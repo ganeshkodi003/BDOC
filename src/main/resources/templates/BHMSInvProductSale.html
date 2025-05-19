@@ -1,0 +1,1405 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+.custom-input {
+	height: 30px; /* Adjust the height as needed */
+	padding: 5px; /* Adjust padding as needed */
+}
+</style>
+<style>
+input, select {
+	height: 30px; /* Adjust height */
+	padding: 5px; /* Adjust padding */
+	border-radius: 5px; /* Rounded corners */
+	border: 1px solid #ccc; /* Light gray border */
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Inner shadow for 3D effect */
+	outline: none; /* Remove outline on focus */
+	transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	/* Smooth transition */
+}
+
+/* Add a hover effect for better UI */
+input:hover, select {
+	border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add focus effect for interaction feedback */
+input:focus, select {
+	border-color: #007bff; /* Change border color on focus */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* Light blue shadow on focus */
+}
+</style>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}.table {
+    width: 91%;
+    margin-bottom: 1rem;
+    color: #212529;     
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 10px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.rotated-image {
+	-webkit-transform: rotate(90deg);
+	transform: rotate(45deg);
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 10px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+}
+
+.table.dataTable td {
+	border: 0.001px solid #ccc;
+	position: relative;
+}
+
+.dataTables_ordering, .dataTables_paging, .dataTables_filter,
+	.dataTables_info {
+	display: none;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+.close-button {
+	border: none;
+	display: inline-block;
+	padding: 8px 16px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap
+}
+
+.topright {
+	position: absolute;
+	right: 0;
+	top: 0
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	/*$(document).ready(function() {
+		$('#datadd').DataTable({
+			"searching" : false,
+			"paging" : false,
+			"info" : false
+		});
+	});*/
+	$(function() {
+
+		$(document).ready(function() {
+			
+		/*	const options = []
+
+			document.querySelectorAll('#pronameList > option').forEach((option) => {
+			    if (options.includes(option.value)) option.remove()
+			    else options.push(option.value)
+			})*/
+			
+			
+
+			var sale_id = /*[[${sale_id}]]*/null;
+			$("#sale_id").attr("value", sale_id);
+
+			var date = new Date();
+
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+
+			if (month < 10)
+				month = "0" + month;
+			if (day < 10)
+				day = "0" + day;
+
+			var today = day + "-" + month + "-" + year;
+			$("#date_of_sale").attr("value", today);
+
+			var table = $("#dataTable").DataTable({
+				"destroy" : true,
+				"scrollY" : 150,
+				"scrollCollapse" : true,
+				"paging" : false,
+				"autoWidth" : false,
+				"ordering" : false,
+				"searching" : false,
+				"scrollX" : true,
+				"lengthChange" : false,
+				"bInfo" : false
+
+			});
+
+			$('#dataTable tbody').on('click', 'button', function() {
+				var data = table.row($(this).parents('tr')).data();
+				alert(data[0] + "'s salary is: " + data[5]);
+			});
+		});
+
+	});
+
+	function bill() {
+	    // Delay the redirect by 10,000 milliseconds (10 seconds)
+	    setTimeout(function() {
+	        // Redirect to the new page with the sale ID
+	        location.href = 'saleReportDet?sid=' + document.getElementById("sale_id").value;
+	    }, 1000);  // 10,000 ms = 10 seconds
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	function submitMedicalBillingConfirmation(){
+		
+		if (ini == 0) {
+			alert("Add Medicine List in to the table")
+		} else if (document.getElementById("cust_name").value == ""
+				|| document.getElementById("date_of_sale").value == ""
+				
+				
+					|| document.getElementById("mobile").value == "") {
+
+			alert("Please fill required field");
+
+		} else {
+
+		var modal = document.getElementById("alert1");
+		modal.style.display = "block";
+		}
+	}
+	function submitform() {
+	    jsonObj = [];
+	    var oTable = document.getElementById('datadd');
+	    var rowLength = oTable.rows.length;
+
+	    for (i = 1; i < rowLength; i++) {
+	        var oCells = oTable.rows.item(i).cells;
+	        var cellLength = oCells.length;
+	        var item = {};
+
+	        // Get the common fields
+	        item["cust_name"] = document.getElementById('cust_name').value;
+	        item["date_of_sale"] = document.getElementById("date_of_sale").value;
+	        item["total"] = document.getElementById("total").value;
+	        item["payment_by"] = document.getElementById("payment_by").value;
+	        item["current_stock"] = document.getElementById("mobile").value;
+	        item["remaining_amount"] = document.getElementById("remaining_amount").value;
+	        item["sale_id"] = document.getElementById("sale_id").value;
+
+	        // Loop through each cell in the current row
+	        for (var j = 0; j < cellLength; j++) {
+	            var cellValue = oCells.item(j).innerHTML.trim(); // Get cell value and trim whitespace
+
+	            if (j == 0) {
+	                item["sub_sale_id"] = cellValue;
+	            }
+	            if (j == 1) {
+	                item["product_name"] = cellValue;
+	            }
+	            if (j == 2) {
+	                item["category_name"] = cellValue;
+	            }
+	            if (j == 3) {
+	                item["batch"] = cellValue;
+	            }
+	            if (j == 4) {
+	                item["expiry_date"] = cellValue;
+	            } 
+	            if (j == 5) {
+	                item["pkg"] = cellValue;
+	            }
+	            if (j == 6) {
+	                item["mrp_rate"] = parseFloat(cellValue) || 0; // Ensure it's a number
+	            }
+	            if (j == 7) {
+	                item["sale_rate"] = parseFloat(cellValue) || 0; // Ensure it's a number
+	            }
+	            if (j == 8) {
+	                item["quantity"] = parseInt(cellValue) || 0; // Ensure it's an integer
+	            }
+	            if (j == 9) {
+	                item["price"] = parseFloat(cellValue) || 0; // Ensure it's a number
+	            }
+	        }
+
+	        jsonObj.push(item);
+	    }
+
+	    console.log(JSON.stringify(jsonObj));
+	    $.ajax({
+	        url: "./addMedicineSaleReq",
+	        contentType: 'application/json',
+	        type: 'POST',
+	        data: JSON.stringify(jsonObj),
+	        success: function(res) {
+	            // Handle success
+	        },
+	        error: function(err) {
+	            console.error("Error:", err); // Log any errors
+	        }
+	    });
+	}
+
+
+	function getcurrentstock(a) {
+		name();
+		if (a.value == "") {
+
+			$("#current_stock").empty();
+
+			document.getElementById("price1").value = "";
+
+		} else {
+
+			document.getElementById("price1").value = "";
+
+			$("#current_stock").empty();
+
+			var pro_name =document.getElementById("product_name1").value;
+			var batch = $("#batch :selected").text();
+			var tyy = '';
+			
+			$
+			.ajax({
+				url : "./makesListss?product_id=" + pro_name
+						+ "&batch=" + batch,
+				type : 'GET',
+				dataType : "json",
+				success : function(res) {
+					$
+							.each(
+									res,
+									function(index, data) {
+										var i = Object.values(data);
+										document
+												.getElementById("exp_date").value = i[0];
+										
+										
+									});
+					
+				}
+			});
+			$.ajax({
+				url : "./getcert?product_id=" + pro_name + "&batch="
+						+ batch,
+				type : 'GET',
+				dataType : "json",
+
+				success : function(res) {
+					$.each(res, function(index, data) {
+
+						var i = Object.values(data);
+
+						console.log(i[0]);
+						//document.getElementById("pkg").value = i[0];
+						document.getElementById("current_stock").value = i[1];
+						document.getElementById("mrp_rate1").value = i[2];
+						document.getElementById("sale_rate1").value = i[3];
+					//	document
+						//.getElementById("exp_date").value = i[1];
+						//document.getElementById("GSTn").value = i[3];
+
+						//alert(i[1]);
+					});
+
+					// $("#category_name").append(tyy);
+
+				}
+			});
+
+		}
+
+	}
+	function get_pkg_typeFunction(a) {
+		if (a.value == "") {
+			var select = document.getElementById("unit1");
+			$("#unit1").empty();
+
+			document.getElementById("price1").value = "";
+
+		} else {
+
+			document.getElementById("price1").value = "";
+			$("#unit1").empty();
+
+			$("#pkg").empty();
+			$("#pkg").append('<option value="">SELECT</option>');
+
+			var pro_name = document.getElementById("product_name1").value;
+			var batch = $("#batch :selected").text();
+			var tyy = '';
+
+			$
+					.ajax({
+						url : "./getpkgtypeList?product_id=" + pro_name
+								+ "&batch=" + batch,
+						type : 'GET',
+						dataType : "json",
+
+						success : function(res) {
+							$
+									.each(
+											res,
+											function(index, data) {
+
+												var i = Object.values(data);
+												document
+														.getElementById("exp_date").value = i[1];
+												console.log(i[0]);
+												tyy += '<option value="'+i[0]+'">'
+														+ i[0] + '</option>';
+											});
+
+							$("#pkg").append(tyy);
+							
+							const options = []
+
+							document.querySelectorAll('#pkg > option').forEach((option) => {
+							    if (options.includes(option.value)) option.remove()
+							    else options.push(option.value)
+							})
+
+						}
+					});
+
+		}
+	}
+
+	function product_name_typeFunction1(a) {
+
+		if (a.value == "") {
+			var select = document.getElementById("unit1");
+			$("#unit1").empty();
+			$("#unit1").append('<option value="">SELECT</option>');
+			$("#batch").append('<option value="">SELECT</option>');
+			//document.getElementById("category_name1").value = "";
+			document.getElementById("mrp_rate1").value = "";
+			document.getElementById("sale_rate1").value = "";
+			document.getElementById("quantity1").value = "";
+			document.getElementById("price1").value = "";
+
+		} else {
+			document.getElementById("mrp_rate1").value = "";
+			document.getElementById("sale_rate1").value = "";
+			document.getElementById("quantity1").value = "";
+			document.getElementById("price1").value = "";
+			$("#unit1").empty();
+			$("#unit1").append('<option value="">SELECT</option>');
+
+			$("#batch").empty();
+			$("#batch").append('<option value="">SELECT</option>');
+
+			var pro_name =document.getElementById("product_name1").value;
+			var tyy = '';
+			console.log(pro_name);
+			
+
+			$
+					.ajax({
+						url : "./getStocksalls?product_id=" + pro_name,
+						type : 'GET',
+						dataType : "json",
+
+						success : function(res) {
+							$.each(
+											res,
+											function(index, data) {
+
+												var i = Object.values(data);
+												console.log("cat name" + i[0]);
+												//document.getElementById("category_name1").value = i[1];
+												//document.getElementById("sale_rate1").value=i[2];
+												console.log(i[0]);
+												tyy += '<option value="'+i[0]+'">'
+														+ i[0] + '</option>';
+											});
+
+							$("#batch").append(tyy);
+							
+							const options = []
+
+							document.querySelectorAll('#batch > option').forEach((option) => {
+							    if (options.includes(option.value)) option.remove()
+							    else options.push(option.value)
+							})
+
+						}
+					});
+
+		}
+	}
+
+	function name(){
+		var refid =document.getElementById("batch").value;
+		var woid =document.getElementById("woid");
+		var mrp_rate1 =document.getElementById("mrp_rate1");
+		var quantity1 =document.getElementById("quantity1");
+		var sale_rate1 =document.getElementById("sale_rate1");
+		var CustomerName =document.getElementById("cust_name");
+	
+		
+		var t="";
+		var woval=""
+		var rate="";
+		var qantity="";
+		var mrp="";
+		$.ajax({
+	        type: 'GET',
+	        url: './getWOname?refid=' + refid,
+	        success: function(res) {
+	            if (res) {
+	                console.log(res);
+
+	                // Assign values if available
+	                if (res.workId) woid.value = res.workId;
+	                if (res.rate) {
+	                    mrp = res.rate;
+	                    mrp_rate1.value = parseFloat(mrp);
+	                    if (res.qty) {
+	                        sale_rate1.value = parseFloat(mrp / res.qty);
+	                    }
+	                }
+	                if (res.qty) {
+	                    quantity = res.qty;
+	                    quantity1.value = quantity;
+	                    quantity_Function();
+	                }
+	                if (res.vendorName) CustomerName.value = res.vendorName;
+	            } else {
+	                console.log("Empty response received.");
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("Request failed:", status, error);
+	            alert("Failed to retrieve work order details. Please try again.");
+	        }
+	    });
+	        
+		
+		
+		
+	}
+	
+	
+	
+	function stock_typeFunction(a) {
+
+		document.getElementById("mrp_rate1").value = "";
+		document.getElementById("sale_rate1").value = "";
+		document.getElementById("quantity1").value = "";
+		document.getElementById("price1").value = "";
+		var pro_name = document.getElementById("product_name1").value;
+		var tyy = '';
+
+		console.log(pro_name);
+		$.ajax({
+			url : "./getUnitsList?product_id=" + pro_name,
+			type : 'GET',
+
+			success : function(res) {
+
+				var select = document.getElementById("stock_id1");
+				$.each(res, function(index, data) {
+					var li = Object.values(data);
+					console.log(li);
+					tyy += '<option value="'+li[7]+'">ID:' + li[7]
+							+ '</option>';
+				});
+				$("#stock_id1").append(tyy);
+
+				/*]]>*/
+
+			}
+		});
+
+	}
+
+	function unit_typeFunction(a) {
+
+		var select = document.getElementById("unit1");
+		var pro_name = document.getElementById("product_name1").value;
+		var stock_id1 = document.getElementById("stock_id1").value;
+		document.getElementById("current_stock1").value = "";
+		document.getElementById("mrp_rate1").value = "";
+		document.getElementById("sale_rate1").value = "";
+		document.getElementById("quantity1").value = "";
+		document.getElementById("price1").value = "";
+
+		$
+				.ajax({
+					url : "./getCurrentStockData?product_id=" + pro_name
+							+ "&stock_id=" + stock_id1,
+					type : 'GET',
+					success : function(res) {
+
+						//alert(res);
+						/*<![CDATA[*/
+
+						if (a.value != "") {
+							if (a.value == 'BOX') {
+								document.getElementById("current_stock1").value = res.pack_quantity;
+
+								var boxMrpPrice = res.mrp_price / 1;
+								var boxSalePrice = res.selling_price / 1;
+
+								document.getElementById("mrp_rate1").value = boxMrpPrice
+										.toFixed(2);
+								document.getElementById("sale_rate1").value = boxSalePrice
+										.toFixed(2);
+
+							} else if (a.value == 'STRIP') {
+								document.getElementById("current_stock1").value = res.item_quantity;
+
+								var stripMrpPrice = res.mrp_price
+										/ res.no_of_items_pack;
+								var stripSalePrice = res.selling_price
+										/ res.no_of_items_pack;
+								document.getElementById("mrp_rate1").value = stripMrpPrice
+										.toFixed(2);
+								document.getElementById("sale_rate1").value = stripSalePrice
+										.toFixed(2);
+
+							} else if (a.value == 'NUMBER') {
+								document.getElementById("current_stock1").value = res.sub_item_quantity;
+
+								var stripMrpPrice = '';
+								var stripSalePrice = '';
+
+								if (res.no_of_items_pack_type == 'NUMBER') {
+									stripMrpPrice = res.mrp_price
+											/ res.no_of_items_pack;
+									stripSalePrice = res.selling_price
+											/ res.no_of_items_pack;
+								} else {
+									stripMrpPrice = res.mrp_price
+											/ res.no_of_sub_items_item;
+									stripSalePrice = res.selling_price
+											/ res.no_of_sub_items_item;
+								}
+
+								document.getElementById("mrp_rate1").value = stripMrpPrice
+										.toFixed(2);
+								document.getElementById("sale_rate1").value = stripSalePrice
+										.toFixed(2);
+							}
+
+							/*]]>*/
+
+						}
+					}
+				});
+
+	}
+
+	function quantity_Function() {
+		var quantity = document.getElementById("quantity1").value;
+		var sale_rate = document.getElementById("sale_rate1").value;
+		//var gst = document.getElementById("GSTn").value;
+
+		if (sale_rate != "") {
+
+			if (sale_rate != 0) {
+				document.getElementById("price1").value = ((quantity * sale_rate) )
+				.toFixed(2);
+				
+			/**	if (gst !=0){
+					ggst=gst/100;
+					
+					gstamt=parseFloat(quantity * sale_rate*ggst);
+					document.getElementById("GSTAMT").value = (gstamt).toFixed(2);
+					document.getElementById("price1").value = ((quantity * sale_rate) )
+					.toFixed(2);
+				}
+				else{
+					gstamt=0;
+					document.getElementById("GSTAMT").value = (gstamt).toFixed(2);
+					document.getElementById("price1").value = ((quantity * sale_rate) )
+					.toFixed(2);
+					
+				}**/
+				
+			} else {
+
+			}
+
+		}
+	}
+
+	var ini = 0;
+
+	var total_price = 0.0;
+	//var total_gstamt = 0.0;
+
+	function addRow(tableID, productid1, saleid1) {
+
+		alert("here");
+
+		var product_id11 = document.getElementById("product_name1").value;
+		var sale_id11 = document.getElementById("sale_id").value;
+		/* var unit11=document.getElementById("unit1").value;
+		
+		var stock_id11=document.getElementById("stock_id1").value;
+		 */
+
+		var qty11 = document.getElementById("quantity1").value;
+		alert(sale_id11);
+		alert(product_id11);
+		alert(qty11);
+		alert("inside");
+
+		$.ajax({
+			url : "./stockLock?sale_id=" + sale_id11 + "&product_id="
+					+ product_id11 + "&sub_sale_id=" + ini + "&unit=" + unit11
+					+ "&qty=" + qty11 + "&stock_id=" + stock_id11,
+			type : 'GET',
+			success : function(res) {
+				alert("success");
+				alert(res);
+
+			}
+		});
+
+		var quantity = document.getElementById("quantity1").value;
+		var price = document.getElementById("price1").value;
+
+		if (quantity != "" && price != "" && price != "0") {
+
+			var table = document.getElementById(tableID);
+
+			total_price += parseFloat(document.getElementById("price1").value);
+			document.getElementById("total").value = total_price.toFixed(2);
+
+			var rowCount = table.rows.length;
+
+			if (ini == 0) {
+
+			}
+
+			ini = ini + 1;
+
+			var elt = document.getElementById("product_name1");
+
+			$('#dataTable').dataTable().fnAddData(
+					[ ini, document.getElementById("stock_id1").value,
+							elt.value, elt.options[elt.selectedIndex].text,
+							document.getElementById("batch").value,
+							document.getElementById("pkg").value,
+							document.getElementById("mrp_rate1").value,
+							document.getElementById("sale_rate1").value,
+							document.getElementById("quantity1").value,
+							document.getElementById("price1").value,
+							'<button class="btn-delete" >Delete</button>' ]);
+
+			$("#pkg").val($("#pkg option:first").val());
+
+			document.getElementById("mrp_rate1").value = "";
+			document.getElementById("sale_rate1").value = "";
+			document.getElementById("quantity1").value = "";
+			document.getElementById("price1").value = "";
+			document.getElementById("current_stock").value = "";
+
+			/* var trHTML = '<tr class="userlist">'
+				+ '<td style="width: 100px" th:text="'+ini+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("sale_id").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("product_name").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("cat_name").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("unit").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("current_stock").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("mrp_rate").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("sale_rate").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("quantity").value+'"/></td>'
+				+ '<td style="width: 100px" th:text="'+ document.getElementById("price").value+'"/></td>'
+				+ '</tr>';
+
+				$('#dataTable').append(trHTML); */
+			/* 
+			for(var i=0; i<colCount; i++) {
+
+				var newcell	= row.insertCell(i);
+
+				newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+				if(i==0){
+					product_id1.setAttribute("value", "dd");
+				}
+				//alert(newcell.childNodes);
+				/* switch(newcell.childNodes[0].type) {
+					case "text":
+							newcell.childNodes[0].value = "";
+							break;
+					case "checkbox":
+							newcell.childNodes[0].checked = false;
+							break;
+					case "select-one":
+							newcell.childNodes[0].selectedIndex = 0;
+							break;
+				} 
+			} */
+		}
+	}
+
+	
+	
+	
+	var ini = 0;
+
+	var total_price = 0.0;
+
+	
+	function addrownew() {
+		
+		
+		let CUS = parseInt(document.getElementById("current_stock").value);
+		let QTY = parseInt(document.getElementById("quantity1").value);
+		
+		if ( CUS < QTY ) {
+			
+			alert("Please check the current stock");
+		}
+		else if(QTY==0){
+			alert("Please enter the valid quantity");
+		}
+		
+		else{	
+		var product_id11 = document.getElementById("product_name1").value;
+		var sale_id11 = document.getElementById("sale_id").value;
+		//var ppkg = document.getElementById("pkg").value;
+
+		var categoryname =null;
+		//= document.getElementById("category_name1").value;
+
+		var mrp = document.getElementById("mrp_rate1").value;
+		var subrate = document.getElementById("sale_rate1").value;
+		var bat = document.getElementById("batch").value;
+		//var exp = document.getElementById("exp_date").value;
+
+		var quantity = document.getElementById("quantity1").value;
+		var price = document.getElementById("price1").value;
+		if (quantity != "" && price != "" && price != "0") {
+
+			var table = document.getElementById("dataTable");
+
+			total_price += parseFloat(document.getElementById("price1").value);
+			document.getElementById("total").value = total_price.toFixed(2);
+			
+			document.getElementById("nettotal").value =( total_price ).toFixed(2);
+			//var rowCount = table.rows.length;
+
+			var elt = document.getElementById("product_name1");
+
+			$.ajax({
+				url : "./newstockLock?product_name=" + product_id11 + "&category_name=" + categoryname
+				
+						+ "&qty=" + quantity + "&batch=" + bat,
+				type : 'GET',
+				success : function(res) {
+					
+					//alert(res);
+
+				}
+			});
+
+			ini = ini + 1;
+			
+			
+			let regStr = "\\d\\'\\d";
+			let regexp = new RegExp(regStr);
+
+			//alert( "Chapter 5.1".match(regexp) ); // 5.1
+			
+			var trHTML = '<tr id="'+ bat +
+			'"><td>' + ini + '</td><td>'+ product_id11 + '</td><td>'
+			//+ categoryname + '</td><td>'
+			+ bat + '</td><td>'
+			//+ exp + '</td><td>'
+			+ mrp + '</td><td>'
+			+ subrate + '</td><td>'
+			+ quantity + '</td><td>'
+		
+			+ price + '</td>'
+			+  '<td><i style="font-size: 16px;padding: 5px" class="fas fa-trash-alt"  onclick="CallMe(\'' + bat + '\',\''+quantity+'\',\''+product_id11+'\',\''+categoryname+'\',\''+price+'\'); removeroww(this);"></i></td>' 
+			+ '</tr>';
+
+$('#saleData').append(trHTML);
+			 
+			   
+			document.getElementById("product_name1").value = "";
+
+			//document.getElementById("pkg").value = "";
+
+			document.getElementById("category_name1").value = "";
+
+			document.getElementById("mrp_rate1").value = "";
+			document.getElementById("sale_rate1").value = "";
+			document.getElementById("batch").value = "";
+			//document.getElementById("exp_date").value = "";
+			document.getElementById("current_stock").value = "";
+
+
+			document.getElementById("quantity1").value = "";
+			document.getElementById("price1").value = "";
+
+			
+
+		}
+	}
+	}
+	
+	function removeroww(row) {
+		
+		
+		 $(row).parent().parent().remove();
+		 
+		 
+}
+	
+	function oncloseButton() {
+		
+		 window.location.reload();
+
+	}
+
+	function CallMe(bat,qt,pn,cn,price) {  
+		
+		//var total_price=document.getElementById("total").value;
+		document.getElementById("total").value = total_price-price;
+		total_price=total_price-price;
+		//var nett=document.getElementById("nettotal").value;
+		document.getElementById("nettotal").value =document.getElementById("nettotal").value-price;
+		$.ajax({
+			url : "./deletestockLock?product_name=" + pn + "&category_name=" + cn
+		
+					+ "&qty=" + qt + "&batch=" + bat,
+			type : 'POST',
+			success : function(res) {
+				
+				alert(res);
+
+			}
+		});
+		  
+	    
+	}  
+	
+	
+	
+</script>
+<script>
+
+window.onload = function() {
+	  document.getElementById("cust_name").focus();
+	}
+$(document).keydown(
+
+	    function(e)
+	    {    
+    		var id1= document.getElementById('cust_name');
+    		var id2= document.getElementById('mobile');
+    		var id3= document.getElementById('product_name1');
+    		var id4= document.getElementById('batch');
+    		var id5= document.getElementById('quantity1');
+    		
+    		var activeElement = document.activeElement;
+    		  
+    		  if (e.keyCode == 39 && id1==activeElement) { 
+	        	//setTimeout(function() { $('input').focus() }, 300);
+	            $("#mobile").focus();
+	        } 
+    		  else if (e.keyCode == 39 && id2==activeElement) { 
+  	        	//setTimeout(function() { $('input').focus() }, 300);
+  	            $("#product_name1").focus();
+  	        } 
+    		  else if (e.keyCode == 39 && id3==activeElement) { 
+    	        	//setTimeout(function() { $("#batch").focus() }, 300);
+    	           $("#batch").focus();
+    	        } 
+    		  else if (e.keyCode == 39 && id4==activeElement) { 
+    	        	//setTimeout(function() { $('input').focus() }, 300);
+    	            $("#quantity1").focus();
+    	        } 
+    		  else if (e.keyCode == 39 && id5==activeElement) { 
+    	        	//setTimeout(function() { $('input').focus() }, 300);
+    	            $("#cust_name").focus();
+    	        } 
+    		  
+	       else  if (e.keyCode == 37 && id1==activeElement) { 
+	        	//setTimeout(function() { $('input').focus() }, 300);
+	            $("#quantity1").focus();
+	        } 
+    		  else if (e.keyCode == 37 && id2==activeElement) { 
+  	        	//setTimeout(function() { $('input').focus() }, 300);
+  	            $("#cust_name").focus();
+  	        } 
+    		  else if (e.keyCode == 37 && id3==activeElement) { 
+    	        	//setTimeout(function() { $("#batch").focus() }, 300);
+    	           $("#mobile").focus();
+    	        } 
+    		  else if (e.keyCode == 37 && id4==activeElement) { 
+    	        	//setTimeout(function() { $('input').focus() }, 300);
+    	            $("#product_name1").focus();
+    	        } 
+    		  else if (e.keyCode == 37 && id5==activeElement) { 
+    	        	//setTimeout(function() { $('input').focus() }, 300);
+    	            $("#batch").focus();
+    	        } 
+	    }
+	);
+
+</script>
+<script>
+function batchdeleteforempty(){
+		var batch = document.getElementById("batch").value;
+		var currentstock = document.getElementById("current_stock").value;
+
+		  var img = document.getElementById("batchdeleteforempty");
+		  img.setAttribute("class", "rotated-image");
+		
+	 	$.ajax({
+					url : "./batchdeleteforempty?batch=" + batch,
+					type : 'GET',
+					success : function(res) {
+
+						alert(res);
+						window.location.reload();
+					}
+	})
+		
+	}
+	
+	
+$(document).ready(function() {
+    $('#payment_by').change(function() {
+        if ($(this).val() === 'partial_payment') {
+            $('#remaining_balance_div').show();
+        } else {
+            $('#remaining_balance_div').hide();
+        }
+    });
+});
+
+
+
+
+</script>
+<script>
+
+function sendsms() {
+	alert()
+    $.ajax({
+        url: "./sendingg", // Make sure this matches the URL mapping in your Spring Boot controller
+        type: 'GET',
+        success: function(res) {
+            alert(res);
+        }
+    });
+}
+
+function for_alert(){
+	
+	alert("Message Send Successfully !!!")
+}
+
+</script>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+
+
+				<div class="card " style="WIDTH: 100%;">
+
+					<div class="card-header">
+						<div class="spur-card-title" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);"> Billing</div>
+
+					</div>
+
+					<div class="card-body">
+						<div class="form-row" style="padding: 10px">
+    <label class="col-md-1" style="font-size: 15px;">Sale ID</label>
+    <input type="text" class="col-md-1 custom-input" id="sale_id" name="sale_id" readonly title="Enter the Sale ID" />
+
+    <label class="col-md-2" style="font-size: 15px;">Customer Name</label>
+    <input type="text" class="col-md-2 custom-input" id="cust_name" name="cust_name"
+           onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123 || event.charCode ==32)"
+           required title="Enter the full name of the customer" />
+
+    <label class="col-md-1" style="font-size: 15px;">Mobile No</label>
+    <input type="number" class="col-md-2 custom-input" id="mobile" name="mobile" required title="Enter the customer's mobile number" />
+
+    <label class="col-md-1" style="font-size: 15px;">Date</label>
+    <input type="text" class="col-md-1 custom-input" id="date_of_sale" name="date_of_sale" readonly title="Date of sale" />
+</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="card " style="WIDTH: 100%;">
+
+					<div class="card-header">
+						<div class="spur-card-title"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">Add
+							Products</div>
+
+					</div>
+
+					<div class="card-body">
+						<div class="form-row" style="padding: 10px">
+							<div class="col-md-2">
+								<label>Product Name</label> <input type="text" name="combobox"
+									list="pronameList" id="product_name1"
+									onchange="product_name_typeFunction1(this)"
+									class="form-control">
+								  <datalist id="pronameList">
+        <option th:each="product : ${productList}"
+                th:value="${product}"
+                th:text="${product}"></option>
+    </datalist>
+							</div>
+
+						<!-- 	<div class="col-md-1">
+								<label>Category</label> <input type="text" id="category_name1"
+									name="category_name1" readonly class="form-control" />
+							</div> -->
+
+							<div class="col-md-2">
+								<label>Ref Id</label> <select id="batch"
+									onchange="getcurrentstock(this)" name="batch"
+									class="form-control">
+									<option>SELECT</option>
+								</select>
+							</div>
+							
+							<div class="col-md-2">
+								<label>WO Id</label> 
+								<input type="text" id="woid"
+									name="woid" class="form-control" />
+							</div>
+
+							<!-- <div class="col-md-1">
+								<label>Exp Date</label> <input type="date" id="exp_date"
+									name="exp_date" class="form-control" />
+							</div> -->
+
+							
+
+							<div class="col-md-1">
+								<label>Cur Stock</label> <input type="number"
+									id="current_stock" name="current_stock" 
+									class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label>MRP Rate</label> <input type="number" id="mrp_rate1"
+									name="mrp_rate1"  class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label>per item</label> <input type="number"
+									id="sale_rate1" name="sale_rate1"  class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label>Quantity</label> <input type="number" id="quantity1"
+									oninput="quantity_Function()" name="quantity1"
+									class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label>Price</label> <input type="number" id="price1"
+									name="price1"  class="form-control" />
+							</div>
+
+							<div class="col-md-1">
+								<label style="visibility: hidden;">Add Button</label>
+								<button type="submit" class="btn btn-primary form-control"
+									onclick="addrownew()">Add</button>
+							</div>
+						</div>
+
+
+
+						<div style="width:110%">
+							<table class="table table-striped" style="padding: 10px;"
+								id="datadd">
+								<thead>
+									<tr class="card-header">
+										<th style="font-weight: bold; font-size: 15px;">SRL No</th>
+										<th style="font-weight: bold; font-size: 15px;">Product
+											Name</th>
+										<!-- <th style="font-weight: bold; font-size: 15px;">Category
+											Name</th> -->
+										<th style="font-weight: bold; font-size: 15px;">Ref Id</th>
+										<th style="font-weight: bold; font-size: 15px;">MRP Rate</th>
+										<!-- <th style="font-weight: bold; font-size: 15px;">Package</th> -->
+										<th style="font-weight: bold; font-size: 15px;">Sale Rate</th>
+										<th style="font-weight: bold; font-size: 15px;">Quantity</th>
+										<th style="font-weight: bold; font-size: 15px;">Price</th>
+										<!--  <th>GST Amt</th>-->
+										<th style="font-weight: bold; font-size: 15px; "></th>
+										<th></th>
+
+									</tr>
+								</thead>
+								<tbody id="saleData" >
+
+								</tbody>
+
+
+							</table>
+
+
+
+						</div>
+
+						<div style="padding: 10px;" align="right">
+
+							<label class=" col-md-1"
+								style="font-weight: bold; font-size: 15px;">Total</label> <input style="
+    margin-left: -50px;"
+								type="text" class="  col-md-1" id="total" name="total" readonly />
+						</div>
+
+
+						<div class="form-row" style="padding: 10px">
+
+							<label class=" col-md-2"
+								style="font-weight: bold; font-size: 15px;">Payment By</label> <select
+								id="payment_by" class=" col-md-2" name="payment_by" required>
+								<option value="cash">CASH</option>
+								<option value="card">CARD</option>
+								<option value="partial_payment">PARTIAL PAYMENT</option>
+								<option VALUE="CASH AT BANK">CASH AT BANK</option>
+							</select> <label class=" col-md-2"
+								style="font-weight: bold; font-size: 15px;">Net Total</label> <input
+								type="text" class="  col-md-2" id="nettotal" name="nettotal" />
+							<!-- Hidden by default -->
+							<div id="remaining_balance_div" style="display: none;">
+								<label class="col-md-5"
+									style="font-weight: bold; font-size: 15px;">Remaining
+									Balance</label> <input type="number" class="col-md-5"
+									id="remaining_amount" name="remaining_amount" /> <img
+									th:src=@{/images/icon.png} alt="Follow-up"
+									onclick="for_alert()"
+									style="margin-left: 10px; width: 33px; height: 33px;" />
+							</div>
+						</div>
+						<!-- <button onclick="sendsms()">click</button> -->
+					</div>
+					<!-- <div>
+						<img th:src=@{/images/refresh.png}
+							style="width: 30px; margin-top: 30px;" id="batchdeleteforempty"
+							alt="Bornfire" onclick="batchdeleteforempty()">
+
+					</div> -->
+					<div class="card-footer col-sm-12 text-center">
+						<div
+							style="background-color: #F5F5F5; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+							<button Style="width: 100px; background: #007bff; color: white; border:none"
+								type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+							<button Style="width: 100px; background: #007bff; color: white;border:none"
+								id="btnSubmit" onclick="submitMedicalBillingConfirmation()">Submit</button>
+							<button Style="width: 100px; background: #007bff; color: white;border:none"
+								type="button" id="btnBack" onclick="back();">Back</button>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+
+	<div class="modal" id="alert1">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+
+				<div class="menu-title-header">
+					<span
+						onclick="document.getElementById('alert1').style.display='none'"
+						class="close-button topright">&times;</span>
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">BHMS</div>
+
+
+				</div>
+
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg1" style="font-size: 16px;"></p>
+
+					<div class=" col-sm-12 text-center">
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							style="width: 100px" onclick="oncloseButton();">Close</button>
+
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							style="width: 100px" onclick="submitform(); bill(); ">Bill</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

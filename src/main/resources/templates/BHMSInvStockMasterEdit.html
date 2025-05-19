@@ -1,0 +1,333 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 10px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 10px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+function back() {
+	window.history.back();
+}
+
+function backedit() {
+	location.href = './currentStock'
+}
+	$(function() {
+
+	});
+
+	function addMedicine() {
+		location.href = './addMedicine'
+	}
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+</script>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+
+	function editME() {
+		
+		//var sts = document.getElementById('PAID_STATUS').value;
+		$.ajax({
+			url : "./BHMSInvStockMasterEditReq",
+
+			dataType : "text",
+			type : 'POST',
+			async : false ,
+			data : $('#editStockCurrent').serialize(),
+			
+			success : function(res) {
+			    alert(res);
+			  //  window.history.back();
+			}
+
+
+	});
+	}
+
+	/*]]>*/
+</script>
+
+
+<body>
+
+	<!-- sideMenu -->
+
+	<div th:insert="BHMSHeader :: header"></div>
+
+
+
+	<!-- Menu -->
+	<div class="dash-app">
+
+		<div class="col-lg-12 menu-title-header "
+			style="background: #727F94; color: #fff">
+			<div class="spur-card-title" th:text=${menu}>DASHBOARD</div>
+		</div>
+
+		<div class="container-fluid">
+
+			<!-- Table -->
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card " style="margin-top: 10px">
+
+						<form method="post" autocomplete="off" id="editStockCurrent"
+							th:fragment="finuserapply">
+							<div class="card-header" style="color: white">
+								<div class="spur-card-title">EDIT STOCK</div>
+							</div>
+							<div class="card-body" style="padding: 10px;">
+								<div class="form-row">
+									<label class="col-md-2 ">Product ID</label> <input type="text"
+										class="  col-md-2" th:value="${ceData?.ID}" name="ID" id="ID"
+										readonly /> <label class="  col-md-2 ">MFR</label> <input
+										type="text" class="col-md-2" th:value="${ceData?.MFR}"
+										name="MFR" id="MFR" required /> <label class="  col-md-2 ">BATCH</label>
+									<input type="text" class="col-md-2" th:value="${ceData?.BATCH}"
+										name="BATCH" id="BATCH" required />
+								</div>
+								<div class="form-row">
+									<label class="  col-md-2 ">Product Name</label> <input
+										type="text" class="col-md-2" id="PRODUCT_NAME"
+										name="PRODUCT_NAME" th:value="${ceData?.PRODUCT_NAME}"
+										required /> <label class="  col-md-2 ">Category Name</label>
+									<input type="text" class="col-md-2"
+										th:value="${ceData?.CATEGORY_NAME}" name="CATEGORY_NAME"
+										id="CATEGORY_NAME" required /> <label class="  col-md-2 ">PKG</label>
+									<input type="text" class="col-md-2" th:value="${ceData?.PKG}"
+										name="PKG" id="PKG" required />
+								</div>
+								<div class="form-row">
+									<label class="  col-md-2 ">Units</label> <input type="text"
+										class="col-md-2" th:value="${ceData?.UNITS}" name="UNITS"
+										id="UNITS" required /> <label class="  col-md-2 ">MRP</label><input
+										type="text" class="col-md-2" th:value="${ceData?.MRP}"
+										name="MRP" id="MRP" required /> <label class="  col-md-2 ">Sub
+										Units</label><input type="text" class="col-md-2"
+										th:value="${ceData?.SUB_UNITS}" name="SUB_UNITS"
+										id="SUB_UNITS" required />
+								</div>
+								<div class="form-row">
+
+									<label class="  col-md-2 ">Sub Units Cost</label><input
+										type="text" class="col-md-2"
+										th:value="${ceData?.SUB_UNITS_COST}" name="SUB_UNITS_COST"
+										id="SUB_UNITS_COST" required /> <label class="  col-md-2 ">No
+										of Units</label><input type="text" class="col-md-2"
+										th:value="${ceData?.NO_OF_UNITS}" name="NO_OF_UNITS"
+										id="NO_OF_UNITS" required /> <label class="  col-md-2 ">GST
+										Percent</label><input type="text" class="col-md-2"
+										th:value="${ceData?.GST_PERCENT}" name="GST_PERCENT"
+										id="GST_PERCENT" required />
+								</div>
+
+
+
+								<div class="form-row">
+									<label class="  col-md-3 "></label> <label class="  col-md-2 " ></label>
+									<button class="  col-md-1  " id="btnSubmit" 
+										style="background-color: #428bca; color: #ffffff; font-weight:bold; margin-left:60px;"
+										onclick="editME()">UPDATE</button>
+
+
+								</div>
+						</form>
+					</div>
+					<div class=" col-sm-17 text-center">
+						<div
+							style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+							<button Style="width: 100px; background: #386276; color: white;"
+								type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+							<button Style="width: 100px; background: #386276; color: white;"
+								type="button" id="btnBack" onclick="backedit();">Back</button>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>

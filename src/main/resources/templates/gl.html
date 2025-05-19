@@ -1,0 +1,1185 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+</style>
+<script>
+
+var AndraPradesh = ["Anantapur","Chittoor","East Godavari","Guntur","Kadapa","Krishna","Kurnool","Prakasam","Nellore","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari"];
+var ArunachalPradesh = ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kra Daadi","Kurung Kumey","Lohit","Longding","Lower Dibang Valley","Lower Subansiri","Namsai","Papum Pare","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang","Itanagar"];
+var Assam = ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup Metropolitan","Kamrup (Rural)","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Dima Hasao","Sivasagar","Sonitpur","South Salmara Mankachar","Tinsukia","Udalguri","West Karbi Anglong"];
+var Bihar = ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"];
+var Chhattisgarh = ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Janjgir Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya","Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sukma","Surajpur","Surguja"];
+var Goa = ["North Goa","South Goa"];
+var Gujarat = ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"];
+var Haryana = ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Mewat","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"];
+var HimachalPradesh = ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul Spiti","Mandi","Shimla","Sirmaur","Solan","Una"];
+var JammuKashmir = ["Anantnag","Bandipora","Baramulla","Budgam","Doda","Ganderbal","Jammu","Kargil","Kathua","Kishtwar","Kulgam","Kupwara","Leh","Poonch","Pulwama","Rajouri","Ramban","Reasi","Samba","Shopian","Srinagar","Udhampur"];
+var Jharkhand = ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"];
+var Karnataka = ["Bagalkot","Bangalore Rural","Bangalore Urban","Belgaum","Bellary","Bidar","Vijayapura","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Gulbarga","Hassan","Haveri","Kodagu","Kolar","Koppal","Mandya","Mysore","Raichur","Ramanagara","Shimoga","Tumkur","Udupi","Uttara Kannada","Yadgir"];
+var Kerala = ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"];
+var MadhyaPradesh = ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna",
+"Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"];
+var Maharashtra = ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"];
+var Manipur = ["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal","Thoubal","Ukhrul"];
+var Meghalaya = ["East Garo Hills","East Jaintia Hills","East Khasi Hills","North Garo Hills","Ri Bhoi","South Garo Hills","South West Garo Hills","South West Khasi Hills","West Garo Hills","West Jaintia Hills","West Khasi Hills"];
+var Mizoram = ["Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip","Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip"];
+var Nagaland = ["Dimapur","Kiphire","Kohima","Longleng","Mokokchung","Mon","Peren","Phek","Tuensang","Wokha","Zunheboto"];
+var Odisha = ["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Debagarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khordha","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundergarh"];
+var Punjab = ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Fazilka","Firozpur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Pathankot","Patiala","Rupnagar","Sangrur","Shaheed Bhagat Singh Nagar","Tarn Taran"];
+var Rajasthan = ["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dholpur","Dungarpur","Ganganagar","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Pratapgarh","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Tonk","Udaipur"];
+var Sikkim = ["East Sikkim","North Sikkim","South Sikkim","West Sikkim"];
+var TamilNadu = ["Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Salem","Sivaganga","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"];
+var Telangana = ["Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar","Jogulamba","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahbubnagar","Mancherial","Medak","Medchal","Nagarkurnool","Nalgonda","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"];
+var Tripura = ["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"];
+var UttarPradesh = ["Agra","Aligarh","Allahabad","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
+var Uttarakhand  = ["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri","Pithoragarh","Rudraprayag","Tehri","Udham Singh Nagar","Uttarkashi"];
+var WestBengal = ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"];
+var AndamanNicobar = ["Nicobar","North Middle Andaman","South Andaman"];
+var Chandigarh = ["Chandigarh"];
+var DadraHaveli = ["Dadra Nagar Haveli"];
+var DamanDiu = ["Daman","Diu"];
+var Delhi = ["Central Delhi","East Delhi","New Delhi","North Delhi","North East Delhi","North West Delhi","Shahdara","South Delhi","South East Delhi","South West Delhi","West Delhi"];
+var Lakshadweep = ["Lakshadweep"];
+var Puducherry = ["Karaikal","Mahe","Puducherry","Yanam"];
+
+function state(){
+	  var StateSelected = document.getElementById('inputState').value;;
+	  var optionsList;
+	  var htmlString = ""
+	  
+
+	  switch (StateSelected) {
+	    case "Andra Pradesh":
+	        optionsList = AndraPradesh;
+	        break;
+	    case "Arunachal Pradesh":
+	        optionsList = ArunachalPradesh;
+	        break;
+	    case "Assam":
+	        optionsList = Assam;
+	        break;
+	    case "Bihar":
+	        optionsList = Bihar;
+	        break;
+	    case "Chhattisgarh":
+	        optionsList = Chhattisgarh;
+	        break;
+	    case "Goa":
+	        optionsList = Goa;
+	        break;
+	    case  "Gujarat":
+	        optionsList = Gujarat;
+	        break;
+	    case "Haryana":
+	        optionsList = Haryana;
+	        break;
+	    case "Himachal Pradesh":
+	        optionsList = HimachalPradesh;
+	        break;
+	    case "Jammu and Kashmir":
+	        optionsList = JammuKashmir;
+	        break;
+	    case "Jharkhand":
+	        optionsList = Jharkhand;
+	        break;
+	    case  "Karnataka":
+	        optionsList = Karnataka;
+	        break;
+	    case "Kerala":
+	        optionsList = Kerala;
+	        break;
+	    case  "Madya Pradesh":
+	        optionsList = MadhyaPradesh;
+	        break;
+	    case "Maharashtra":
+	        optionsList = Maharashtra;
+	        break;
+	    case  "Manipur":
+	        optionsList = Manipur;
+	        break;
+	    case "Meghalaya":
+	        optionsList = Meghalaya ;
+	        break;
+	    case  "Mizoram":
+	        optionsList = Mizoram;
+	        break;
+	    case "Nagaland":
+	        optionsList = Nagaland;
+	        break;
+	    case  "Orissa":
+	        optionsList = Orissa;
+	        break;
+	    case "Punjab":
+	        optionsList = Punjab;
+	        break;
+	    case  "Rajasthan":
+	        optionsList = Rajasthan;
+	        break;
+	    case "Sikkim":
+	        optionsList = Sikkim;
+	        break;
+	    case  "Tamil Nadu":
+	        optionsList = TamilNadu;
+	        break;
+	    case  "Telangana":
+	        optionsList = Telangana;
+	        break;
+	    case "Tripura":
+	        optionsList = Tripura ;
+	        break;
+	    case  "Uttaranchal":
+	        optionsList = Uttaranchal;
+	        break;
+	    case  "Uttar Pradesh":
+	        optionsList = UttarPradesh;
+	        break;
+	    case "West Bengal":
+	        optionsList = WestBengal;
+	        break;
+	    case  "Andaman and Nicobar Islands":
+	        optionsList = AndamanNicobar;
+	        break;
+	    case "Chandigarh":
+	        optionsList = Chandigarh;
+	        break;
+	    case  "Dadar and Nagar Haveli":
+	        optionsList = DadraHaveli;
+	        break;
+	    case "Daman and Diu":
+	        optionsList = DamanDiu;
+	        break;
+	    case  "Delhi":
+	        optionsList = Delhi;
+	        break;
+	    case "Lakshadeep":
+	        optionsList = Lakshadeep ;
+	        break;
+	    case  "Pondicherry":
+	        optionsList = Pondicherry;
+	        break;
+	}
+
+	  htmlString = htmlString+"<option value=''>"+ 'select District' +"</option>";
+	  for(var i = 0; i < optionsList.length; i++){
+	    htmlString = htmlString+"<option value='"+ optionsList[i] +"'>"+ optionsList[i] +"</option>";
+	  }
+	  $("#inputDistrict").html(htmlString);
+
+	};
+
+	
+	
+	function submitform() {
+
+		if ($("#BamGeneralLedger").valid()) {
+			//alert("add");
+			var url = "./GeneralLedgerAdd?formmode=add";
+			$("#BamGeneralLedger").attr('action', url);
+
+			var options = {
+				success: showResponse
+			};
+
+			$("#BamGeneralLedger").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$('#alert').modal("toggle");
+			}
+			;
+		}
+	};
+	
+	function modifybtn() {
+		var l = document.getElementById('glshcode').value;
+		alert(l);
+
+		if ($("#BamGeneralLedger").valid()) {
+			//alert("add");
+			var url = "./GeneralLedgerAdd?formmode=edit"+"&GLSH_CODE=" + l;
+			$("#BamGeneralLedger").attr('action', url);
+
+			var options = {
+				success: showResponse
+			};
+
+			$("#BamGeneralLedger").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$('#alert').modal("toggle");
+			}
+			;
+		}
+	};
+		
+	
+	
+	
+	
+	
+
+
+
+
+
+function back(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+function add(event){
+event.preventDefault();
+	
+	location.href='./erpglcodes?formmode=add';
+
+}
+function registrationlist(event){
+	event.preventDefault();
+	location.href='./erpglcodes';
+}
+
+function modifyscreen(a){
+	
+	var glsh_Code = a.getAttribute("data-attr");
+	console.log("glsh_Code" + glsh_Code);
+	location.href = 'erpglcodes?formmode=edit&glsh_Code=' + glsh_Code;
+}
+
+
+
+
+function deletebtn(a){
+	
+	var glsh_Code = a.getAttribute("data-attr");
+	console.log("glsh_Code" + glsh_Code);
+	location.href = 'erpglcodes?formmode=delete&glsh_Code=' + glsh_Code;
+}
+
+function deleteUserData() {
+	//alert("delete");
+	var l = document.getElementById('glshcode').value;
+	alert(l);
+
+		var url = "./GeneralLedgerAdd?formmode=delete" + "&GLSH_CODE=" + l;
+		$("#BamGeneralLedger").attr('action', url);
+
+		var options = {
+			success: showResponse
+		};
+
+		$("#BamGeneralLedger").ajaxSubmit(options);
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			$("#alertmsg").text(responseText);
+			$('#alert').modal("toggle");
+		}
+		;
+	
+};
+
+function getdata(a) {
+	var glsh_Code = a.getAttribute("data-attr");
+	console.log("glsh_Code" + glsh_Code);
+	location.href = 'erpglcodes?formmode=viewusinglsh&glsh_Code=' + glsh_Code;
+}
+</script>
+
+<script>
+    function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+</script>
+</head>
+
+<body>
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="BamGeneralLedger" autocomplete="off">
+							
+							<div class="card">
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+        style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        <div>
+            <i class="fas fa-user-plus mr-2"></i> GL STRUCTURE
+        </div>
+        <div>
+            <button class="btn btn-light btn-sm"
+                style="color: black; font-weight: bold; border-color: black;"
+                onclick="registrationlist(event);">
+                <i class="fas fa-list mr-1"></i> List
+            </button>
+        </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+    <div class="container" style="margin-left: 230px;">  
+    <div class="row mb-3">
+        <!-- Branch Id Field -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text"  class="form-control" id="Branch_id" name="Branch_id" placeholder=" " required>
+                <label for="branchId" class="form-legend">Branch Id</label>
+            </div>
+        </div>
+        
+        <!-- Branch Description Field -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="branch_desc" class="form-control" name="branch_desc" placeholder=" " required>
+                <label for="branchDesc" class="form-legend">Branch Description</label>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glCode" class="form-control" name="glCode" placeholder=" " required>
+                <label for="glCode" class="form-legend">GL CODE</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glDescription" class="form-control" name="glDescription" placeholder=" " required>
+                <label for="glDescription" class="form-legend">GL Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glsh_code" class="form-control" name="glsh_code" placeholder=" " required>
+                <label for="glsh_code" class="form-legend">GL Sub Head Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glsh_desc" class="form-control" name="glsh_desc" placeholder=" " required>
+                <label for="field2" class="form-legend">GLSH Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="crncy_code" class="form-control" name="crncy_code" placeholder=" " required>
+                <label for="crncy_code" class="form-legend">Currency Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="bal_sheet_group" class="form-control" name="bal_sheet_group" placeholder=" " required>
+                <label for="field2" class="form-legend">Balance Sheet Group</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="seq_order" class="form-control" name="seq_order" placeholder=" " required>
+                <label for="seq_order" class="form-legend">Sequence Order</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="number" id="total_balance" class="form-control" name="total_balance" placeholder=" " required>
+                <label for="field2" class="form-legend">Total Balance</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_opened" class="form-control" name="no_acct_opened" placeholder=" " required>
+                <label for="no_acct_opened" class="form-legend">No of Account Opened</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_closed" class="form-control" name="no_acct_closed" placeholder=" " required>
+                <label for="field2" class="form-legend">No of Account Closed</label>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        
+            
+            					
+					<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button th:if="${formmode}== 'add'" type="button" class="btn btn-xs btn-dark"
+									form="RefCodeMaster" id="btnSubmit" onclick="submitform(this);"
+									th:attr="data-formmode=${formmode}">Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+					
+					
+					</div>			
+        </form>	
+    </div>
+</div>
+
+			<!---------------------------- view------------------------>
+			<div class="container-fluid content" th:if="${formmode=='viewusinglsh'|| formmode=='delete'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="BamGeneralLedger" autocomplete="off">
+							
+							<div class="card">
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+        style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        <div th:if="${formmode=='viewusinglsh'}">
+            <i class="fas fa-user-plus mr-2"></i> GL STRUCTURE-View
+        </div>
+        <div th:if="${formmode=='delete'}">
+            <i class="fas fa-user-plus mr-2"></i> GL STRUCTURE-Delete
+        </div>
+        <div>
+            <button class="btn btn-light btn-sm"
+                style="color: black; font-weight: bold; border-color: black;"
+                onclick="registrationlist(event);">
+                <i class="fas fa-list mr-1"></i> List
+            </button>
+        </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+    <div class="container" style="margin-left: 230px;">  
+    <div class="row mb-3">
+        <!-- Branch Id Field -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text"  class="form-control" id="Branch_id" name="Branch_id"th:value="${singlerecord?.branch_id}" readonly>
+                <label for="branchId" class="form-legend">Branch Id</label>
+            </div>
+        </div>
+        
+        <!-- Branch Description Field -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="branch_desc" class="form-control" name="branch_desc" th:value="${singlerecord?.branch_desc}" readonly>
+                <label for="branchDesc" class="form-legend">Branch Description</label>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glCode" class="form-control" name="glCode" th:value="${singlerecord?.glCode}" readonly >
+                <label for="glCode" class="form-legend">GL CODE</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glDescription" class="form-control" name="glDescription" th:value="${singlerecord?.glDescription}" readonly required>
+                <label for="glDescription" class="form-legend">GL Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glshcode" class="form-control" name="glsh_code" th:value="${singlerecord?.glsh_code}" readonly required>
+                <label for="glsh_code" class="form-legend">GL Sub Head Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glsh_desc" class="form-control" name="glsh_desc" placeholder=" " th:value="${singlerecord?.glsh_desc}" readonly required>
+                <label for="field2" class="form-legend">GLSH Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="crncy_code" class="form-control" name="crncy_code" th:value="${singlerecord?.crncy_code}" readonly required>
+                <label for="crncy_code" class="form-legend">Currency Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="bal_sheet_group" class="form-control" name="bal_sheet_group" th:value="${singlerecord?.bal_sheet_group}" readonly required>
+                <label for="field2" class="form-legend">Balance Sheet Group</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="seq_order" class="form-control" name="seq_order" th:value="${singlerecord?.seq_order}" readonly required>
+                <label for="seq_order" class="form-legend">Sequence Order</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="number" id="total_balance" class="form-control" name="total_balance" th:value="${#numbers.formatDecimal(singlerecord?.total_balance, 0, 2)}"  readonly required>
+                <label for="field2" class="form-legend">Total Balance</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_opened" class="form-control" name="no_acct_opened" th:value="${singlerecord?.no_acct_opened}" readonly required>
+                <label for="no_acct_opened" class="form-legend">No of Account Opened</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_closed" class="form-control" th:value="${singlerecord?.no_acct_closed != null ? #numbers.formatDecimal(singlerecord.no_acct_closed, 0, 2) : '0'}"  name="no_acct_closed" readonly required>
+                <label for="field2" class="form-legend">No of Account Closed</label>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        
+            
+            					
+					<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button th:if="${formmode}== 'delete'" type="button" class="btn btn-xs btn-dark"
+									form="RefCodeMaster" id="btnSubmit" onclick="deleteUserData()">Submit</button>
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+					
+					
+					</div>			
+        </form>	
+    </div>
+</div>
+			
+			<!-- edit -->
+			
+			<div class="container-fluid content" th:if="${formmode}=='edit'">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="BamGeneralLedger" autocomplete="off">
+							
+							<div class="card">
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+        style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        <div>
+            <i class="fas fa-user-plus mr-2"></i> GL STRUCTURE - Modify
+        </div>
+        <div>
+            <button class="btn btn-light btn-sm"
+                style="color: black; font-weight: bold; border-color: black;"
+                onclick="registrationlist(event);">
+                <i class="fas fa-list mr-1"></i> List
+            </button>
+        </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+    <div class="container" style="margin-left: 230px;">  
+    <div class="row mb-3">
+        <!-- Branch Id Field -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text"  class="form-control" id="Branch_id" name="Branch_id"th:value="${singlerecord?.branch_id}" required>
+                <label for="branchId" class="form-legend">Branch Id</label>
+            </div>
+        </div>
+        
+        <!-- Branch Description Field -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="branch_desc" class="form-control" name="branch_desc" th:value="${singlerecord?.branch_desc}" required >
+                <label for="branchDesc" class="form-legend">Branch Description</label>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glCode" class="form-control" name="glCode" th:value="${singlerecord?.glCode}"  required>
+                <label for="glCode" class="form-legend">GL CODE</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glDescription" class="form-control" name="glDescription" th:value="${singlerecord?.glDescription}"  required>
+                <label for="glDescription" class="form-legend">GL Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="glshcode" class="form-control" name="glsh_code" th:value="${singlerecord?.glsh_code}" readonly required>
+                <label for="glsh_code" class="form-legend">GL Sub Head Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="glsh_desc" class="form-control" name="glsh_desc" placeholder=" " th:value="${singlerecord?.glsh_desc}"  required>
+                <label for="field2" class="form-legend">GLSH Description</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="crncy_code" class="form-control" name="crncy_code" th:value="${singlerecord?.crncy_code}"  required>
+                <label for="crncy_code" class="form-legend">Currency Code</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="bal_sheet_group" class="form-control" name="bal_sheet_group" th:value="${singlerecord?.bal_sheet_group}" required>
+                <label for="field2" class="form-legend">Balance Sheet Group</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="seq_order" class="form-control" name="seq_order" th:value="${singlerecord?.seq_order}" required>
+                <label for="seq_order" class="form-legend">Sequence Order</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="number" id="total_balance" class="form-control" name="total_balance" th:value="${#numbers.formatDecimal(singlerecord?.total_balance, 0, 2)}"  required>
+                <label for="field2" class="form-legend">Total Balance</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-3">
+        <!-- Additional Field 1 -->
+        <div class="col-md-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_opened" class="form-control" name="no_acct_opened" th:value="${singlerecord?.no_acct_opened}"required>
+                <label for="no_acct_opened" class="form-legend">No of Account Opened</label>
+            </div>
+        </div>
+        <!-- Additional Field 2 -->
+        <div class="col-md-5 ml-5">
+            <div class="form-group">
+                <input type="text" id="no_acct_closed" class="form-control" th:value="${singlerecord?.no_acct_closed != null ? #numbers.formatDecimal(singlerecord.no_acct_closed, 0, 2) : '0'}"  name="no_acct_closed" required>
+                <label for="field2" class="form-legend">No of Account Closed</label>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        
+            
+            					
+					<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button  type="button" class="btn btn-xs btn-dark"
+									form="RefCodeMaster" id="btnSubmit" onclick="modifybtn()">Submit</button>
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+					
+					
+					</div>			
+        </form>	
+    </div>
+</div>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+							<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i> GL STRUCTURE - List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable('dataTables', 'searchInput')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+										    <th style="text-align: center;">S.NO</th>
+										    <th style="text-align: center;">GL CODE</th>
+										    <th style="text-align: center;">GL DESC</th>
+										    <th style="text-align: center;">BRANCH ID</th>
+										    <th style="text-align: center;">BRANCH DESC</th>
+										    <th style="text-align: center;">GLSH CODE</th>
+										    <th style="text-align: center;">GLSH DESC</th>
+										    <th style="text-align: center;">CRNCY CODE</th>
+										    <th style="text-align: center;">CREDIT BAL</th>
+										    <th style="text-align: center;">DEBIT BAL</th>
+										    <th style="text-align: center;">Action</th>
+										</tr>
+												
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(getvaluelist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="chartacc ,srl: ${getvaluelist}">
+												<td th:text="${srl?.index+1}" style="text-align: center;"></td>
+												<td th:text="${chartacc?.glCode}" style="text-align: center;" ></td>
+												<td th:text="${chartacc?.glDescription}" style="text-align: center;"></td>
+												<td th:text="${chartacc?.branch_id}" style="text-align: center;"></td>
+												<td th:text="${chartacc?.branch_desc}" style="text-align: center;"></td>
+												<td  style="text-align: center;"
+													 th:attr="data-attr=${chartacc?.glsh_code}"
+													th:text="${chartacc?.glsh_code}">
+												</td>
+												<td th:text="${chartacc?.glsh_desc}" style="text-align: center;"></td>
+												<td th:text="${chartacc?.crncy_code}" style="text-align: center;"></td>
+												<!-- Positive Total Balance -->
+													<td style="text-align: right;"
+													th:text="${chartacc?.total_balance != null && (T(java.lang.Double).valueOf(chartacc.total_balance) > 0) ? #numbers.formatDecimal(T(java.lang.Double).valueOf(chartacc.total_balance), 2, 2) : '0.00'}">
+												</td>
+												<td style="text-align: right;"
+													th:text="${chartacc?.total_balance != null && (T(java.lang.Double).valueOf(chartacc.total_balance) < 0) ? #numbers.formatDecimal(T(java.lang.Double).valueOf(chartacc.total_balance), 2, 2) : '0.00'}">
+												</td>
+													
+													<td style="text-align: center;">
+													<!--<input type="radio" name="yourRadioGroup" value="yourValue">-->
+															 <div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-attr=${chartacc?.glsh_code}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+																
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-attr=${chartacc?.glsh_code}"
+																	style="cursor: pointer;" onclick="getdata(this)">View</a>
+																
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-attr=${chartacc?.glsh_code}"
+																	style="cursor: pointer;" onclick="deletebtn(this)">Delete</a>
+																
+
+															</div>
+														</div>
+
+													</td>
+												
+
+												
+  			
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+					</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+</div>
+</div>
+</div>
+<div class="modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="registrationlist(event)">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html>

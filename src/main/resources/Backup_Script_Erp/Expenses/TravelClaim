@@ -1,0 +1,40 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[TravelClaim]    Script Date: 4/22/2025 2:14:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TravelClaim](
+	[employeeid] [varchar](100) NULL,
+	[role] [varchar](100) NULL,
+	[date] [date] NULL,
+	[town_city] [varchar](100) NULL,
+	[fromloc] [varchar](100) NULL,
+	[toloc] [varchar](100) NULL,
+	[market_type] [varchar](100) NULL,
+	[allowance] [decimal](18, 2) NULL,
+	[travelmode] [varchar](100) NULL,
+	[busfare] [decimal](18, 2) NULL,
+	[total_km] [decimal](18, 2) NULL,
+	[petrolefare] [decimal](18, 2) NULL,
+	[stayallowance] [decimal](18, 2) NULL,
+	[stationery_xerox] [decimal](18, 2) NULL,
+	[other_expense] [decimal](18, 2) NULL,
+	[grand_total] [decimal](18, 2) NULL,
+	[id] [varchar](100) NULL,
+	[del_flg] [varchar](100) NULL,
+	[entry_user] [varchar](100) NULL,
+	[modify_user] [varchar](100) NULL,
+	[verify_user] [varchar](100) NULL,
+	[modify_flg] [varchar](100) NULL,
+	[verify_flg] [varchar](100) NULL,
+	[vehicle_type] [varchar](50) NULL,
+	[image_proof] [varbinary](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+

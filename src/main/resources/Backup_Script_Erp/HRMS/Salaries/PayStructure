@@ -1,0 +1,88 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[BTM_SAL_PAY]    Script Date: 4/22/2025 1:29:05 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BTM_SAL_PAY](
+	[EMP_NO] [varchar](10) NULL,
+	[EMP_NAME] [varchar](50) NULL,
+	[EMP_DESIG] [varchar](10) NULL,
+	[EMP_GROUP] [varchar](10) NULL,
+	[EMP_DIVISION] [varchar](10) NULL,
+	[DATE_OF_BIRTH] [datetime] NULL,
+	[DATE_OF_JOINING] [datetime] NULL,
+	[SPF_ACCT_NO] [varchar](25) NULL,
+	[URN_NO] [varchar](25) NULL,
+	[SALARY_MONTH] [varchar](15) NULL,
+	[NO_OF_DAYS] [smallint] NULL,
+	[DAYS_PAID] [smallint] NULL,
+	[LOSS_OF_PAY] [smallint] NULL,
+	[PAYMENT_MODE] [varchar](10) NULL,
+	[BANK_NAME] [varchar](25) NULL,
+	[BANK_ACCT_NO] [varchar](25) NULL,
+	[BASIC_PAY] [decimal](24, 2) NULL,
+	[HRA] [decimal](24, 2) NULL,
+	[SPL_ALLOW] [decimal](24, 2) NULL,
+	[MEDI_REIMB] [decimal](24, 2) NULL,
+	[CONV_ALLOW] [decimal](24, 2) NULL,
+	[LUNCH_ALLOW] [decimal](24, 2) NULL,
+	[EDU_ALLOW] [decimal](24, 2) NULL,
+	[BUSS_ATTIRE] [decimal](24, 2) NULL,
+	[CAR_MAINT] [decimal](24, 2) NULL,
+	[LEAVE_TRAVEL_ALLOW] [decimal](24, 2) NULL,
+	[OUTSTN_ALLOW] [decimal](24, 2) NULL,
+	[ANNUAL_LOYAL_BONUS] [decimal](24, 2) NULL,
+	[OTR_ALLOW] [decimal](24, 2) NULL,
+	[GROSS_SALARY] [decimal](24, 2) NULL,
+	[SPF] [decimal](24, 2) NULL,
+	[TDS] [decimal](24, 2) NULL,
+	[PROF_TAX] [decimal](24, 2) NULL,
+	[ESI] [decimal](24, 2) NULL,
+	[RECOVERY] [decimal](24, 2) NULL,
+	[OTR_DED] [decimal](24, 2) NULL,
+	[TOTAL_DEDUCTIONS] [decimal](24, 2) NULL,
+	[NET_SALARY] [decimal](24, 2) NULL,
+	[DATE_OF_PAY] [datetime] NULL,
+	[CUM_TDS_FY] [decimal](24, 2) NULL,
+	[PROV_IT] [decimal](24, 2) NULL,
+	[TAX_DUE] [decimal](24, 2) NULL,
+	[TAX_PER_MONTH] [decimal](24, 2) NULL,
+	[CTC_AMT] [decimal](24, 2) NULL,
+	[DECL_STATUS] [varchar](15) NULL,
+	[CTC_EFF_DATE] [datetime] NULL,
+	[CTC_END_DATE] [datetime] NULL,
+	[MOBILE_NO] [bigint] NULL,
+	[EMAIL_ID] [varchar](50) NULL,
+	[RECORD_TYPE] [varchar](10) NULL,
+	[RECORD_SRL_NO] [varchar](10) NULL,
+	[RECORD_DATE] [datetime] NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[DEL_FLG] [char](1) NULL,
+	[PAY_STATUS] [varchar](10) NULL,
+	[ENTRY_TIME] [datetime] NULL,
+	[ENTRY_USER] [varchar](10) NULL,
+	[MODIFY_FLG] [char](1) NULL,
+	[MODIFY_TIME] [datetime] NULL,
+	[MODIFY_USER] [varchar](10) NULL,
+	[VERIFY_TIME] [datetime] NULL,
+	[VERIFY_USER] [varchar](10) NULL,
+	[IFSC_CODE] [varchar](20) NULL,
+	[REMARKS] [varchar](50) NULL,
+	[AADHAR_NO] [varchar](20) NULL,
+	[National] [varchar](50) NULL,
+	[GROUP_OF_CTC] [varchar](50) NULL,
+	[VERIFY_FLG] [char](1) NOT NULL,
+	[CUM_TAX_DUD] [decimal](25, 4) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[BTM_SAL_PAY] ADD  DEFAULT ('N') FOR [VERIFY_FLG]
+GO
+
+

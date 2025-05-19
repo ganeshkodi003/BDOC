@@ -1,0 +1,976 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+
+<head>
+
+<title>ERP</title>
+<script src="/js/maxcdn.js" th:src="@{/js/maxcdn.js}"></script>
+<link rel="stylesheet" type="text/css" href="/css/loader.css"
+	th:href="@{/css/loader2.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<!-- Bootstrap JS (Required for Modal) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<style>
+body {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    
+}
+
+    /* Style for the loading modal */
+    #loadingModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: none; /* Semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Make sure it's on top */
+        backdrop-filter: blur(5px); /* Apply background blur */
+    }
+
+    #loadingContent {
+        text-align: center;
+        background-color:none; /* White background for loading content */
+        z-index: 10000; /* Ensure loading content stays above blur */
+    }
+
+    #loadingContent img {
+        width: 100px; /* Adjust size as needed */
+        height: 100px; /* Adjust size as needed */
+        margin-bottom: 10px;
+    }
+
+</style>
+
+
+
+<style>
+.header1 {
+	background-color: #83b5ec;
+}
+
+
+.error {
+	color: red;
+	padding-left: 10px;
+}
+
+
+
+#userdtl, #dropico {
+	float: right;
+}
+
+nav {
+	background-color: #fafafa;
+}
+
+#pagetitle {
+	top: 114%;
+	left: 50%;
+	height: 50px;
+	color: #e80909;
+	position: absolute;
+	text-align: center;
+	margin: -25px 0 0 -31px;
+}
+
+#logoutmenu {
+    display: none;
+    position: absolute;
+    z-index: 1031;
+    width: 200px;
+    background-color: #dee2e6;
+    box-shadow: 3px 1px 11px 1px #888888;
+    border-radius: 5px;
+    right: 0px;
+    top: 70px;
+    border: 2px solid #4d8cb9;
+    position: fixed;
+}
+
+#ques {
+	margin-top: -54px;
+	float: right;
+	padding: 65px;
+}
+
+.logout {
+	color: #2e7bd0;
+}
+
+.content {
+	margin-top: 100px;
+}
+
+html {
+	zoom: 0.8;
+}
+
+label {
+	text-align: left;
+}
+
+.modal-backdrop {
+	width: 200vw;
+	height: 200vh;
+}
+
+section {
+	padding-left: 15px;
+}
+
+.form-control:focus {
+	color: #495057;
+	outline: 0;
+	box-shadow: unset !important;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+	box-shadow: unset !important;
+}
+
+.nav-link-collapse:after {
+	float: right;
+	content: '\f067';
+	font-family: 'Font Awesome 5 Free';
+	color: red;
+	
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+
+
+ul {
+	list-style: none
+}
+
+li a {
+	color: white;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+#showmenu1 {
+	width: 50px;
+	height: 50px;
+	/* Maintain the same width and height to create a circular shape */
+	border-radius: 50%; /* Use a border-radius of 50% to create a circle */
+	object-fit: fill;
+	/* Ensure the image covers the circular area without distortion */
+}
+</style>
+
+
+    <style>
+   
+
+
+/* First Layer */
+.first-layer {
+width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   /*  padding: 10px 20px;
+    border-bottom: 2px solid #ddd; */
+}
+
+.logo img {
+    width: 75px;
+    height: 75px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.user-details {
+    font-family: Calibri, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Second Layer */
+.second-layer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 13%;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin-left: -156px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+
+
+    </style>
+    <style>
+   /* Custom styles */
+.navbar {
+    background-color: #f0f0f0  !important;
+}
+
+.navbar-brand img {
+    width: 100px;
+    height: 100px;
+}
+
+.nav-links a , label , div span, h3{
+color:#354a5f !important;
+    /* color: black !important; */
+}
+
+.dropdown-menu li a {
+font-weight: 100;
+
+}
+.menu {
+    display: flex;
+  /*   gap: 1em; */
+    font-size: 14px;
+}
+
+.menu li:hover {
+    background-color: #34495e;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.menu li {
+    padding: 5px 6px;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    background-color: #5b708a;
+    border-radius: 8px;
+}
+
+.dropdown-menu a {
+    color: #354a5f !important;
+    padding: 4px 8px;
+}
+
+.dropdown-menu a:hover {
+    background-color: lightgray !important;
+}
+
+/* Adjust the last 3 menu items */
+.dropdown-menu a:nth-last-child(-n+3) {
+    padding: -0.3rem !important;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+    cursor: pointer;
+    color: white;
+}
+
+
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    min-width: 13rem;
+}
+
+/* Add spacing between dropdown items */
+.dropdown-menu li {
+    padding: -8px 12px; /* Adjust vertical and horizontal padding */
+    margin-bottom: 5px; /* Space between items */
+}
+
+/* Remove bottom margin for the last item to avoid extra space */
+.dropdown-menu li:last-child {
+    margin-bottom: 0;
+}
+
+/* Style for links inside dropdown */
+.dropdown-menu a {
+    display: block;
+    color: #354a5f !important;
+    padding: 8px 12px; /* Adjust spacing inside links */
+}
+
+
+.dropdown-submenu > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+
+/* Black arrow with proper alignment */
+.dropdown-submenu > a::after {
+    content: ""; /* Thicker right arrow */
+    font-size: 16px; /* Bigger size */
+    color: #354a5f; /* Black color */
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 50%; 
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+/* Position the second-level (submenu) */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-top: -12px;
+    margin-left: 13px;
+}
+
+/* Show only the relevant submenu on hover */
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+/* Ensure the top-level menu dropdowns show on hover */
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+
+        
+    </style>
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        let menuTimeout;
+
+        // Function to show menu
+        function showMenu(menu) {
+            clearTimeout(menuTimeout);
+            menu.style.display = "block";
+        }
+
+        // Function to hide menu with delay
+        function hideMenu(menu) {
+            menuTimeout = setTimeout(() => {
+                menu.style.display = "none";
+            }, 200); // 200ms delay
+        }
+
+        // Handle main dropdown menu hover (e.g., "Orders")
+        const mainMenus = document.querySelectorAll('.nav-item.dropdown');
+        mainMenus.forEach(menu => {
+            menu.addEventListener("mouseenter", function () {
+                let dropdownMenu = this.querySelector(".dropdown-menu");
+                if (dropdownMenu) showMenu(dropdownMenu);
+            });
+
+            menu.addEventListener("mouseleave", function () {
+                let dropdownMenu = this.querySelector(".dropdown-menu");
+                if (dropdownMenu) hideMenu(dropdownMenu);
+            });
+        });
+
+        // Handle submenus inside dropdown (e.g., "Purchase", "Sale")
+        const submenus = document.querySelectorAll('.dropdown-submenu');
+        submenus.forEach(submenu => {
+            submenu.addEventListener("mouseenter", function () {
+                let subMenuElement = this.querySelector(".dropdown-menu");
+                if (subMenuElement) showMenu(subMenuElement);
+            });
+
+            submenu.addEventListener("mouseleave", function () {
+                let subMenuElement = this.querySelector(".dropdown-menu");
+                if (subMenuElement) hideMenu(subMenuElement);
+            });
+        });
+
+        // Close menus when clicking outside
+        document.addEventListener("click", function (e) {
+            if (!e.target.closest(".dropdown")) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = "none";
+                });
+            }
+        });
+    });
+
+
+    </script>
+    
+
+<script type="text/javascript">
+	/*<![CDATA[*/
+
+	/* Re-Direction Functionality */
+	function contentLoad(a) {
+        document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+
+		location.href = "/ERP/" + a.id;
+	}
+
+	/* LogOut Functionality */
+	function logout() {
+		$("#datalogout").modal("toggle");
+	}
+
+
+
+
+	
+
+	function logoutfunc() {
+
+		location.href = "/ERP/logoutsub";
+
+	}
+	
+	function popupmodel(a){
+	
+		
+		$("#processModal").modal("toggle");
+	}
+	  // Logout toggle function
+    function toggleLogout() {
+        let logoutMenu = document.getElementById("logout");
+        if (logoutMenu) {
+            logoutMenu.classList.toggle("hidden");
+        }
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Get the current user's employee_id
+        let currentUserId = document.getElementById("no").textContent.trim();
+
+        if (currentUserId) {
+            let imgs = document.getElementById("showmenu1");
+
+            // AJAX request to fetch profile image
+            $.ajax({
+                url: '/ERP/get_image?id=' + encodeURIComponent(currentUserId),
+                type: 'GET',
+                success: function (response) {
+                    if (response && response[currentUserId]) {
+                        // Set user profile image
+                        imgs.src = 'data:image/png;base64,' + response[currentUserId];
+                    } else {
+                        console.warn("No image found for user:", currentUserId);
+                    }
+                },
+                error: function (err) {
+                    console.error('Error fetching profile image:', err);
+                }
+            });
+        } else {
+            console.warn("User ID is empty. Cannot fetch profile image.");
+        }
+
+        // Toggle navigation menu
+        $('.nav-link-collapse').on('click', function () {
+            $('.nav-link-collapse').not(this).removeClass('nav-link-show');
+            $(this).toggleClass('nav-link-show');
+        });
+    });
+</script>
+
+    
+  
+    
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    let navLinks = document.querySelectorAll(".nav-second-level .nav-link");
+    let dashboardLink = document.getElementById("Dashboard");
+
+    // Check if the reset flag is present
+    let resetMenu = document.body.getAttribute("data-reset-menu");
+
+    if (resetMenu === "true") {
+        // Remove active class from all menu items
+        navLinks.forEach(item => item.classList.remove("active"));
+
+        // Set only Dashboard as active
+        if (dashboardLink) {
+            dashboardLink.classList.add("active");
+        }
+
+        // Clear localStorage to prevent old selections from persisting
+        localStorage.setItem("activeMenu", "Dashboard");
+    }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let navLinks = document.querySelectorAll(".nav-second-level .nav-link");
+    let homeButton = document.querySelector(".home-button");
+
+    // Retrieve last clicked menu item from localStorage
+    let activeMenu = localStorage.getItem("activeMenu");
+    if (activeMenu) {
+        let activeElement = document.getElementById(activeMenu);
+        if (activeElement) {
+            activeElement.classList.add("active");
+
+            let parentMenu = activeElement.closest(".collapse");
+            while (parentMenu) {
+                parentMenu.classList.add("show");
+                let parentLink = document.querySelector(`[data-target="#${parentMenu.id}"]`);
+                if (parentLink) {
+                    parentLink.setAttribute("aria-expanded", "true");
+                }
+                parentMenu = parentMenu.parentElement.closest(".collapse");
+            }
+        }
+    }
+
+    // Add click event listeners to menu items
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            // Remove active class from all links
+            navLinks.forEach(item => item.classList.remove("active"));
+
+            // Add active class to the clicked link
+            this.classList.add("active");
+
+            // Store the clicked menu ID in localStorage
+            localStorage.setItem("activeMenu", this.id);
+        });
+    });
+});
+
+// Function to Reset Active Menu and Set Dashboard Active
+function setDashboardActive() {
+    let navLinks = document.querySelectorAll(".nav-second-level .nav-link");
+    
+    // Remove active class from all links
+    navLinks.forEach(item => item.classList.remove("active"));
+
+    // Set "Dashboard" as active
+    let dashboardLink = document.getElementById("Dashboard");
+    if (dashboardLink) {
+        dashboardLink.classList.add("active");
+        localStorage.setItem("activeMenu", "Dashboard");
+    }
+}
+
+//inventories..
+document.addEventListener("DOMContentLoaded", function () {
+    // Handle Inventory menu click separately
+    let inventoryMenu = document.getElementById("Inventory_po");
+    
+    if (inventoryMenu) {
+        inventoryMenu.addEventListener("click", function () {
+            // Remove highlight from all menus
+            document.querySelectorAll(".nav-item .nav-link").forEach(link => {
+                link.classList.remove("active");
+            });
+
+            // Highlight the clicked Inventory menu
+            inventoryMenu.classList.add("active");
+
+            // Remove active state from localStorage for other menus
+            localStorage.removeItem("activeMenu");
+            localStorage.removeItem("activeModule");
+        });
+
+        // If Inventory menu is active (from localStorage or page load), keep it highlighted
+        let activeModule = localStorage.getItem("activeModule");
+        if (activeModule === "Inventory_po") {
+            inventoryMenu.classList.add("active");
+        }
+    }
+});
+
+</script>
+  
+</head>
+<body>
+    <nav class="navbar blur-border">
+        <!-- First Layer -->
+        <div class="first-layer">
+            <!-- Logo -->
+            <div class="logo">
+                <img th:src="@{/images/BF_LOGO_HRM.png}" alt="Bornfire">
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img th:src="@{'/images/' + ${session.USERID} + '.jpg'}" id="showmenu1" onclick="toggleLogout()">
+                <div class="user-details">
+                    <span id="no" th:text="${session.USERID}"></span> <br>
+                    <span th:text="${session.USERNAME}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Layer (Menu) -->
+        <div class="second-layer">
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#" id="Dashboard"  onclick="contentLoad(this)">Home</a></li>
+
+                <!-- Admin Section -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Admin</a>
+                    <ul class="dropdown-menu">
+<!--                         <li><a href="#" onclick="contentLoad(this)" id="organizationMaster" >Organization Master</a></li>
+ -->                        <li><a href="#" onclick="contentLoad(this)" id="TSK_organizationMaster" >Organization Master</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="HRMSUserProfile">User Profile</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="BTMAdminAccessandRole">Access and Role</a></li>
+                        <li><a  id="CategoryCreation" href="#" onclick="contentLoad(this)">Asset And Liability</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="notificationMaster" >Notifications</a></li>
+                         <!--<li><a  id="adminReferenceMaster" href="#" onclick="contentLoad(this)">Reference Code Master</a></li>-->
+                    </ul>
+                </li>
+
+                <!-- Master Section -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Master</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="contentLoad(this)" id="VendorCreation">Vendor Creation</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="ItemCreation">Item Creation</a></li>
+                          <!-- <li class="nav-item">
+                    <a class="nav-link" id="erpglcodes" href="#" onclick="contentLoad(this)">GL Structure</a>
+                </li> -->
+                
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" id="SubGroup" href="#" onclick="contentLoad(this)">Sub Group</a>
+                </li>-->
+                    </ul>
+                </li>
+
+                <!-- Orders Section -->
+               
+                
+                
+                 <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Orders</a>
+                    <ul class="dropdown-menu">
+                    	<li class="dropdown-submenu">
+                    	<a href="#" class="dropdown-toggle">Purchase</a>
+                    	<ul class="dropdown-menu">
+                         <li><a href="#" onclick="contentLoad(this)" id="purchaseOrder">Purchase Order</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="new_po_list">Purchase Invoice</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="Purchase_Return">Purchase Return</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="Payment_Out">Payment Out</a></li>
+                            </ul>
+                            
+                            <li class="dropdown-submenu">
+                    	<a href="#" class="dropdown-toggle">Sale</a>
+                    	<ul class="dropdown-menu">
+                         <li><a href="#" onclick="contentLoad(this)" id="SalesOrder">Sale Order</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="new_wo_list">Sale Invoice</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="new_wo_list1">Sale Out</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="SaleIn">Sale In</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="DeliveryCharge">Delivery Charge</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="sale_Return">Sale Return/Cr.Note</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="paymentin">Payment In</a></li>
+                            </ul>
+                            
+                            
+                            
+                            
+                            </ul>
+                </li>
+                
+                
+         <li class="nav-item dropdown">
+            <a  href="#" class="dropdown-toggle"> Production Cycle</a>
+
+            <ul class="dropdown-menu">
+                
+				 <li ><a 
+				id="Boil" href="#" onclick="contentLoad(this)">Boil</a></li>
+				
+				
+				<li ><a 
+				id="tskValidation" href="#" onclick="contentLoad(this)">Validation</a></li>
+				
+				<li ><a 
+				id="TskConvertToFG" href="#" onclick="contentLoad(this)">Convert To FG</a></li>
+				
+				<li ><a 
+				id="FinishedGoods" href="#" onclick="contentLoad(this)">Finished Goods</a></li>
+				
+              </ul>
+        </li>
+        
+        
+        
+        
+        
+       <!--<li class="nav-item dropdown">
+            <a  href="#" class="dropdown-toggle"> Production Cycle</a>
+
+            <ul class="dropdown-menu">
+                <li ><a 
+				id="BillOfMaterial" href="#" onclick="contentLoad(this)">Bill Of Material</a></li>
+				
+				<li ><a 
+				id="erpprocess" href="#" onclick="contentLoad(this)">Process</a></li>
+				
+				<li ><a 
+				id="Validation" href="#" onclick="contentLoad(this)">Validation</a></li>
+								
+				
+				<li ><a 
+				id="ConvertToFG" href="#" onclick="contentLoad(this)">Convert To FG</a></li>
+				
+				<li ><a 
+				id="FinishedGoods" href="#" onclick="contentLoad(this)">Finished Goods</a></li>
+				
+              </ul>
+        </li>-->
+        
+        
+        
+                
+              <!--  <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Orders</a>
+                    <ul class="dropdown-menu">
+                         <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle">Purchase</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="contentLoad(this)" id="purchaseOrder">Purchase Order</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="new_po_list">Purchase Invoice</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="Purchase_Return">Purchase Return</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="Payment_Out">Payment Out</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle">Sale</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="contentLoad(this)" id="SalesOrder" >Sale Order</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="new_wo_list" >Sale Invoice</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="DeliveryCharge" >Delivery Charge</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="sale_Return" >Sale Return</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="paymentin" >Payment In</a></li>
+                            </ul>
+                        </li> 
+                    </ul>
+                </li>-->
+
+                <!-- Production Section -->
+               <!--  <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Production</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="contentLoad(this)" id="BillOfMaterial">Bill Of Material</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="erpprocess">Process</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="Validation">Validation</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="ConvertToFG">Convert To FG</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="FinishedGoods">Finished Goods</a></li>
+                    </ul>
+                </li> -->
+
+                <!-- Inventory Section -->
+                <li class="nav-item"><a href="#" onclick="contentLoad(this)" id="Inventory_po">Inventory</a></li>
+
+                <!-- Expenses Section -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Expenses</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" onclick="contentLoad(this)" id="ERPExpenses">Expenses</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="TravelClaim" >Travel Claim</a></li>
+                    </ul>
+                </li>
+
+                <!-- HRMS Section -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">HRMS</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle">Management</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="contentLoad(this)" id="adminAssociateProfile">Associate Profile</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="attendanceRegister">Attendance Register</a></li>
+                                  <!--   <li class="nav-item"><a class="nav-link" id="adminProfileMaster" href="#" onclick="contentLoad(this)">Profile Master</a></li>
+               -->
+                                <li><a href="#" onclick="contentLoad(this)" id="adminLeaveMaster">Leave Master</a></li>
+                                 <!--  <li class="nav-item"><a class="nav-link" id="adminCalendarMaster" href="#" onclick="contentLoad(this)">Calendar Master</a></li>
+                -->
+                                <li><a href="#" onclick="contentLoad(this)" id="adminHolidayMaster">Holiday Master</a></li>
+                                <!--        <li class="nav-item"><a class="nav-link" id="adminDocumentMaster" href="#" onclick="contentLoad(this)">Document Master</a></li>
+                <li class="nav-item"><a class="nav-link" id="adminReferenceMaster" href="#" onclick="contentLoad(this)">Reference Code Master</a></li>
+                <li class="nav-item"><a class="nav-link" id="adminProjectMaster" href="#" onclick="contentLoad(this)">Project Master</a></li> -->
+                                <li><a href="#" onclick="contentLoad(this)"  id="adminTravelMaster">Travel Master</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="adminExpenseReport">Expense Report</a></li>
+                            </ul>
+                        </li>
+                        
+                                
+        <!-- Maintenance -->
+						<li class="dropdown-submenu"><a href="#"
+							class="dropdown-toggle">Maintenance</a>
+							<ul class="dropdown-menu">
+								<li><a id="MtAssociateProfile" href="#"
+									onclick="contentLoad(this)">Associate Profile</a></li>
+								<!--                                  <li class="nav-item"><a class="nav-link" id="MtProjectMaster" href="#" onclick="contentLoad(this)">Project Master</a></li>
+ -->
+								<li><a id="MtLeaveMaster" href="#"
+									onclick="contentLoad(this)">Leave Master</a></li>
+								<li><a id="MtTravelMaster" href="#"
+									onclick="contentLoad(this)">Travel Master</a></li>
+								<li><a id="MtExpenseReport" href="#"
+									onclick="contentLoad(this)">Expense Report</a></li>
+							</ul></li>
+
+						<li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle">Operation</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="contentLoad(this)" id="changePassword">Change Password</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="applyLeave">Apply Leave</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="travelMaster">Apply Travel Plan</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="claimExpenses">Claim Expenses</a></li><!-- 
+                <li class="nav-item"><a class="nav-link" id="issueTracker" href="#" onclick="contentLoad(this)">Issue Tracker-Lodge</a></li>
+                <li class="nav-item"><a class="nav-link" id="Performance_Evaluation" href="#" onclick="contentLoad(this)">Performance Evaluation</a></li> -->
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle">Salaries</a>
+                            <ul class="dropdown-menu">
+                             <li class="nav-item"><a class="nav-link" id="salary_parameters_ERP" href="#" onclick="contentLoad(this)">Salary Parameters</a></li>
+                                <li><a href="#" onclick="contentLoad(this)" id="paystructures" >Pay Structure</a></li>
+                                
+                              
+                                           <!--  <li class="nav-item"><a class="nav-link" id="pay_master" href="#" onclick="contentLoad(this)">Pay Master</a></li> -->
+                <!-- <li class="nav-item"><a class="nav-link" id="permas" href="#" onclick="contentLoad(this)">Perdiem Master</a></li>
+                <li class="nav-item"><a class="nav-link" id="batchJob" href="#" onclick="contentLoad(this)">Batch Job</a></li> -->
+                <!--  <li class="nav-item"><a class="nav-link" id="salary_parameters" href="#" onclick="contentLoad(this)">Salary Parameters</a></li> -->
+                <!--  <li class="nav-item"><a class="nav-link" id="Taxation_parameters" href="#" onclick="contentLoad(this)">Taxation Parameters</a></li> --> 
+<!--                 <li class="nav-item"><a class="nav-link" id="Performance_Evaluation" href="#" onclick="contentLoad(this)">Performance Evaluation</a></li>
+ --> 
+                         <!--   <li><a href="#" onclick="contentLoad(this)" id="esIERP" >ESI</a></li>
+                           <li><a href="#" onclick="contentLoad(this)" id="spf" >SPF</a></li> -->
+                          
+                           <li class="nav-item"><a class="nav-link" id="employeesalaryslip" href="#" onclick="contentLoad(this)">Employee Salary Slip</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Reports Section -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Reports</a>
+                  <!--   <ul class="dropdown-menu">
+                        <li><a href="#" onclick="contentLoad(this)" id="attendanceReport">Attendance Report</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="PurchaseReports" >Purchase Order Report</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="SaleReports" >Sale Order Report</a></li>
+                          <li class="nav-item">
+                    <a class="nav-link" id="GL_NEW" href="#" onclick="contentLoad(this)">General Ledger</a>
+                </li>
+                
+                    </ul> -->
+                      <ul class="dropdown-menu">
+            <li > <a  id="attendanceReport"
+						href="#" onclick="contentLoad(this)">Attendance Register</a> </li>
+                <li class="nav-item">
+                    <a  id="PurchaseReports" href="#" onclick="contentLoad(this)">Purchase & Sale </a>
+                </li>
+                <li class="nav-item">
+                    <a  id="Graphical_Design" href="#" onclick="contentLoad(this)">Graphical Design</a>
+                </li>
+                
+                <!--  <li class="nav-item">
+                    <a class="nav-link" id="Depreciation" href="#" onclick="contentLoad(this)">Depreciation </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                    <a class="nav-link" id="SaleReports" href="#" onclick="contentLoad(this)">Sale Order</a>
+                </li> -->
+               <!--   <li class="nav-item">
+                    <a class="nav-link" id="purchasereturnreport" href="#" onclick="contentLoad(this)">Purchase Return</a>
+                </li>  -->
+               <!--  <li class="nav-item">
+                    <a class="nav-link" id="GL_NEW" href="#" onclick="contentLoad(this)">General Ledger</a>
+                </li>
+                 -->
+            </ul>
+                    
+                </li>
+
+                <!-- Transaction Master -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="dropdown-toggle">Transaction Master</a>
+                    <ul class="dropdown-menu">
+                    <li><a href="#"id="erpchartOfAccounts"  onclick="contentLoad(this)">Chart Of Accounts</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="gj">General Journal</a></li>
+                        <li><a href="#" onclick="contentLoad(this)"  id="ledger" >General Ledger</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="trail_balance">Trial Balance</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="balancesheet">Balance Sheet</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="profitloss">Profit Loss</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="accountGL" >Transaction List</a></li>
+                          <li>
+                    <a  id="accountledger" href="#" onclick="contentLoad(this)">Account Ledger</a>
+                </li> 
+                    </ul>
+                </li>
+                
+                
+                <li class="nav-item" ><a  href="#" id="logout"
+				onclick="contentLoad(this)"> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</body>
+<!-- Loading Modal -->
+<div id="loadingModal" style="display: none;">
+    <div id="loadingContent">
+        <img th:src=@{/images/infins.gif} alt="Loading...">
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,66 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[HRMS_USER_PROFILE_TABLE_NEW]    Script Date: 4/22/2025 1:43:04 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[HRMS_USER_PROFILE_TABLE_NEW](
+	[USER_ID] [varchar](20) NULL,
+	[USER_NAME] [varchar](50) NULL,
+	[EMPLOYEE_ID] [varchar](20) NULL,
+	[EMPLOYEE_NAME] [varchar](50) NULL,
+	[DESIGNATION] [varchar](20) NULL,
+	[NATURE_OF_EMPLOYMENT] [varchar](20) NULL,
+	[MAX_INACTIVE_TIME] [varchar](20) NULL,
+	[ACC_EXP_DATE] [date] NULL,
+	[LOGIN_LOW] [varchar](20) NULL,
+	[LOGIN_HIGH] [varchar](20) NULL,
+	[USER_DISABLE_DATE] [date] NULL,
+	[USER_DISABLE_TILL] [date] NULL,
+	[PASSWORD] [varchar](100) NULL,
+	[PASS_EXP_DATE] [datetime] NULL,
+	[USER_STATUS] [varchar](20) NULL,
+	[LOGIN_STATUS] [varchar](20) NULL,
+	[VIRTUAL_USER_FLG] [varchar](20) NULL,
+	[WORK_CLASS] [varchar](20) NULL,
+	[MOBILE_NO] [decimal](38, 0) NULL,
+	[EMAIL_ID] [varchar](50) NULL,
+	[CATEGORY] [varchar](50) NULL,
+	[ROLE_ID] [varchar](20) NULL,
+	[ROLE_DESCRIPTION] [varchar](20) NULL,
+	[PERMISSION] [varchar](20) NULL,
+	[EFFECTIVE_TILL] [datetime] NULL,
+	[ADMIN] [varchar](20) NULL,
+	[ACCOUNTS] [varchar](20) NULL,
+	[GENERAL] [varchar](20) NULL,
+	[AUDIT_INQ] [varchar](20) NULL,
+	[DOCTOR] [varchar](50) NULL,
+	[LABORATORY] [varchar](20) NULL,
+	[PHARMACEUTICALS] [varchar](20) NULL,
+	[NURSES] [varchar](20) NULL,
+	[SCANNING] [varchar](20) NULL,
+	[XRAY] [varchar](20) NULL,
+	[CHANNELS] [varchar](20) NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[DEL_FLG] [char](1) NULL,
+	[ENTRY_USER] [varchar](20) NULL,
+	[ENTRY_TIME] [varchar](40) NULL,
+	[MODIFY_USER] [varchar](20) NULL,
+	[MODIFY_TIME] [varchar](40) NULL,
+	[AUTH_USER] [varchar](20) NULL,
+	[AUTH_TIME] [varchar](40) NULL,
+	[LOGIN_FLG] [varchar](50) NULL,
+	[USER_LOCKED_FLG] [varchar](50) NULL,
+	[NO_OF_ATTMP] [decimal](38, 0) NULL,
+	[DISABLE_FLG] [varchar](50) NULL,
+	[specialist] [varchar](100) NULL,
+	[LIFE_OF_PW] [decimal](10, 2) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+

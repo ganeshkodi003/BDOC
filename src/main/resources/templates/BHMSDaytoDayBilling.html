@@ -1,0 +1,424 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<script src="js/chart-js-config.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-size: 12rem;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 20px;
+}
+
+.btn btn-primary btn-md center-block {
+	color: #fff;
+	background-color: #1b5f61;
+	border-color: #3F84FC;
+	border-radius: 10px;
+}
+
+.card-body {
+	background: #dee2e6;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+label {
+	font-size: x-small;
+	display: inline-block;
+	margin-bottom: 0.1rem;
+}
+
+input, button, select, optgroup, textarea {
+	font-size: x-small;
+	padding: 0.1rem;
+	border: 1px solid #ccc;
+	/* height: 10px; */
+}
+
+input[type="radio"] {
+	float: left;
+	width: auto;
+	margin-left: 3em;
+}
+
+input[type="text"]:read-only {
+	cursor: normal;
+	background-color: #f8f8f8;
+	color: #999;
+}
+
+.panel {
+	margin-bottom: 20px;
+	background-color: #ffffff;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.form-row {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.radio-inline, .checkbox-inline {
+	display: inline-block;
+	/*  padding-left: 20px; */
+	margin-bottom: 0;
+	font-weight: normal;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.table-bordered th, .table-bordered td {
+	border: 1px solid #1e232d;
+}
+{
+margin-bottom 0.1rem
+;
+}
+</style>
+</head>
+
+<script type="text/javascript" th:inline="javascript">
+	function back() {
+		window.history.back();
+	}
+	/*<![CDATA[*/
+
+	$(document)
+			.ready(
+					function() {
+
+						$("#btnDayBillingsearch")
+								.on(
+										"click",
+										function() {
+
+											var payDate = document
+													.getElementById('payDate').value;
+
+											$('#DayBillingListTableBody')
+													.empty();
+
+											$
+													.ajax({
+														type : 'get',
+														url : "./api/getDaySaleInquiries?payDate="
+																+ payDate,
+														success : function(
+																response) {
+
+															var selectedRefCode = response;
+															//window.alert(selectedRefCode);
+															//var li=Object.values(selectedRefCode);
+															//var lis=Object.values(li);
+															//window.alert(lis[0]);666666
+															var trHTML = '';
+
+															trHTML += '<tr style="color:green !important;"><td>Consulting</td><td>'
+																	+ response[0]
+																	+ '</td></tr><tr style="color:green !important;"><td>Blood Test</td><td>'
+																	+ response[1]
+																	+ '</td></tr><tr style="color:green !important;"><td>Scan</td><td>'
+																	+ response[2]
+																	+ '</td></tr><tr style="color:green !important;"><td>Dressing</td><td>'
+																	+ response[3]
+																	+ '</td></tr><tr style="color:green !important;"><td>Medicine Sale</td><td>'
+																	+ response[4]
+
+																	+ '</td></tr><tr style="color:red !important;"><td>Common Expense</td><td>'
+																	+ response[5]
+																	
+																	+ '</td></tr><tr style="font-weight: bolder !important;"><td> Grand Total</td><td>'
+																	+ response[6]
+
+																	+ '</td></tr>';
+
+															$(
+																	'#DayBillingListTable')
+																	.append(
+																			trHTML);
+
+															document
+																	.getElementById('DayBillingList').style.display = 'block';
+
+														}
+													});
+										});
+
+						$("#cancelButton").on("click", function() {
+							alert("work in progress");
+						});
+
+					});
+
+	/*]]>*/
+</script>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+
+						$("#btnBillingsearch")
+								.on(
+										"click",
+										function() {
+
+											var start = document
+													.getElementById('startDate').value;
+											var end = document
+													.getElementById('endDate').value;
+
+											$('#BillingListTableBody').empty();
+
+											$
+													.ajax({
+														type : 'get',
+														url : "./api/getDaySaleInquiriesFromToEnd?Start="
+																+ start
+																+ "&End=" + end,
+														success : function(
+																response) {
+
+															var selectedRefCode = response;
+															//window.alert(selectedRefCode);
+															//var li=Object.values(selectedRefCode);
+															//var lis=Object.values(li);
+															//window.alert(lis[0]);666666
+															var trHTML = '';
+
+															trHTML += '<tr style="color:green !important;"><td>Consulting</td><td>'
+																	+ response[0]
+																	+ '</td></tr><tr style="color:green !important;"><td>Blood Test</td><td>'
+																	+ response[1]
+																	+ '</td></tr><tr style="color:green !important;"><td>Scan</td><td>'
+																	+ response[2]
+																	+ '</td></tr><tr style="color:green !important;"><td>Dressing</td><td>'
+																	+ response[3]
+																	+ '</td></tr><tr style="color:green !important;"><td>Medicine Sale</td><td>'
+																	+ response[4]
+
+																	+ '</td></tr><tr style="color:red !important;"><td>Common Expense</td><td>'
+																	+ response[5]
+																	
+																	+ '</td></tr><tr style="font-weight: bolder !important;"><td> Grand Total</td><td>'
+																	+ response[6]
+
+																	+ '</td></tr>';
+
+															$(
+																	'#BillingListTable')
+																	.append(
+																			trHTML);
+
+															document
+																	.getElementById('BillingList').style.display = 'block';
+
+														}
+													});
+										});
+
+					});
+</script>
+
+
+
+
+<body>
+
+
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+
+
+	<div class="container content">
+
+		<form th:if="${mode}=='check'" autocomplete="off" id="generalpatient"
+			method="POST">
+
+			<div class="card ">
+
+				<div
+					style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+					<div class="spur-card-title">DAY TO DAY BILLING</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<div class="form-row">
+
+						<label class="col-md-1 " style="font-size: 20px";><b>Payment
+								Date</b></label> <input type="date" id="payDate" class="col-md-2" /> <label
+							class="col-md-1 "></label>
+						<button type="button"
+							style="background-color: #428bca; border-color: #357ebd; color: white;"
+							class="col-md-1" id="btnDayBillingsearch">Search</button>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="card " id="DayBillingList">
+
+				<div
+					style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+					<div class="spur-card-title">BILLING</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<table class="table  table-bordered" id="DayBillingListTable">
+						<thead class="stats-secondary">
+							<tr>
+								<th style="font-size: 20px">Category</th>
+								<th style="font-size: 20px">Amount</th>
+
+							</tr>
+						</thead>
+						<tbody id="DayBillingListTableBody">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
+			<div class="card ">
+
+				<div
+					style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+					<div class="spur-card-title">BILLING BETWEEN DATES</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<div class="form-row">
+
+						<label class="col-md-1 " style="font-size: 20px;"><b>Start
+								Date</b></label> <input type="date" id="startDate" class="col-md-2" /> <label
+							class="col-md-1 "></label><label class="col-md-1 "
+							style="font-size: 20px;"><b>End Date</b></label> <input
+							type="date" id="endDate" class="col-md-2" /> <label
+							class="col-md-1 "></label>
+						<button type="button"
+							style="background-color: #428bca; border-color: #357ebd; color: white;"
+							class="col-md-1" id="btnBillingsearch">Search Between
+							Dates</button>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="card " id="BillingList">
+
+				<div
+					style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+					<div class="spur-card-title">BILLING BETWEEN DATES</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<table class="table  table-bordered" id="BillingListTable">
+						<thead class="stats-secondary">
+							<tr>
+								<th style="font-size: 20px">Category</th>
+								<th style="font-size: 20px">Amount</th>
+
+							</tr>
+						</thead>
+						<tbody id="BillingListTableBody">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class=" col-sm-13 text-center">
+				<div
+					style="background: linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%); background-color: #377486; color: white; padding: 1rem 1.3rem; margin-bottom: 0; height: 50px; border-bottom: 1px solid #17a2b852;">
+					<button Style="width: 100px; background: #386276; color: white;"
+						type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+					<button Style="width: 100px; background: #386276; color: white;"
+						type="button" id="btnBack" onclick="back();">Back</button>
+				</div>
+			</div>
+		</form>
+
+
+
+
+	</div>
+	
+
+</body>
+
+</html>

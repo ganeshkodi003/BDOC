@@ -1,0 +1,36 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[BGLS_BUSINESS_TABLE]    Script Date: 12/6/2024 12:55:21 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[BGLS_BUSINESS_TABLE](
+	[audit_ref_no] [varchar](255) NOT NULL,
+	[audit_date] [date] NULL,
+	[audit_screen] [varchar](255) NULL,
+	[audit_table] [varchar](255) NULL,
+	[auth_time] [datetime] NULL,
+	[auth_user] [varchar](255) NULL,
+	[entry_time] [datetime] NULL,
+	[entry_user] [varchar](255) NULL,
+	[event_id] [varchar](255) NULL,
+	[event_name] [varchar](255) NULL,
+	[func_code] [varchar](255) NULL,
+	[modi_details] [varchar](255) NULL,
+	[remarks] [varchar](255) NULL,
+	[field_name] [varchar](255) NULL,
+	[old_value] [varchar](255) NULL,
+	[new_value] [varchar](255) NULL,
+	[olf_value] [varchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[audit_ref_no] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

@@ -1,0 +1,1430 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td{
+        
+    text-align: center;
+        
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-align: left;
+            padding: 5px;
+        }
+        .but{
+            text-align: center;
+            justify-content: center;
+            
+
+        }
+      
+    </style>
+
+<style>
+.btn {
+	line-height: 0.5rem;
+}
+
+.table-bordered td, .table-bordered th {
+	font-size: smaller;
+}
+
+.container-manager {
+	width: 83.5%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 17.3%;
+	margin-top: 100px;
+}
+
+.table .thead-light th {
+	color: #495057;
+	background-color: #e9ecef;
+	border-color: #dee2e6;
+	width: 23px;
+}
+
+#thanveerssss {
+	font-size: 30px;
+}
+
+.tablinks {
+	background-color: #f2f2f2;
+	color: #000;
+}
+
+/* Highlighted tab style */
+.tablinks.active {
+	background-color: #007bff;
+	/* Change this to your desired highlight color */
+	color: #fff; /* Change this to the text color for highlighted tabs */
+}
+
+.tab {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+    fieldset {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+.scroll {
+	max-height: 60vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+/* Style the buttons inside the tab */
+.tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+/* .tab button.active {
+	background-color: #ccc;
+} */
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 0px solid #ccc;
+	border-top: none;
+}
+
+#myPieChart {
+	width: 100px;
+	height: 100px;
+}
+</style>
+
+<script th:inline="javascript">
+	
+</script>
+<script>
+	// JavaScript function to switch between tabs
+
+	function Home() {
+
+		location.href = 'Dashboard';
+	}
+
+	function Back() {
+
+		window.history.back();
+	}
+
+	function Backadd() {
+
+		window.location.href = 'Performance_Evaluation?formmode=list';
+	}
+
+	function contentLoad(a) {
+
+		location.href = "/BTM/" + a.id;
+		//location.href = "./operacc";
+
+	}
+
+	function add() {
+		location.href = 'Performance_Evaluation?formmode=add';
+
+	}
+
+	function verify(a) {
+		var ref_no = a.getAttribute("data-ref_no");
+		location.href = 'Performance_Evaluation?formmode=verify&ref_no=' + ref_no;
+
+	}
+
+	function view(a) {
+		var ref_no = a.value;
+		location.href = 'Performance_Evaluation?formmode=view&ref_no=' + ref_no;
+
+	}
+
+
+	$(function() {
+		$(
+				"#date_of_birth,#date_of_interview,#date_of_offer,#date_of_appointment_letter")
+				.datepicker({
+					dateFormat : "dd-mm-yy",
+
+				});
+	});
+
+	
+	/* MODIFY */
+function Submitemp(a) {
+	var ref_no = a.getAttribute("data-ref_no");
+    const sub_date = document.getElementById('sub_date').value;
+
+
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = currentDate.getFullYear();
+    const formattedDate = `${day}-${month}-${year}`;
+//alert(ref_no);alert(sub_date);alert(formattedDate);
+    if (sub_date !== formattedDate) {
+     
+      	$("#alertmsg").text("Already submitted!!!");
+			$('#alert').modal("toggle");
+		
+	}else{
+	  $.ajax({
+          url: './Per_Eva_submit?formmode=modify' +"&ref_no=" + ref_no  ,
+          data: $("#cvfid").serialize() ,
+          type: 'POST',
+         
+          success: function(response) {
+
+          	$("#alertmsg").text(response);
+				$('#alert').modal("toggle");
+          },
+          error: function(xhr, status, error) {
+              console.error("AJAX error:", status, error);
+              alert("An error occurred while sending the data.");
+          }
+	   }); 
+
+     
+}
+	
+	}
+
+		   
+		      
+	function Submitadd() {
+	  //  alert("submit");
+	        	   $.ajax({
+	                    url: './Per_Eva_submit?formmode=add' ,
+	                    data: $("#cvfid").serialize() ,
+	                    type: 'POST',
+	                   
+	                    success: function(response) {
+
+	    	            	$("#alertmsg").text(response);
+	    					$('#alert').modal("toggle");
+	                    },
+	                    error: function(xhr, status, error) {
+	    	                console.error("AJAX error:", status, error);
+	    	                alert("An error occurred while sending the data.");
+	    	            }
+	        	   }); 
+ 
+} 
+
+
+	function Delete(element) {
+		var del = element.getAttribute("data-ref_no");
+		if (confirm("Are you sure you want to delete?")) {
+			$.ajax({
+				url : './cvfdelete',
+				data : {
+					ref_no : del
+				},
+				type : 'POST',
+				success : function(data) {
+					alert("Deleted Successfully");
+					$(element).closest('tr').remove();
+				},
+				error : function(xhr, status, error) {
+					alert("Error occurred while deleting: " + error);
+				}
+			});
+		}
+	}
+
+	function base64ToUint8Array(base64) {
+		const binaryString = window.atob(base64);
+		const length = binaryString.length;
+		const uint8Array = new Uint8Array(length);
+
+		for (let i = 0; i < length; i++) {
+			uint8Array[i] = binaryString.charCodeAt(i);
+		}
+
+		return uint8Array;
+	}
+
+	
+	
+	
+	
+</script>
+
+<script>
+function modify(a) {
+    alert("modify");
+    var ref_no = a.getAttribute("data-ref_no");
+    //fetchBlobData(ref_no);
+    location.href = 'cvf?formmode=modify&ref_no=' + ref_no;
+
+    
+}
+
+
+ function fetchBlobData(ref_no) {
+    alert("Fetching blob data for ref_no: " + ref_no);
+    
+    $.ajax({
+        url: './cvfmodifysubmit2/' + ref_no,
+        type: 'GET',
+        responseType: 'blob', // Set responseType to 'blob' to receive a Blob object
+        success: function(response, status, xhr) {
+            alert(response);
+
+            // Convert the byte array to a Blob object
+            var blob = new Blob([response], { type: 'application/pdf' });
+
+            // Create URL for the Blob object
+            var url = URL.createObjectURL(blob);
+            alert("URL created: " + url);
+
+            // Set the URL as the value of the input text
+            $('#annexure_resume1').val(url);
+
+            alert($('#annexure_resume1').val());
+        },
+        error: function(xhr, status, error) {
+            alert("Error: " + error);
+        }
+    });
+} 
+
+
+
+</script>
+<script>
+
+function updateEmpName() {
+    const empId = document.getElementById('emb_id').value;
+   // alert(empId)
+    
+      $.ajax({
+        url: './Per_Eva_get_Name?empId=' + empId,
+        type: 'GET', 
+        success: function(response, status, xhr) {
+           // alert(response);
+            document.getElementById('emb_name').value = response.resource_name;
+            document.getElementById('rep_id').value = response.report_mgr_id;
+            document.getElementById('rep_name').value = response.report_mgr_name;
+        }
+      
+    
+      });
+}
+document.addEventListener('DOMContentLoaded', (event) => {
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach((row) => {
+        const checkboxes = row.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    checkboxes.forEach((box) => {
+                        if (box !== checkbox) {
+                            box.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    });
+});
+
+</script>
+<script>
+
+function openPage(pageNumber) {
+    // Hide all pages
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "none";
+
+    // Show the selected page
+    document.getElementById("page" + pageNumber).style.display = "block";
+}
+
+// Show the first page by default
+document.addEventListener("DOMContentLoaded", function() {
+    openPage(1);
+
+    // Add event listener to the button
+    document.getElementById('nextButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        openPage(2); // Change the page number as needed 
+    });
+    document.getElementById('nextButtons').addEventListener('click', function(event) {
+        event.preventDefault();
+        openPage(3); // Change the page number as needed
+    });
+    document.getElementById('prevButtons').addEventListener('click', function(event) {
+        event.preventDefault();
+        openPage(1); // Change the page number as needed
+    });
+    document.getElementById('prevButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        openPage(2); // Change the page number as needed
+    });
+});
+</script>
+
+</head>
+<body >
+	 <div th:insert="BTMHeaderMenu :: header"></div> 
+	<!---------------------User List Starts------------------------------------------------------->
+	<!-- Start Content-->
+	<div class="container-manager">
+
+
+
+		<div class="row">
+
+
+			<div class="col-sm-11"
+				style="font-size: 12px; margin-left: 60px; margin-top: 0px;">
+				
+				
+<!--------------------------------------- For Admin only  ------------------------>
+				<div th:if="*{formmode == 'list' and RoleMenu?.role == 'ADM'}">
+
+					<div class="card">
+						<div class="card-header " style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+							<div class="float-left">
+								<h6 style="font-size: 1.5rem; color: black;">PERFORMANCE
+									EVALUATION LIST</h6>
+							</div>
+
+							<div class="btn-group nav-buttons float-right"
+								style="padding: 5px;">
+
+								<button class="btn btn-primary" onclick="add();" th:if="${RoleMenu?.role=='ADM'}">Add</button>
+
+
+
+							</div>
+
+						</div>
+
+						<table class="table  table-bordered  table-hover table-sm"
+							style="margin-bottom: 0px; font-size: initial;" id="usertable">
+							<thead class="thead-light">
+
+								<tr style="text-align: center">
+									<th><h6>SRL NO</h6></th>
+									<th><h6>EMPLOYEE NAME</h6></th>
+									<th><h6>EMPLOYEE ID</h6></th>
+									<th><h6>REPORTING MANAGER</h6></th>
+									<th><h6>ASSIGN DATE</h6></th>
+									<th><h6>SUBMITION DATE</h6></th>
+									<th><h6>STATUS</h6></th>
+									<th><h6>SELECT</h6></th>
+								</tr>
+							</thead>
+
+							<tbody id="placelist">
+
+								<tr th:each="details : ${del}">
+
+									<td th:text="${details.srl_no}" ></td>
+									<td th:text="${details.emb_id}"></td>
+									<td th:text="${details.emb_name}"></td>
+									<td th:text="${details.rep_name}"></td>
+									
+									
+									<td style="width: 10%"
+										th:text="${#dates.format(details.review_assigning_date,'dd-MM-yyyy')}"></td>
+									<td style="width: 10%"
+										th:text="${#dates.format(details.review_submition_date,'dd-MM-yyyy')}"></td>
+									<td th:text="${details.status}"></td>
+									
+									<td style="text-align:center"><input class="form-control-md checkToModify" 
+									th:value="${details.srl_no}" type="radio" onclick="view(this)"/></td>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+						<div class="card-footer text-center"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" onclick="Back();">Back</button>
+						</div>
+					</div>
+
+				</div>
+				
+				
+<!--------------------------------------- For Employee only  ------------------------>
+				<div th:if="*{formmode == 'list' and RoleMenu?.role != 'ADM'}">
+
+					<div class="card">
+						<div class="card-header " style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+							<div class="float-left">
+								<h6 style="font-size: 1.5rem; color: black;">PERFORMANCE
+									EVALUATION LIST</h6>
+							</div>
+
+							<div class="btn-group nav-buttons float-right"
+								style="padding: 5px;">
+
+								<button class="btn btn-primary" onclick="add();" th:if="${RoleMenu?.role=='ADM'}">Add</button>
+
+
+
+							</div>
+
+						</div>
+
+						<table class="table  table-bordered  table-hover table-sm"
+							style="margin-bottom: 0px; font-size: initial;" id="usertable">
+							<thead class="thead-light">
+
+								<tr style="text-align: center">
+									<th><h6>SRL NO</h6></th>
+									<th><h6>EMPLOYEE NAME</h6></th>
+									<th><h6>EMPLOYEE ID</h6></th>
+									<th><h6>REPORTING MANAGER</h6></th>
+									<th><h6>ASSIGN DATE</h6></th>
+									<th><h6>SUBMITION DATE</h6></th>
+									<th><h6>STATUS</h6></th>
+									<th><h6>SELECT</h6></th>
+								</tr>
+							</thead>
+
+							<tbody id="placelist">
+
+								<tr th:each="details : ${dell}">
+
+									<td th:text="${details.srl_no}" ></td>
+									<td th:text="${details.emb_id}"></td>
+									<td th:text="${details.emb_name}"></td>
+									<td th:text="${details.rep_name}"></td>
+									
+									
+									<td style="width: 10%"
+										th:text="${#dates.format(details.review_assigning_date,'dd-MM-yyyy')}"></td>
+									<td style="width: 10%"
+										th:text="${#dates.format(details.review_submition_date,'dd-MM-yyyy')}"></td>
+									<td th:text="${details.status}"></td>
+									
+									<td style="text-align:center"><input class="form-control-md checkToModify" 
+									th:value="${details.srl_no}" type="radio" onclick="view(this)"/></td>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+						<div class="card-footer text-center"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" onclick="Back();">Back</button>
+						</div>
+					</div>
+
+				</div>
+
+				<!------------------------------------Add start------------------------------->
+				<div th:if="${formmode}=='add'">
+					<div class="card">
+						<form method="post" id="cvfid" autocomplete="off"
+							enctype="multipart/form-data">
+
+	<!-- Page 1 -->
+					<div id="page1" style="display: none;">
+
+							<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+ 					<fieldset>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Employee Id</div>
+								<div class="col-sm-2">
+						 <select id="emb_id"  name="emb_id" style="  background-color: #f9fff6;" onchange="updateEmpName()" >
+						 <option value="">SELECT</option>
+      					  <option th:each="resource_id : ${userlist}" th:value="${resource_id}" th:text="${resource_id}"></option>
+    					</select>
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Employee name</div>
+								<div class="col-sm-2">
+									<input type="text" name="emb_name" id="emb_name"  
+										class="form-control form-control-sm" required readonly/>
+								</div>
+								
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Reporting Manager Id</div>
+								<div class="col-sm-2">
+								
+    							<input type="text" id="rep_id"  name="rep_id" readonly required
+										class="form-control form-control-sm" />
+    							
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Reporting Manager Name</div>
+								<div class="col-sm-2">
+									<input type="text" name="rep_name" id="rep_name" readonly required
+										class="form-control form-control-sm" />
+								</div>
+							</div>
+								
+							</fieldset>
+							<fieldset>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Goals And Objectives During This Evaluation Period</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="goals_and_objectives_this" name="goals_and_objectives_this" maxlength="10000"
+									   style="width: 391%; height: 213px;" readonly></textarea>
+								</div>
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Achievements, Accomplishments, And Responsibilities</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="acheive_accoumb" name="acheive_accoumb" maxlength="10000"
+									   style="width: 391%; height: 213px;" readonly></textarea>
+								</div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Strengths And Areas For Development</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="strength_areas" name="strength_areas" maxlength="10000"
+									   style="width: 391%; height: 213px;" readonly></textarea>
+								</div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Suggested Career Progression Plan </div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="suggets_career" name="suggets_career" maxlength="10000"
+									   style="width: 391%; height: 213px;" readonly></textarea>
+								</div>
+								</div>
+								
+							</fieldset>
+							<fieldset>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div  style="transform: translateX(122px);font-size: medium;">Goals And Objectives For Next Evaluation Period </div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >1.</div>
+								<div >
+									<input type="text" name="next_eva_one"  id="next_eva_one" readonly
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+							   <div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >2.</div>
+								<div >
+									<input type="text" name="next_eva_two" id="next_eva_two" readonly
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+							   <div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >3.</div>
+								<div >
+									<input type="text" name="next_eva_three" id="next_eva_three" readonly
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+								</fieldset>
+								<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="nextButton">Next</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						     </div>
+								 </div>
+								 
+								 
+						<!-- Page 2 -->
+					<div id="page2" style="display: none;">
+					<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+					<fieldset>
+					<table border="1">
+            <thead style="background-color: rgba(175, 177, 177, 0.692);">
+                <tr>
+                    <th style="text-align: left; padding: 10px;">5 Exceptional</th>
+                    <th style="text-align: left; padding: 10px;">Performance is consistently superior and significantly exceeds position requirements.</th>
+                    <th class="vertical-text" rowspan="6">5 Exceptional</th>
+                    <th class="vertical-text" rowspan="6">4 Highly Effective</th>
+                    <th class="vertical-text" rowspan="6">3 Proficient</th>
+                    <th class="vertical-text" rowspan="6">2 Inconsistent</th>
+                    <th class="vertical-text" rowspan="6">1 Unsatisfactory</th>
+                    <th class="vertical-text" rowspan="6">N/A New/Not Applicable</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">4 Highly Effective:</th>
+                    <th style="text-align: left; padding: 10px;">Performance frequently exceeds position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">3 Proficient:</th>
+                    <th style="text-align: left; padding: 10px;">Performance consistently meets position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">2 Inconsistent:</th>
+                    <th style="text-align: left; padding: 10px;">Performance meets some, but not all position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">1 Unsatisfactory:</th>
+                    <th style="text-align: left; padding: 10px;">Performance consistently fails to meet minimum position requirements; employee lacks skills required or fails to utilize necessary skills.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">N/A New or Not Applicable:</th>
+                    <th style="text-align: left; padding: 10px;">Employee has not been in position long enough to have demonstrated the essential elements of the position and will be reviewed at a later agreed upon date.</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td style="text-align: left; padding: 10px;">1.</td>
+                    <td style="text-align: left; padding: 10px;">Skill and proficiency in carrying out assignments<br>Brief explanation: <input type="hidden" name="explanation1"></td>
+                    <td><input type="checkbox" name="review1" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review1" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review1" value="Proficient"></td>
+                    <td><input type="checkbox" name="review1" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review1" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review1" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">2.</td>
+                    <td style="text-align: left; padding: 10px;">Quality of work<br>Brief explanation: <input type="hidden" name="explanation2"></td>
+                    <td><input type="checkbox" name="review2" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review2" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review2" value="Proficient"></td>
+                    <td><input type="checkbox" name="review2" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review2" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review2" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">3.</td>
+                    <td style="text-align: left; padding: 10px;">Attendance and punctuality<br>Brief explanation: <input type="hidden" name="explanation3"></td>
+                    <td><input type="checkbox" name="review3" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review3" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review3" value="Proficient"></td>
+                    <td><input type="checkbox" name="review3" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review3" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review3" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">4.</td>
+                    <td style="text-align: left; padding: 10px;">Teamwork and cooperation<br>Brief explanation: <input type="hidden" name="explanation4"></td>
+                    <td><input type="checkbox" name="review4" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review4" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review4" value="Proficient"></td>
+                    <td><input type="checkbox" name="review4" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review4" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review4" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">5.</td>
+                    <td style="text-align: left; padding: 10px;">Proficiency at improving work methods and procedures as a means toward greater efficiency<br>Brief explanation: <input type="hidden" name="explanation5"></td>
+                    <td><input type="checkbox" name="review5" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review5" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review5" value="Proficient"></td>
+                    <td><input type="checkbox" name="review5" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review5" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review5" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">6.</td>
+                    <td style="text-align: left; padding: 10px;">Communicates effectively with supervisor, peers, and customers<br>Brief explanation: <input type="hidden" name="explanation6"></td>
+                    <td><input type="checkbox" name="review6" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review6" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review6" value="Proficient"></td>
+                    <td><input type="checkbox" name="review6" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review6" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review6" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">7.</td>
+                    <td style="text-align: left; padding: 10px;">Ability to work independently<br>Brief explanation: <input type="hidden" name="explanation7"></td>
+                    <td><input type="checkbox" name="review7" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review7" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review7" value="Proficient"></td>
+                    <td><input type="checkbox" name="review7" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review7" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review7" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">8.</td>
+                    <td style="text-align: left; padding: 10px;">Ability to work cooperatively with supervision or as part of a team<br>Brief explanation: <input type="hidden" name="explanation8"></td>
+                    <td><input type="checkbox" name="review8" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review8" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review8" value="Proficient"></td>
+                    <td><input type="checkbox" name="review8" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review8" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review8" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">9.</td>
+                    <td style="text-align: left; padding: 10px;">Willingness to take on additional responsibilities<br>Brief explanation: <input type="hidden" name="explanation9"></td>
+                    <td><input type="checkbox" name="review9" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review9" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review9" value="Proficient"></td>
+                    <td><input type="checkbox" name="review9" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review9" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review9" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">10.</td>
+                    <td style="text-align: left; padding: 10px;">Reliability (attendance, punctuality, meeting deadlines)<br>Brief explanation: <input type="hidden" name="explanation10"></td>
+                    <td><input type="checkbox" name="review10" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review10" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review10" value="Proficient"></td>
+                    <td><input type="checkbox" name="review10" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review10" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review10" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">11.</td>
+                    <td style="text-align: left; padding: 10px;">Adeptness at analyzing facts, problem solving, decision-making, and demonstrating good judgment<br>Brief explanation: <input type="hidden" name="explanation11"></td>
+                    <td><input type="checkbox" name="review11" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review11" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review11" value="Proficient"></td>
+                    <td><input type="checkbox" name="review11" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review11" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review11" value="N/A New or not Applicable"></td>
+                </tr>
+                
+                <tr>
+                    <td style="text-align: left; padding: 10px;">12.</td>
+                    <td style="text-align: left; padding: 10px;">Displays fairness towards all subordinates.<br>Brief explanation: <input type="hidden" name="explanation12"></td>
+                    <td><input type="checkbox" name="review12" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review12" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review12" value="Proficient"></td>
+                    <td><input type="checkbox" name="review12" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review12" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review12" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">13.</td>
+                    <td style="text-align: left; padding: 10px;">Identifies performance expectations, gives timely feedback and conducts formal performance appraisals.<br>Brief explanation: <input type="hidden" name="explanation13"></td>
+                    <td><input type="checkbox" name="review13" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review13" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review13" value="Proficient"></td>
+                    <td><input type="checkbox" name="review13" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review13" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review13" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">14.</td>
+                    <td style="text-align: left; padding: 10px;">14.	Helps employees to see the potential for developing their skills; assists them in eliminating barriers to their development.<br>Brief explanation: <input type="hidden" name="explanation14"></td>
+                    <td><input type="checkbox" name="review14" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review14" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review14" value="Proficient"></td>
+                    <td><input type="checkbox" name="review14" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review14" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review14" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">15.</td>
+                    <td style="text-align: left; padding: 10px;">Delegates responsibility where appropriate, based on the employee’s ability and potential.<br>Brief explanation: <input type="hidden" name="explanation15"></td>
+                    <td><input type="checkbox" name="review15" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review15" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review15" value="Proficient"></td>
+                    <td><input type="checkbox" name="review15" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review15" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review15" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">16.</td>
+                    <td style="text-align: left; padding: 10px;">Takes timely and appropriate corrective/disciplinary action with employees. <br>Brief explanation: <input type="hidden" name="explanation16"></td>
+                    <td><input type="checkbox" name="review16" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review16" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review16" value="Proficient"></td>
+                    <td><input type="checkbox" name="review16" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review16" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review16" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">17.</td>
+                    <td style="text-align: left; padding: 10px;">Displays fairness towards all subordinates.<br>Brief explanation: <input type="hidden" name="explanation17"></td>
+                    <td><input type="checkbox" name="review17" value="Exceptional"></td>
+                    <td><input type="checkbox" name="review17" value="Highly Effective"></td>
+                    <td><input type="checkbox" name="review17" value="Proficient"></td>
+                    <td><input type="checkbox" name="review17" value="Inconsistent"></td>
+                    <td><input type="checkbox" name="review17" value="Unsatisfactory"></td>
+                    <td><input type="checkbox" name="review17" value="N/A New or not Applicable"></td>
+                </tr>
+                <tr style="background-color: rgba(175, 177, 177, 0.692);">
+                    <th colspan="8">Additional performance competencies for employees with supervisory responsibilities</th>
+                </tr>
+            </tbody>
+        </table>
+					
+					
+					
+					</fieldset>
+					<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="prevButtons">Previous</button>
+							<button class="btn btn-primary" id="nextButtons">Next</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						</div>
+					</div>		 
+								 
+							<!-- Page 3 -->
+					<div id="page3" style="display: none;">
+					<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+							
+							<fieldset>
+							
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Goal Setting and Development Planning:</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="man_goals" name="man_goals" maxlength="10000"
+									   style="width: 391%; height: 213px;" ></textarea>
+								</div>
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Manager Comments:</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="man_comments" name="man_comments" maxlength="10000"
+									   style="width: 391%; height: 213px;" ></textarea>
+								</div>
+							</div>
+							
+							
+							</fieldset>
+					
+					<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="prevButton">Previous</button>
+							<button class="btn btn-primary" onclick="Submitadd();">Submit</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						</div>
+					</div>		 		 
+								 
+						</form>
+						
+					</div>
+				</div>
+
+											<!-- View starts -->
+				
+
+				
+<div th:if="${formmode}=='view'">
+					<div class="card">
+						<form method="post" id="cvfid" autocomplete="off"
+							enctype="multipart/form-data">
+
+	<!-- Page 1 -->
+					<div id="page1" style="display: none;">
+
+							<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+ 					<fieldset>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Employee Id</div>
+								<div class="col-sm-2">
+						 <select id="emb_id"  name="emb_id" style="  background-color: #f9fff6;" onchange="updateEmpName()" >
+						 <option th:text="${cvfview.emb_id}">SELECT</option>
+      					  </select>
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Employee name</div>
+								<div class="col-sm-2">
+									<input type="text" name="emb_name" id="emb_name"  th:value="${cvfview.emb_name}"
+										class="form-control form-control-sm" required readonly/>
+								</div>
+								
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Reporting Manager Id</div>
+								<div class="col-sm-2">
+								 <input id="rep_id"  name="rep_id" class="form-control form-control-sm"
+						 		 th:value="${cvfview.rep_id}" readonly/>
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Reporting Manager Name</div>
+								<div class="col-sm-2">
+									<input type="text" name="rep_name" id="rep_name" readonly required
+										class="form-control form-control-sm" th:value="${cvfview.rep_name}"/>
+								</div>
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Assigning Date</div>
+								<div class="col-sm-2">
+								<input type="text" name="ass_date" id="ass_date" readonly required
+										class="form-control form-control-sm" th:value="${#dates.format(cvfview.review_assigning_date,'dd-MM-yyyy')}"/>
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">Submission Date</div>
+								<div class="col-sm-2">
+									<input type="text" name="sub_date" id="sub_date"  required class="form-control form-control-sm"
+										 th:value="${cvfview.review_submition_date != null ? #dates.format(cvfview.review_submition_date, 'dd-MM-yyyy') : datee}" readonly/>
+								</div>
+							</div>
+								
+							</fieldset>
+							<fieldset>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Goals And Objectives During This Evaluation Period</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="goals_and_objectives_this" name="goals_and_objectives_this" maxlength="10000"
+									   style="width: 391%; height: 213px;" th:text="${cvfview.goals_and_objectives_this}"></textarea>
+								</div>
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Achievements, Accomplishments, And Responsibilities</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="acheive_accoumb" name="acheive_accoumb" maxlength="10000"
+									   style="width: 391%; height: 213px;"  th:text="${cvfview.acheive_accoumb}"></textarea>
+								</div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Strengths And Areas For Development</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="strength_areas" name="strength_areas" maxlength="10000"
+									   style="width: 391%; height: 213px;" th:text="${cvfview.strength_areas}"></textarea>
+								</div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+							<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Suggested Career Progression Plan </div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="suggets_career" name="suggets_career" maxlength="10000"
+									   style="width: 391%; height: 213px;" th:text="${cvfview.suggets_career}"></textarea>
+								</div>
+								</div>
+								
+							</fieldset>
+							<fieldset>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div  style="transform: translateX(122px);font-size: medium;">Goals And Objectives For Next Evaluation Period </div>
+								</div>
+								<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >1.</div>
+								<div >
+									<input type="text" name="next_eva_one"  id="next_eva_one" th:value="${cvfview.next_eva_one}"
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+							   <div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >2.</div>
+								<div >
+									<input type="text" name="next_eva_two" id="next_eva_two" th:value="${cvfview.next_eva_two}"
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+							   <div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="text-align: center;font-size: large;" >3.</div>
+								<div >
+									<input type="text" name="next_eva_three" id="next_eva_three" th:value="${cvfview.next_eva_three}"
+										class="form-control form-control-sm" style="width: 280%;transform: translateX(21px);"/>
+								</div>
+							   </div>
+								</fieldset>
+								<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="nextButton">Next</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						     </div>
+								 </div>
+								
+									 
+								 
+						<!-- Page 2 -->
+					<div id="page2" style="display: none;">
+					<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+					<fieldset>
+					<table border="1">
+            <thead style="background-color: rgba(175, 177, 177, 0.692);">
+                <tr>
+                    <th style="text-align: left; padding: 10px;">5 Exceptional</th>
+                    <th style="text-align: left; padding: 10px;">Performance is consistently superior and significantly exceeds position requirements.</th>
+                    <th class="vertical-text" rowspan="6">5 Exceptional</th>
+                    <th class="vertical-text" rowspan="6">4 Highly Effective</th>
+                    <th class="vertical-text" rowspan="6">3 Proficient</th>
+                    <th class="vertical-text" rowspan="6">2 Inconsistent</th>
+                    <th class="vertical-text" rowspan="6">1 Unsatisfactory</th>
+                    <th class="vertical-text" rowspan="6">N/A New/Not Applicable</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">4 Highly Effective:</th>
+                    <th style="text-align: left; padding: 10px;">Performance frequently exceeds position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">3 Proficient:</th>
+                    <th style="text-align: left; padding: 10px;">Performance consistently meets position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">2 Inconsistent:</th>
+                    <th style="text-align: left; padding: 10px;">Performance meets some, but not all position requirements.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">1 Unsatisfactory:</th>
+                    <th style="text-align: left; padding: 10px;">Performance consistently fails to meet minimum position requirements; employee lacks skills required or fails to utilize necessary skills.</th>
+                </tr>
+                <tr>
+                    <th style="text-align: left; padding: 10px;">N/A New or Not Applicable:</th>
+                    <th style="text-align: left; padding: 10px;">Employee has not been in position long enough to have demonstrated the essential elements of the position and will be reviewed at a later agreed upon date.</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td style="text-align: left; padding: 10px;">1.</td>
+                    <td style="text-align: left; padding: 10px;">Skill and proficiency in carrying out assignments<br>Brief explanation: <input type="hidden" name="explanation1"></td>
+                    <td><input type="checkbox" name="review1" value="Exceptional"  th:field="*{cvfview.review1}" disabled></td>
+                    <td><input type="checkbox" name="review1" value="Highly Effective" th:field="*{cvfview.review1}" disabled></td>
+                    <td><input type="checkbox" name="review1" value="Proficient" th:field="*{cvfview.review1}" disabled></td>
+                    <td><input type="checkbox" name="review1" value="Inconsistent" th:field="*{cvfview.review1}" disabled></td>
+                    <td><input type="checkbox" name="review1" value="Unsatisfactory" th:field="*{cvfview.review1}" disabled></td>
+                    <td><input type="checkbox" name="review1" value="N/A New or not Applicable" th:field="*{cvfview.review1}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">2.</td>
+                    <td style="text-align: left; padding: 10px;">Quality of work<br>Brief explanation: <input type="hidden" name="explanation2"></td>
+                    <td><input type="checkbox" name="review2" value="Exceptional" th:field="*{cvfview.review2}" disabled></td>
+                    <td><input type="checkbox" name="review2" value="Highly Effective" th:field="*{cvfview.review2}" disabled></td>
+                    <td><input type="checkbox" name="review2" value="Proficient" th:field="*{cvfview.review2}" disabled></td>
+                    <td><input type="checkbox" name="review2" value="Inconsistent" th:field="*{cvfview.review2}" disabled></td>
+                    <td><input type="checkbox" name="review2" value="Unsatisfactory" th:field="*{cvfview.review2}" disabled></td>
+                    <td><input type="checkbox" name="review2" value="N/A New or not Applicable" th:field="*{cvfview.review2}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">3.</td>
+                    <td style="text-align: left; padding: 10px;">Attendance and punctuality<br>Brief explanation: <input type="hidden" name="explanation3"></td>
+                    <td><input type="checkbox" name="review3" value="Exceptional" th:field="*{cvfview.review3}" disabled></td>
+                    <td><input type="checkbox" name="review3" value="Highly Effective" th:field="*{cvfview.review3}" disabled></td>
+                    <td><input type="checkbox" name="review3" value="Proficient" th:field="*{cvfview.review3}" disabled></td>
+                    <td><input type="checkbox" name="review3" value="Inconsistent" th:field="*{cvfview.review3}" disabled></td>
+                    <td><input type="checkbox" name="review3" value="Unsatisfactory" th:field="*{cvfview.review3}" disabled></td>
+                    <td><input type="checkbox" name="review3" value="N/A New or not Applicable" th:field="*{cvfview.review3}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">4.</td>
+                    <td style="text-align: left; padding: 10px;">Teamwork and cooperation<br>Brief explanation: <input type="hidden" name="explanation4"></td>
+                    <td><input type="checkbox" name="review4" value="Exceptional" th:field="*{cvfview.review4}" disabled></td>
+                    <td><input type="checkbox" name="review4" value="Highly Effective" th:field="*{cvfview.review4}" disabled></td>
+                    <td><input type="checkbox" name="review4" value="Proficient" th:field="*{cvfview.review4}" disabled></td>
+                    <td><input type="checkbox" name="review4" value="Inconsistent" th:field="*{cvfview.review4}" disabled></td>
+                    <td><input type="checkbox" name="review4" value="Unsatisfactory" th:field="*{cvfview.review4}" disabled></td>
+                    <td><input type="checkbox" name="review4" value="N/A New or not Applicable" th:field="*{cvfview.review4}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">5.</td>
+                    <td style="text-align: left; padding: 10px;">Proficiency at improving work methods and procedures as a means toward greater efficiency<br>Brief explanation: <input type="hidden" name="explanation5"></td>
+                    <td><input type="checkbox" name="review5" value="Exceptional" th:field="*{cvfview.review5}" disabled></td>
+                    <td><input type="checkbox" name="review5" value="Highly Effective" th:field="*{cvfview.review5}" disabled></td>
+                    <td><input type="checkbox" name="review5" value="Proficient" th:field="*{cvfview.review5}" disabled></td>
+                    <td><input type="checkbox" name="review5" value="Inconsistent" th:field="*{cvfview.review5}" disabled></td>
+                    <td><input type="checkbox" name="review5" value="Unsatisfactory" th:field="*{cvfview.review5}" disabled></td>
+                    <td><input type="checkbox" name="review5" value="N/A New or not Applicable" th:field="*{cvfview.review5}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">6.</td>
+                    <td style="text-align: left; padding: 10px;">Communicates effectively with supervisor, peers, and customers<br>Brief explanation: <input type="hidden" name="explanation6"></td>
+                    <td><input type="checkbox" name="review6" value="Exceptional" th:field="*{cvfview.review6}" disabled></td>
+                    <td><input type="checkbox" name="review6" value="Highly Effective" th:field="*{cvfview.review6}" disabled></td>
+                    <td><input type="checkbox" name="review6" value="Proficient" th:field="*{cvfview.review6}" disabled></td>
+                    <td><input type="checkbox" name="review6" value="Inconsistent" th:field="*{cvfview.review6}" disabled></td>
+                    <td><input type="checkbox" name="review6" value="Unsatisfactory" th:field="*{cvfview.review6}" disabled></td>
+                    <td><input type="checkbox" name="review6" value="N/A New or not Applicable" th:field="*{cvfview.review6}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">7.</td>
+                    <td style="text-align: left; padding: 10px;">Ability to work independently<br>Brief explanation: <input type="hidden" name="explanation7"></td>
+                    <td><input type="checkbox" name="review7" value="Exceptional" th:field="*{cvfview.review7}" disabled></td>
+                    <td><input type="checkbox" name="review7" value="Highly Effective" th:field="*{cvfview.review7}" disabled></td>
+                    <td><input type="checkbox" name="review7" value="Proficient" th:field="*{cvfview.review7}" disabled></td>
+                    <td><input type="checkbox" name="review7" value="Inconsistent" th:field="*{cvfview.review7}" disabled></td>
+                    <td><input type="checkbox" name="review7" value="Unsatisfactory" th:field="*{cvfview.review7}" disabled></td>
+                    <td><input type="checkbox" name="review7" value="N/A New or not Applicable" th:field="*{cvfview.review7}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">8.</td>
+                    <td style="text-align: left; padding: 10px;">Ability to work cooperatively with supervision or as part of a team<br>Brief explanation: <input type="hidden" name="explanation8"></td>
+                    <td><input type="checkbox" name="review8" value="Exceptional" th:field="*{cvfview.review8}" disabled></td>
+                    <td><input type="checkbox" name="review8" value="Highly Effective" th:field="*{cvfview.review8}" disabled></td>
+                    <td><input type="checkbox" name="review8" value="Proficient" th:field="*{cvfview.review8}" disabled></td>
+                    <td><input type="checkbox" name="review8" value="Inconsistent" th:field="*{cvfview.review8}" disabled></td>
+                    <td><input type="checkbox" name="review8" value="Unsatisfactory" th:field="*{cvfview.review8}" disabled></td>
+                    <td><input type="checkbox" name="review8" value="N/A New or not Applicable" th:field="*{cvfview.review8}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">9.</td>
+                    <td style="text-align: left; padding: 10px;">Willingness to take on additional responsibilities<br>Brief explanation: <input type="hidden" name="explanation9"></td>
+                    <td><input type="checkbox" name="review9" value="Exceptional" th:field="*{cvfview.review9}" disabled></td>
+                    <td><input type="checkbox" name="review9" value="Highly Effective" th:field="*{cvfview.review9}" disabled></td>
+                    <td><input type="checkbox" name="review9" value="Proficient" th:field="*{cvfview.review9}" disabled></td>
+                    <td><input type="checkbox" name="review9" value="Inconsistent" th:field="*{cvfview.review9}" disabled></td>
+                    <td><input type="checkbox" name="review9" value="Unsatisfactory" th:field="*{cvfview.review9}" disabled></td>
+                    <td><input type="checkbox" name="review9" value="N/A New or not Applicable" th:field="*{cvfview.review9}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">10.</td>
+                    <td style="text-align: left; padding: 10px;">Reliability (attendance, punctuality, meeting deadlines)<br>Brief explanation: <input type="hidden" name="explanation10"></td>
+                    <td><input type="checkbox" name="review10" value="Exceptional" th:field="*{cvfview.review10}" disabled></td>
+                    <td><input type="checkbox" name="review10" value="Highly Effective" th:field="*{cvfview.review10}" disabled></td>
+                    <td><input type="checkbox" name="review10" value="Proficient" th:field="*{cvfview.review10}" disabled></td>
+                    <td><input type="checkbox" name="review10" value="Inconsistent" th:field="*{cvfview.review10}" disabled></td>
+                    <td><input type="checkbox" name="review10" value="Unsatisfactory" th:field="*{cvfview.review10}" disabled></td>
+                    <td><input type="checkbox" name="review10" value="N/A New or not Applicable" th:field="*{cvfview.review10}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">11.</td>
+                    <td style="text-align: left; padding: 10px;">Adeptness at analyzing facts, problem solving, decision-making, and demonstrating good judgment<br>Brief explanation: <input type="hidden" name="explanation11"></td>
+                    <td><input type="checkbox" name="review11" value="Exceptional" th:field="*{cvfview.review11}" disabled></td>
+                    <td><input type="checkbox" name="review11" value="Highly Effective" th:field="*{cvfview.review11}" disabled></td>
+                    <td><input type="checkbox" name="review11" value="Proficient" th:field="*{cvfview.review11}" disabled></td>
+                    <td><input type="checkbox" name="review11" value="Inconsistent" th:field="*{cvfview.review11}" disabled></td>
+                    <td><input type="checkbox" name="review11" value="Unsatisfactory" th:field="*{cvfview.review11}" disabled></td>
+                    <td><input type="checkbox" name="review11" value="N/A New or not Applicable" th:field="*{cvfview.review11}" disabled></td>
+                </tr>
+                
+                <tr>
+                    <td style="text-align: left; padding: 10px;">12.</td>
+                    <td style="text-align: left; padding: 10px;">Displays fairness towards all subordinates.<br>Brief explanation: <input type="hidden" name="explanation12"></td>
+                    <td><input type="checkbox" name="review12" value="Exceptional" th:field="*{cvfview.review12}" disabled></td>
+                    <td><input type="checkbox" name="review12" value="Highly Effective" th:field="*{cvfview.review12}" disabled></td>
+                    <td><input type="checkbox" name="review12" value="Proficient" th:field="*{cvfview.review12}" disabled></td>
+                    <td><input type="checkbox" name="review12" value="Inconsistent" th:field="*{cvfview.review12}" disabled></td>
+                    <td><input type="checkbox" name="review12" value="Unsatisfactory" th:field="*{cvfview.review12}" disabled></td>
+                    <td><input type="checkbox" name="review12" value="N/A New or not Applicable" th:field="*{cvfview.review12}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">13.</td>
+                    <td style="text-align: left; padding: 10px;">Identifies performance expectations, gives timely feedback and conducts formal performance appraisals.<br>Brief explanation: <input type="hidden" name="explanation13"></td>
+                    <td><input type="checkbox" name="review13" value="Exceptional" th:field="*{cvfview.review13}" disabled></td>
+                    <td><input type="checkbox" name="review13" value="Highly Effective" th:field="*{cvfview.review13}" disabled></td>
+                    <td><input type="checkbox" name="review13" value="Proficient" th:field="*{cvfview.review13}" disabled></td>
+                    <td><input type="checkbox" name="review13" value="Inconsistent" th:field="*{cvfview.review13}" disabled></td>
+                    <td><input type="checkbox" name="review13" value="Unsatisfactory" th:field="*{cvfview.review13}" disabled></td>
+                    <td><input type="checkbox" name="review13" value="N/A New or not Applicable" th:field="*{cvfview.review13}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">14.</td>
+                    <td style="text-align: left; padding: 10px;">14.	Helps employees to see the potential for developing their skills; assists them in eliminating barriers to their development.<br>Brief explanation: <input type="hidden" name="explanation14"></td>
+                    <td><input type="checkbox" name="review14" value="Exceptional" th:field="*{cvfview.review14}" disabled></td>
+                    <td><input type="checkbox" name="review14" value="Highly Effective" th:field="*{cvfview.review14}" disabled></td>
+                    <td><input type="checkbox" name="review14" value="Proficient" th:field="*{cvfview.review14}" disabled></td>
+                    <td><input type="checkbox" name="review14" value="Inconsistent" th:field="*{cvfview.review14}" disabled></td>
+                    <td><input type="checkbox" name="review14" value="Unsatisfactory" th:field="*{cvfview.review14}" disabled></td>
+                    <td><input type="checkbox" name="review14" value="N/A New or not Applicable" th:field="*{cvfview.review14}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">15.</td>
+                    <td style="text-align: left; padding: 10px;">Delegates responsibility where appropriate, based on the employee’s ability and potential.<br>Brief explanation: <input type="hidden" name="explanation15"></td>
+                    <td><input type="checkbox" name="review15" value="Exceptional" th:field="*{cvfview.review15}" disabled></td>
+                    <td><input type="checkbox" name="review15" value="Highly Effective" th:field="*{cvfview.review15}" disabled></td>
+                    <td><input type="checkbox" name="review15" value="Proficient" th:field="*{cvfview.review15}" disabled></td>
+                    <td><input type="checkbox" name="review15" value="Inconsistent" th:field="*{cvfview.review15}" disabled></td>
+                    <td><input type="checkbox" name="review15" value="Unsatisfactory" th:field="*{cvfview.review15}" disabled></td>
+                    <td><input type="checkbox" name="review15" value="N/A New or not Applicable" th:field="*{cvfview.review15}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">16.</td>
+                    <td style="text-align: left; padding: 10px;">Takes timely and appropriate corrective/disciplinary action with employees. <br>Brief explanation: <input type="hidden" name="explanation16"></td>
+                    <td><input type="checkbox" name="review16" value="Exceptional" th:field="*{cvfview.review16}" disabled></td>
+                    <td><input type="checkbox" name="review16" value="Highly Effective" th:field="*{cvfview.review16}" disabled></td>
+                    <td><input type="checkbox" name="review16" value="Proficient" th:field="*{cvfview.review16}" disabled></td>
+                    <td><input type="checkbox" name="review16" value="Inconsistent" th:field="*{cvfview.review16}" disabled></td>
+                    <td><input type="checkbox" name="review16" value="Unsatisfactory" th:field="*{cvfview.review16}" disabled></td>
+                    <td><input type="checkbox" name="review16" value="N/A New or not Applicable" th:field="*{cvfview.review16}" disabled></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 10px;">17.</td>
+                    <td style="text-align: left; padding: 10px;">Displays fairness towards all subordinates.<br>Brief explanation: <input type="hidden" name="explanation17"></td>
+                    <td><input type="checkbox" name="review17" value="Exceptional" th:field="*{cvfview.review17}" disabled></td>
+                    <td><input type="checkbox" name="review17" value="Highly Effective" th:field="*{cvfview.review17}" disabled></td>
+                    <td><input type="checkbox" name="review17" value="Proficient" th:field="*{cvfview.review17}" disabled></td>
+                    <td><input type="checkbox" name="review17" value="Inconsistent" th:field="*{cvfview.review17}" disabled></td>
+                    <td><input type="checkbox" name="review17" value="Unsatisfactory" th:field="*{cvfview.review17}" disabled></td>
+                    <td><input type="checkbox" name="review17" value="N/A New or not Applicable" th:field="*{cvfview.review17}" disabled></td>
+                </tr>
+                <tr style="background-color: rgba(175, 177, 177, 0.692);">
+                    <th colspan="8">Additional performance competencies for employees with supervisory responsibilities</th>
+                </tr>
+            </tbody>
+        </table>
+					
+					
+					
+					</fieldset>
+					<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="prevButtons">Previous</button>
+							<button class="btn btn-primary" id="nextButtons">Next</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						</div>
+					</div>		 
+								 
+									 
+							<!-- Page 3 -->
+					<div id="page3" style="display: none;">
+					<div class="row formline" style="padding: 1px 0px 0px 50px; background-color: #e9ecef; margin-left: 0; margin-right: 0;">
+								<div class="col-sm-3"></div>
+
+								<h4 style="transform: translateX(-333px);">
+									EMPLOYEE PERFORMANCE REVIEW</h4>
+							</div>
+							
+							<fieldset>
+							
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Goal Setting and Development Planning:</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="man_goals" name="man_goals" maxlength="10000"
+									   style="width: 391%; height: 213px;" th:text="${cvfview.man_goals}" readonly></textarea>
+								</div>
+							</div>
+							<div class="row formline" style="padding: 15px 0px 5px 0px;">
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2" style="font-size: medium;">Manager Comments:</div>
+								<div class="col-sm-2">
+									  <textarea class="form-control form-control-sm" id="man_comments" name="man_comments" maxlength="10000"
+									   style="width: 391%; height: 213px;" th:text="${cvfview.man_comments}" readonly></textarea>
+								</div>
+							</div>
+							
+							
+							</fieldset>
+					
+					<div class="card-footer text-center" style="background-color: #e9ecef">
+							<button class="btn btn-primary" onclick="Home();">Home</button>
+							<button class="btn btn-primary" id="prevButton">Previous</button>
+							<button th:attr="data-ref_no=${cvfview.srl_no}" class="btn btn-primary" onclick="Submitemp(this);"  th:if="${submit == cvfview.emb_id}">Submit</button>
+							<button class="btn btn-primary" onclick="Backadd();">Back</button>
+						</div>
+					</div>		 	
+						</form>
+					</div>
+				</div>
+				
+
+			</div>
+		</div>
+		<div class="modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">CIM FINANCE</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg" style="font-size: 16px;"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						style="width: 120px" onclick="Backadd();">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+</html>

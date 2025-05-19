@@ -1,0 +1,25 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[paymentin]    Script Date: 12/6/2024 3:22:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[paymentin](
+	[receiptno] [varchar](100) NULL,
+	[vendorid] [varchar](100) NULL,
+	[vendorname] [varchar](100) NULL,
+	[paymenttype] [varchar](100) NULL,
+	[reference] [varchar](100) NULL,
+	[advance] [varchar](100) NULL,
+	[date] [date] NULL,
+	[receivedamount] [varchar](100) NULL,
+	[balance] [decimal](18, 2) NULL,
+	[description] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+

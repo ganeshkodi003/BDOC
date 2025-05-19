@@ -1,0 +1,19 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[ERP_EXPEN_CATEGORY]    Script Date: 4/22/2025 2:12:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ERP_EXPEN_CATEGORY](
+	[CAT_ID] [varchar](100) NULL,
+	[CAT_NAME] [varchar](100) NULL,
+	[DEL_FLG] [varchar](1) NULL,
+	[EXP_TYPE] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+

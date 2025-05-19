@@ -1,0 +1,2401 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+
+
+<title>ERP</title>
+
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+
+
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: center;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+
+.transparent-shadow {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	background-color: rgba(255, 255, 255, 0.8);
+	/* Light transparent background */
+	border-radius: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2); /* Semi-transparent border */
+	position: relative;
+}
+</style>
+
+
+<style>
+
+/* Wrapper for alignment */
+.toggle-wrapper {
+	display: flex;
+	align-items: left;
+	justify-content: left;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+/* Headings */
+.toggle-wrapper h5 {
+	margin: 0;
+	color: #888;
+	font-weight: normal;
+	transition: color 0.3s ease;
+}
+
+.toggle-wrapper h5.active {
+	color: black; /* Highlight active label */
+	font-weight: bold;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 25px;
+}
+
+.toggle-switch input {
+	display: none; /* Hide default checkbox */
+}
+
+.slider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.slider:before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	border-radius: 50%;
+	bottom: 2.5px;
+	left: 2.5px;
+	transition: transform 0.3s ease;
+}
+
+input:checked+.slider {
+	background-color: #ccc; /* Active color */
+}
+
+input:checked+.slider:before {
+	transform: translateX(25px); /* Move circle to the right */
+}
+
+.select-container {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.select-container select {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	z-index: 1;
+}
+
+#addCategory {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+</style>
+
+<style>
+/* Style for the loading modal */
+#loadingModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: none; /* Semi-transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999; /* Make sure it's on top */
+	backdrop-filter: blur(5px); /* Apply background blur */
+}
+
+#loadingContent {
+	text-align: center;
+	background-color: none; /* White background for loading content */
+	z-index: 10000; /* Ensure loading content stays above blur */
+}
+
+#loadingContent img {
+	width: 100px; /* Adjust size as needed */
+	height: 100px; /* Adjust size as needed */
+	margin-bottom: 10px;
+}
+</style>
+
+
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function () {
+    $('#dataTables').DataTable({
+        "pageLength": 20,        // Set the number of rows per page
+        "lengthChange": false,   // Hide the dropdown for changing rows per page
+        "ordering": false,       // Disable column sorting
+        "searching": true,       // Enable global search
+        "info": true,            // Show table information
+        "pagingType": "simple_numbers", // Pagination with only numbers
+
+        // Customizing DOM structure to place search box at the top left
+
+        "dom": '<"top"f>rt<"bottom"ip><"clear">'
+    });
+
+    // Remove the "Search:" label and add a placeholder to the search input
+    $('.dataTables_filter label').contents().filter(function () {
+        return this.nodeType === Node.TEXT_NODE;
+    }).remove(); // Remove the text node containing "Search:"
+
+    // Add a placeholder to the input field
+    $('.dataTables_filter input')
+        .attr('placeholder', 'Search...')
+        .css('margin-left', '0'); // Adjust margin since the label is removed
+
+    // Align the search box to the left corner
+    $('.dataTables_filter').css({
+        "float": "left",
+        "text-align": "left"
+    });
+});
+
+
+
+</script>
+
+<script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+function modifyitem(){
+	
+	
+	 var ItemName=document.getElementById('ItemName').value.trim();
+	 var HSNCode=document.getElementById('HSNCode').value.trim();
+	 var category=document.getElementById('category').value.trim();
+	 var Unit=document.getElementById('Unit').value.trim();
+	 var ItemCode=document.getElementById('ItemCode').value.trim();
+	  var isValid = true;
+	  var mandatoryMessage = "Please fill the required field(s)";
+	  
+	    function validateField(field, errorMessage) {
+	        if (!field.val().trim()) {
+	            field.css("border-color", "red").attr("title", errorMessage);
+	            isValid = false;
+	        } else {
+	            field.css("border-color", "").attr("title", ""); // Reset styles
+	        }
+	    }
+	    
+	    
+	    validateField($('#ItemName'), mandatoryMessage);
+	    validateField($('#HSNCode'), mandatoryMessage);
+	    validateField($('#category'), mandatoryMessage);
+	    validateField($('#Unit'), mandatoryMessage);
+	    validateField($('#ItemCode'), mandatoryMessage);
+	   
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+	
+	
+	
+	
+	
+	
+	if ($("#itemcreation").valid()) {
+		var formData = new FormData($('#itemcreation')[0]);
+		var fileInput = document.getElementById('image').files[0];
+		if (fileInput) {
+		    // Check if the file is an image
+		    var fileType = fileInput.type;
+		    var fileSize = fileInput.size;
+
+		    if (fileType.startsWith("image/")) {  // Check if the file is an image (e.g., image/png, image/jpeg)
+		        if (fileSize <= 50 * 1024 * 1024) {  // Check if the file size is less than or equal to 50 MB
+		            formData.append("file", fileInput);  // Append the file
+		        } else {
+		            alert("File size must be less than or equal to 50 MB.");
+		            return;  // Exit if file size is too large
+		        }
+		    } else {
+		        alert("Please upload only image files.");
+		        return;  // Exit if the file is not an image
+		    }
+		}
+		$.ajax({
+			url : './modifyitem',
+			type : 'POST',
+			data : formData,
+			processData: false,  // Don't process the data into a query string
+            contentType: false,
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+			}
+		});
+	}
+	
+	
+}
+
+function back(event) {
+	document.getElementById('loadingModal').style.display = 'flex';
+
+	event.preventDefault();
+	window.history.back();
+}
+
+function Home() {
+	document.getElementById('loadingModal').style.display = 'flex';
+
+	location.href = 'Dashboard';
+}
+
+function modifyscreen(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+	
+	var travid=a.getAttribute('data-travid');
+
+	
+	location.href='./TravelClaim?formmode=Modify' + '&travid=' +travid;
+}
+function view(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+	var travid=a.getAttribute('data-travid');
+	location.href='./TravelClaim?formmode=view' + '&travid=' +travid;	
+}
+
+function verify(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+	var travid=a.getAttribute('data-travid');
+	location.href='./TravelClaim?formmode=verify' + '&travid=' +travid;	
+	
+}
+
+function deleteview(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+	//alert("hi");
+	var travid=a.getAttribute('data-travid');
+	location.href='./TravelClaim?formmode=deleteview' + '&travid=' +travid;	
+
+}
+
+let travidzz="";
+
+function deletebtn(a) {
+	travidzz=a.getAttribute('data-travid');
+    $('#confirmationModal').modal('show'); 
+}
+
+
+
+
+
+function deletebtnwithmodel(){
+	
+	//var itemcode=a.getAttribute('data-itemcode');
+	$.ajax({
+		url : './deletetraveltclaim?travid='+travidzz,
+		type : 'POST',
+		success : function(response) {
+			
+			 $('#confirmationModal').modal('hide');
+			
+			$("#alertmsg").text(response);
+			$("#alert").modal("toggle");
+			
+		}
+	});
+
+	
+}
+
+
+
+function verifysubmit(a){
+	
+	var travid=a.getAttribute('data-travid');
+	
+	$.ajax({
+		url:'./verifytraval?id='+travid,
+		type : 'POST',
+		 // Show the loading modal before sending the request
+        beforeSend: function() {
+            document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+        },
+		success: function(response){
+			
+			$("#alertmsg").text(response);
+			$("#alert").modal("toggle");
+			  document.getElementById('loadingModal').style.display = 'none';
+			
+		}
+		
+		
+	});
+	
+	
+	
+}
+
+function add(event){
+	document.getElementById('loadingModal').style.display = 'flex';
+event.preventDefault();
+	
+	location.href='./TravelClaim?formmode=add';
+
+}
+function registrationlist(event){
+	document.getElementById('loadingModal').style.display = 'flex';
+	event.preventDefault();
+	location.href='./TravelClaim';
+}
+
+function unit(){
+	$("#alertmsg").text("hi");
+	$("#alert").modal("toggle");
+	
+}
+document.addEventListener('DOMContentLoaded', () => {
+	saleprice();
+	  const priceToggle = document.getElementById('priceToggle');
+	  const salePriceLabel = document.getElementById('salePriceLabel');
+	  const purchasePriceLabel = document.getElementById('purchasePriceLabel');
+	  var purchaseprice=document.getElementById('purchaseprice');
+	  var sale=document.getElementById('saleprice');
+	  
+
+	  priceToggle.addEventListener('change', () => {
+		  
+	    if (priceToggle.checked) {
+	      salePriceLabel.classList.remove('active');
+	      purchasePriceLabel.classList.add('active');
+	      sale.style.display="none";
+	      purchaseprice.style.display="block";
+	      
+	    } else {
+	    	
+	      salePriceLabel.classList.add('active');
+	      purchasePriceLabel.classList.remove('active');
+	      sale.style.display="block";
+	      purchaseprice.style.display="none";
+	    }
+	  });
+	});
+
+
+</script>
+
+<script>
+
+
+function particularpage(){
+	
+	 const priceToggle = document.getElementById('priceToggle');
+	  const salePriceLabel = document.getElementById('salePriceLabel');
+	  const purchasePriceLabel = document.getElementById('purchasePriceLabel');
+	  var purchaseprice=document.getElementById('purchaseprice');
+	  var sale=document.getElementById('saleprice');
+	  
+	  if (priceToggle.checked) {
+	      salePriceLabel.classList.remove('active');
+	      purchasePriceLabel.classList.add('active');
+	      sale.style.display="none";
+	      purchaseprice.style.display="block";
+	      
+	    } else {
+	    	
+	      salePriceLabel.classList.add('active');
+	      purchasePriceLabel.classList.remove('active');
+	      sale.style.display="block";
+	      purchaseprice.style.display="none";
+	    }
+	  
+}
+</script>
+
+<script>
+    function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+</script>
+
+<script>
+
+function toggleImageModal(show) {
+    if (show) {
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal.show();
+    }
+}
+
+function closemodel(event) {
+	
+    event.preventDefault(); 
+  window.location.reload();
+}
+
+
+</script>
+
+<script>
+
+function perenable() {
+    var saletype = document.getElementById('saleTaxType').value;
+    var gstsale = document.getElementById('gstpercentagesale');
+
+    if (saletype === "withtax") {
+        gstsale.disabled = false; // Enable the element
+    } else {
+        gstsale.disabled = true; // Disable the element
+    }
+} 
+
+function perenableforprice() {
+	
+    var saletype = document.getElementById('purchaseTaxType').value;
+    var gstsale = document.getElementById('gstpercentagePRICE');
+
+    if (saletype === "withtax") {
+        gstsale.disabled = false; // Enable the element
+    } else {
+        gstsale.disabled = true; // Disable the element
+    }
+}
+
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	 perenable();
+	 perenableforprice();
+})
+</script>
+
+
+<script>
+    // Function to update the toggle state based on input values
+function updateToggle() {
+    	
+    
+  
+    const salePriceInput = document.getElementById('salePrice').value.trim();
+    const purchasePriceInput = document.getElementById('purchasePrice').value.trim();
+
+    // Get the toggle element
+    const priceToggle = document.getElementById('priceToggle');
+
+
+    if (salePriceInput !== '') {
+   
+        priceToggle.checked = false; 
+    	particularpage();
+    } else if (purchasePriceInput !== '') {
+    
+        priceToggle.checked = true; 
+        particularpage()
+    } else {
+        priceToggle.checked = false; 
+        particularpage()
+    }
+}
+
+window.onload = updateToggle;
+
+// Add event listeners for dynamic updates
+document.getElementById('salePrice').addEventListener('input', updateToggle);
+document.getElementById('purchasePrice').addEventListener('input', updateToggle);
+
+
+
+</script>
+
+<script>
+function geetingrole(){
+	var empid =document.getElementById('empid').value;
+	var role=document.getElementById('role');
+	//alert(empid)
+	
+	$.ajax({
+		url : './getrole?empid='+empid,
+		type : 'POST',
+		success : function(response) {
+			role.value=response.design;
+			allowancemaker();
+			 
+			 //alert(response.design);	
+		}
+	});	
+ }
+let allow=[];
+function allowancemaker(){
+	
+	var role =document.getElementById('role').value||null;
+	//var empid =document.getElementById('empid').value;
+	if(role==null){
+		//alert("Please Select Valid user")
+		return;
+	}
+	allow=[]
+	$.ajax({
+		url : './getallowance?role='+role,
+		type : 'POST',
+		success : function(response) {
+			 //alert(response.localMarketAllowance);
+			 allow.push(response);
+			 console.log(allow);
+			 
+		}
+	});	
+}
+
+function MARKETTypechange(){
+	var MARKETType=document.getElementById('MARKETType').value
+	var travelmode=document.getElementById('travelmode')
+	var BusFare =document.getElementById('BusFare');
+	//var totalkm =document.getElementById('totalkm');
+	var petrolFare =document.getElementById('petrolFare');
+	if(MARKETType=='EXMARKET' || MARKETType=='UPCOUNTRY'){
+		travelmode.style.display="block";
+		travelmodetypechange()
+	}
+	
+	else{
+		travelmode.style.display="none";
+		BusFare.style.display="none";
+		//totalkm.style.display="none";
+		petrolFare.style.display="none";
+	}
+}
+
+function travelmodetypechange(){
+	var travelmodetype =document.getElementById('travelmodetype').value
+	//var totalkm =document.getElementById('totalkm');
+	var petrolFare =document.getElementById('petrolFare');
+	var BusFare =document.getElementById('BusFare');
+	var petrolFareamount=document.getElementById('petrolFareamount');
+	var kmcal=document.getElementById('kmcal').value;
+	
+	if(travelmodetype=='OwnVehicle'){
+		//totalkm.style.display="block";
+		petrolFare.style.display="block";
+		BusFare.style.display="none";
+		petrolFareamount.value=kmcal*allow[0].petrolAllowance
+		
+	}
+	else if(travelmodetype=='Bus'){
+		//totalkm.style.display="none";
+		petrolFare.style.display="none";
+		BusFare.style.display="block";
+		petrolFareamount.value=0;
+	}
+}
+
+function petcal(){
+	
+	var petrolFareamount=document.getElementById('petrolFareamount');
+	var MARKETType=document.getElementById('MARKETType');
+	var Allowanceval=document.getElementById('Allowance');
+	
+	var kmcal=document.getElementById('kmcal').value||0;
+	if(kmcal==0){
+		Allowanceval.value=0;
+		MARKETType.value='';
+		grantotal();
+		return;
+	}
+	
+	//var total=kmcal*2;
+	//petrolFareamount.value=total;
+	if(kmcal>allow[0].kmConstrain){
+		MARKETType.value='EXMARKET';
+		//alert(allow[0].exMarketAllowance)
+		Allowanceval.value=allow[0].exMarketAllowance;
+		
+	}
+	else if(kmcal<=allow[0].kmConstrain){
+		MARKETType.value='LOCALMARKET';
+		Allowanceval.value=allow[0].localMarketAllowance;
+	}
+	MARKETTypechange();
+	grantotal();
+}
+
+function grantotal(){
+	var busfare = parseFloat(document.getElementById('busfare').value) ||0;
+	var petrolFareamount = parseFloat(document.getElementById('petrolFareamount').value) ||0;
+	var Allowance = parseFloat(document.getElementById('Allowance').value) || 0;
+    var Stationery = parseFloat(document.getElementById('Stationery').value) || 0;
+    var OtherExpense = parseFloat(document.getElementById('OtherExpense').value) || 0;
+    var GrandTotal = document.getElementById('GrandTotal');
+    
+    var totalf = Allowance + Stationery + OtherExpense + busfare + petrolFareamount ; // GrandTotal is the result, not part of the calculation
+    GrandTotal.value = totalf.toFixed(2);	
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	allowancemaker()
+	setTimeout(petcal, 2000);	
+	setTimeout(MARKETTypechange, 2000);
+	
+	})
+function Addsubmit(){
+	 
+	  var isValid = true;
+	  var mandatoryMessage = "Please fill the required field(s)";
+	  
+	    function validateField(field, errorMessage) {
+	        if (!field.val().trim()) {
+	            field.css("border-color", "red").attr("title", errorMessage);
+	            isValid = false;
+	        } else {
+	            field.css("border-color", "").attr("title", ""); // Reset styles
+	        }
+	    }
+	    
+	    validateField($('#empid'), mandatoryMessage);
+	    validateField($('#role'), mandatoryMessage);
+	    validateField($('#date'), mandatoryMessage);
+	    validateField($('#townCity'), mandatoryMessage);
+	    validateField($('#fromLoc'), mandatoryMessage);
+	    validateField($('#toLoc'), mandatoryMessage);
+	    validateField($('#kmcal'), mandatoryMessage);
+	    validateField($('#MARKETType'), mandatoryMessage);
+	    validateField($('#Allowance'), mandatoryMessage);
+	    validateField($('#travelmodetype'), mandatoryMessage);
+	    //validateField($('#busfare'), mandatoryMessage);
+	    //validateField($('#petrolFare'), mandatoryMessage);
+	    validateField($('#Stationery'), mandatoryMessage);
+	    validateField($('#OtherExpense'), mandatoryMessage);
+	    validateField($('#GrandTotal'), mandatoryMessage);
+	    
+	   
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+	    
+	    
+	    if ($("#TravelClaimadd").valid()) {
+		
+		$.ajax({
+			url : './Addtraveltclaim?formmode=add',
+			type : 'POST',
+			data:$('#TravelClaimadd').serialize(),
+			 // Show the loading modal before sending the request
+            beforeSend: function() {
+                document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+            },
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+				 document.getElementById('loadingModal').style.display = 'none';
+			}
+		});
+	}
+}
+
+
+function editsubmit(){
+	 
+	  var isValid = true;
+	  var mandatoryMessage = "Please fill the required field(s)";
+	  
+	    function validateField(field, errorMessage) {
+	        if (!field.val().trim()) {
+	            field.css("border-color", "red").attr("title", errorMessage);
+	            isValid = false;
+	        } else {
+	            field.css("border-color", "").attr("title", ""); // Reset styles
+	        }
+	    }
+	    
+	    validateField($('#empid'), mandatoryMessage);
+	    validateField($('#role'), mandatoryMessage);
+	    validateField($('#date'), mandatoryMessage);
+	    validateField($('#townCity'), mandatoryMessage);
+	    validateField($('#fromLoc'), mandatoryMessage);
+	    validateField($('#toLoc'), mandatoryMessage);
+	    validateField($('#kmcal'), mandatoryMessage);
+	    validateField($('#MARKETType'), mandatoryMessage);
+	    validateField($('#Allowance'), mandatoryMessage);
+	    validateField($('#travelmodetype'), mandatoryMessage);
+	    //validateField($('#busfare'), mandatoryMessage);
+	    //validateField($('#petrolFare'), mandatoryMessage);
+	    validateField($('#Stationery'), mandatoryMessage);
+	    validateField($('#OtherExpense'), mandatoryMessage);
+	    validateField($('#GrandTotal'), mandatoryMessage);
+	    
+	   
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+	    
+	    
+	    if ($("#TravelClaimadd").valid()) {
+		
+		$.ajax({
+			url : './Addtraveltclaim?formmode=edit',
+			type : 'POST',
+			data:$('#TravelClaimadd').serialize(),
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+			}
+		});
+	}
+}
+
+
+$(document).ready(function () {
+
+    $('#empid, #role, #date, #townCity, #fromLoc,#toLoc,#kmcal,#MARKETType,#Allowance,#travelmodetype,#busfare,#petrolFare,#Stationery,#OtherExpense,#GrandTotal')
+        .on('input', function () {
+            $(this).css("border-color", "");
+        });
+});
+
+
+</script>
+
+
+<script>
+		function capitalizeInput(input) {
+			let value = input.value;
+			// Only change the first letter to uppercase if it's lowercase
+			value = value.replace(/\b[a-z]/g, function (char) {
+				return char.toUpperCase();
+			});
+			input.value = value;
+		}
+	</script>
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="TravelClaimadd"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Travel Claim
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+
+											<select class="form-control" id="empid" name="employeeId"
+												onchange="geetingrole()" required>
+												<option value="">--Select EmpId---</option>
+												<option th:each="emplist :${adminAssociateProfileList}"
+													th:text="${emplist.resource_id}"
+													th:value="${emplist.resource_id}"></option>
+											</select> <label for="name" class="form-legend">Employee Id*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+
+											<div class="form-floating flex-grow-1 d-flex">
+												<input type="text" class="form-control" id="role"
+													name="role" placeholder="" required readonly> <label
+													for="name" class="form-legend">Role</label>
+											</div>
+
+										</div>
+
+										<div class="form-group col-md-4 d-flex align-items-center">
+											<div class="form-floating flex-grow-1 d-flex">
+												<!-- Split Select Box -->
+												<input type="date" class="form-control" id="date"
+													name="date" required> <label for="name"
+													class="form-legend">Date*</label>
+
+
+											</div>
+										</div>
+
+
+									</div>
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="select-container flex-grow-1 position-relative">
+												<input type="text" class="form-control" id="townCity"
+													name="townCity" placeholder=""
+													oninput="capitalizeInput(this)" required> <label
+													for="name" class="form-legend">Town/City Worked*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="fromLoc"
+													name="fromLoc" oninput="capitalizeInput(this)"
+													placeholder="" required> <label for="name"
+													class="form-legend">From</label>
+											</div>
+										</div>
+
+
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="toLoc"
+													oninput="capitalizeInput(this)" name="toLoc" placeholder=""
+													required> <label for="name" class="form-legend">To</label>
+											</div>
+										</div>
+
+
+
+									</div>
+
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="kmcal"
+													oninput="petcal()" name="totalKm" placeholder="" required>
+												<label for="name" class="form-legend">Total Km's</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="MARKETType"
+													name="marketType" onchange="MARKETTypechange()">
+													<option value="">----Select----</option>
+													<option value="LOCALMARKET">LOCAL MARKET</option>
+													<option value="EXMARKET">EX MARKET</option>
+													<option value="UPCOUNTRY">UP COUNTRY</option>
+												</select> <label for="name" class="form-legend">Market Type</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating flex-grow-1 d-flex">
+												<div class="select-container flex-grow-1 position-relative">
+													<input type="number" class="form-control"
+														oninput="grantotal()" id="Allowance" name="allowance"
+														placeholder="" required readonly> <label
+														for="name" class="form-legend">Allowance</label>
+												</div>
+												<!-- Plus Icon -->
+												<button type="button"
+													class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+													onclick="togglre();" id="addCategory">
+													<i class="fas fa-plus"></i>
+												</button>
+											</div>
+										</div>
+
+
+
+
+										<div class="form-group col-md-4" id="travelmode"
+											style="display: none">
+											<div class="form-floating">
+
+												<select class="form-control" id="travelmodetype"
+													name="travelMode" onchange="travelmodetypechange()">
+													<option value="">----Select----</option>
+													<option value="Bus">Bus</option>
+													<option value="OwnVehicle">Own Vehicle</option>
+												</select> <label for="name" class="form-legend">Travel Mode*</label>
+											</div>
+
+
+
+										</div>
+
+
+
+
+
+
+										<div class="form-group col-md-4" id="BusFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													oninput="grantotal()" id="busfare" name="busFare"
+													placeholder="" required> <label for="name"
+													class="form-legend">Bus Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4" id="petrolFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													id="petrolFareamount" name="petrolFare" placeholder=""
+													required readonly> <label for="name"
+													class="form-legend">Petrole Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="Stationery"
+													name="stationeryXerox" oninput="grantotal()" placeholder=""
+													required> <label for="name" class="form-legend">Stationery/Xerox</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="OtherExpense"
+													name="otherExpense" placeholder="" oninput="grantotal()"
+													required> <label for="name" class="form-legend">Other
+													Expense</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="GrandTotal"
+													name="grandTotal" placeholder="" required readonly>
+												<label for="name" class="form-legend">Grand Total</label>
+											</div>
+										</div>
+
+
+
+
+									</div>
+
+
+								</div>
+
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-dark"
+										id="btnSubmit" onclick="Addsubmit();">Submit</button>
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+				<!-------------------------------- modify------------------------------------------------->
+
+				<div class="container-fluid content" th:if="${formmode == 'Modify'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="TravelClaimadd"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Travel Claim-Modify<span
+											th:text="${'('+TravelClaim.id+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+											<select class="form-control" id="empid" name="employeeId"
+												onchange="geetingrole()" required>
+												<option value="">--Select EmpId---</option>
+												<option th:each="emplist :${adminAssociateProfileList}"
+													th:text="${emplist.resource_id}"
+													th:value="${emplist.resource_id}"
+													th:selected="${TravelClaim.employeeId==emplist.resource_id}"></option>
+											</select> <label for="name" class="form-legend">Employee Id*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+											<div class="form-floating flex-grow-1 d-flex">
+												<input type="text" class="form-control" id="role"
+													th:value="${TravelClaim.role}" name="role" placeholder=""
+													required readonly> <input type="hidden"
+													class="form-control" id="role" th:value="${TravelClaim.id}"
+													name="id" placeholder="" readonly> <label
+													for="name" class="form-legend">Role</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4 d-flex align-items-center">
+											<div class="form-floating flex-grow-1 d-flex">
+												<!-- Split Select Box -->
+												<input type="date" class="form-control"
+													th:value="${#dates.format(TravelClaim.date, 'yyyy-MM-dd')}"
+													id="date" name="date" required> <label for="name"
+													class="form-legend">Date*</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="select-container flex-grow-1 position-relative">
+												<input type="text" class="form-control" id="townCity"
+													th:value="${TravelClaim.townCity}" name="townCity"
+													placeholder="" required> <label for="name"
+													class="form-legend">Town/City Worked*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="fromLoc"
+													th:value="${TravelClaim.fromLoc}" name="fromLoc"
+													placeholder="" required> <label for="name"
+													class="form-legend">From</label>
+											</div>
+										</div>
+
+
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="toLoc"
+													th:value="${TravelClaim.toLoc}" name="toLoc" placeholder=""
+													required> <label for="name" class="form-legend">To</label>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="kmcal"
+													th:value="${TravelClaim.totalKm}" oninput="petcal()"
+													name="totalKm" placeholder="" required> <label
+													for="name" class="form-legend">Total Km's</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="MARKETType"
+													name="marketType" onchange="MARKETTypechange()">
+													<option value="">----Select----</option>
+													<option value="LOCALMARKET"
+														th:selected="${TravelClaim.marketType=='LOCALMARKET'}">LOCAL
+														MARKET</option>
+													<option value="EXMARKET"
+														th:selected="${TravelClaim.marketType=='EXMARKET'}">EX
+														MARKET</option>
+													<option value="UPCOUNTRY"
+														th:selected="${TravelClaim.marketType=='UPCOUNTRY'}">UP
+														COUNTRY</option>
+												</select> <label for="name" class="form-legend">Market Type</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating flex-grow-1 d-flex">
+												<div class="select-container flex-grow-1 position-relative">
+													<input type="number" class="form-control"
+														oninput="grantotal()" id="Allowance" name="allowance"
+														th:value="${TravelClaim.allowance}" placeholder=""
+														required readonly> <label for="name"
+														class="form-legend">Allowance</label>
+												</div>
+												<!-- Plus Icon -->
+												<button type="button"
+													class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+													onclick="togglre();" id="addCategory">
+													<i class="fas fa-plus"></i>
+												</button>
+											</div>
+										</div>
+
+
+
+
+										<div class="form-group col-md-4" id="travelmode"
+											style="display: none">
+											<div class="form-floating">
+
+												<select class="form-control" id="travelmodetype"
+													name="travelMode" onchange="travelmodetypechange()">
+													<option value="">----Select----</option>
+													<option value="Bus"
+														th:selected="${TravelClaim.travelMode=='Bus'}">Bus</option>
+													<option value="OwnVehicle"
+														th:selected="${TravelClaim.travelMode=='OwnVehicle'}">Own
+														Vehicle</option>
+												</select> <label for="name" class="form-legend">Travel Mode*</label>
+											</div>
+
+
+
+										</div>
+
+
+
+
+
+
+										<div class="form-group col-md-4" id="BusFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.busFare}" oninput="grantotal()"
+													id="busfare" name="busFare" placeholder="" required>
+												<label for="name" class="form-legend">Bus Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4" id="petrolFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.petrolFare}" id="petrolFareamount"
+													name="petrolFare" placeholder="" required readonly>
+												<label for="name" class="form-legend">Petrole Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="Stationery"
+													name="stationeryXerox"
+													th:value="${TravelClaim.stationeryXerox}"
+													oninput="grantotal()" placeholder="" required> <label
+													for="name" class="form-legend">Stationery/Xerox</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="OtherExpense"
+													name="otherExpense" placeholder=""
+													th:value="${TravelClaim.otherExpense}"
+													oninput="grantotal()" required> <label for="name"
+													class="form-legend">Other Expense</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.grandTotal}" id="GrandTotal"
+													name="grandTotal" placeholder="" required readonly>
+												<label for="name" class="form-legend">Grand Total</label>
+											</div>
+										</div>
+
+
+
+
+									</div>
+
+
+								</div>
+
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-dark"
+										id="btnSubmit" onclick="editsubmit();">Submit</button>
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+				<!-------------------------------- view------------------------------------------------->
+
+				<div class="container-fluid content"
+					th:if="${formmode == 'view'||formmode == 'deleteview' || formmode=='verify'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="TravelClaimadd"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div th:if="${formmode == 'view'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Travel Claim-view<span
+											th:text="${'('+TravelClaim.id+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+								<div th:if="${formmode == 'deleteview'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Travel Claim-view<span
+											th:text="${'('+TravelClaim.id+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+								
+								
+								 	<div th:if="${formmode == 'verify'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Travel Claim-verify<span
+											th:text="${'('+TravelClaim.id+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div> 
+								
+								
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+											<select class="form-control" id="empid" name="employeeId"
+												onchange="geetingrole()" disabled required>
+												<option value="">--Select EmpId---</option>
+												<option th:each="emplist :${adminAssociateProfileList}"
+													th:text="${emplist.resource_id}"
+													th:value="${emplist.resource_id}"
+													th:selected="${TravelClaim.employeeId==emplist.resource_id}"></option>
+											</select> <label for="name" class="form-legend">Employee Id*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+											<div class="form-floating flex-grow-1 d-flex">
+												<input type="text" class="form-control" id="role"
+													th:value="${TravelClaim.role}" name="role" placeholder=""
+													required readonly> <label for="name"
+													class="form-legend">Role</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4 d-flex align-items-center">
+											<div class="form-floating flex-grow-1 d-flex">
+												<!-- Split Select Box -->
+												<input type="date" class="form-control"
+													th:value="${#dates.format(TravelClaim.date, 'yyyy-MM-dd')}"
+													id="date" name="date" readonly required> <label
+													for="name" class="form-legend">Date*</label>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="select-container flex-grow-1 position-relative">
+												<input type="text" class="form-control" id="townCity"
+													th:value="${TravelClaim.townCity}" name="townCity"
+													placeholder="" readonly required> <label for="name"
+													class="form-legend">Town/City Worked*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="fromLoc"
+													th:value="${TravelClaim.fromLoc}" name="fromLoc"
+													placeholder="" required readonly> <label
+													for="name" class="form-legend">From</label>
+											</div>
+										</div>
+
+
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="toLoc"
+													th:value="${TravelClaim.toLoc}" name="toLoc" placeholder=""
+													required readonly> <label for="name"
+													class="form-legend">To</label>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="kmcal"
+													th:value="${TravelClaim.totalKm}" oninput="petcal()"
+													name="totalKm" placeholder="" required readonly> <label
+													for="name" class="form-legend">Total Km's</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="MARKETType"
+													name="marketType" disabled onchange="MARKETTypechange()">
+													<option value="">----Select----</option>
+													<option value="LOCALMARKET"
+														th:selected="${TravelClaim.marketType=='LOCALMARKET'}">LOCAL
+														MARKET</option>
+													<option value="EXMARKET"
+														th:selected="${TravelClaim.marketType=='EXMARKET'}">EX
+														MARKET</option>
+													<option value="UPCOUNTRY"
+														th:selected="${TravelClaim.marketType=='UPCOUNTRY'}">UP
+														COUNTRY</option>
+												</select> <label for="name" class="form-legend">Market Type</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<div>
+													<!--<div class="select-container flex-grow-1 position-relative">-->
+													<input type="number" class="form-control"
+														oninput="grantotal()" id="Allowance" name="allowance"
+														th:value="${TravelClaim.allowance}" placeholder=""
+														required readonly> <label for="name"
+														class="form-legend">Allowance</label>
+												</div>
+												<!-- Plus Icon -->
+												<!--<button type="button"
+													class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+													onclick="togglre();" id="addCategory">
+													<i class="fas fa-plus"></i>
+												</button>-->
+											</div>
+										</div>
+
+
+
+
+										<div class="form-group col-md-4" id="travelmode"
+											style="display: none">
+											<div class="form-floating">
+
+												<select class="form-control" id="travelmodetype"
+													name="travelMode" disabled
+													onchange="travelmodetypechange()">
+													<option value="">----Select----</option>
+													<option value="Bus"
+														th:selected="${TravelClaim.travelMode=='Bus'}">Bus</option>
+													<option value="OwnVehicle"
+														th:selected="${TravelClaim.travelMode=='OwnVehicle'}">Own
+														Vehicle</option>
+												</select> <label for="name" class="form-legend">Travel Mode*</label>
+											</div>
+
+
+
+										</div>
+
+
+
+
+
+
+										<div class="form-group col-md-4" id="BusFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.busFare}" oninput="grantotal()"
+													id="busfare" name="busFare" placeholder="" required
+													readonly> <label for="name" class="form-legend">Bus
+													Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4" id="petrolFare"
+											style="display: none">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.petrolFare}" id="petrolFareamount"
+													name="petrolFare" placeholder="" required readonly>
+												<label for="name" class="form-legend">Petrole Fare</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="Stationery"
+													name="stationeryXerox"
+													th:value="${TravelClaim.stationeryXerox}"
+													oninput="grantotal()" placeholder="" required readonly>
+												<label for="name" class="form-legend">Stationery/Xerox</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="OtherExpense"
+													name="otherExpense" placeholder=""
+													th:value="${TravelClaim.otherExpense}"
+													oninput="grantotal()" required readonly> <label
+													for="name" class="form-legend">Other Expense</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control"
+													th:value="${TravelClaim.grandTotal}" id="GrandTotal"
+													name="grandTotal" placeholder="" required readonly>
+												<label for="name" class="form-legend">Grand Total</label>
+											</div>
+										</div>
+
+
+
+
+									</div>
+
+
+								</div>
+
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button class="btn btn-xs btn-dark" type="button"
+										th:if="${formmode == 'deleteview'}" id="Dashboard"
+										th:attr="data-travid=${TravelClaim.id}"
+										onclick="deletebtn(this)">Submit</button>
+										
+										<button class="btn btn-xs btn-dark" type="button"
+										th:if="${formmode == 'verify'}" id="Dashboard"
+										th:attr="data-travid=${TravelClaim.id}"
+										onclick="verifysubmit(this)">verify</button>
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i>Travel Claim List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<!-- 		<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')"
+													class="form-control" />
+											</div>
+											Date Search (Commented Out)
+											<div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div>
+										</div> -->
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">Claim Id</th>
+													<th style="text-align: center;">Emp Id</th>
+													<th style="text-align: center;">Claim Date</th>
+													<th style="text-align: center;">Market Type</th>
+													<th style="text-align: right;">Claim Amount</th>
+													<th style="text-align: center;">Verification Status</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(getitemlist)}">
+													<td colspan="7" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="travellist : ${getitemlist}">
+													<td th:text="${travellist.id}" style="text-align: center;"></td>
+													<td th:text="${travellist.employeeId}"
+														style="text-align: center;"></td>
+													<td
+														th:text="${#dates.format(travellist.date,'dd-MM-YYYY')}"
+														style="text-align: center;"></td>
+													<td th:text="${travellist.marketType}"
+														style="text-align: center;"></td>
+													<td th:text="${travellist.grandTotal}"
+														style="text-align: right;"></td>
+													<!-- <th:block th:switch="${travellist?.verify_flg}">
+														<td th:case="'Y'" style="color: green; text-align: center">Verified</td>
+														<td th:case="'N'" style="color: red; text-align: center">Unverified</td>
+														<td th:case="null" style="color: red; text-align: center">Unknown</td>
+													</th:block> -->
+
+													<td 
+														th:text="${travellist.verify_flg == 'Y' ? 'Verified' : 'Unverified'}"
+														th:style="${travellist.verify_flg == 'Y' ? 'text-align:center;color: green;' : 'text-align:center;color: red;'}">
+													</td>
+
+
+													<td style="text-align: center;">
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" MODIFY"
+																	th:attr="data-travid=${travellist.id}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+																<a class="dropdown-item" title=" VIEW"
+																	th:attr="data-travid=${travellist.id}"
+																	style="cursor: pointer;" onclick="view(this)">View</a>
+
+																<a class="dropdown-item" title=" VERIFY"  
+																	th:attr="data-travid=${travellist.id}"
+																	style="cursor: pointer;" onclick="verify(this)">Verify</a>
+
+																<a class="dropdown-item" title=" DELETE"
+																	th:attr="data-travid=${travellist.id}"
+																	style="cursor: pointer;" onclick="deleteview(this)">Delete</a>
+
+
+															</div>
+														</div>
+
+													</td>
+
+													<!-- 	<th:block th:switch="${travellist?.verify_flg}">	
+														<td th:case="'Y'" style="text-align: center"><input type="radio" th:attr="data-travid=${travellist.id}" onclick="view(this)"></td>
+														
+													
+													</th:block> -->
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<div class=" modal fade" id="addcat">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content fullscreen-modal">
+							<form action="#" method="post" class="w-100"
+								id="allowanceCreationadd" autocomplete="off">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Allowance Maker
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="togglelist();">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+								<div class="modal-body">
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+
+												<select class="form-control" id="designation"
+													name="designation">
+													<option>--Select Designation--</option>
+													<option value="BDE">BDE</option>
+													<option value="SBDE">SBDE</option>
+
+												</select> <label for="name" class="form-legend">Designation</label>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control"
+													id="localMarketAllowance" name="localMarketAllowance"
+													placeholder="" required> <label for="name"
+													class="form-legend">Local Market Allowance</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control"
+													id="exMarketAllowance" name="exMarketAllowance"
+													placeholder="" required> <label for="name"
+													class="form-legend">EX MARKET Allowance</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control"
+													id="upcountryAllowance" name="upcountryAllowance"
+													placeholder="" required> <label for="name"
+													class="form-legend">UP COUNTRY Allowance</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="kmConstrain"
+													name="kmConstrain" placeholder="" required> <label
+													for="name" class="form-legend">Km constrain</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="petrolAllowance"
+													name="petrolAllowance" placeholder="" required> <label
+													for="name" class="form-legend">Petrol Allowance
+													per/km</label>
+											</div>
+										</div>
+
+
+									</div>
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="allowanceCreation()">Submit</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="closechange(event);">Close</button>
+									</div>
+
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- unit -->
+
+
+
+
+
+
+
+
+				<div class=" modal fade" id="addlist">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content fullscreen-modal">
+
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class="fas fa-user-plus mr-2"></i>Allowance Maker-list
+
+								</div>
+
+							</div>
+							<div class="modal-body">
+								<div
+									class="mb-3 d-flex justify-content-between align-items-center">
+									<div>
+										<!--<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable('dataTables', 'searchInput')"
+											class="form-control" />-->
+									</div>
+									<!-- Date Search (Commented Out) -->
+									<!-- <div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div> -->
+								</div>
+
+								<!-- Table for displaying journal entries -->
+								<table id="dataTables" class="table table-striped">
+									<thead>
+										<tr>
+											<th style="text-align: center;">Designation</th>
+											<th style="text-align: left;">Local Market</th>
+											<th style="text-align: left;">Ex Market</th>
+											<th style="text-align: left;">Up Country</th>
+											<th style="text-align: left;">KM Constrain</th>
+											<th style="text-align: left;">Petrol</th>
+											<th style="text-align: center;">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${#lists.isEmpty(getallowance)}">
+											<td colspan="7" style="text-align: center; color: red;">
+												No records found.</td>
+										</tr>
+										<tr th:each="allowance : ${getallowance}">
+											<td th:text="${allowance.designation}"
+												style="text-align: center;"></td>
+											<td th:text="${allowance.localMarketAllowance}"
+												style="text-align: left;"></td>
+											<td th:text="${allowance.exMarketAllowance}"
+												style="text-align: left;"></td>
+											<td th:text="${allowance.upcountryAllowance}"
+												style="text-align: left;"></td>
+											<td th:text="${allowance.kmConstrain}"
+												style="text-align: left;"></td>
+											<td th:text="${allowance.petrolAllowance}"
+												style="text-align: left;"></td>
+											<td style="text-align: center;"><input type="radio"
+												th:attr="data-allowancemakerid=${allowance.allowancemakerId}"
+												onclick="deletebyid(this)"></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div id="pagination-controls"></div>
+							</div>
+
+
+							<div class="card-footer text-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+									onclick="closechange(event);">Close</button>
+							</div>
+
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class=" modal fade" id="alert">
+				<div
+					class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel"
+								style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+						</div>
+						<div class="modal-body"
+							style="text-align: center; background-color: #c6ccd2">
+							<p id="alertmsg"></p>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" onclick="registrationlist(event);">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+		</div>
+	</div>
+	</div>
+	</div>
+
+
+	</div>
+
+
+	<!-- Modal -->
+	<!-- Confirmation Modal -->
+	<div class="modal fade" id="confirmationModal" tabindex="-1"
+		role="dialog" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="confirmationModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">Confirm
+						Deletion</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p>Are you sure you want to delete this Item?</p>
+					<button type="button" class="btn btn-primary"
+						th:if="${formmode}=='deleteview'" id="confirmDeleteBtn"
+						onclick="deletebtnwithmodel();">Yes</button>
+					<button type="button" class="btn btn-primary"
+						th:if="${formmode}=='add'" id="confirmDeleteBtn"
+						onclick="deletebyidtog();">Yes</button>
+
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+function togglre(){
+	$('#addcat').modal('show'); 
+	 
+	
+}
+
+function togglelist(){
+	
+	$('#addcat').modal('hide');
+	$('#addlist').modal('show'); 
+
+	 
+	
+}
+function unitconvert(){
+	$('#basesunits').modal('show');
+	
+}
+
+
+function closechange(event) {
+
+	event.preventDefault();
+	$('#addcat').modal('hide');
+	$('#addlist').modal('hide');
+	$('#basesunits').modal('hide');
+	
+}
+function allowanceCreation(){
+	if ($("#allowanceCreationadd").valid()) {
+
+		$.ajax({
+			url : './ErpAddallowancemaker',
+			type : 'POST',
+			data : $('#allowanceCreationadd').serialize(),
+			success : function(response) {
+				alert(response);
+				$('#addcat').modal('hide');
+				location.reload();
+			}
+		});
+	}
+}
+let allowancemakerid=""
+
+function deletebyid(a){
+	allowancemakerid=a.getAttribute('data-allowancemakerid');
+	$('#confirmationModal').modal('show');
+	
+	
+
+	
+}
+
+
+function deletebyidtog(){
+	$.ajax({
+		url : './deleteallowancemaker?allowancemakerid='+allowancemakerid,
+		type : 'POST',
+		success : function(response) {
+			$('#confirmationModal').modal('hide');
+			alert(response);
+			location.reload();
+			
+		}
+	});
+
+	
+}
+
+
+
+function unitc(){
+	var unit=document.getElementById('Unit');
+	var Baseunit=document.getElementById('Baseunit').value;
+	var secondaryunit=document.getElementById('secondaryunit').value;
+	var Conversion=document.getElementById('Conversion').value;
+	if(secondaryunit!='NONE'){
+	unit.value=Conversion+"-"+secondaryunit+"-"+Baseunit;
+	}
+	else{
+		unit.value=Baseunit;
+	}
+	$('#basesunits').modal('hide');	
+	
+	
+}
+
+</script>
+
+	<!-- Loading Modal -->
+	<div id="loadingModal" style="display: none;">
+		<div id="loadingContent">
+			<img th:src=@{/images/infins.gif} alt="Loading...">
+		</div>
+	</div>
+
+
+
+</body>
+</html>

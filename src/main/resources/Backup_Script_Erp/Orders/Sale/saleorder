@@ -1,0 +1,89 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[SALES_ORDER_TABLE_NEW]    Script Date: 12/6/2024 3:05:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[SALES_ORDER_TABLE_NEW](
+	[WO_ID] [varchar](100) NULL,
+	[VENDOR_ID] [varchar](100) NULL,
+	[SHIPPING_ADDRESS] [varchar](100) NULL,
+	[PHONE_NO] [varchar](100) NULL,
+	[ORDER_DATE] [date] NULL,
+	[DUE_DATE] [date] NULL,
+	[ITEM] [varchar](100) NULL,
+	[QTY] [int] NULL,
+	[TOTAL_QTY] [int] NULL,
+	[UNIT] [varchar](100) NULL,
+	[PRICE_HEADER] [varchar](100) NULL,
+	[PRICE] [int] NULL,
+	[TAX_PERCENTAGE] [varchar](100) NULL,
+	[TAX_AMOUNT] [int] NULL,
+	[AMOUNTPERITEM] [decimal](18, 7) NULL,
+	[TOTAL_AMOUNT] [int] NULL,
+	[ADVANCE_AMOUNT] [int] NULL,
+	[BALANCE_AMOUNT] [int] NULL,
+	[PAYMENT_TYPE] [varchar](100) NULL,
+	[REFERENCE_NUMBER] [varchar](100) NULL,
+	[PAID_AMOUNT] [int] NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[VERIFY_FLG] [char](1) NULL,
+	[MODIFY_FLG] [char](1) NULL,
+	[DEL_FLG] [char](1) NULL,
+	[INVENTORY_FLG] [char](1) NULL,
+	[QC_FLG] [char](1) NULL,
+	[APPROVED_FLG] [char](1) NULL,
+	[verifytime] [varchar](100) NULL,
+	[verifyuser] [varchar](100) NULL,
+	[entryuser] [varchar](100) NULL,
+	[entrytime] [varchar](100) NULL,
+	[Assettype] [varchar](100) NULL,
+	[Assetcategory] [varchar](100) NULL,
+	[Assetsubcategory] [varchar](100) NULL,
+	[ITEM_CODE] [varchar](100) NULL,
+	[ID] [varchar](100) NULL,
+	[bill_companyname] [varchar](100) NULL,
+	[ship_companyname] [varchar](100) NULL,
+	[bill_address] [varchar](100) NULL,
+	[ship_address] [varchar](100) NULL,
+	[bill_street] [varchar](100) NULL,
+	[ship_street] [varchar](100) NULL,
+	[bill_dis] [varchar](100) NULL,
+	[ship_dis] [varchar](100) NULL,
+	[bill_pincode] [varchar](100) NULL,
+	[ship_pincode] [varchar](100) NULL,
+	[bill_phno] [varchar](100) NULL,
+	[ship_phno] [varchar](100) NULL,
+	[bill_email] [varchar](100) NULL,
+	[ship_email] [varchar](100) NULL,
+	[bill_gstno] [varchar](100) NULL,
+	[ship_gstno] [varchar](100) NULL,
+	[hsncode] [varchar](100) NULL,
+	[orderNo] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+
+--sequence
+
+USE [HRMS]
+GO
+
+USE [HRMS]
+GO
+
+/****** Object:  Sequence [HRMS].[wo_idnew]    Script Date: 12/6/2024 3:08:18 PM ******/
+CREATE SEQUENCE [HRMS].[wo_idnew] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999
+ CACHE 
+GO
+
+

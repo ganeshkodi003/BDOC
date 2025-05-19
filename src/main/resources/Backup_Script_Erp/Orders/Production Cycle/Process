@@ -1,0 +1,56 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[TSK_PROCESS_TABLE]    Script Date: 22-04-2025 11:58:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TSK_PROCESS_TABLE](
+	[PROCESS_ID] [varchar](100) NULL,
+	[bomid] [varchar](100) NULL,
+	[kilograms] [varchar](100) NULL,
+	[units] [varchar](20) NULL,
+	[itemCode] [varchar](100) NULL,
+	[itemname] [varchar](100) NULL,
+	[category_name1] [varchar](100) NULL,
+	[Quantity] [decimal](18, 2) NULL,
+	[stock_qty] [decimal](18, 2) NULL,
+	[price] [decimal](18, 2) NULL,
+	[reqqnt] [decimal](18, 2) NULL,
+	[totalprice] [decimal](18, 2) NULL,
+	[batch] [varchar](100) NULL,
+	[ExpensesType] [varchar](100) NULL,
+	[per_Amount] [decimal](18, 2) NULL,
+	[totalexpcost] [decimal](18, 2) NULL,
+	[makingproductName] [varchar](100) NULL,
+	[grantTotal] [varchar](100) NULL,
+	[entity_flg] [varchar](1) NULL,
+	[del_flg] [varchar](1) NULL,
+	[verify_flg] [varchar](1) NULL,
+	[modify_flg] [varchar](1) NULL,
+	[process_start_date] [date] NULL,
+	[process_end_date] [date] NULL,
+	[ID] [varchar](100) NOT NULL,
+	[STATUS] [varchar](100) NULL,
+	[returnquantity] [decimal](18, 3) NULL,
+	[useingquantity] [decimal](18, 3) NULL,
+	[baseunit] [varchar](100) NULL,
+	[returnquantityunit] [varchar](100) NULL,
+	[BRANCH_ID] [varchar](50) NULL,
+	[outtern] [decimal](18, 2) NULL,
+	[Kasadu] [decimal](18, 2) NULL,
+	[Ghee] [decimal](18, 2) NULL,
+	[totalKasadu] [decimal](18, 2) NULL,
+	[totalGhee] [decimal](18, 2) NULL,
+	[Materialtotalvalue] [decimal](18, 2) NULL,
+	[Expensesgrandtotal] [decimal](18, 2) NULL,
+	[Actualkasadu] [decimal](18, 2) NULL,
+	[differghee] [decimal](18, 2) NULL,
+	[differkasadu] [decimal](18, 2) NULL
+) ON [PRIMARY]
+GO
+
+

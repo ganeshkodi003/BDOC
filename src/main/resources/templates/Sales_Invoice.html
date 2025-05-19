@@ -1,0 +1,1083 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<!--moment.js-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
+
+
+
+
+<script>
+	function Home() {
+
+		location.href = 'Dashboard';
+	}
+
+	function Back() {
+		window.history.back();
+	}
+</script>
+<script>
+	function add() {
+
+		location.href = './assosiateProfile?formmode=add';
+	}
+
+	function listPage() {
+
+		location.href = './accountLedger?formmode=list';
+	}
+</script>
+
+<script>
+	function enquiryuser(a) {
+		var acctno = a.getAttribute("data-attr");
+		location.href = 'accountLedger2?formmode=view&acct_num=' + acctno;
+	}
+</script>
+
+<script>
+	/*$(document)
+			.ready(
+					function() {
+						// Function to calculate totals
+						function calculateTotals() {
+							let totalQty = 0;
+							let totalAmount = 0;
+
+							// Loop through each row in the table body
+							const rows = $('#purchaseInvoiceTable tbody tr'); // Assuming the table has an id of 'purchaseInvoiceTable'
+							rows.each(function() {
+								// Log the row to see if it’s being correctly selected
+								console.log('Row data:', $(this).html());
+
+								// Get the qty and amount values (check if they are correctly selected)
+								const qty = parseFloat($(this).find(
+										'td:nth-child(5)').text()) || 0; // 6th column is Qty
+									
+								const amount = parseFloat($(this).find(
+										'td:nth-child(11)').text()) || 0; // 12th column is Total Amount
+
+								console.log('Qty:', qty, 'Amount:', amount); // Log the values for debugging
+
+								// Add to totals
+								totalQty += qty;
+								totalAmount += amount;
+							});
+
+							// Update the Total Qty, Total Amount in the footer
+							$('#totalQty').text(totalQty.toFixed(2));
+							$('#totalAmount').text(totalAmount.toFixed(2));
+
+							// Get CGST, SGST, IGST, RCM and Round Off values from the input fields (if available)
+							const cgstInput = parseFloat($('#cgstInput').val()) || 0;
+							const sgstInput = parseFloat($('#sgstInput').val()) || 0;
+							const igstInput = parseFloat($('#igstInput').val()) || 0;
+
+							// Get RCM Inputs (from input fields)
+							const cgstRcmInput = parseFloat($('#cgstRcmInput')
+									.val()) || 0;
+							const sgstRcmInput = parseFloat($('#sgstRcmInput')
+									.val()) || 0;
+							const igstRcmInput = parseFloat($('#igstRcmInput')
+									.val()) || 0;
+
+							// Get Round Off value
+							const roundOff = parseFloat($('#roundOff').val()) || 0;
+
+							// Calculate the net total (add taxes and other adjustments)
+							const netTotal = totalAmount + cgstInput
+									+ sgstInput + igstInput + cgstRcmInput
+									+ sgstRcmInput + igstRcmInput + roundOff;
+
+							// Update the Net Total in the footer
+							$('#netTotal').text(netTotal.toFixed(2));
+
+							// Convert the net total to words and display it
+							$('#amountInWords').html('<b>' +numberToWords(netTotal)+'</b>');
+						}
+
+						// Run the calculation on page load
+						calculateTotals();
+
+						// Optionally, update totals when the user changes any input field (CGST, SGST, IGST, RCM, Round Off)
+						$(
+								'#cgstInput, #sgstInput, #igstInput, #cgstRcmInput, #sgstRcmInput, #igstRcmInput, #roundOff')
+								.on('input', function() {
+									calculateTotals();
+								});
+					});*/
+
+	/* ---existing script-- */
+
+	/* 	function numberToWords(number) {
+	 const words = [ '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six',
+	 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
+	 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen',
+	 'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty',
+	 'Sixty', 'Seventy', 'Eighty', 'Ninety' ];
+
+	 function convertHundreds(n) {
+	 if (n < 20)
+	 return words[n];
+	 const tens = Math.floor(n / 10);
+	 const units = n % 10;
+	 return words[tens + 18] + (units ? ' ' + words[units] : '');
+	 }
+
+	 function convertThousands(n) {
+	 const hundreds = Math.floor(n / 100);
+	 const remainder = n % 100;
+	 return (hundreds ? words[hundreds] + ' Hundred ' : '')
+	 + (remainder ? convertHundreds(remainder) : '');
+	 }
+
+	 const thousands = Math.floor(number / 1000);
+	 const remainder = number % 1000;
+	 const thousandText = thousands ? convertThousands(thousands)
+	 + ' Thousand ' : '';
+	 return thousandText + convertThousands(remainder);
+	 } */
+
+	/* ---new script-- */
+
+	function numberToWords(number) {
+		const words = [ '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six',
+				'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
+				'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen',
+				'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty',
+				'Sixty', 'Seventy', 'Eighty', 'Ninety' ];
+
+		function convertHundreds(n) {
+			if (n < 20)
+				return words[n];
+			else if (n < 100) {
+				const tens = Math.floor(n / 10);
+				const units = n % 10;
+				return words[18 + tens] + (units ? ' ' + words[units] : '');
+			} else {
+				const hundreds = Math.floor(n / 100);
+				const remainder = n % 100;
+				return words[hundreds] + ' Hundred'
+						+ (remainder ? ' ' + convertHundreds(remainder) : '');
+			}
+		}
+
+		function convertNumber(n) {
+			if (n === 0)
+				return 'Zero';
+			let result = '';
+
+			const thousands = Math.floor(n / 1000);
+			const remainder = n % 1000;
+
+			if (thousands)
+				result += convertHundreds(thousands) + ' Thousand ';
+			if (remainder)
+				result += convertHundreds(remainder);
+
+			return result.trim();
+		}
+
+		let roundedNumber = Math.round(number); // Round to nearest integer
+		return convertNumber(roundedNumber) + ' Only';
+	}
+
+	
+</script>
+
+
+
+<script>
+	function printWithCustomFileName() {
+
+		const poNumberElement = document.getElementById('woNumber');
+		const poNumber = poNumberElement.textContent.trim();
+
+		const originalTitle = document.title; // Save the original title
+		document.title = "INV_" + poNumber; // Set your desired file name
+		window.print(); // Trigger the print
+		document.title = originalTitle; // Restore the original title
+	}
+</script>
+
+
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
+	height: 300vh;
+}
+
+.container-manager {
+	width: 80%; /* Adjust the width as per your preference */
+	border: 2px solid #000; /* Add a black border */
+	padding: 20px;
+	background: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	/* Optional for a slight shadow effect */
+}
+
+.footer {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.table {
+	border-collapse: collapse;
+	/* Ensure borders are collapsed for a clean look */
+	width: 100%; /* Optional: Make the table span the full width */
+}
+
+.table th {
+	border: 1px solid #000;
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table tr {
+	border: 1px solid #000;
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table tr th {
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table td {
+	padding: 8px; /* Add padding for table cells */
+	border: none; /* Remove cell-specific borders */
+}
+
+.details {
+	margin-bottom: 20px;
+}
+
+.details div {
+	margin-bottom: 5px;
+}
+
+.notes {
+	border-bottom: 1px solid #ddd;
+}
+
+.signatures {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+	border-bottom: 1px solid #ddd;
+}
+
+.signature {
+	width: 30%;
+	text-align: center;
+}
+</style>
+<style>
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px;
+	border-bottom: 1px solid #ddd; /* Optional border for styling */
+}
+
+.header-image {
+	flex-shrink: 0; /* Prevent the image from resizing */
+	margin-right: 20px; /* Add some space between the image and text */
+}
+
+.text-content {
+	text-align: center; /* Center-align the text inside this container */
+	flex-grow: 0.5; /* Allow text to expand and occupy available space */
+}
+
+.details {
+	margin: 20px; /* Add spacing around the block */
+	border-bottom: 1px solid #ddd;
+}
+
+.title {
+	text-align: center; /* Center align the title */
+	font-weight: bold; /* Make it bold */
+	margin-bottom: 20px; /* Add some spacing below the title */
+}
+
+.details-content {
+	display: flex; /* Flexbox layout for side-by-side alignment */
+	justify-content: space-between; /* Space out left and right sections */
+	gap: 20px; /* Add spacing between left and right sections */
+}
+
+strong {
+	font-weight: 100;
+}
+</style>
+
+<style>
+@media print {
+	.col-sm-2 {
+		display: none !important;
+	}
+	.container-manager {
+		width: 100%;
+		padding: 0;
+	}
+	body {
+		font-size: 12px;
+		margin-top: -1050px;
+		padding: 0;
+	}
+	.details {
+		width: 98%;
+	}
+	.header, .table {
+		width: 100%;
+	}
+	.table th, .table td {
+		padding: 4px;
+		font-size: 12px;
+	}
+	@page {
+		size: A4;
+		margin: 10mm; /* Adjust margins for content */
+	}
+	.container-manager {
+		transform: scale(0.95); /* Adjust scaling as needed */
+		transform-origin: top left;
+	}
+	input {
+		border: none; /* Removes the border */
+		outline: none; /* Removes the focus outline */
+		background-color: transparent;
+		/* Optional: Makes background transparent */
+		font-size: 16px; /* Optional: Adjust font size */
+		color: #000; /* Optional: Adjust text color */
+	}
+
+	/* Hide interactive or unnecessary elements */
+	.no-print, .theebutton {
+		display: none !important;
+	}
+}
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -40px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:1px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+<script>
+	let totalCGST = 0;
+	let totalSGST = 0;
+	let totalIGST = 0;
+
+	$(document)
+			.ready(
+					function() {
+						const igstRcmInput = parseFloat($('#igstRcmInput')
+								.val()) || 0;
+						// Function to calculate totals
+						function calculateTotals() {
+							let totalQty = 0;
+							let totalAmount = 0;
+
+							// Loop through each row in the table body
+							const rows = $('#purchaseInvoiceTable tbody tr'); // Assuming the table has an id of 'purchaseInvoiceTable'
+							rows.each(function() {
+								// Log the row to see if it’s being correctly selected
+								console.log('Row data:', $(this).html());
+
+								// Get the qty and amount values (check if they are correctly selected)
+								const qty = parseFloat($(this).find(
+										'td:nth-child(5)').text()) || 0; // 6th column is Qty
+										
+								const amount = parseFloat($(this).find(
+										'td:nth-child(11)').text()) || 0; // 12th column is Total Amount
+
+								console.log('Qty:', qty, 'Amount:', amount); // Log the values for debugging
+
+								// Add to totals
+								totalQty += qty;
+								totalAmount += amount;
+							});
+
+							// Update the Total Qty, Total Amount in the footer
+							$('#totalQty').text(totalQty.toFixed(2));
+							$('#totalAmount').text(totalAmount.toFixed(2));
+
+							// Get CGST, SGST, IGST, RCM and Round Off values from the input fields (if available)
+							const cgstInput = parseFloat($('#cgstInput').val()) || 0;
+							const sgstInput = parseFloat($('#sgstInput').val()) || 0;
+							const igstInput = parseFloat($('#igstInput').val()) || 0;
+
+							// Get RCM Inputs (from input fields)
+							const cgstRcmInput = parseFloat($('#cgstRcmInput')
+									.val()) || 0;
+							const sgstRcmInput = parseFloat($('#sgstRcmInput')
+									.val()) || 0;
+							const igstRcmInput = parseFloat($('#igstRcmInput')
+									.val()) || 0;
+
+							// Get Round Off value
+							const roundOff = parseFloat($('#roundOff').val()) || 0;
+
+							// Sum all SGST amounts
+							$('#purchaseInvoiceTable tbody .sgstAmount').each(
+									function() {
+										const amount = parseFloat($(this)
+												.text()) || 0;
+										totalSGST += amount;
+									});
+
+							// Sum all CGST amounts
+							$('#purchaseInvoiceTable tbody .cgstAmount').each(
+									function() {
+										const amount = parseFloat($(this)
+												.text()) || 0;
+										totalCGST += amount;
+									});
+
+							// Sum all IGST amounts
+							$('#purchaseInvoiceTable tbody .igstAmount').each(
+									function() {
+										const amount = parseFloat($(this)
+												.text()) || 0;
+										totalIGST += amount;
+										//alert("total" +totalIGST)
+									});
+
+							// Calculate the net total (add taxes and other adjustments)
+							const netTotal = totalAmount + cgstInput
+									+ sgstInput + igstInput + cgstRcmInput
+									+ sgstRcmInput + igstRcmInput + roundOff
+									+ totalSGST + totalIGST + totalCGST;
+
+							// Update the Net Total in the footer
+							$('#netTotal').text(netTotal.toFixed(2));
+
+							// Convert the net total to words and display it
+							$('#amountInWords').html(
+									'<b>' + numberToWords(netTotal) + '</b>');
+
+						}
+
+						// Run the calculation on page load
+						calculateTotals();
+
+						// Optionally, update totals when the user changes any input field (CGST, SGST, IGST, RCM, Round Off)
+						$(
+								'#cgstInput, #sgstInput, #igstInput, #cgstRcmInput, #sgstRcmInput, #igstRcmInput, #roundOff')
+								.on('input', function() {
+									calculateTotals();
+								});
+					});
+
+	// Function to convert numbers to words (supports numbers up to 999,999)---now no need this
+	function numberToWords1(number) {
+
+		const words = [ '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six',
+				'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
+				'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen',
+				'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty',
+				'Sixty', 'Seventy', 'Eighty', 'Ninety' ];
+
+		function convertHundreds(n) {
+			if (n < 20)
+				return words[n];
+			const tens = Math.floor(n / 10);
+			const units = n % 10;
+			return words[tens + 18] + (units ? ' ' + words[units] : '');
+		}
+
+		function convertThousands(n) {
+			const hundreds = Math.floor(n / 100);
+			const remainder = n % 100;
+			return (hundreds ? words[hundreds] + ' Hundred ' : '')
+					+ (remainder ? convertHundreds(remainder) : '');
+		}
+
+		const thousands = Math.floor(number / 1000);
+		const remainder = number % 1000;
+		const thousandText = thousands ? convertThousands(thousands)
+				+ ' Thousand ' : '';
+		return thousandText + convertThousands(remainder);
+	}
+
+	$(document).ready(function() {
+		// Run the calculation on page load
+		calculateTaxInputs();
+	});
+	
+	
+	
+	
+	function calculateTaxInputs() {
+	    let totalIGSTS = 0;
+	    let totalSGSTS = 0;
+	    let totalCGSTS = 0;
+
+	    // Loop through each row to calculate SGST, CGST, and IGST
+	    $('#purchaseInvoiceTable tbody tr').each(function () {
+	        
+	        const igstAmount = parseFloat($(this).find('.igstAmount').text()) || 0;
+
+	        if (igstAmount > 0) {
+	            const sgstAmountField = $(this).find('.sgstAmount');
+	            const cgstAmountField = $(this).find('.cgstAmount');
+
+	            
+	            const currentRowSGSTCGST = igstAmount / 2;
+
+	            sgstAmountField.text(currentRowSGSTCGST.toFixed(2));
+	            cgstAmountField.text(currentRowSGSTCGST.toFixed(2));
+
+	            
+	            totalIGSTS += igstAmount;
+	            totalSGSTS += currentRowSGSTCGST;
+	            totalCGSTS += currentRowSGSTCGST;
+	        } else {
+	           
+	            const sgstAmount = parseFloat($(this).find('.sgstAmount').text()) || 0;
+	            const cgstAmount = parseFloat($(this).find('.cgstAmount').text()) || 0;
+
+	            totalSGSTS += sgstAmount;
+	            totalCGSTS += cgstAmount;
+	        }
+	    });
+
+	   
+	    $('#cgstInput').val(totalCGSTS.toFixed(2));
+	    $('#sgstInput').val(totalSGSTS.toFixed(2));
+	    $('#igstInput').val(totalIGSTS.toFixed(2)).css({'font-weight':'bold','width' : '210px'});
+	    //$('#igstInput').html('<b>'+ totalIGSTS.toFixed(2) + '</b>');
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	/*function cgstsgst() {
+	    let totalCGST = 0;
+	    let totalSGST = 0;
+	    let totalIGST = 0;
+		//alert(totalIGST);
+	    $('#purchaseInvoiceTable tbody tr').each(function () {
+	        const taxPercentage = $(this).find('.taxPercentage').text().trim();
+	        alert(taxPercentage)
+	        const taxAmount = parseFloat($(this).find('.taxAmount').text()) || 0;
+
+	        // Check if the tax is CGST, SGST, or IGST and add to the respective total
+	        if (taxPercentage.startsWith('C')) { // CGST
+	            alert("totalc"+taxAmount)
+	        	totalCGST += taxAmount;
+	        } else if (taxPercentage.startsWith('S')) { // SGST
+	            totalSGST += taxAmount;
+	        } else if (taxPercentage.startsWith('I')) { // IGST
+	            totalIGST += taxAmount;
+	        }
+	    });
+	    //alert(totalIGST);
+	    $('#cgstInput').val(totalCGST.toFixed(2));
+		$('#sgstInput').val(totalSGST.toFixed(2));
+		$('#igstInput').val(totalIGST.toFixed(2));
+	}*/
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*$(document).ready(
+			function() {
+				// Function to calculate and update the tax inputs
+				function calculateTaxInputss() {
+					
+					
+					// Loop through each row in the table body
+					$('#purchaseInvoiceTable tbody tr').each(
+							
+				
+							function() {
+								const taxPercentage = $(this).find(
+										'.taxPercentage').text().trim();
+								const taxAmount = parseFloat($(this).find(
+										'.taxAmount').text()) || 0;
+
+								// Check if the tax is CGST, SGST, or IGST and add to the respective total
+								if (taxPercentage.startsWith('C')) { // CGST
+									totalCGST += taxAmount;
+								} else if (taxPercentage.startsWith('S')) { // SGST
+									totalSGST += taxAmount;
+								} else if (taxPercentage.startsWith('I')) { // IGST
+									totalIGST += taxAmount;
+								
+								}
+							});
+					
+				alert("hi")
+
+					// Update the input fields with the calculated totals
+					$('#cgstInput').val(totalCGST.toFixed(2));
+					$('#sgstInput').val(totalSGST.toFixed(2));
+					$('#igstInput').val(totalIGST.toFixed(2));
+					
+				}
+				
+				alert("totalCGST" +totalCGST)
+				//alert("totalSGST" +totalSGST)
+				//alert("totalIGST" +totalSGST)
+				
+
+				// Run the calculation on page load
+				//calculateTaxInputs();
+			});*/
+	
+
+	// Function to calculate and update the tax inputs
+	
+	
+	
+	
+</script>
+
+</head>
+<body>
+
+<div class="col-sm-2">
+		<div th:insert="BTMHeaderMenu :: header"></div>
+	</div>
+	
+			
+
+
+
+	<div class="container-manager" style="margin-top: 100px">
+		<div style="padding: 10px;" align="right">
+			<button class="no-print" onclick="printWithCustomFileName();">Print</button>
+		</div>
+		<div class="header">
+			<div class="header-content">
+				<img th:src="@{/images/TSK.PNG}" style="height: 80px;"
+					alt="Bornfire" class="header-image">
+			</div>
+			<div class=" text-content" style="text-align: center;">
+				<h1 style="font-weight: bold;">T.SenthilKumar & Company</h1>
+				<p style="font-weight: bold;">Fssai No: 12419006000855</p>
+				<p>284 B KRISHANA MARKET, KS BUILDING, ODDANCHATRAM,
+					DINDIGUL-624619</p>
+				<p>Ph: 9443743002, GSTIN/UIN: 33BUFPS2073F1ZQ, PAN: BUFPS2073F</p>
+
+			</div>
+		</div>
+
+
+		<div class="details" th:object="${getdetails}">
+			<!-- Center and bold -->
+			<h2 class="title">SALES ORDER</h2>
+
+			<div class="details-content" style="border-bottom: 1px solid #ddd;">
+				<!-- Left side -->
+				<div class="col-sm-5">
+					<div style="font-weight: bold;">T. SENTHILKUMAR & COMPANY</div>
+					<div>284 B Krishna Market, KS Building, Oddanchatram, 624619</div>
+					<div>
+						<strong>Cell:</strong> 9443743002
+					</div>
+					<div>
+						<strong>State:</strong> TAMILNADU
+					</div>
+					<div>
+						<strong>GSTIN:</strong> 33BUFPS2073F1ZQ
+					</div>
+				</div>
+
+				<!-- Right side -->
+				<div class="col-sm-4">
+					<div >
+						<b>WO No:</b> <span style="font-weight:bold;"  id="woNumber" th:text="${wo_id}"></span>
+					</div>
+					<div >
+						<b>WO Date:</b> <span style="font-weight:bold;"
+							th:text="${#dates.format(orderdate, 'dd/MM/yyyy')}"></span>
+					</div>
+					<div >
+						<b>Reference No:</b>
+					
+						<span style="font-weight:bold;" th:text="${ordernumber}"></span>
+					</div>
+					<!-- <div>
+						<strong>Reference Date:</strong> <span
+							th:text="${#dates.format(orderdate, 'dd/MM/yyyy')}"></span>
+					</div> -->
+					<div>
+						<b>Order Type:</b> <span style="font-weight:bold;">Sale Order</span>
+					</div>
+				</div>
+			</div>
+
+			<br>
+			<div class="details-content">
+				<!-- Left side -->
+				<div class="col-sm-4" style="border-right: 2px solid #ddd;">
+					<div>
+						<b>Billed To:</b>
+					</div>
+					<div>
+						<strong>Company Name:</strong> <span th:text="${billcompany}"></span>
+					</div>
+					<div>
+						<strong>Address:</strong> <span th:text="${billaddress}"></span>
+					</div>
+					<div>
+						<strong>Cell:</strong> <span th:text="${billphone}"></span>
+					</div>
+					<div>
+						<strong>State:</strong> <span th:text="${billdis}"></span>
+					</div>
+					<div>
+						<strong>GSTIN:</strong> <span th:text="${billgst}"></span>
+					</div>
+				</div>
+
+				<div class="col-sm-4" style="border-right: 2px solid #ddd;">
+					<div>
+						<b>Shipped To:</b>
+					</div>
+					<div>
+						Company Name : <span th:text="${shipcompany}"></span>
+					</div>
+					<div>
+						Address : <span th:text="${shipaddress}"></span>
+					</div>
+					<div>
+						State : <span th:text="${shipstreet}"></span>
+					</div>
+					<div>
+						phone no : <span th:text="${shipphone}"></span>
+					</div>
+
+					<div>
+						Email Address : <span th:text="${shipemail}"></span>
+					</div>
+					<div>
+						<strong>GST No:</strong> <span th:text="${shipgst}"></span>
+					</div>
+				</div>
+
+				<div class="col-sm-4">
+					<div>
+						<strong>Terms Of Delivery:</strong>
+					</div>
+					<div class="d-flex align-items-center mt-2">
+						1. <input type="text" style="width: 100%;font-size:12px;">
+
+					</div>
+					<div class="d-flex align-items-center mt-2">
+						2. <input type="text" style="width: 100%;font-size:12px;">
+					</div>
+					<div class="d-flex align-items-center mt-2">
+						3. <input type="text" style="width: 100%;font-size:12px;">
+					</div>
+					<div class="d-flex align-items-center mt-2">
+						4. <input type="text" style="width: 100%;font-size:12px;">
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+
+		<table class="table" id="purchaseInvoiceTable" style="border=1">
+			<thead>
+				<tr style="text-align:center">
+					 <th>S.No</th>
+					<th>Material code</th>
+					<th>Description</th>
+					<!-- <th>Despatch Date</th> -->
+					<th>HSN Code</th>
+					<th>Qty</th>
+					<th>UOM</th>
+					<th HIDDEN>SGST</th>
+					<th HIDDEN>CGST</th>
+					<th HIDDEN>IGST</th>
+					<th>Unit Cost (INR)</th>
+					<th style="text-align:right;">Amount (INR)</th> 
+					
+					<!-- <th>S.No</th>
+					<th>Material code</th>
+					<th>Description</th>
+					<th>Despatch Date</th>
+					<th>HSN Code</th>
+					<th>Qty</th>
+					<th>UOM</th>
+					<th>SGST</th>
+					<th>CGST</th>
+					<th>IGST</th>
+					<th>Unit Cost (INR)</th>
+					<th>Amount (INR)</th> -->
+					
+					
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Regular Data Rows -->
+				<tr th:each="po,iterStat : ${salelist}" style="text-align: center;">
+					<!-- <td th:text="${po?.id}"></td> -->
+					<td th:text="${iterStat.index+1}" ></td>
+					<!-- Display PO ID -->
+					<td th:text="${po?.woId}"></td>
+					<!-- Display PO Number -->
+					<td th:text="${po?.item}"></td>
+					<!-- Display Item Description -->
+					<!-- <td th:text="${#dates.format(po?.orderDate, 'yyyy-MM-dd')}"></td> -->
+					<!-- Display Order Date (formatted) -->
+					<!-- <td th:text="${po?.itemcode}"></td> -->
+					<td th:text="${po?.hsncode}"></td>
+					<!-- Display Item Code (HSN) -->
+					<td th:text="${po?.qty}"></td>
+					<!-- Display Quantity -->
+					<td th:text="${po?.unit}"></td>
+					<!-- Display Unit of Measure (UOM) -->
+					<!-- SGST % -->
+					<td class="sgstAmount" hidden
+						th:text="${po?.taxPercentage != null && po?.taxPercentage.startsWith('S') ? po?.taxAmount : 0}"></td>
+					<!-- CGST % -->
+					<td class="cgstAmount" hidden
+						th:text="${po?.taxPercentage != null && po?.taxPercentage.startsWith('C') ? po?.taxAmount : 0}"></td>
+					<!-- IGST % -->
+					<td class="igstAmount" hidden
+						th:text="${po?.taxPercentage != null && po?.taxPercentage.startsWith('I') ? po?.taxAmount : 0}"></td>
+
+					<td th:text="${po?.price}"></td>
+					<!-- Amount Per Item (modify if needed) -->
+					<td style="text-align: right"
+						th:text="${#numbers.formatDecimal(po?.amountPerItem, 2, 2)}"></td>
+					<!-- Display Total Amount -->
+				</tr>
+				<!-- Quantity Total Row -->
+				<tr>
+					<td colspan="3"></td>
+					<td  style="text-align: right; font-weight: bold;">Total:-</td>
+					<td style="text-align: left; font-weight: bold;" id="totalQty">0</td>
+					<td colspan="2"  style="text-align: right; font-weight: bold;"></td>
+					<td style="text-align: right; font-weight: bold;" id="totalAmount">0</td>
+				</tr>
+				<!-- Additional Data Rows Starting from 8th Column -->
+				<tr>
+					<td colspan="6"></td>
+					<td colspan="1" style="text-align: right;"><strong>CGST :
+							</strong></td>
+					<td><input type="text" id="cgstInput" value="0" step="0.01"
+						style="text-align: right; float: right;" /></td>
+				</tr>
+				<tr>
+					<td colspan="6"></td>
+					<td colspan="1" style="text-align: right;"><strong>SGST :
+							</strong></td>
+					<td><input type="text" id="sgstInput" value="0" step="0.01"
+						style="text-align: right; float: right;" /></td>
+				</tr>
+				<tr>
+					<td colspan="6"></td>
+					<td colspan="1" style="text-align: right;"><strong>IGST :
+							</strong></td>
+					<td><input type="text" id="igstInput" value="0" step="0.01"
+						style="text-align: right; float: right;" /></td>
+				</tr>
+
+
+				<tr>
+					<td colspan="6"></td>
+					<td colspan="1" style="text-align: right; font-weight: bold;">Net
+						Total :</td>
+					<td style="text-align: right; font-weight: bold;" id="netTotal">0</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+		<div class="details">
+			<div>
+				<strong>Amount in Words:</strong> <span id="amountInWords"></span>
+			</div>
+
+			<div class="d-flex align-items-center">
+				<strong>Remarks:</strong> <input type="text" 
+					style="width: 50%; font-size: 12px;">
+			</div>
+
+
+
+		</div>
+<!-- 
+		<div>
+			<h6 style="text-align: center">SUPPLY THE PRODUCT ALONG WITH HSN
+				CODE IN THE INVOICE</h6>
+				
+				<h5 style="text-decoration:underline;">Declaration :</h2>
+				<p>We declare that this invoice shows the actual price of goods described and that all particulars are true and correct.</p>
+		</div> -->
+		<br> <br>
+		<!--<div class="signatures">
+			<div class="signature">
+				<p style="font-weight: bold;">Prepared By</p>
+			</div>
+			<div class="signature">
+				<p style="font-weight: bold;">Verified By</p>
+			</div>
+			<div class="signature">
+				<p style="font-weight: bold;">Approved By</p>
+			</div>
+		</div>--> 
+		
+			<!--<div class="signatures">
+				<div class="signature">
+					<p
+						style="font-weight: bold; text-align: right; margin-right: -900px;">Authorized
+						Signature</p>
+				</div>
+			</div>-->
+		
+		<br>
+		<div class="notes">
+			<p style="font-weight: bold;">Declaration: We declare that this invoice shows the actual price of goods described and that all particulars are true and correct.</p>
+		</div>
+		<br>
+		<div class="footer">
+			<p style="font-size: x-large;">Always Use TSK Products</p>
+			<p>Head Office: 284 B KRISHANA MARKET, KS BUILDING, ODDANCHITRAM</p>
+			<p>GSTIN/UIN: 33BUFPS2073F1ZQ, PAN: BUFPS2073F, CONTACT NO:
+				9443743002</p>
+		</div>
+
+
+
+		<div class="card-footer text-center theebutton"
+			style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+			<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+				onclick="Home()">Home</button>
+
+
+			<button class="btn btn-xs btn-dark" id="btnback"
+				onclick="window.history.back();">Back</button>
+		</div>
+
+	</div>
+
+</div></div></div>
+
+
+
+
+
+
+</body>
+
+
+</html>

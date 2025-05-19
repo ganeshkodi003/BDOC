@@ -1,0 +1,825 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 0px 2px;
+	font-size: 5px;
+}
+
+.table.dataTable td {
+	border: 0.001px solid #ccc;
+	position: relative;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
+</style>
+</head>
+<script type='text/javascript'>
+
+function back() {
+	location.href = "./sale"
+	//window.history.back();
+}
+  
+        // JavaScript anonymous function
+        (() => {
+            if (window.localStorage) {
+  
+                // If there is no item as 'reload'
+                // in localstorage then create one &
+                // reload the page
+                if (!localStorage.getItem('reload')) {
+                    localStorage['reload'] = true;
+                    window.location.reload();
+                } else {
+  
+                    // If there exists a 'reload' item
+                    // then clear the 'reload' item in
+                    // local storage
+                    localStorage.removeItem('reload');
+                }
+            }
+        })(); // Calling anonymous function here only
+    </script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+$(function() {
+	
+	
+	
+
+	$(document).ready(function() {
+		
+		
+		var sale_id = /*[[${sale_id}]]*/null;
+	    $("#sale_id").attr("value", sale_id);
+
+		
+		   /* var date = new Date();
+ var day = date.getDate();
+var month = date.getMonth() + 1;
+ var year = date.getFullYear();
+  var hr = date.getHours() +1;
+  var mmin=date.getMinutes();
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+
+		   var today =  day + "-" + month+"-"+year +" "+hr+":"+mmin; */
+		    
+		   var currentdate = new Date(); 
+		    var year = currentdate.getFullYear();
+		    year = year.toString().substr(-2);
+		    
+			   var datetimes = " " + currentdate.getDate() + "/"
+			                    + (currentdate.getMonth()+1)  + "/" 
+			                    + year + " "  
+			                    + currentdate.getHours() + ":"  
+			                    + currentdate.getMinutes() + ":" 
+			                    + currentdate.getSeconds();
+			                    
+			                    document.getElementById("date_of_sale").innerText =datetimes;
+		   //$("#date_of_sale").attr("value", currentdate);
+		    
+	    var table = $("#dataTable").DataTable({
+			"destroy" : true,
+			"scrollY" : 150,
+			"scrollCollapse" : true,
+			"paging" : false,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"lengthChange" : false,
+			"bInfo":false
+
+		});
+	 
+	    $('#dataTable tbody').on( 'click', 'button', function () {
+	        var data = table.row( $(this).parents('tr') ).data();
+	        alert( data[0] +"'s salary is: "+ data[ 5 ] );
+	    } );
+	} );
+
+	
+	
+
+});
+
+
+function submitform(){
+	    
+    jsonObj = [];
+
+	var oTable = document.getElementById('dataTable');
+
+	var rowLength = oTable.rows.length;
+
+	if(ini==0){
+		alert("Add Medicine List in to the table")
+	}else if (document.getElementById("cust_name").value == ""||
+			 document.getElementById("date_of_sale").value == "" ||
+				 document.getElementById("given_amount").value == "" ||
+				 document.getElementById("remaining_amount").value == "" ||
+				 document.getElementById("balance_amount").value == "" ){
+
+		alert("Please fill required field")
+
+	}else{
+		
+		//gets rows of table
+
+		//loops through rows    
+		for (i = 1; i < rowLength; i++){
+
+		   //gets cells of current row
+		   var oCells = oTable.rows.item(i).cells;
+
+		   //gets amount of cells of current row
+		   var cellLength = oCells.length;
+	       item = {}
+
+	       item ["cust_name"] = document.getElementById('cust_name').value;
+	       item ["date_of_sale"] = document.getElementById("date_of_sale").value;
+	       item ["total"] = document.getElementById("total").value;
+	       item ["payment_by"] = document.getElementById("payment_by").value;
+	       item ["remarks"] = document.getElementById("remarks").value;
+	       item ["given_amount"] = document.getElementById("given_amount").value;
+	       item ["remaining_amount"] = document.getElementById("remaining_amount").value;
+	       item ["balance_amount"] = document.getElementById("balance_amount").value;
+	       	   //loops through each cell in current row
+		   for(var j = 0; j < cellLength; j++){
+		      /* get your cell info here */
+
+		      if(j==0){
+		          item ["product_id"] = oCells.item(j).innerHTML;
+		      }
+		      if(j==1){
+			      item ["sale_id"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==2){
+			      item ["product_name"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==3){
+			      item ["category_name"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==4){
+			      item ["unit"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==5){
+			      item ["current_stock"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==6){
+			      item ["mrp_rate"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==7){
+			      item ["sale_rate"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==8){
+			      item ["quantity"] = oCells.item(j).innerHTML;
+			  }
+		      if(j==9){
+			      item ["price"] = oCells.item(j).innerHTML;
+			  }
+		      
+		   }
+	       
+	       jsonObj.push(item);
+
+		}
+	    
+		console.log(JSON.stringify(jsonObj));
+		$.ajax({
+			url : "./addMedicineSaleReq",
+		    'contentType': 'application/json',
+			type : 'POST',
+			data : JSON.stringify(jsonObj),
+
+			success : function(res) {
+				alert(res);
+				window.history.back();
+			}
+		});
+
+	}
+	
+	
+	    
+    //node.context is element of tr generated by jQuery DataTables.
+
+//	window.history.back();
+    
+}
+
+
+function product_name_typeFunction(a) {
+	
+	if(a.value==""){
+		var select = document.getElementById("unit1");
+		$("#unit1").empty();
+		$("#unit1").append(
+				'<option value="">SELECT</option>');
+		document.getElementById("category_name1").value="";
+		document.getElementById("mrp_rate1").value="";
+		document.getElementById("sale_rate1").value="";
+		document.getElementById("quantity1").value="";
+		document.getElementById("price1").value="";
+
+		
+	}else{
+		
+		document.getElementById("mrp_rate1").value="";
+		document.getElementById("sale_rate1").value="";
+		document.getElementById("quantity1").value="";
+		document.getElementById("price1").value="";
+		
+		var productList=(/*[[${productList}]]*/);
+		for(var i=0;i< productList.length;i++){
+			
+			
+			if(a.value==productList[i].product_id){
+				document.getElementById("category_name1").value=productList[i].medi_category;
+
+				var select = document.getElementById("unit1");
+				/*<![CDATA[*/
+				$("#unit1").empty();
+				$("#unit1").append(
+						'<option value="">SELECT</option>');
+
+				var tyy='';
+				
+				tyy+='<option value="'+productList[i].package_type+'">'
+				+ productList[i].package_type
+				+ '</option>';
+				
+				tyy+='<option value="'+productList[i].no_of_items_pack_type+'">'
+				+ productList[i].no_of_items_pack_type
+				+ '</option>';
+				
+				if(productList[i].no_of_sub_items_item_type!=null){
+					tyy+='<option value="'+productList[i].no_of_sub_items_item_type+'">'
+					+ productList[i].no_of_sub_items_item_type
+					+ '</option>';
+				}
+				$("#unit1").append(tyy);
+
+				/*]]>*/
+				
+			}
+			
+		}
+	}
+
+}
+
+function unit_typeFunction(a){
+	
+	var select = document.getElementById("unit1");
+	var pro_name = document.getElementById("product_name1").value;
+	var productList=(/*[[${productList}]]*/);
+	for(var i=0;i< productList.length;i++){
+		if(pro_name=productList[i].product_id){
+			
+			if(a.value==""){
+				document.getElementById("mrp_rate1").value="";
+				document.getElementById("sale_rate1").value="";
+				document.getElementById("quantity1").value="";
+				document.getElementById("price1").value="";
+			}else{
+				
+				document.getElementById("quantity1").value="";
+				document.getElementById("price1").value="";
+
+			if(a.value=='BOX'){
+				 document.getElementById("mrp_rate1").value=productList[i].mrp_price;
+				 document.getElementById("sale_rate1").value=productList[i].selling_price;
+
+			}else if(a.value=="STRIP"){
+				
+				var stripMrpPrice=productList[i].mrp_price/productList[i].no_of_items_pack;
+				var stripSalePrice=productList[i].selling_price/productList[i].no_of_items_pack;
+				 document.getElementById("mrp_rate1").value=stripMrpPrice;
+				 document.getElementById("sale_rate1").value=stripSalePrice;
+				 
+			}else if(a.value=="NUMBER"){
+				
+				var stripMrpPrice='';
+				var stripSalePrice='';
+				
+				if(productList[i].no_of_items_pack_type=='NUMBER'){
+					stripMrpPrice=productList[i].mrp_price/productList[i].no_of_items_pack;
+					stripSalePrice=productList[i].selling_price/productList[i].no_of_items_pack;
+				}else{
+					stripMrpPrice=productList[i].mrp_price/productList[i].no_of_sub_items_item;
+					stripSalePrice=productList[i].selling_price/productList[i].no_of_sub_items_item;
+				}
+				
+				 document.getElementById("mrp_rate1").value=stripMrpPrice;
+				 document.getElementById("sale_rate1").value=stripSalePrice;
+			}	
+			}
+		}
+	}
+	
+}
+
+
+function quantity_Function() {
+	var quantity = document.getElementById("quantity1").value;
+	var sale_rate = document.getElementById("sale_rate1").value;
+
+
+	if (sale_rate != "") {
+
+		if (sale_rate != 0) {
+			document.getElementById("price1").value=quantity*sale_rate
+		} else {
+			
+
+		}
+
+	}
+}
+
+function generateBill() {
+	//var srNo = /*[[${invoice_no}]]*/null;
+
+	
+	//location.href = 'api/BillPrint?invoice_no='+srNo;
+	/* location.href = 'downloadJasperMediBill?invoice_no='+srNo; */
+
+	var divContents = document
+	.getElementById("saleinfo").innerHTML;
+	var docprint = window.open('', '_blank', 'toolbar=0,location=0,menubar=0');
+	docprint.document.write('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"');
+	   docprint.document.write('"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">');
+	   docprint.document.write('<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">');
+	   docprint.document.write('<head><title>print</title>');
+	   docprint.document.write('<style type="text/css">body{ margin:0px;');
+	   docprint.document.write('font-family:verdana,Arial;color:#000;');
+	   docprint.document.write('font-family:Verdana, Geneva, sans-serif;}');
+	   docprint.document.write('a{color:#000;text-decoration:none;}   th,   table {    border-top: 1px solid black;    border-collapse: collapse;  } td{padding: 0 10px;}</style>');
+	   docprint.document.write('</head><body onLoad="self.print()"><center>');
+	   docprint.document.write(divContents);
+	   docprint.document.write('</center></body></html>');
+	   docprint.document.close();
+	   //docprint.print();
+}
+
+var ini=0;
+
+var total_price=0;
+
+function addRow(tableID,productid1,saleid1) {
+	
+	
+	var quantity=document.getElementById("quantity1").value;
+	var price=document.getElementById("price1").value;
+	
+	if(quantity!=""&&price!=""&&price!="0"){
+		
+	var table = document.getElementById(tableID);
+	
+	total_price +=parseInt(document.getElementById("price1").value);
+	document.getElementById("total").value=total_price; 
+	
+	var rowCount = table.rows.length;
+	
+	//var row = table.insertRow(rowCount);
+
+	//var colCount = table.rows[0].cells.length;
+	
+	//alert(colCount);
+	
+
+	if(ini==0){
+		//$('#dataTable1').empty();
+
+	}
+	
+	ini=ini+1;
+	
+	var elt=document.getElementById("product_name1");
+
+	$('#dataTable').dataTable().fnAddData( [
+		ini,
+		document.getElementById("sale_id").value,
+		elt.options[elt.selectedIndex].text,
+		document.getElementById("category_name1").value,
+		document.getElementById("unit1").value,
+		document.getElementById("current_stock1").value,
+		document.getElementById("mrp_rate1").value,
+		document.getElementById("sale_rate1").value,
+		document.getElementById("quantity1").value,
+		document.getElementById("price1").value,
+		'<button class="btn-delete" >Delete</button>']
+		);
+	
+	
+
+	
+	$("#unit1").val($("#unit1 option:first").val());
+
+	document.getElementById("mrp_rate1").value="";
+	document.getElementById("sale_rate1").value="";
+	document.getElementById("quantity1").value="";
+	document.getElementById("price1").value="";
+	
+	/* var trHTML = '<tr class="userlist">'
+		+ '<td style="width: 100px" th:text="'+ini+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("sale_id").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("product_name").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("cat_name").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("unit").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("current_stock").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("mrp_rate").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("sale_rate").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("quantity").value+'"/></td>'
+		+ '<td style="width: 100px" th:text="'+ document.getElementById("price").value+'"/></td>'
+		+ '</tr>';
+
+		$('#dataTable').append(trHTML); */
+	/* 
+	for(var i=0; i<colCount; i++) {
+
+		var newcell	= row.insertCell(i);
+
+		newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+		if(i==0){
+			product_id1.setAttribute("value", "dd");
+		}
+		//alert(newcell.childNodes);
+		/* switch(newcell.childNodes[0].type) {
+			case "text":
+					newcell.childNodes[0].value = "";
+					break;
+			case "checkbox":
+					newcell.childNodes[0].checked = false;
+					break;
+			case "select-one":
+					newcell.childNodes[0].selectedIndex = 0;
+					break;
+		} 
+	} */
+	}
+}
+
+/*function back() {
+	window.history.back();
+}
+
+*/
+
+/*]]>*/
+
+</script>
+
+<body>
+
+	<!-- sideMenu -->
+
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+
+
+	<!-- Menu -->
+	<div class="dash-app" style="margin-top:100px;">
+
+		
+
+		<div class="container-fluid" style="padding-left: 450px;">
+		
+
+			<!-- Table -->
+			<div class="row">
+				<div class="col-lg-10">
+				<div class="card-header" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+			<div >Sale Information</div>
+		</div>
+
+					<div style="padding: 10px;" align="right">
+
+						<button type="button"
+							class="btn btn-primary"
+							id="btnAdd" onclick="generateBill();">Generate Bill</button>
+
+					</div>
+
+					<div style="margin-top: 10px">
+
+
+
+						<div id="saleinfo">
+
+							<div class="form-group" style="padding: 10px">
+
+
+								<p style="text-align: center;">
+									<b font-size="3">ERP </b><br> <font
+										size="1">
+										Phone: 045 5324 2423, 99445 37524
+									</font>
+								</p>
+								<hr>
+
+								<div style="margin-top: 10px;"></div>
+								<div class="row formline" style="
+    margin-left: 0px;">
+
+									<div style="font-size: 12px; text-align: left ! important ;">
+										<label for="name" style=""><b>Bill No:</b> </label> <label for="name"
+											th:text="${invoice_no}"></label> <label
+											style="  font-size: 12px;padding-left: 45px;text-align: right; !important" for="name"><b>Date: 
+										</b> </label> <label  style="font-size: 10px; text-align: right; !important" for="name"
+											id="date_of_sale">
+
+										</label>
+
+									</div>
+
+
+
+
+
+								</div>
+								<div class="row formline"
+									style="font-size: 12px; text-align: left !important; margin-left: 0px ! important">
+
+									<label for="name"><b>Customer Name: </b> </label> <label
+										for="name" th:text="${cust_name}"></label>
+
+								</div>
+							<!-- 	<p style="text-align: center; margin-top: -5px;">
+									<font size="2"><b>Doctor Name:</b> DR. M.SATHISH KUMAR,
+										DCH<br> </font>
+								</p> -->
+
+							</div>
+
+
+
+							<div>
+								<!-- <div class="card-body"> -->
+								<table
+									style=" margin-top: -25px;"
+									id="dataTable">
+
+
+
+									<tr>
+										<!-- <th>Product ID</th> -->
+										<th style="font-size: 12px;">Product Name</th>
+
+										<th style="font-size: 12px;">Batch</th>
+										<th style="font-size: 12px;">MRP Rate</th>
+										<th style="font-size: 12px;">Sale Rate</th>
+										<th style="font-size: 12px;">Quantity</th>
+										<th style="font-size: 12px;">Price</th>
+
+								
+
+									</tr>
+
+									<tr style="background: white; "
+										th:each="saleItem : ${saleList}" class="userlist">
+
+										<!-- <td th:text="${saleItem.product_name}"></td> -->
+										<td style="text-align: left; font-size: 12px;" th:text="${saleItem.product_name}"></td>
+										<td style="text-align: left; font-size: 12px;" th:text="${saleItem.batch}"></td>
+										<!-- <td style="text-align: left; font-size: 12px;"
+											th:text="${saleItem.expiry_date}"></td> -->
+											<td style="text-align: left; font-size: 12px;" th:text="${saleItem.mrp_rate}"></td>
+											
+											
+											
+												<td style="text-align: left; font-size: 12px;"
+											th:text="${#numbers.formatDecimal(saleItem.mrp_rate, 0, 'COMMA', 2, 'POINT')}"></td>
+											
+											<!-- <td style="text-align: left; font-size: 12px;"
+											th:text="${#numbers.formatDecimal(saleItem.sale_rate, 0, 'COMMA', 2, 'POINT')}"></td>
+											 -->
+											<td style="text-align: left; font-size: 12px;" th:text="${saleItem.pkg}"></td>
+										<!-- <td style="text-align: left; font-size: 12px;" th:text="${saleItem.quantity}"></td> -->
+									
+										<td style="text-align: left; font-size: 12px;"
+											th:text="${#numbers.formatDecimal(saleItem.total, 0, 'COMMA', 2, 'POINT')}"></td>
+
+									</tr>
+
+
+								</table>
+							</div>
+							<hr>
+
+
+							<!--  	<div style="padding: 10px; font-size: 10px;" align="left">
+
+								<label class=" col-md-1" style="padding-right: 50px;"><b>CGST</b></label>
+								<label style="padding-right: 10px;" for="cgst"
+									th:text="${#numbers.formatDecimal(remaining_amount/2, 0, 'COMMA', 2, 'POINT')}">
+								</label> <label class=" col-md-1" style="padding-right: 50px;"><b>SGST</b></label>
+								<label style="padding-right: 10px;" for="sgst"
+									th:text="${#numbers.formatDecimal(remaining_amount/2, 0, 'COMMA', 2, 'POINT')}">
+								</label>
+							</div>-->
+							<div style="padding: 10px; font-size: 10px;" align="right">
+
+								<!--  <label class=" col-md-2" style="padding-right: 50px;"><b>Total
+										GST</b></label> <label style="padding-right: 10px;" for="totalgst"
+									th:text="${#numbers.formatDecimal(remaining_amount, 0, 'COMMA', 2, 'POINT')}">-->
+								 <label class=" col-md-1" ><b>Grand Total</b></label> <label   class=" col-md-1" for="total"
+									th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}">
+								</label>
+							</div>
+							<hr>
+							<div style="font-size: 10px;" align="center">
+
+								<label>This price includes all taxes suffered,Any
+									difference will be refunded</label><br> <label>Goods once
+									sold cannot be taken back</label>
+							</div>
+							<hr>
+							<div style="font-size: 10px;" align="center">
+
+								<label> <b>Wishing you speedy Recovery!!</b></label>
+
+							</div>
+
+
+
+
+
+
+						</div>
+					</div>
+
+
+<div class=" col-sm-13 text-center">
+								<div
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+									<button
+										class="btn btn-primary"
+										type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+									<button
+										class="btn btn-primary"
+										id="btnBack" onclick="back();">Back</button>
+
+								</div>
+							</div>
+
+
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

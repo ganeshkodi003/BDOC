@@ -1,0 +1,98 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[ORGANIZATION_DETAILS]    Script Date: 4/22/2025 1:39:58 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ORGANIZATION_DETAILS](
+	[ORGN_NAME] [varchar](50) NULL,
+	[SHORT_NAME] [varchar](50) NULL,
+	[REGN_NO] [varchar](50) NULL,
+	[GST_REF] [varchar](50) NULL,
+	[DOR] [datetime] NULL,
+	[DOC] [datetime] NULL,
+	[PAN_REF] [varchar](50) NULL,
+	[TAN_REF] [varchar](50) NULL,
+	[WEBSITE] [varchar](50) NULL,
+	[EMAIL] [varchar](50) NULL,
+	[LAND_LINE_1] [varchar](50) NULL,
+	[LAND_LINE_2] [varchar](50) NULL,
+	[MOBILE] [varchar](20) NULL,
+	[ALT_MOBILE] [varchar](20) NULL,
+	[LOC_ADDR1] [varchar](100) NULL,
+	[LOC_ADDR2] [varchar](100) NULL,
+	[LOC_CITY] [varchar](50) NULL,
+	[LOC_STATE] [varchar](50) NULL,
+	[LOC_COUNTRY] [varchar](50) NULL,
+	[LOC_POSTAL_CODE] [varchar](10) NULL,
+	[REGN_ADDR1] [varchar](100) NULL,
+	[REGN_ADDR2] [varchar](100) NULL,
+	[REGN_CITY] [varchar](50) NULL,
+	[REGN_STATE] [varchar](50) NULL,
+	[REGN_COUNTRY] [varchar](50) NULL,
+	[REGN_POSTAL_CODE] [varchar](50) NULL,
+	[ADM_ADDR1] [varchar](100) NULL,
+	[ADM_ADDR2] [varchar](100) NULL,
+	[ADM_CITY] [varchar](50) NULL,
+	[ADM_STATE] [varchar](50) NULL,
+	[ADM_COUNTRY] [varchar](10) NULL,
+	[ADM_POSTAL_CODE] [varchar](10) NULL,
+	[NO_OF_EMP] [float] NULL,
+	[LIFE_OF_PW] [float] NULL,
+	[CASUAL_LEAVE] [float] NULL,
+	[SICK_LEAVE] [float] NULL,
+	[EARNED_LEAVE] [float] NULL,
+	[SPL_LEAVE] [float] NULL,
+	[FREE_TEXT_1] [varchar](50) NULL,
+	[FREE_TEXT_2] [varchar](50) NULL,
+	[FREE_TEXT_3] [varchar](50) NULL,
+	[FREE_TEXT_4] [varchar](50) NULL,
+	[FREE_TEXT_5] [varchar](50) NULL,
+	[FREE_TEXT_6] [varchar](50) NULL,
+	[FREE_TEXT_7] [varchar](50) NULL,
+	[FREE_TEXT_8] [varchar](50) NULL,
+	[ENTRY_USER] [varchar](10) NULL,
+	[MODIFY_USER] [varchar](10) NULL,
+	[AUTH_USER] [varchar](10) NULL,
+	[ENTRY_TIME] [datetime] NULL,
+	[MODIFY_TIME] [datetime] NULL,
+	[AUTH_TIME] [datetime] NULL,
+	[DEL_FLG] [char](1) NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[MODIFY_FLG] [char](1) NULL,
+	[Capitalamount] [bigint] NULL,
+	[contract_labours] [varchar](50) NULL,
+	[account_balance] [decimal](18, 2) NULL,
+	[cash_balance] [decimal](18, 2) NULL,
+	[Maternity_Leave] [float] NULL,
+	[Compensatory_Offer_Leave] [float] NULL,
+	[Loss_of_Pay_Leave] [float] NULL,
+	[Paternity_Leave] [float] NULL,
+	[Bereavement_Leave] [float] NULL,
+	[current_cash_balance] [decimal](18, 2) NULL,
+	[current_account_balance] [decimal](18, 2) NULL,
+	[COUNTRY_TAX] [varchar](50) NULL,
+	[TAX] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ORGANIZATION_DETAILS] ADD  DEFAULT ((0)) FOR [Maternity_Leave]
+GO
+
+ALTER TABLE [dbo].[ORGANIZATION_DETAILS] ADD  DEFAULT ((0)) FOR [Compensatory_Offer_Leave]
+GO
+
+ALTER TABLE [dbo].[ORGANIZATION_DETAILS] ADD  DEFAULT ((0)) FOR [Loss_of_Pay_Leave]
+GO
+
+ALTER TABLE [dbo].[ORGANIZATION_DETAILS] ADD  DEFAULT ((0)) FOR [Paternity_Leave]
+GO
+
+ALTER TABLE [dbo].[ORGANIZATION_DETAILS] ADD  DEFAULT ((0)) FOR [Bereavement_Leave]
+GO
+
+

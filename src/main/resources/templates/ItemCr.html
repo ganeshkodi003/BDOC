@@ -1,0 +1,3363 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+
+
+<title>ERP</title>
+
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+
+
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: center;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: bold;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+
+.transparent-shadow {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	background-color: rgba(255, 255, 255, 0.8);
+	/* Light transparent background */
+	border-radius: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2); /* Semi-transparent border */
+	position: relative;
+}
+</style>
+
+
+<style>
+
+/* Wrapper for alignment */
+.toggle-wrapper {
+	display: flex;
+	align-items: left;
+	justify-content: left;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+/* Headings */
+.toggle-wrapper h5 {
+	margin: 0;
+	color: #888;
+	font-weight: normal;
+	transition: color 0.3s ease;
+}
+
+.toggle-wrapper h5.active {
+	color: black; /* Highlight active label */
+	font-weight: bold;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 25px;
+}
+
+.toggle-switch input {
+	display: none; /* Hide default checkbox */
+}
+
+.slider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.slider:before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	border-radius: 50%;
+	bottom: 2.5px;
+	left: 2.5px;
+	transition: transform 0.3s ease;
+}
+
+input:checked+.slider {
+	background-color: #ccc; /* Active color */
+}
+
+input:checked+.slider:before {
+	transform: translateX(25px); /* Move circle to the right */
+}
+.select-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.select-container select {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 1;
+}
+
+#addCategory {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+</style>
+
+
+<style>
+    /* Style for the loading modal */
+    #loadingModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: none; /* Semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Make sure it's on top */
+        backdrop-filter: blur(5px); /* Apply background blur */
+    }
+
+    #loadingContent {
+        text-align: center;
+        background-color:none; /* White background for loading content */
+        z-index: 10000; /* Ensure loading content stays above blur */
+    }
+
+    #loadingContent img {
+        width: 100px; /* Adjust size as needed */
+        height: 100px; /* Adjust size as needed */
+        margin-bottom: 10px;
+    }
+    table, th, td {
+    border: 1px solid #ccc;
+}
+
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:5px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+
+
+
+
+<script>
+$(document).ready(function () {
+    $('#dataTables').DataTable({
+        "pageLength": 20,        // Set the number of rows per page
+        "lengthChange": false,   // Hide the dropdown for changing rows per page
+        "ordering": false,       // Disable column sorting
+        "searching": true,       // Enable global search
+        "info": true,            // Show table information
+        "pagingType": "simple_numbers", // Pagination with only numbers
+
+        // Customizing DOM structure to place search box at the top left
+
+        "dom": '<"top"f>rt<"bottom"ip><"clear">'
+    });
+
+    // Remove the "Search:" label and add a placeholder to the search input
+    $('.dataTables_filter label').contents().filter(function () {
+        return this.nodeType === Node.TEXT_NODE;
+    }).remove(); // Remove the text node containing "Search:"
+
+    // Add a placeholder to the input field
+    $('.dataTables_filter input')
+        .attr('placeholder', 'Search...')
+        .css('margin-left', '0'); // Adjust margin since the label is removed
+
+    // Align the search box to the left corner
+    $('.dataTables_filter').css({
+        "float": "left",
+        "text-align": "left"
+    });
+});
+
+
+
+</script>
+
+<script>
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	
+
+	
+	
+	//var removeplus =document.getElementById('removeplus');
+	//removeplus.style.display="none";
+	//var wholesale=document.getElementById('WholeSale');
+	//wholesale.style.display="none";
+	var purchaseprice=document.getElementById('purchaseprice');
+	purchaseprice.style.display="none";
+	var Stock=document.getElementById('Stock');
+	Stock.style.display="none";
+	var priceingbtn =document.getElementById('priceingc');
+	priceingbtn.style.backgroundColor ="black";
+	priceingbtn.style.color="white";
+	var AsOfDate =document.getElementById('AsOfDate');
+	const currentDate = new Date();
+	const formattedDate = currentDate.toISOString().split('T')[0];
+	AsOfDate.value=formattedDate;
+	
+})
+
+function WholeSale(a){
+	
+	var plus =document.getElementById('plus');
+	var wholesale=document.getElementById('WholeSale');
+	var removeplus =document.getElementById('removeplus');
+	
+	if(a.id=='plus'){
+		plus.style.display="none";
+		removeplus.style.display="block";
+		wholesale.style.display="block";
+	}
+	else{
+		plus.style.display="block";
+		removeplus.style.display="none";
+		wholesale.style.display="none";
+	}
+	
+}
+
+function btnchange(a){
+	a.preventDefault();
+	//alert(a.target.id);
+	var pricing =document.getElementById('pricing');
+	var Stock=document.getElementById('Stock');
+	
+	var priceingbtn =document.getElementById('priceingc');
+	var stockc =document.getElementById('stockc');
+		
+	if(a.target.id=='priceingc'){
+		Stock.style.display="none";
+		pricing.style.display="block";
+		
+		priceingbtn.style.backgroundColor ="black";
+		priceingbtn.style.color="white";
+		stockc.style.backgroundColor ="#e5e5e5";
+		stockc.style.color="black";
+	}
+	else{
+		pricing.style.display="none";
+		Stock.style.display="block";
+		stockc.style.backgroundColor ="black";
+		stockc.style.color="white";
+		priceingbtn.style.backgroundColor ="#e5e5e5";
+		priceingbtn.style.color="black";
+		
+	}
+}
+
+function itemcreations(){
+	
+	
+	 var ItemName=document.getElementById('ItemName').value.trim();
+	 var HSNCode=document.getElementById('HSNCode').value.trim();
+	 var category=document.getElementById('category').value.trim();
+	 var Unit=document.getElementById('Unit').value.trim();
+	 var ItemCode=document.getElementById('ItemCode').value.trim();
+	  var isValid = true;
+	  var mandatoryMessage = "Please fill the required field(s)";
+	  
+	    function validateField(field, errorMessage) {
+	        if (!field.val().trim()) {
+	            field.css("border-color", "red").attr("title", errorMessage);
+	            isValid = false;
+	        } else {
+	            field.css("border-color", "").attr("title", ""); // Reset styles
+	        }
+	    }
+	    
+	    
+	    validateField($('#ItemName'), mandatoryMessage);
+	    validateField($('#HSNCode'), mandatoryMessage);
+	    validateField($('#category'), mandatoryMessage);
+	    validateField($('#Unit'), mandatoryMessage);
+	    validateField($('#ItemCode'), mandatoryMessage);
+	    if(category=='Finished Goods'){
+	    	validateField($('#PriceType'), mandatoryMessage);
+	    
+	    	validateField($('#DistributorPrice'), mandatoryMessage);
+	    	validateField($('#RetailerPrice'), mandatoryMessage);
+	    	validateField($('#CustomerPrice'), mandatoryMessage);
+	    	validateField($('#SSPrice'), mandatoryMessage);
+	    	validateField($('#WHOLESALERPrice'), mandatoryMessage);
+	    	
+	    }
+	    
+	   
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+	    
+	    
+	    if ($("#itemcreation").valid()) {
+		var formData = new FormData($('#itemcreation')[0]);
+		var fileInput = document.getElementById('image').files[0];
+		if (fileInput) {
+		    // Check if the file is an image
+		    var fileType = fileInput.type;
+		    var fileSize = fileInput.size;
+
+		    if (fileType.startsWith("image/")) {  // Check if the file is an image (e.g., image/png, image/jpeg)
+		        if (fileSize <= 50 * 1024 * 1024) {  // Check if the file size is less than or equal to 50 MB
+		            formData.append("file", fileInput);  // Append the file
+		        } else {
+		            alert("File size must be less than or equal to 50 MB.");
+		            return;  // Exit if file size is too large
+		        }
+		    } else {
+		        alert("Please upload only image files.");
+		        return;  // Exit if the file is not an image
+		    }
+		} else {
+		    alert("Please select a file.");
+		    return;  // Exit if no file is selected
+		}
+		$.ajax({
+			url : './Additem',
+			type : 'POST',
+			data : formData,
+			processData: false,  // Don't process the data into a query string
+            contentType: false,
+            beforeSend: function() {
+                document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+            },
+            
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+				
+				document.getElementById('loadingModal').style.display = 'none';
+			}
+		});
+	}
+}
+
+
+$(document).ready(function () {
+
+    $('#ItemName, #HSNCode, #category, #Unit, #ItemCode,#PriceType,#salepricetab,#DistributorPrice,#RetailerPrice,#CustomerPrice,#SSPrice,#WHOLESALERPrice')
+        .on('input', function () {
+            $(this).css("border-color", "");
+        });
+});
+
+
+function modifyitem(){
+	
+	
+	 var ItemName=document.getElementById('ItemName').value.trim();
+	 var HSNCode=document.getElementById('HSNCode').value.trim();
+	 var category=document.getElementById('category').value.trim();
+	 var Unit=document.getElementById('Unit').value.trim();
+	 var ItemCode=document.getElementById('ItemCode').value.trim();
+	  var isValid = true;
+	  var mandatoryMessage = "Please fill the required field(s)";
+	  
+	    function validateField(field, errorMessage) {
+	        if (!field.val().trim()) {
+	            field.css("border-color", "red").attr("title", errorMessage);
+	            isValid = false;
+	        } else {
+	            field.css("border-color", "").attr("title", ""); // Reset styles
+	        }
+	    }
+	    
+	    
+	    validateField($('#ItemName'), mandatoryMessage);
+	    validateField($('#HSNCode'), mandatoryMessage);
+	    validateField($('#category'), mandatoryMessage);
+	    validateField($('#Unit'), mandatoryMessage);
+	    validateField($('#ItemCode'), mandatoryMessage);
+	   
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+	
+	
+	
+	
+	
+	
+	if ($("#itemcreation").valid()) {
+		var formData = new FormData($('#itemcreation')[0]);
+		var fileInput = document.getElementById('image').files[0];
+		if (fileInput) {
+		    // Check if the file is an image
+		    var fileType = fileInput.type;
+		    var fileSize = fileInput.size;
+
+		    if (fileType.startsWith("image/")) {  // Check if the file is an image (e.g., image/png, image/jpeg)
+		        if (fileSize <= 50 * 1024 * 1024) {  // Check if the file size is less than or equal to 50 MB
+		            formData.append("file", fileInput);  // Append the file
+		        } else {
+		            alert("File size must be less than or equal to 50 MB.");
+		            return;  // Exit if file size is too large
+		        }
+		    } else {
+		        alert("Please upload only image files.");
+		        return;  // Exit if the file is not an image
+		    }
+		}
+		$.ajax({
+			url : './modifyitem',
+			type : 'POST',
+			data : formData,
+			processData: false,  // Don't process the data into a query string
+            contentType: false,
+            beforeSend: function() {
+                document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+            },
+            
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+				
+				document.getElementById('loadingModal').style.display = 'none';
+			}
+		});
+	}
+	
+	
+}
+
+function back(event) {
+	document.getElementById('loadingModal').style.display = 'flex';
+
+	event.preventDefault();
+	window.history.back();
+}
+
+function Home() {
+	document.getElementById('loadingModal').style.display = 'flex';
+
+	location.href = 'Dashboard';
+}
+
+function modifyscreen(a){
+	
+	var itemcode=a.getAttribute('data-itemcode');
+
+	
+	location.href='./ItemCreation?formmode=Modify' + '&itemcode=' +itemcode;
+}
+function view(a){
+	var itemcode=a.getAttribute('data-itemcode');
+	location.href='./ItemCreation?formmode=view' + '&itemcode=' +itemcode;	
+}
+
+let itemcodeszz="";
+
+function deletebtn(a) {
+	itemcodeszz=a.getAttribute('data-itemcode');
+    $('#confirmationModal').modal('show'); 
+}
+
+
+
+
+
+function deletebtnwithmodel(){
+	
+	//var itemcode=a.getAttribute('data-itemcode');
+	$.ajax({
+		url : './deleteitemcode?itemcode='+itemcodeszz,
+		type : 'POST',
+		success : function(response) {
+			
+			 $('#confirmationModal').modal('hide');
+			
+			$("#alertmsg").text(response);
+			$("#alert").modal("toggle");
+			
+		}
+	});
+
+	
+}
+function add(event){
+	
+	document.getElementById('loadingModal').style.display = 'flex';
+event.preventDefault();
+	
+	location.href='./ItemCreation?formmode=add';
+
+}
+function registrationlist(event){
+	document.getElementById('loadingModal').style.display = 'flex';
+	event.preventDefault();
+	location.href='./ItemCreation';
+}
+
+function unit(){
+	$("#alertmsg").text("hi");
+	$("#alert").modal("toggle");
+	
+}
+document.addEventListener('DOMContentLoaded', () => {
+	saleprice();
+	  const priceToggle = document.getElementById('priceToggle');
+	  const salePriceLabel = document.getElementById('salePriceLabel');
+	  const purchasePriceLabel = document.getElementById('purchasePriceLabel');
+	  var purchaseprice=document.getElementById('purchaseprice');
+	  var sale=document.getElementById('saleprice');
+	  
+
+	  priceToggle.addEventListener('change', () => {
+		  
+	    if (priceToggle.checked) {
+	      salePriceLabel.classList.remove('active');
+	      purchasePriceLabel.classList.add('active');
+	      sale.style.display="none";
+	      purchaseprice.style.display="block";
+	      
+	    } else {
+	    	
+	      salePriceLabel.classList.add('active');
+	      purchasePriceLabel.classList.remove('active');
+	      sale.style.display="block";
+	      purchaseprice.style.display="none";
+	    }
+	  });
+	});
+
+
+</script>
+
+<script>
+
+
+function particularpage(){
+	
+	 const priceToggle = document.getElementById('priceToggle');
+	  const salePriceLabel = document.getElementById('salePriceLabel');
+	  const purchasePriceLabel = document.getElementById('purchasePriceLabel');
+	  var purchaseprice=document.getElementById('purchaseprice');
+	  var sale=document.getElementById('saleprice');
+	  
+	  if (priceToggle.checked) {
+	      salePriceLabel.classList.remove('active');
+	      purchasePriceLabel.classList.add('active');
+	      sale.style.display="none";
+	      purchaseprice.style.display="block";
+	      
+	    } else {
+	    	
+	      salePriceLabel.classList.add('active');
+	      purchasePriceLabel.classList.remove('active');
+	      sale.style.display="block";
+	      purchaseprice.style.display="none";
+	    }
+	  
+}
+</script>
+
+<script>
+    function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+</script>
+
+<script>
+
+function toggleImageModal(show) {
+    if (show) {
+        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+        modal.show();
+    }
+}
+
+function closemodel(event) {
+	
+    event.preventDefault(); 
+  window.location.reload();
+}
+
+
+</script>
+
+<script>
+
+function perenable() {
+    var saletype = document.getElementById('saleTaxType').value;
+    var gstsale = document.getElementById('gstpercentagesale');
+
+    if (saletype === "withtax") {
+        gstsale.disabled = false; // Enable the element
+    } else {
+        gstsale.disabled = true; // Disable the element
+    }
+} 
+
+function perenableforprice() {
+	
+    var saletype = document.getElementById('purchaseTaxType').value;
+    var gstsale = document.getElementById('gstpercentagePRICE');
+
+    if (saletype === "withtax") {
+        gstsale.disabled = false; // Enable the element
+    } else {
+        gstsale.disabled = true; // Disable the element
+    }
+}
+
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+	 perenable();
+	 perenableforprice();
+})
+</script>
+
+
+<script>
+    // Function to update the toggle state based on input values
+function updateToggle() {
+    	
+    
+  
+    const salePriceInput = document.getElementById('salePrice').value.trim();
+    const purchasePriceInput = document.getElementById('purchasePrice').value.trim();
+
+    // Get the toggle element
+    const priceToggle = document.getElementById('priceToggle');
+
+
+    if (salePriceInput !== '') {
+   
+        priceToggle.checked = false; 
+    	particularpage();
+    } else if (purchasePriceInput !== '') {
+    
+        priceToggle.checked = true; 
+        particularpage()
+    } else {
+        priceToggle.checked = false; 
+        particularpage()
+    }
+}
+
+window.onload = updateToggle;
+
+// Add event listeners for dynamic updates
+document.getElementById('salePrice').addEventListener('input', updateToggle);
+document.getElementById('purchasePrice').addEventListener('input', updateToggle);
+
+
+
+</script>
+
+<script>
+function saleprice(){
+	var pricetype=document.getElementById('PriceType').value;
+	var salepricetab=document.getElementById('salepricetab');
+	if(pricetype=='Percentage'){
+		//alert(pricetype);
+		salepricetab.style.display='block';
+	}
+	else{
+		salepricetab.style.display='none';
+	}
+	
+	
+}
+
+function unitconvert(){
+	
+	$('#basesunits').modal('show');
+	
+}
+
+function togglre(){
+	$('#addcat').modal('show'); 
+	 
+	
+}
+
+function togglelist(){
+	
+	$('#addcat').modal('hide');
+	$('#addlist').modal('show'); 
+
+	 
+	
+}
+
+
+function closechange(event) {
+
+	event.preventDefault();
+	$('#addcat').modal('hide');
+	$('#addlist').modal('hide');
+	$('#basesunits').modal('hide');
+	
+}
+
+
+function unitc(){
+	var unit=document.getElementById('Unit');
+	var Baseunit=document.getElementById('Baseunit').value;
+	var secondaryunit=document.getElementById('secondaryunit').value;
+	var Conversion=document.getElementById('Conversion').value;
+	if(secondaryunit!='NONE'){
+	unit.value=Conversion+"-"+secondaryunit+"-"+Baseunit;
+	}
+	else{
+		unit.value=Baseunit;
+	}
+	$('#basesunits').modal('hide');	
+	
+	
+}
+
+</script>
+
+<script>
+
+function CategoryCreation(){
+	if ($("#CategoryCreationadd").valid()) {
+
+		$.ajax({
+			url : './ErpAddCategoryCreation',
+			type : 'POST',
+			data : $('#CategoryCreationadd').serialize(),
+			success : function(response) {
+				alert(response);
+				$('#addcat').modal('hide');
+				location.reload();
+			}
+		});
+	}
+}
+let Categoryid=""
+
+function deletebyid(a){
+	Categoryid=a.getAttribute('data-Categoryid');
+	$('#confirmationModal').modal('show');
+	
+	
+
+	
+}
+
+
+function deletebyidtog(){
+	$.ajax({
+		url : './deleteCategory?Categoryid='+Categoryid,
+		type : 'POST',
+		success : function(response) {
+			$('#confirmationModal').modal('hide');
+			alert(response);
+			location.reload();
+			
+		}
+	});
+
+	
+}
+
+function deleteview(a){
+	//alert("hi");
+	var itemcode=a.getAttribute('data-itemcode');
+	location.href='./ItemCreation?formmode=deleteview' + '&itemcode=' +itemcode;	
+
+}
+
+
+
+</script>
+
+
+
+
+<script>
+		function capitalizeInput(input) {
+			let value = input.value;
+			// Only change the first letter to uppercase if it's lowercase
+			value = value.replace(/\b[a-z]/g, function (char) {
+				return char.toUpperCase();
+			});
+			input.value = value;
+		}
+	</script>
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+				<div class="modal fade" id="imageModal" tabindex="-1"
+					aria-labelledby="imageModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="imageModalLabel">Uploaded Image</h5>
+								<button type="button" class="btn btn-close"
+									onclick="closemodel(event)">&times;</button>
+							</div>
+							<div class="modal-body text-center">
+								<img th:src="${image}" alt="Uploaded Image"
+									class="img-thumbnail" style="width: 60%; height: auto;" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class=" modal fade" id="alert">
+				<div
+					class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel"
+								style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+						</div>
+						<div class="modal-body"
+							style="text-align: center; background-color: #c6ccd2">
+							<p id="alertmsg"></p>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" onclick="registrationlist(event);">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>	
+					
+
+
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="itemcreation"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Item Creation
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+											<input type="text" id="ItemName" class="form-control"
+												name="itemName" placeholder=" " oninput="capitalizeInput(this)" required> <label
+												for="name" class="form-legend">Item Name*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="HSNCode"
+													name="hsnCode" placeholder="" required> <label
+													for="name" class="form-legend">HSN Code*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4 ">
+											<div class="form-floating ">
+												<!-- Split Select Box -->
+												
+													<select class="form-control" id="category" name="category"
+														required>
+														<option value=""  selected>--Select
+															Category--</option>
+														<option th:each="Category : ${getCategory}"
+															th:value="${Category.assetcode}"
+															th:text="${Category.assetcode+'-'+Category.headdescription+'('+Category.subcategorydescription+')'}"></option>
+
+													</select> <label for="category" class="form-legend">Category</label>
+												
+												<!-- Plus Icon -->
+												<!--<button type="button"
+													class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+													onclick="togglre();" id="addCategory">
+													<i class="fas fa-plus"></i>
+												</button>-->
+											</div>
+										</div>
+
+
+									</div>
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="Unit" name="unit" placeholder="" onclick="unitconvert();"
+													 required readonly>
+												 <label for="vendorType" class="form-legend">Unit</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="ItemCode"
+													th:value="${itemcode}" name="itemCode" placeholder=""
+													required readonly> <label for="name"
+													class="form-legend">Item Code</label>
+											</div>
+										</div>
+
+
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="file" class="form-control" id="image"
+													name="image" placeholder=""> <label for="name"
+													class="form-legend">Upload Image</label>
+											</div>
+										</div>
+
+
+
+									</div>
+									<div class="card-header" id="tabs"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="row formline py-1" style="margin-left: 5px;">
+											<button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="priceingc" onclick="btnchange(event);">Pricing
+											</button>
+										<!-- 	<button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="stockc" onclick="btnchange(event);">Stock</button> -->
+										</div>
+									</div>
+									<div id="pricing">
+										<div class="transparent-shadow">
+
+
+											<div class="toggle-wrapper">
+												<h5 id="salePriceLabel" class="active">Sale Price</h5>
+												<!-- <label class="toggle-switch"> <input type="checkbox"
+													id="priceToggle" /> <span class="slider"></span>
+												</label> 
+												 <h5 id="purchasePriceLabel">Purchase Price</h5> -->
+											</div>
+
+											<div id="saleprice">
+												
+												<div class="form-row g-3" style="margin-top: 30px">
+												
+												<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" onchange='saleprice()' id="PriceType" name="salepricetype" >
+																<option value=""  >--Select Price Type--</option>
+																<option value="Amount">Amount</option>
+																<option value="Percentage">Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Price Type</label>
+														</div>
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="SSPrice"
+																name="SSPrice" placeholder="" > <label
+																for="name" class="form-legend">SS(Sub-Stockist) Price </label>
+														</div>
+
+													</div>
+												
+												
+												
+													<div class="form-group col-md-4" id="salepricetab" style="display:none">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="salePrice"
+																name="salePrice" placeholder="" > <label
+																for="name" class="form-legend">Sale Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="DistributorPrice"
+																name="DistributorPrice" placeholder="" > <label
+																for="name" class="form-legend">Distributor Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="WHOLESALERPrice"
+																name="wholesalePrice" placeholder="" > <label
+																for="name" class="form-legend">WholeSaler Price</label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="RetailerPrice"
+																name="RetailerPrice" placeholder="" > <label
+																for="name" class="form-legend">Retailer Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" id="CustomerPrice"
+																name="CustomerPrice" placeholder="" > <label
+																for="name" class="form-legend">Customer Price </label>
+														</div>
+
+													</div>
+													
+													
+													
+													
+													
+													
+													
+													
+													
+													
+
+													<!-- <div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="saleTaxType"
+																onchange="perenable()" name="saleTaxType" >
+																<option value="" disabled >--Select
+																	Tax--</option>
+																<option value="withouttax" selected>Without Tax</option>
+																<option value="withtax">With Tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>
+
+													
+
+
+
+
+
+
+												
+
+
+
+												
+												
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagesale"
+																name="gstpercentagesale" >
+																<option value="" disabled selected>--None--</option>
+																<option value="NONE">NONE</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax Percentage</label>
+														</div>
+													</div>-->
+													
+														
+													<!--<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="discountType"
+																name="discountType" >
+																<option value="" disabled >--Select
+																	Discount Type--</option>
+																<option value="Amount">Amount</option>
+																<option value="Percentage" selected>Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Discount
+																Type</label>
+														</div>
+													</div>
+
+
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="discountPrice" name="discountPrice" placeholder=""
+																> <label for="name" class="form-legend">Discount
+																Price </label>
+														</div>
+
+													</div>-->
+
+													    <!--  <div class="form-group col-md-4">
+														<div class="form-floating">
+															<h5 id="plus" onclick="WholeSale(this)">+ Add
+																WholeSale Price</h5>
+															<h5 id="removeplus" onclick="WholeSale(this)">-
+																Remove WholeSale Price</h5>
+														</div>
+													</div>-->
+												</div>
+												<!--  <div id="WholeSale">
+													<div class="form-row mt-3">
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="number" class="form-control"
+																	id="wholesalePrice" name="wholesalePrice"
+																	placeholder="" > <label for="name"
+																	class="form-legend">Wholesale Price</label>
+															</div>
+														</div>
+
+
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="number" class="form-control"
+																	id="minimumWholesaleQty" name="minimumWholesaleQty"
+																	placeholder="" > <label for="name"
+																	class="form-legend">Minimum Wholesale QTY</label>
+															</div>
+														</div>
+
+
+													</div>
+												</div>-->
+											</div>
+											<!-- purchase price -->
+											<div id="purchaseprice">
+												<div class="form-row g-3" style="margin-top: 30px">
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="purchasePrice" name="purchasePrice" placeholder=""
+																> <label for="name" class="form-legend">purchase
+																Price </label>
+														</div>
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="purchaseTaxType"
+																onchange="perenableforprice()" name="purchaseTaxType"
+																>
+																<option value="" disabled selected>--Select
+																	Tax--</option>
+																<option value="withouttax">Without Tax</option>
+																<option value="withtax">With Tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>
+
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagePRICE"
+																name="gstpercentageprice" >
+																<option value="" disabled selected>--None--</option>
+																<option value="NONE">NONE</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax Percentage</label>
+														</div>
+													</div>
+
+
+												</div>
+
+
+
+											</div>
+										</div>
+
+
+									</div>
+									<div id="Stock">
+										<div class="form-row g-3" style="margin-top: 30px">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="openingQuantity" name="openingQuantity" placeholder=""
+														> <label for="name" class="form-legend">Opening
+														Quantity</label>
+
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control" id="atPrice"
+														name="atPrice" placeholder="" > <label
+														for="name" class="form-legend">At Price</label>
+
+												</div>
+											</div>
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="date" class="form-control" id="asOfDate"
+														name="asOfDate" placeholder="" > <label
+														for="name" class="form-legend">As Of Date</label>
+
+												</div>
+											</div>
+
+
+										</div>
+										<div class="form-row mt-1">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="minStockToMaintain" name="minStockToMaintain"
+														placeholder="" > <label for="name"
+														class="form-legend">Min Stock To Maintain</label>
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="text" class="form-control" id="location"
+														name="location" placeholder="" > <label
+														for="name" class="form-legend">location</label>
+												</div>
+											</div>
+										</div>
+
+
+
+
+
+
+
+
+
+
+									</div>
+									
+					<div class=" modal fade" id="basesunits">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Units
+									</div>
+									
+								</div>
+								<div class="modal-body">
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="Baseunit" name="baseUnit"
+													required>
+													<option value="NONE">NONE</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+
+												</select> <label for="vendorType" class="form-legend">Base
+													Unit</label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="secondaryunit" name="secondaryunit">
+													<option value="NONE">NONE</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+
+												</select> <label for="vendorType" class="form-legend">secondary Unit</label>
+												
+											</div>
+										</div>
+									<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="Conversion" name="Conversion">
+												 <label for="Conversion"class="form-legend">Conversion</label>
+												 												
+											</div>
+										</div>
+									
+
+									</div>
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="unitc()">Submit</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="closechange(event);">Close</button>
+									</div>
+
+								</div>
+						</div>
+					</div>
+				</div>
+									
+
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-dark"
+											id="btnSubmit" onclick="itemcreations();">Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+
+
+								</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i> Item List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+								<!-- 		<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')"
+													class="form-control" />
+											</div>
+											Date Search (Commented Out)
+											<div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div>
+										</div> -->
+										<div class="table-responsive"
+										style="overflow-y: auto; height: 85vh; margin-top:-20px">
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left;">Item Code</th>
+													<th style="text-align: left;">Item Name</th>
+													<th style="text-align: left;">Category</th>
+													<th style="text-align: left;">Unit</th>
+													<th style="text-align: left;">HSN Code</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(getitemlist)}">
+													<td colspan="7" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${getitemlist}">
+													<td th:text="${item.itemCode}" style="text-align: left;"></td>
+													<td th:text="${item.itemName}" style="text-align: left;"></td>
+													<td th:text="${item.category}" style="text-align: left;"></td>
+													<td th:text="${item.baseUnit}" style="text-align: left;"></td>
+													<td th:text="${item.hsnCode}" style="text-align: left;"></td>
+													<td style="text-align: center;">
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-itemcode=${item.itemCode}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-itemcode=${item.itemCode}"
+																	style="cursor: pointer;" onclick="view(this)">View</a>
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-itemcode=${item.itemCode}"
+																	style="cursor: pointer;" onclick="deleteview(this)">Delete</a>
+
+
+															</div>
+														</div>
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										</div>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+				<!-- modify -->
+
+
+
+				<div class="container-fluid content" th:if="${formmode == 'Modify'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="itemcreation"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-edit mr-2"></i>Item - Modify <span
+											th:text="${'('+list.itemCode+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+											<input type="text" id="ItemName" class="form-control"
+												th:value="${list.itemName}" oninput="capitalizeInput(this)" name="itemName"> <label
+												for="name" class="form-legend">Item Name*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="HSNCode"
+													th:value="${list.hsnCode}" name="hsnCode"> <label
+													for="name" class="form-legend">HSN Code*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4 d-flex align-items-center">
+											<!-- <div class="form-floating flex-grow-1 d-flex">
+												
+												<div class="select-container flex-grow-1 position-relative">
+													
+												
+													<select class="form-control" id="category" name="category"
+														required>
+														<option value="" disabled selected>--Select
+															Category--</option>
+														<option th:each="Category : ${getCategory}"
+															th:value="${Category.category_name}"
+															th:text="${Category.category_name}" th:selected="${Category.category_name==list.category}"></option>
+
+													</select> <label for="category" class="form-legend">Category</label>
+												</div>
+												
+												
+												
+												<button type="button"
+													class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+													onclick="togglre();" id="addCategory">
+													<i class="fas fa-plus"></i>
+												</button>
+											</div>-->
+											
+											<div class="form-floating ">
+												<!-- Split Select Box -->
+												
+													<select class="form-control" id="category" name="category"
+														required>
+														<option value=""  selected>--Select
+															Category--</option>
+														<option th:each="Category : ${getCategory}"
+															th:value="${Category.assetcode}"
+															th:text="${Category.assetcode+'-'+Category.headdescription+'('+Category.subcategorydescription+')'}"
+															th:selected="${list.category==Category.assetcode}"></option>
+
+													</select> <label for="category" class="form-legend">Category</label>
+											</div>
+											
+										</div>
+										
+
+
+									</div>
+									<div class="form-row g-3">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="Unit" name="unit" th:value="${list.unit}" placeholder="" onclick="unitconvert();"
+													 required readonly>
+												 <label for="vendorType" class="form-legend">Unit</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="ItemCode"
+													th:value="${list.itemCode}" name="itemCode" readonly> <label
+													for="name" class="form-legend" >Item Code</label>
+											</div>
+										</div>
+
+
+
+										<div class="form-group col-md-2">
+											<div class="form-floating">
+												<!-- <div>
+													<img th:src="${image}" alt="Uploaded Image"
+														class="img-thumbnail" style="width: 50%; height: auto;" />
+												</div> -->
+												<input type="file" class="form-control" id="image"
+													name="image"> <label for="name" class="form-legend">Uploaded
+													Image</label>
+											</div>
+										</div>
+
+
+										<div class="form-group col-md-2">
+											<div class="form-floating">
+												<div>
+													<a> <img th:src="${image}" alt="Uploaded Image"
+														onclick="toggleImageModal(true)" class="img-thumbnail"
+														style="width: 50%; height: auto; margin-top: -22px;" />
+													</a>
+												</div>
+												<!--<button class="btn btn-primary" style="white-space: nowrap;">View Image</button>-->
+											</div>
+										</div>
+
+
+
+									</div>
+									<div class="card-header" id="tabs"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="row formline py-1" style="margin-left: 5px;">
+											<button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="priceingc" onclick="btnchange(event);">Pricing
+											</button>
+											<!-- <button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="stockc" onclick="btnchange(event);">Stock</button> -->
+										</div>
+									</div>
+									<div id="pricing">
+										<div class="transparent-shadow">
+
+
+											<div class="toggle-wrapper">
+												<h5 id="salePriceLabel" class="active">Sale Price</h5>
+												<!-- <label class="toggle-switch"> <input type="checkbox"
+													id="priceToggle" /> <span class="slider"></span>
+												</label>
+												<h5 id="purchasePriceLabel">Purchase Price</h5> -->
+											</div>
+
+											<div id="saleprice">
+												<div class="form-row g-3" style="margin-top: 30px">
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" onchange='saleprice()' id="PriceType" name="salepricetype" >
+																<option value=""  >--Select Price Type--</option>
+																<option th:selected="${list.salepricetype}=='Amount'" value="Amount">Amount</option>
+																<option th:selected="${list.salepricetype}=='Percentage'" value="Percentage">Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Price Type</label>
+														</div>
+													</div>
+												
+												<div class="form-group col-md-4" id="salepricetab" style="display:none">
+														<div class="form-floating">
+															<input type="number" th:value="${list.salePrice}" class="form-control" id="salePrice"
+																name="salePrice" placeholder="" > <label
+																for="name" class="form-legend">Sale Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.DistributorPrice}" id="DistributorPrice"
+																name="DistributorPrice" placeholder="" > <label
+																for="name" class="form-legend">Distributor Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.RetailerPrice}" id="RetailerPrice"
+																name="RetailerPrice" placeholder="" > <label
+																for="name" class="form-legend">Retailer Price </label>
+														</div>
+
+													</div>
+													
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.CustomerPrice}" id="CustomerPrice"
+																name="CustomerPrice" placeholder="" > <label
+																for="name" class="form-legend">Customer Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"  th:value="${list.SSPrice}"id="SSPrice"
+																name="SSPrice" placeholder="" > <label
+																for="name" class="form-legend">SS(Sub-Stockist) Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.wholesalePrice}"id="WHOLESALERPrice"
+																name="wholesalePrice" placeholder="" > <label
+																for="name" class="form-legend">WholeSaler Price</label>
+														</div>
+
+													</div>
+													
+
+													
+
+													<!-- <div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="saleTaxType"
+																onchange="perenable()" name="saleTaxType">
+																<option value="" disabled selected>--Select
+																	Tax--</option>
+																<option value="withouttax"
+																	th:selected="${list.saleTaxType}=='withouttax'">Without
+																	Tax</option>
+																<option value="withtax"
+																	th:selected="${list.saleTaxType}=='withtax'">With
+																	tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>-->
+
+													<!-- <div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagesale"
+																name="gstpercentagesale">
+																<option th:value="${list.gstpercentagesale}"
+																	th:text="${list.gstpercentagesale}">--None--</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax Percentage</label>
+														</div>
+													</div>-->
+
+
+
+
+
+
+
+												
+												
+
+
+													 <!--  <div class="form-group col-md-4">
+
+
+														<div class="form-floating">
+															<select class="form-control" id="discountType"
+																name="discountType">
+																<option value="" disabled selected>--Select
+																	Discount type--</option>
+																<option value="Amount"
+																	th:selected="${list.discountType}=='Amount'">Amount</option>
+																<option value="Percentage"
+																	th:selected="${list.discountType}=='Percentage'">Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Discount
+																Type</label>
+														</div>
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="discountPrice" th:value="${list.discountPrice}"
+																name="discountPrice" placeholder=""> <label
+																for="name" class="form-legend">Discount Price </label>
+														</div>
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<h5 id="plus" onclick="WholeSale(this)">+ Add
+																WholeSale Price</h5>
+															<h5 id="removeplus" onclick="WholeSale(this)">-
+																Remove WholeSale Price</h5>
+														</div>
+													</div>
+													-->
+												</div>
+												<!-- <div id="WholeSale">
+													<div class="form-row mt-3">
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="number" class="form-control"
+																	id="wholesalePrice" th:value="${list.wholesalePrice}"
+																	name="wholesalePrice"> <label for="name"
+																	class="form-legend">Wholesale Price</label>
+															</div>
+														</div>-->
+														<!-- 
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<select class="form-control" id="wholesaleTax"
+																	name="wholesaleTax">
+																	<option value="" disabled selected>--Select
+																		tax--</option>
+																	<option value="withouttax"
+																		th:selected="${list.wholesaleTax}=='withouttax'">Without
+																		tax</option>
+																	<option value="Withtax"
+																		th:selected="${list.wholesaleTax}=='Withtax'">With
+																		tax</option>
+																</select> <label for="vendorType" class="form-legend">Select
+																	tax</label>
+															</div>
+
+														</div> -->
+
+
+														<!--<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="text" class="form-control"
+																	th:value="${list.minimumWholesaleQty}"
+																	id="minimumWholesaleQty" name="minimumWholesaleQty"
+																	placeholder=""> <label for="name"
+																	class="form-legend">Minimum Wholesale QTY</label>
+															</div>
+														</div>-->
+
+
+													</div>
+																							<!-- purchase price -->
+											<div id="purchaseprice">
+												<div class="form-row g-3" style="margin-top: 30px">
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="purchasePrice" th:value="${list.purchasePrice}"
+																name="purchasePrice" placeholder=""> <label
+																for="name" class="form-legend">Purchase Price </label>
+														</div>
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="purchaseTaxType"
+																onchange="perenableforprice()" name="purchaseTaxType">
+																<option value="" disabled selected>--Select
+																	tax--</option>
+																<option value="withouttax"
+																	th:selected="${list.purchaseTaxType}=='withouttax'">Without
+																	tax</option>
+																<option value="withtax"
+																	th:selected="${list.purchaseTaxType}=='withtax'">With
+																	tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+
+
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagePRICE"
+																name="gstpercentageprice">
+																<option th:value="${list.gstpercentageprice}"
+																	th:text="${list.gstpercentageprice}">--None--</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>
+
+
+
+
+												</div>
+
+
+
+											</div>
+										</div>
+										
+										</div>
+											
+										
+
+										<!-- 							<div class="transparent-shadow">
+											<div class="form-row g-3" style="margin-top: 30px">
+												<div class="form-group col-md-4">
+													<div class="form-floating">
+														<select class="form-control" id="gstpercentage"
+															name="gstpercentage">
+															<option th:value="${list.gstpercentage}"
+																th:text="${list.gstpercentage}">--None--</option>
+															<option value="IGST@0%">IGST@0%</option>
+															<option value="CGST@0%">CGST@0%</option>
+															<option value="SGST@0%">SGST@0%</option>
+															<option value="IGST@0.25%">IGST@0.25%</option>
+															<option value="CGST@0.25%">CGST@0.25%</option>
+															<option value="SGST@0.25%">SGST@0.25%</option>
+															<option value="IGST@3%">IGST@3%</option>
+															<option value="CGST@3%">CGST@3%</option>
+															<option value="SGST@3%">SGST@3%</option>
+															<option value="IGST@5%">IGST@5%</option>
+															<option value="CGST@5%">CGST@5%</option>
+															<option value="SGST@5%">SGST@5%</option>
+															<option value="IGST@12%">IGST@12%</option>
+															<option value="CGST@12%">CGST@12%</option>
+															<option value="SGST@12%">SGST@12%</option>
+															<option value="IGST@18%">IGST@18%</option>
+															<option value="CGST@18%">CGST@18%</option>
+															<option value="SGST@18%">SGST@18%</option>
+															<option value="IGST@28%">IGST@28%</option>
+															<option value="CGST@28%">CGST@28%</option>
+															<option value="SGST@28%">SGST@28%</option>
+															<option value="EXEMPT">EXEMPT</option>
+
+														</select> <label for="vendorType" class="form-legend">Select
+															tax</label>
+													</div>
+												</div>
+											</div>
+</div> -->
+									
+
+									<div id="Stock">
+										<div class="form-row g-3" style="margin-top: 30px">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="openingQuantity" th:value="${list.openingQuantity}"
+														name="openingQuantity" placeholder=""> <label
+														for="name" class="form-legend">Opening Quantity</label>
+
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control" id="atPrice"
+														th:value="${list.atPrice}" name="atPrice" placeholder="">
+													<label for="name" class="form-legend">At Price</label>
+
+												</div>
+											</div>
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="date" class="form-control" id="asOfDate"
+														name="asOfDate"
+														th:value="${#dates.format(list.asOfDate, 'yyyy-MM-dd')}"
+														placeholder=""> <label for="name"
+														class="form-legend">As Of Date</label>
+
+												</div>
+											</div>
+
+
+										</div>
+										<div class="form-row mt-1">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="minStockToMaintain"
+														th:value="${list.minStockToMaintain}"
+														name="minStockToMaintain" placeholder=""> <label
+														for="name" class="form-legend">Min Stock To
+														Maintain</label>
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="text" class="form-control" id="location"
+														th:value="${list.location}" name="location" placeholder="">
+													<label for="name" class="form-legend">location</label>
+												</div>
+											</div>
+										</div>
+
+
+
+
+
+
+
+
+
+
+									</div>
+									</div>
+									
+									
+									
+									<div class=" modal fade" id="basesunits">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Units
+									</div>
+									
+								</div>
+								<div class="modal-body">
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="Baseunit" name="baseUnit">
+													<option th:value="${list.baseUnit}"
+														th:text="${list.baseUnit}">--Select BaseUnit--</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+												</select>
+												 <label for="vendorType" class="form-legend">Base
+													Unit</label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="secondaryunit" name="secondaryunit">
+													<option th:value="${list.secondaryunit}"
+														th:text="${list.secondaryunit}">--Select BaseUnit--</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+
+												</select> <label for="vendorType" class="form-legend">secondary Unit</label>
+												
+											</div>
+										</div>
+									<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" th:value="${list.Conversion}" id="Conversion" name="Conversion">
+												 <label for="Conversion"class="form-legend">Conversion</label>
+												 												
+											</div>
+										</div>
+									
+
+									</div>
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="unitc()">Submit</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="closechange(event);">Close</button>
+									</div>
+
+								</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				
+									
+
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" th:if="${formmode}=='Modify'"
+											class="btn btn-xs btn-dark" id="btnSubmit"
+											onclick="modifyitem();">Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+
+
+								</div>
+						</form>
+					</div>
+				
+
+
+
+				<!-- ------view---- -->
+
+
+
+
+				<div class="container-fluid content" th:if="${formmode == 'view'||formmode == 'deleteview'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100" id="itemcreation"
+							autocomplete="off">
+
+							<div class="card">
+								<!-- Form Header -->
+								<div th:if="${formmode == 'view'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-eye mr-2"></i>Item - View <span
+											th:text="${'('+list.itemCode+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+								
+								<div th:if="${formmode == 'deleteview'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-eye mr-2"></i>Item - Delete <span
+											th:text="${'('+list.itemCode+')'}"></span>
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="registrationlist(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+								
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+									<div class="form-row mb-2">
+										<!-- Name Field -->
+										<div class="form-group col-md-4">
+											<input type="text" id="ItemName" class="form-control"
+												th:value="${list.itemName}" name="itemName" readonly>
+											<label for="name" class="form-legend">Item Name*</label>
+										</div>
+
+										<!-- Phone Number Field -->
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="HSNCode"
+													th:value="${list.hsnCode}" name="hsnCode" readonly>
+												<label for="name" class="form-legend">HSN Code*</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="category"
+													name="category" th:value="${list.category}" readonly>
+												<label for="category" class="form-legend">Category</label>
+											</div>
+										</div>
+
+
+
+									</div>
+									<div class="form-row g-3">
+										
+											<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="Unit" name="unit" th:value="${list.unit}" placeholder="" onclick="unitconvert();"
+													 required readonly>
+												 <label for="vendorType" class="form-legend">Unit</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="ItemCode"
+													th:value="${list.itemCode}" name="itemCode" placeholder=""
+													readonly> <label for="name" class="form-legend">Item
+													Code</label>
+											</div>
+										</div>
+
+
+										<div class="form-group col-md-4">
+											<div class="d-flex align-items-center">
+												<label for="name">Uploaded Image :</label> <img
+													th:src="${image}" class="col-md-2"
+													onclick="toggleImageModal(true)" alt="Uploaded Image"
+													style="max-width: 150px; max-height: 150px; margin-top: -26px;" />
+
+												<!-- 	  <input
+													type="radio" style="margin-left:10px;" id="imageview1" name="imageview"
+													onclick="toggleImageModal(true)"> <label
+													for="imageview1" class="ms-1 me-3">Yes</label> <input style="margin-left:10px;"
+													type="radio" id="imageview2" name="imageview"
+													onclick="toggleImageModal(false)"> <label
+													for="imageview2" class="ms-1">No</label>  -->
+											</div>
+										</div>
+
+
+
+
+										<!--  <div class="form-group col-md-2">
+                    <div class="form-floating">
+                    <div>
+            <img th:src="${image}" alt="Uploaded Image" class="img-thumbnail" style="width: 50%; height: auto;"/>
+        </div>
+        <button type="button" style="background-color:blue;color:white;" class="form-control"  onclick="previewImage()">View Image</button>
+                    </div>
+                </div> -->
+
+
+
+
+									</div>
+									<div class="card-header" id="tabs"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="row formline py-1" style="margin-left: 5px;">
+											<button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="priceingc" onclick="btnchange(event);">Pricing
+											</button>
+											<!-- <button class="btn btn-secondary mx-1"
+												style="background-color: #e5e5e5; border-color: black; color: black"
+												id="stockc" onclick="btnchange(event);">Stock</button> -->
+										</div>
+									</div>
+									<div id="pricing">
+										<div class="transparent-shadow">
+
+
+											<div class="toggle-wrapper">
+												<h5 id="salePriceLabel" class="active">Sale Price</h5>
+										<!-- 		<label class="toggle-switch"> <input type="checkbox"
+													id="priceToggle" /> <span class="slider"></span>
+												</label>
+												<h5 id="purchasePriceLabel">Purchase Price</h5> -->
+											</div>
+
+											<div id="saleprice">
+												<div class="form-row g-3" style="margin-top: 30px">
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" onchange='saleprice()' disabled id="PriceType" name="salepricetype" >
+																<option value=""  >--Select Price Type--</option>
+																<option th:selected="${list.salepricetype}=='Amount'" value="Amount">Amount</option>
+																<option th:selected="${list.salepricetype}=='Percentage'" value="Percentage">Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Price Type</label>
+														</div>
+													</div>
+												
+												<div class="form-group col-md-4" id="salepricetab" style="display:none">
+														<div class="form-floating">
+															<input type="number" th:value="${list.salePrice}" class="form-control" id="salePrice"
+																name="salePrice" placeholder=""  readonly> <label
+																for="name" class="form-legend">Sale Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.DistributorPrice}" id="DistributorPrice"
+																name="DistributorPrice" placeholder="" readonly> <label
+																for="name" class="form-legend">Distributor Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.RetailerPrice}" id="RetailerPrice"
+																name="RetailerPrice" placeholder="" readonly> <label
+																for="name" class="form-legend">Retailer Price </label>
+														</div>
+
+													</div>
+													
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.CustomerPrice}" id="CustomerPrice"
+																name="CustomerPrice" placeholder="" readonly> <label
+																for="name" class="form-legend">Customer Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"  th:value="${list.SSPrice}"id="SSPrice"
+																name="SSPrice" placeholder="" readonly> <label
+																for="name" class="form-legend">SS(Sub-Stockist) Price </label>
+														</div>
+
+													</div>
+													
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control" th:value="${list.wholesalePrice}"id="WHOLESALERPrice"
+																name="wholesalePrice" placeholder="" readonly> <label
+																for="name" class="form-legend">WholeSaler Price</label>
+														</div>
+
+													</div>
+													
+
+													
+
+													<!-- <div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="saleTaxType"
+																onchange="perenable()" name="saleTaxType">
+																<option value="" disabled selected>--Select
+																	Tax--</option>
+																<option value="withouttax"
+																	th:selected="${list.saleTaxType}=='withouttax'">Without
+																	Tax</option>
+																<option value="withtax"
+																	th:selected="${list.saleTaxType}=='withtax'">With
+																	tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>-->
+
+													<!-- <div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagesale"
+																name="gstpercentagesale">
+																<option th:value="${list.gstpercentagesale}"
+																	th:text="${list.gstpercentagesale}">--None--</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax Percentage</label>
+														</div>
+													</div>-->
+
+
+
+
+
+
+
+												
+												
+
+
+													 <!--  <div class="form-group col-md-4">
+
+
+														<div class="form-floating">
+															<select class="form-control" id="discountType"
+																name="discountType">
+																<option value="" disabled selected>--Select
+																	Discount type--</option>
+																<option value="Amount"
+																	th:selected="${list.discountType}=='Amount'">Amount</option>
+																<option value="Percentage"
+																	th:selected="${list.discountType}=='Percentage'">Percentage</option>
+															</select> <label for="vendorType" class="form-legend">Discount
+																Type</label>
+														</div>
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="discountPrice" th:value="${list.discountPrice}"
+																name="discountPrice" placeholder=""> <label
+																for="name" class="form-legend">Discount Price </label>
+														</div>
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<h5 id="plus" onclick="WholeSale(this)">+ Add
+																WholeSale Price</h5>
+															<h5 id="removeplus" onclick="WholeSale(this)">-
+																Remove WholeSale Price</h5>
+														</div>
+													</div>
+													-->
+												</div>
+												<!-- <div id="WholeSale">
+													<div class="form-row mt-3">
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="number" class="form-control"
+																	id="wholesalePrice" th:value="${list.wholesalePrice}"
+																	name="wholesalePrice"> <label for="name"
+																	class="form-legend">Wholesale Price</label>
+															</div>
+														</div>-->
+														<!-- 
+														<div class="form-group col-md-4">
+															<div class="form-floating">
+																<select class="form-control" id="wholesaleTax"
+																	name="wholesaleTax">
+																	<option value="" disabled selected>--Select
+																		tax--</option>
+																	<option value="withouttax"
+																		th:selected="${list.wholesaleTax}=='withouttax'">Without
+																		tax</option>
+																	<option value="Withtax"
+																		th:selected="${list.wholesaleTax}=='Withtax'">With
+																		tax</option>
+																</select> <label for="vendorType" class="form-legend">Select
+																	tax</label>
+															</div>
+
+														</div> -->
+
+
+														<!--<div class="form-group col-md-4">
+															<div class="form-floating">
+																<input type="text" class="form-control"
+																	th:value="${list.minimumWholesaleQty}"
+																	id="minimumWholesaleQty" name="minimumWholesaleQty"
+																	placeholder=""> <label for="name"
+																	class="form-legend">Minimum Wholesale QTY</label>
+															</div>
+														</div>-->
+
+
+													</div>
+																							<!-- purchase price -->
+											<div id="purchaseprice">
+												<div class="form-row g-3" style="margin-top: 30px">
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<input type="number" class="form-control"
+																id="purchasePrice" th:value="${list.purchasePrice}"
+																name="purchasePrice" placeholder="" readonly> <label
+																for="name" class="form-legend">Purchase Price </label>
+														</div>
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="purchaseTaxType" disabled
+																onchange="perenableforprice()" name="purchaseTaxType">
+																<option value="" disabled selected>--Select
+																	tax--</option>
+																<option value="withouttax"
+																	th:selected="${list.purchaseTaxType}=='withouttax'">Without
+																	tax</option>
+																<option value="withtax"
+																	th:selected="${list.purchaseTaxType}=='withtax'">With
+																	tax</option>
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+
+
+
+													</div>
+
+													<div class="form-group col-md-4">
+														<div class="form-floating">
+															<select class="form-control" id="gstpercentagePRICE"
+																name="gstpercentageprice" disabled>
+																<option th:value="${list.gstpercentageprice}"
+																	th:text="${list.gstpercentageprice}">--None--</option>
+																<option value="IGST@0%">IGST@0%</option>
+																<option value="CGST@0%">CGST@0%</option>
+																<option value="SGST@0%">SGST@0%</option>
+																<option value="IGST@0.25%">IGST@0.25%</option>
+																<option value="CGST@0.25%">CGST@0.25%</option>
+																<option value="SGST@0.25%">SGST@0.25%</option>
+																<option value="IGST@3%">IGST@3%</option>
+																<option value="CGST@3%">CGST@3%</option>
+																<option value="SGST@3%">SGST@3%</option>
+																<option value="IGST@5%">IGST@5%</option>
+																<option value="CGST@5%">CGST@5%</option>
+																<option value="SGST@5%">SGST@5%</option>
+																<option value="IGST@12%">IGST@12%</option>
+																<option value="CGST@12%">CGST@12%</option>
+																<option value="SGST@12%">SGST@12%</option>
+																<option value="IGST@18%">IGST@18%</option>
+																<option value="CGST@18%">CGST@18%</option>
+																<option value="SGST@18%">SGST@18%</option>
+																<option value="IGST@28%">IGST@28%</option>
+																<option value="CGST@28%">CGST@28%</option>
+																<option value="SGST@28%">SGST@28%</option>
+																<option value="EXEMPT">EXEMPT</option>
+
+															</select> <label for="vendorType" class="form-legend">Select
+																Tax</label>
+														</div>
+													</div>
+
+
+
+
+												</div>
+
+
+
+											</div>
+										</div>
+										
+										</div>
+											
+										
+
+										<!-- 							<div class="transparent-shadow">
+											<div class="form-row g-3" style="margin-top: 30px">
+												<div class="form-group col-md-4">
+													<div class="form-floating">
+														<select class="form-control" id="gstpercentage"
+															name="gstpercentage">
+															<option th:value="${list.gstpercentage}"
+																th:text="${list.gstpercentage}">--None--</option>
+															<option value="IGST@0%">IGST@0%</option>
+															<option value="CGST@0%">CGST@0%</option>
+															<option value="SGST@0%">SGST@0%</option>
+															<option value="IGST@0.25%">IGST@0.25%</option>
+															<option value="CGST@0.25%">CGST@0.25%</option>
+															<option value="SGST@0.25%">SGST@0.25%</option>
+															<option value="IGST@3%">IGST@3%</option>
+															<option value="CGST@3%">CGST@3%</option>
+															<option value="SGST@3%">SGST@3%</option>
+															<option value="IGST@5%">IGST@5%</option>
+															<option value="CGST@5%">CGST@5%</option>
+															<option value="SGST@5%">SGST@5%</option>
+															<option value="IGST@12%">IGST@12%</option>
+															<option value="CGST@12%">CGST@12%</option>
+															<option value="SGST@12%">SGST@12%</option>
+															<option value="IGST@18%">IGST@18%</option>
+															<option value="CGST@18%">CGST@18%</option>
+															<option value="SGST@18%">SGST@18%</option>
+															<option value="IGST@28%">IGST@28%</option>
+															<option value="CGST@28%">CGST@28%</option>
+															<option value="SGST@28%">SGST@28%</option>
+															<option value="EXEMPT">EXEMPT</option>
+
+														</select> <label for="vendorType" class="form-legend">Select
+															tax</label>
+													</div>
+												</div>
+											</div>
+</div> -->
+									
+
+									<div id="Stock">
+										<div class="form-row g-3" style="margin-top: 30px">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="openingQuantity" th:value="${list.openingQuantity}"
+														name="openingQuantity" placeholder="" readonly> <label
+														for="name" class="form-legend">Opening Quantity</label>
+
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control" id="atPrice"
+														th:value="${list.atPrice}" name="atPrice" placeholder="" readonly>
+													<label for="name" class="form-legend">At Price</label>
+
+												</div>
+											</div>
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="date" class="form-control" id="asOfDate"
+														name="asOfDate"
+														th:value="${#dates.format(list.asOfDate, 'yyyy-MM-dd')}"
+														placeholder="" readonly> <label for="name"
+														class="form-legend">As Of Date</label>
+
+												</div>
+											</div>
+
+
+										</div>
+										<div class="form-row mt-1">
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="number" class="form-control"
+														id="minStockToMaintain"
+														th:value="${list.minStockToMaintain}"
+														name="minStockToMaintain" placeholder="" readonly> <label
+														for="name" class="form-legend">Min Stock To
+														Maintain</label>
+												</div>
+											</div>
+
+											<div class="form-group col-md-4">
+												<div class="form-floating">
+													<input type="text" class="form-control" id="location"
+														th:value="${list.location}" name="location" placeholder="" readonly>
+													<label for="name" class="form-legend">location</label>
+												</div>
+											</div>
+										</div>
+
+
+
+
+
+
+
+
+
+
+									</div>
+									</div>
+									
+									
+									
+									<div class=" modal fade" id="basesunits">
+					<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Units
+									</div>
+									
+								</div>
+								<div class="modal-body">
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="Baseunit" name="baseUnit" disabled>
+													<option th:value="${list.baseUnit}"
+														th:text="${list.baseUnit}">--Select BaseUnit--</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+												</select>
+												 <label for="vendorType" class="form-legend">Base
+													Unit</label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<select class="form-control" id="secondaryunit" name="secondaryunit" disabled>
+													<option th:value="${list.secondaryunit}"
+														th:text="${list.secondaryunit}">--Select BaseUnit--</option>
+													<option value="BAGS">BAGS</option>
+													<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+													<option value="BOX">BOX</option>
+													<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+													<option value="CANS">CANS (CAN)</option>
+													<option value="CARTONS">CARTONS (CTN)</option>
+													<option value="DOZENS">DOZENS (DZN)</option>
+													<option value="GRAMMES">GRAMMES (GM)</option>
+													<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+													<option value="LITRES">LITRES (LTR)</option>
+													<option value="METERS">METERS (MTR)</option>
+													<option value="MILILITRE">MILILITRE (ML)</option>
+													<option value="NUMBERS">NUMBERS (NOS)</option>
+													<option value="PACKS">PACKS (PAC)</option>
+													<option value="PAIRS">PAIRS (PRS)</option>
+													<option value="PIECES">PIECES (PCS)</option>
+													<option value="QUINTAL">QUINTAL (QTL)</option>
+													<option value="ROLLS">ROLLS (ROL)</option>
+													<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+													<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+													<option value="TABLETS">TABLETS (TBS)</option>
+
+												</select> <label for="vendorType" class="form-legend">secondary Unit</label>
+												
+											</div>
+										</div>
+									<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" th:value="${list.Conversion}" id="Conversion" name="Conversion" readonly>
+												 <label for="Conversion"class="form-legend">Conversion</label>
+												 												
+											</div>
+										</div>
+									
+
+									</div>
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="unitc()">Submit</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="closechange(event);">Close</button>
+									</div>
+
+								</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				
+									
+
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button class="btn btn-xs btn-dark" type="button" th:if="${formmode == 'deleteview'}"
+											id="Dashboard" th:attr="data-itemcode=${list.itemCode}" onclick="deletebtn(this)">Submit</button>
+
+										
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+
+
+								</div>
+						</form>
+					</div>
+				<div class=" modal fade" id="addcat">
+					<div
+						class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+							<form action="#" method="post" class="w-100"
+								id="CategoryCreationadd" autocomplete="off">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Category Creation
+									</div>
+									<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="togglelist();">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+								</div>
+								<div class="modal-body">
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="category_id"
+													th:value="${CategoryNo}" name="category_id" required
+													readonly> <label for="name" class="form-legend">Category
+													Code</label>
+											</div>
+										</div>
+										<div class="form-group col-md-6">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="category_name"
+													name="category_name" required> <label for="name"
+													class="form-legend">Category Name</label>
+											</div>
+										</div>
+
+
+									</div>
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="CategoryCreation()">Submit</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="closechange(event);">Close</button>
+									</div>
+
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				<!-- unit -->
+				
+
+
+
+
+
+
+
+				<div class=" modal fade" id="addlist" >
+					<div
+						class="modal-dialog modal-dialog-centered modal-dialog-scrollable" >
+						<div class="modal-content">
+
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class="fas fa-user-plus mr-2"></i>Category Creation
+
+								</div>
+								
+							</div>
+							<div class="modal-body">
+								<div
+									class="mb-3 d-flex justify-content-between align-items-center">
+									<div>
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable('dataTables', 'searchInput')"
+											class="form-control" />
+									</div>
+									<!-- Date Search (Commented Out) -->
+									<!-- <div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div> -->
+								</div>
+
+								<!-- Table for displaying journal entries -->
+								<table id="dataTables" class="table table-striped">
+									<thead>
+										<tr>
+											<th style="text-align: center;">Category Code</th>
+											<th style="text-align: left;">Category Name</th>
+											<th style="text-align: center;">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${#lists.isEmpty(getCategory)}">
+											<td colspan="7" style="text-align: center; color: red;">
+												No records found.</td>
+										</tr>
+										<tr th:each="item : ${getCategory}">
+											<td th:text="${item.category_id}" style="text-align: center;"></td>
+											<td th:text="${item.category_name}" style="text-align: left;"></td>
+
+											<td style="text-align: center;"><input type="radio"
+												th:attr="data-Categoryid=${item.category_id}"
+												onclick="deletebyid(this)"></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div id="pagination-controls"></div>
+							</div>
+
+
+							<div class="card-footer text-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+									onclick="closechange(event);">Close</button>
+							</div>
+
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div>
+	</div>
+	
+
+
+	<!-- Modal -->
+	<!-- Confirmation Modal -->
+	<div class="modal fade" id="confirmationModal" tabindex="-1"
+		role="dialog" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="confirmationModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">Confirm
+						Deletion</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p>Are you sure you want to delete this Item?</p>
+					<button type="button" class="btn btn-primary" th:if="${formmode}=='deleteview'" id="confirmDeleteBtn"
+						onclick="deletebtnwithmodel();">Yes</button>
+					<button type="button" class="btn btn-primary" th:if="${formmode}=='add'" id="confirmDeleteBtn"
+						onclick="deletebyidtog();">Yes</button>	
+						
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- Loading Modal -->
+<div id="loadingModal" style="display: none;">
+    <div id="loadingContent">
+        <img th:src=@{/images/infins.gif} alt="Loading...">
+    </div>
+</div>
+
+
+
+</body>
+</html>

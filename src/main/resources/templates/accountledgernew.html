@@ -1,0 +1,2292 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.30/jspdf.plugin.autotable.min.js"></script>
+
+
+
+<title>ERP</title>
+<style>
+/* Centering header text */
+th {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* Align debit and credit columns to the right */
+td.debit, td.credit {
+	text-align: right;
+}
+
+/* Optional: Add some padding for better readability */
+td, th {
+	padding: 8px 10px;
+}
+</style>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: left;
+	background-color: #fff;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+.debit {
+	color: red;
+	text-align: right;
+}
+
+.credit {
+	color: green;
+	text-align: right;
+}
+
+footer {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 0.8em;
+	color: #666;
+}
+</style>
+
+
+
+<style type="text/css">
+.navbar {
+	margin-left: -5px;
+	position: fixed; /* Keep it fixed */
+	top: 0;
+	width: 100%;
+	z-index: 1000; /* Ensure it's above other elements */
+}
+
+.content {
+	margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+
+.container-fluid {
+	width: 100%;
+	padding-right: 0px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -8px;
+	margin-left: -22px;
+}
+
+.bold-text {
+	font-weight: bold;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+</head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentYear = new Date().getFullYear();
+        let currentMonth = String(new Date().getMonth() + 1).padStart(2, '0'); // Format to "01", "02", etc.
+
+        let monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        let monthDropdown = document.getElementById("Monthlydata");
+        let yearDropdown = document.getElementById("Yeardata");
+
+        // Populate Month Dropdown
+        monthNames.forEach((month, index) => {
+            let monthValue = String(index + 1).padStart(2, '0'); // Ensure "01", "02", etc.
+            let option = document.createElement("option");
+            option.value = monthValue;
+            option.text = `${month}`;
+            if (monthValue === currentMonth) {
+                option.selected = true; // Select current month
+            }
+            monthDropdown.appendChild(option);
+        });
+
+        // Populate Year Dropdown (e.g., last 10 years + next 2 years)
+        for (let i = currentYear - 10; i <= currentYear; i++) {
+            let option = document.createElement("option");
+            option.value = i;
+            option.text = i;
+            if (i === currentYear) {
+                option.selected = true; // Select current year
+            }
+            yearDropdown.appendChild(option);
+        }
+    });
+
+    function getMonthlyData() {
+        let month = document.getElementById("Monthlydata").value;
+        let year = document.getElementById("Yeardata").value;
+
+        if (month === "0" || year === "0") {
+            alert("Please select both Month and Year");
+            return;
+        }
+
+        $.ajax({
+            url: "./get_salary",
+            type: 'GET',  // Ensure the backend supports GET
+            data: { month: month, year: year },
+            dataType: "json",
+            success: function(res) {
+                let tableBody = document.getElementById("salary-body");
+                tableBody.innerHTML = "";  // Clear existing rows
+
+                let totalDebit = 0;
+
+                res.forEach(item => {
+                    let row = `<tr>
+                        <td>${item.salId}</td>
+                        <td>${item.empId}</td>
+                        <td>${item.empName}</td>
+                        <td>${item.month}</td>
+                        <td>${item.year}</td>
+                        <td>${item.paymentBy}</td>
+                        <td class="debit">${item.netSalary}</td>
+                    </tr>`;
+
+                    tableBody.innerHTML += row;
+                    totalDebit += parseFloat(item.netSalary) || 0;
+                });
+
+                // Update total debit with negative value
+                document.getElementById("debitTotal_sale").innerText = `- ${totalDebit.toFixed(2)}`;
+            },
+            error: function(err) {
+                console.error("Error fetching salary data:", err);
+            }
+        });
+    }
+
+</script>
+<script>
+
+	function searchTable() {
+		// Get the search input value
+		var input = document.getElementById("searchInput");
+		var filter = input.value.toLowerCase(); // Convert to lowercase for case-insensitive search
+		var table = document.getElementById("dataTables");
+		var tbody = table.getElementsByTagName("tbody")[0];
+		var rows = tbody.getElementsByTagName("tr");
+
+		// Loop through all rows and hide those that don't match the search query
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i];
+			var cells = row.getElementsByTagName("td");
+			var found = false;
+
+			// Loop through each cell in the row
+			for (var j = 0; j < cells.length; j++) {
+				if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+					found = true; // If a match is found, set found to true
+					break; // No need to check other cells
+				}
+			}
+
+			// Show or hide the row based on the search result
+			if (found) {
+				row.style.display = ""; // Show row
+			} else {
+				row.style.display = "none"; // Hide row
+			}
+		}
+	}    
+	function searchTablesale() {
+		// Get the search input value
+		var input = document.getElementById("searchInput");
+		var filter = input.value.toLowerCase(); // Convert to lowercase for case-insensitive search
+		var table = document.getElementById("saleTables");
+		var tbody = table.getElementsByTagName("tbody")[0];
+		var rows = tbody.getElementsByTagName("tr");
+
+		// Loop through all rows and hide those that don't match the search query
+		for (var i = 0; i < rows.length; i++) {
+			var row = rows[i];
+			var cells = row.getElementsByTagName("td");
+			var found = false;
+
+			// Loop through each cell in the row
+			for (var j = 0; j < cells.length; j++) {
+				if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+					found = true; // If a match is found, set found to true
+					break; // No need to check other cells
+				}
+			}
+
+			// Show or hide the row based on the search result
+			if (found) {
+				row.style.display = ""; // Show row
+			} else {
+				row.style.display = "none"; // Hide row
+			}
+		}
+	}   
+	
+</script>
+
+<script>
+
+function salariesfn(){
+	var currentMonth = new Date().getMonth() + 1;
+	 var currentYear = new Date().getFullYear();
+	location.href="ledger?formmode=salaries&month="+currentMonth+"&year="+currentYear;
+}
+
+function cashfn(){
+	location.href="ledger?formmode=cash";
+}
+
+function bankfn(){
+	location.href="ledger?formmode=Account";
+}
+
+function salesfn(){
+	location.href="ledger?formmode=sales";
+}
+
+function vendorfn(){
+	location.href="ledger?formmode=vendor";
+}
+
+function workorder(button){
+	const vandorid = button.getAttribute("data-value");
+	const process = button.getAttribute("data-value1");
+	
+	if(process=='purchaseorder'){
+		location.href="ledger?formmode=PURCHASEORDER&vandorid="+vandorid;
+	}
+	else{
+		location.href="ledger?formmode=WORKORDER&vandorid="+vandorid;
+	}
+	
+}
+
+function back() {
+	window.history.back();
+}
+function vendorgl(a){
+	var vandorid=$(a).val();
+	alert(vandorid);
+	location.href="ledger?formmode=PURCHASEORDER&vandorid="+vandorid;
+	
+}
+
+function Workorder(){
+	location.href="ledger?formmode=WORKORDER&vandorid="+vandorid;
+}
+function wofn(){
+	
+	location.href="ledger?formmode=wo";
+}
+function purchasefn(){
+	location.href="ledger";
+}
+function getvendorid(){
+    var vendorid = document.getElementById("vendorid").value;
+    var Yeardata = document.getElementById("Yeardata").value;
+    var Monthlydata = document.getElementById("Monthlydata").value;
+    
+    $.ajax({
+        url: "./get_vendorledger",
+        type: 'GET',  // Ensure the backend supports GET
+        data: {
+            Vendorid: vendorid,
+            Yeardata: Yeardata,
+            Monthlydata: Monthlydata
+        },
+        success: function(response) {
+            var tableBody = document.getElementById("dataTablesven").querySelector('tbody');
+            let transactions = response.transactions;
+
+            let OpeningBalance = response.openingbalance;
+            let type = response.type;
+            console.log(response)
+            //alert(OpeningBalance)
+            
+            // ✅ Clear previous data before adding new rows
+            tableBody.innerHTML = ''; 
+            let row = document.createElement("tr");
+            if(type=='Debit'){
+            	row.innerHTML = `
+                    
+                    <td colspan="5" style="text-align: right; font-weight: bold;">Opening Balance</td>
+                    <td class="debit"></td>
+                    <td class="credit">${OpeningBalance || ''}</td>
+                `;
+            }
+            else if(type=='Credit'){
+            	row.innerHTML = `
+                    
+                    <td colspan="5" style="text-align: right; font-weight: bold;">Opening Balance</td>
+                    <td class="debit">${OpeningBalance || ''}</td>
+                    <td class="credit"></td>
+                `;
+            }
+            else if(type=null){
+					row.innerHTML = `
+                    <td colspan="5" style="text-align: right; font-weight: bold;">Opening Balance</td>
+                    <td class="debit"></td>
+                    <td class="credit"></td>
+                `;
+            }
+            
+            
+       
+            tableBody.appendChild(row);
+
+            
+            if(transactions.length > 0) {
+            	transactions.forEach(item => {
+                    let dateObj = new Date(item.acct_cls_date);
+                    let day = String(dateObj.getDate()).padStart(2, '0');
+                    let month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                    let year = dateObj.getFullYear();
+                    let formattedDate = `${day}-${month}-${year}`;
+
+                    let row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${formattedDate}</td>
+                        <td>${item.vendor_id}</td>
+                        <td>${item.vendor_name || ''}</td>
+                        <td>${item.type || ''}</td>
+                        <td>${item.po_id || ''}</td>
+                        <td class="debit">${item.dr_amt || ''}</td>
+                        <td class="credit">${item.cr_amt || ''}</td>
+                    `;
+                    
+                    // ✅ Use appendChild to add new row
+                    tableBody.appendChild(row);
+                });
+
+                
+            } else {
+                //alert("No Record Found");
+
+      
+                //tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center;">No Record Found</td></tr>`;
+                //document.getElementById("debitTotal").textContent = `Total Debit: 0`;
+                //document.getElementById("creditTotal").textContent = `Total Credit: 0`;
+            }
+            let debitTotal = 0;
+            let creditTotal = 0;
+
+            document.querySelectorAll("#dataTablesven tbody tr").forEach(row => {
+                let debitCell = row.querySelector(".debit");
+                let creditCell = row.querySelector(".credit");
+
+                let debitValue = parseFloat(debitCell?.textContent.trim()) || 0;
+                let creditValue = parseFloat(creditCell?.textContent.trim()) || 0;
+
+                debitTotal += debitValue;
+                creditTotal += creditValue;
+            });
+
+            // ✅ Add balance difference row if needed
+            if (debitTotal !== creditTotal) {
+                let totalDifference = Math.abs(debitTotal - creditTotal);
+                let totalRow = document.createElement("tr");
+
+                if (creditTotal < debitTotal) {
+                    totalRow.innerHTML = `
+                        <td colspan="5" class="text-right"><strong>By Balance C/D</strong></td>
+                        <td></td>
+                        <td class="credit">${totalDifference.toFixed(2)}</td>
+                    `;
+                    creditTotal += totalDifference;
+                } else {
+                    totalRow.innerHTML = `
+                        <td colspan="5" class="text-right"><strong>To Balance B/D</strong></td>
+                        <td class="debit">${totalDifference.toFixed(2)}</td>
+                        <td></td>
+                    `;
+                    debitTotal += totalDifference;
+                }
+
+                tableBody.appendChild(totalRow);
+            }
+
+            // ✅ Update totals
+            document.getElementById("debitTotal").textContent = `Total Debit: ${debitTotal.toFixed(2)}`;
+            document.getElementById("creditTotal").textContent = `Total Credit: ${creditTotal.toFixed(2)}`;
+        },
+        error: function(err) {
+            console.error("Error fetching vendor ledger:", err);
+        }
+    });
+}
+
+
+/*function vendorfn(){
+	location.href="ledger?formmode=vendor";
+}*/
+
+
+
+
+function Purchase_Invoice(Opid){
+	//alert(id)
+	location.href='./Payment_Out?formmode=invoice_view&Opid='+Opid ;
+	}
+	
+function vendorledger(acno){
+	//alert(id)
+	location.href='./ledger' ;
+	}
+
+function ven(){
+	location.href='./ledger?formmode=ven' 
+}
+function sale_Invoice(Opid){
+	//alert(id)
+	location.href='./paymentin?formmode=historyview&Opid='+Opid ;
+	}
+</script>
+
+
+<script>
+
+//////////////////////////////////////////////For purchase
+
+document.addEventListener("DOMContentLoaded", function () {
+    let data = {}; // Object to store totals and rows by PO_ID
+    let tableBody = document.querySelector("#table-body");
+
+    // Get the column index for Debit and Credit using class names
+    let debitColumnIndex = Array.from(document.querySelectorAll("#dataTables thead th")).findIndex(th => th.classList.contains('debit'));
+    let creditColumnIndex = Array.from(document.querySelectorAll("#dataTables thead th")).findIndex(th => th.classList.contains('credit'));
+
+    // Iterate over each row and accumulate only the first debit/credit values per PO_ID
+    document.querySelectorAll("#table-body tr").forEach(row => {
+        let poId = row.cells[0].innerText;
+        let debit = parseFloat(row.cells[debitColumnIndex].getAttribute('value')) || 0;
+        let credit = parseFloat(row.cells[creditColumnIndex].getAttribute('value')) || 0;
+
+        // Initialize PO_ID if not present
+        if (!data[poId]) {
+            data[poId] = { debit: debit, credit: credit, rows: [] }; // Store only first row's values
+        }
+
+        // Store all rows for the PO_ID
+        data[poId].rows.push(row);
+    });
+
+    // Clear table body
+    tableBody.innerHTML = "";
+
+    // Iterate and append rows for each PO_ID
+    Object.keys(data).forEach(poId => {
+        data[poId].rows.forEach(row => {
+            tableBody.appendChild(row);
+        });
+        /* <td class="credit">${data[poId].credit.toFixed(2)}</td> */
+        // Append total row **only using first row's debit and credit values**
+        let totalRow = document.createElement("tr");
+        totalRow.innerHTML = `
+            <td colspan="4" class="text-right"><strong> Paid Amount</strong></td>
+            <td class="debit">-${data[poId].debit.toFixed(2)}</td>
+            
+        `;
+        tableBody.appendChild(totalRow);
+    });
+
+    // Update **global** total (only summing the first debit/credit for each PO)
+    let globalDebit = Object.values(data).reduce((sum, entry) => sum + entry.debit, 0);
+    let globalCredit = Object.values(data).reduce((sum, entry) => sum + entry.credit, 0);
+
+    document.getElementById("debitTotal").innerText = '-' + globalDebit.toFixed(2);
+    document.getElementById("creditTotal").innerText = globalCredit.toFixed(2);
+});
+
+
+
+
+
+//////////////////////////////////////////////For Sale
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let data = {}; // Object to store totals and rows by PO_ID
+    let tableBody = document.querySelector("#sale-body");
+
+    // Get the column index for Debit and Credit using class names
+    let creditColumnIndex = Array.from(document.querySelectorAll("#saleTables thead th")).findIndex(th => th.classList.contains('credit'));
+
+    // Iterate over each row and accumulate only the first debit/credit values per PO_ID
+    document.querySelectorAll("#sale-body tr").forEach(row => {
+        let woId = row.cells[0].innerText;
+        let credit = parseFloat(row.cells[creditColumnIndex].getAttribute('value')) || 0;
+
+        // Initialize PO_ID if not present
+        if (!data[woId]) {
+            data[woId] = {  credit: credit, rows: [] }; // Store only first row's values
+        }
+
+        // Store all rows for the PO_ID
+        data[woId].rows.push(row);
+    });
+
+    // Clear table body
+    tableBody.innerHTML = "";
+
+    // Iterate and append rows for each PO_ID
+    Object.keys(data).forEach(woId => {
+        data[woId].rows.forEach(row => {
+            tableBody.appendChild(row);
+        });
+        /* <td class="credit">${data[poId].credit.toFixed(2)}</td> */
+        // Append total row **only using first row's debit and credit values**
+        let totalRow = document.createElement("tr");
+        totalRow.innerHTML = `
+            <td colspan="4" class="text-right"><strong>Paid Amount</strong></td>
+            <td class="credit">${data[woId].credit.toFixed(2)}</td>
+            
+        `;
+        tableBody.appendChild(totalRow);
+    });
+
+    let globalCredit = Object.values(data).reduce((sum, entry) => sum + entry.credit, 0);
+
+    document.getElementById("creditTotal").innerText = globalCredit.toFixed(2);
+});
+document.addEventListener("DOMContentLoaded", function () {
+    let totalDebit = 0;
+    document.querySelectorAll("#salary-body .debit").forEach(cell => {
+        let value = parseFloat(cell.innerText) || 0;
+        totalDebit += value;
+    });
+
+    // Set the total as a negative value
+    document.getElementById("debitTotal_sale").innerText = `- ${totalDebit.toFixed(2)}`;
+});
+
+
+
+
+//Function to handle pagination for any table
+function setupPaginationForTable(tableId, controlsId, itemsPerPage) {
+    const table = document.getElementById(tableId);
+    const controls = document.getElementById(controlsId);
+    const rows = table.querySelectorAll('tbody tr');
+    const pageCount = Math.ceil(rows.length / itemsPerPage);
+
+    let currentPage = 1;
+
+    function renderPagination() {
+        controls.innerHTML = '';
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(pageCount, currentPage + 2);
+
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            pageButton.onclick = function () {
+                currentPage = i;
+                renderTable();
+                renderPagination();
+            };
+            controls.appendChild(pageButton);
+        }
+    }
+
+    function renderTable() {
+        rows.forEach((row, index) => {
+            if (index >= (currentPage - 1) * itemsPerPage && index < currentPage * itemsPerPage) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    renderTable();
+    renderPagination();
+}
+
+// Wait until the document is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // Apply pagination separately for each table
+    setupPaginationForTable('dataTables', 'purchase-pagination-controls', 10); // Purchase table
+    setupPaginationForTable('saleTables', 'sale-pagination-controls', 10); // Sale table
+    setupPaginationForTable('salary_Tables', 'salary-pagination-controls', 10); // Salary table
+});
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+	let formmode=document.getElementById("formmode").value;
+	if (formmode=="cash"|| formmode=="bank"){
+    let debitTotal = 0;
+    let creditTotal = 0;
+
+    document.querySelectorAll("#dataTables4 tbody tr").forEach(row => {
+        let debitCell = row.querySelector(".debit");
+        let creditCell = row.querySelector(".credit");
+
+        let debitValue = parseFloat(debitCell?.textContent.trim()) || 0;
+        let creditValue = parseFloat(creditCell?.textContent.trim()) || 0;
+
+        debitTotal += debitValue;
+        creditTotal += creditValue;
+    });
+
+    
+    let tableBody = document.querySelector("#dataTables4 tbody");
+
+    
+    if (debitTotal !== creditTotal) {
+        let totalDifference = Math.abs(debitTotal - creditTotal);
+        let totalRow = document.createElement("tr");
+        
+        if (creditTotal<debitTotal){
+        	totalRow.innerHTML = `
+                <td colspan="6" class="text-right"><strong>${debitTotal > creditTotal ? 'By Balance C/D' : 'To Balance B/D'}</strong></td>
+                <td></td>
+                <td class="credit">${totalDifference.toFixed(2)}</td>
+                
+            `;
+        	creditTotal+=totalDifference;
+        	
+        }
+        else{
+        	totalRow.innerHTML = `
+                <td colspan="6" class="text-right"><strong>${debitTotal > creditTotal ? 'By Balance C/D' : 'To Balance B/D'}</strong></td>
+                <td class="debit">${totalDifference.toFixed(2)}</td>
+                <td></td>
+            `;
+        	debitTotal+=totalDifference;
+        }
+
+        
+
+
+        
+        let footerRow = document.querySelector("#dataTables4 tfoot tr");
+        tableBody.appendChild(totalRow, footerRow);
+    }
+
+    document.getElementById("debitTotal").textContent = `Total Debit: ${debitTotal.toFixed(2)}`;
+    document.getElementById("creditTotal").textContent = `Total Credit: ${creditTotal.toFixed(2)}`;
+	
+	}else if (formmode=='vendor'){
+		let debitTotal = 0;
+	    let creditTotal = 0;
+
+	    document.querySelectorAll("#dataTables4 tbody tr").forEach(row => {
+	        let debitCell = row.querySelector(".debit");
+	        let creditCell = row.querySelector(".credit");
+
+	        let debitValue = parseFloat(debitCell?.textContent.trim()) || 0;
+	        let creditValue = parseFloat(creditCell?.textContent.trim()) || 0;
+
+	        debitTotal += debitValue;
+	        creditTotal += creditValue;
+	    });
+
+	    
+	    let tableBody = document.querySelector("#dataTables4 tbody");
+
+	    
+	    if (debitTotal !== creditTotal) {
+	        let totalDifference = Math.abs(debitTotal - creditTotal);
+	        let totalRow = document.createElement("tr");
+	        
+	        if (creditTotal<debitTotal){
+	        	totalRow.innerHTML = `
+	                <td colspan="5" class="text-right"><strong>${debitTotal > creditTotal ? 'By Balance C/D' : 'To Balance B/D'}</strong></td>
+	                <td></td>
+	                <td class="credit">${totalDifference.toFixed(2)}</td>
+	                
+	            `;
+	        	creditTotal+=totalDifference;
+	        	
+	        }
+	        else{
+	        	totalRow.innerHTML = `
+	                <td colspan="5" class="text-right"><strong>${debitTotal > creditTotal ? 'By Balance C/D' : 'To Balance B/D'}</strong></td>
+	                <td class="debit">${totalDifference.toFixed(2)}</td>
+	                <td></td>
+	            `;
+	        	debitTotal+=totalDifference;
+	        }
+
+	        
+
+
+	        
+	        let footerRow = document.querySelector("#dataTables4 tfoot tr");
+	        tableBody.appendChild(totalRow, footerRow);
+	    }
+
+	    document.getElementById("debitTotal").textContent = `Total Debit: ${debitTotal.toFixed(2)}`;
+	    document.getElementById("creditTotal").textContent = `Total Credit: ${creditTotal.toFixed(2)}`;
+	}
+});
+</script>
+<script>
+function formatDate(dateString) {
+    if (!dateString) return ''; // Handle empty or null dates
+
+    var date = new Date(dateString);
+    if (isNaN(date)) return dateString; // Return original value if not a valid date
+
+    var day = String(date.getDate()).padStart(2, '0');
+    var month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    var year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+}
+
+
+</script>
+
+
+<script>
+
+	function myaccountledger11(a) {
+	    var accountdetails = a.value;
+	    var separateaccountdetails = accountdetails.split('-');
+	
+	    var accountnumber = separateaccountdetails[0];
+	    var accountname = separateaccountdetails[1];
+	    
+	    // Get date values
+	    var fromdate = document.getElementById('fromdate').value;
+	    var todate = document.getElementById('todate').value;
+	  
+	    
+	    if(fromdate==null && todate== null){
+	    	
+	    	alert("without date");
+	   $.ajax({
+	        url: './myaccountledger',
+	        type: 'GET',
+	        data: { accountnum: accountnumber },
+	        success: function(response) {
+	            $("#table-body").empty();
+	
+	            if (response.length === 0) {
+	                $("#table-body").append("<tr><td colspan='8' style='text-align:center;color:red'>No Record Found</td></tr>");
+	                return;
+	            }
+	
+	            // Initialize total variables before the loop
+	            var totalDebits = 0;
+	            var totalCredits = 0;
+	
+	            response.forEach(function(item, index) {
+	                var debitAmountss = parseFloat(item.debits) || 0;
+	                var creditAmountss = parseFloat(item.credits) || 0;
+	
+	                // Accumulate totals
+	                totalDebits += debitAmountss;
+	                totalCredits += creditAmountss;
+	
+	                var formattedDate = formatDate(item.journalDate);
+	
+	                var row = `<tr>
+	                    <td>${index + 1}</td>
+	                    <td>${formattedDate}</td>
+	                    <td>${item.journalTranId}</td>
+	                    <td>${item.tran_particulars}</td>
+	                    <td>${item.description}</td>
+	                    <td>${item.type}</td>
+	                    <td style="color:red">${debitAmountss.toFixed(2)}</td>
+	                    <td style="color:green">${creditAmountss.toFixed(2)}</td>
+	                </tr>`;
+	
+	                $("#table-body").append(row);
+	            });
+	
+	         
+	            var openingbalancedr = totalDebits < totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+	            var openingbalancecr = totalDebits > totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+	            
+	            var closingbal = `<tr style="background-color: #e0e0e0;">
+	                <td colspan="4" class="bold-text" style="text-align: right;">Closing Balance:</td>
+	                <td colspan="2"></td>
+	                <td  style="color:red">${openingbalancedr.toFixed(2)}</td>
+	                <td style="color:green">${openingbalancecr.toFixed(2)}</td>
+	            </tr>`;
+	
+	            $("#table-body").append(closingbal);
+	            
+	            
+	            var tallyTotalDebits = totalDebits + openingbalancedr;
+	            var tallyTotalCredits = totalCredits + openingbalancecr;
+	
+	            var totalRow = `<tr style=" background-color: #f0f0f0;">
+	                <td colspan="6" style="text-align: right;">Total:</td>
+	                <td style="color:red">${tallyTotalDebits.toFixed(2)}</td>
+	                <td style="color:green">${tallyTotalCredits.toFixed(2)}</td>
+	            </tr>`;
+	
+	            $("#table-body").append(totalRow);
+	
+	          
+	           
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("AJAX Error: ", status, error);
+	        }
+	    });
+	   
+	    }
+
+	}
+
+
+
+// Function to format date as dd-mm-yyyy
+function formatDate(dateString) {
+    if (!dateString) return '';
+
+    var date = new Date(dateString);
+    if (isNaN(date)) return dateString;
+
+    var day = String(date.getDate()).padStart(2, '0');
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var year = date.getFullYear();
+
+    return `${day}-${month}-${year}`;
+}
+
+
+</script>
+
+<script>
+
+var accountnumber = ""; // Global variable
+
+function myaccountledger(a) {
+    if (a && a.value) {
+        var accountdetails = a.value;
+        var separateaccountdetails = accountdetails.split('-');
+
+        // Assign value to global variable
+        accountnumber = separateaccountdetails[0] || "";  // Ensure it's not undefined
+        var accountname = separateaccountdetails[1] || "";
+
+        console.log("Account Number Set:", accountnumber); // Debugging
+    }
+
+    // Get date values
+    var fromdate = document.getElementById('fromdate').value;
+    var todate = document.getElementById('todate').value;
+
+    console.log("From Date:", fromdate, "To Date:", todate, "Account No:", accountnumber);
+
+    // Ensure `accountnumber` is not empty before making an AJAX request
+    if (!accountnumber) {
+        alert("Account number is empty! Please select an account.");
+        return;
+    }
+
+    if (!fromdate && !todate) {
+        // Fetch all transactions (without date filter)
+        $.ajax({
+            url: './myaccountledger',
+            type: 'GET',
+            data: { accountnum: accountnumber },
+            success: function(response) {
+                processLedgerData(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+            }
+        });
+    } else {
+        // Fetch transactions within date range
+        $.ajax({
+            url: './myaccountledger',
+            type: 'GET',
+            data: { accountnum: accountnumber, fdate: fromdate, tdate: todate },
+            success: function(response) {
+                processLedgerData(response);
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+            }
+        });
+    }
+}
+
+
+</script>
+
+<script>
+
+
+function processLedgerData(response) {
+    $("#table-body").empty();
+
+    if (response.length === 0) {
+        $("#table-body").append("<tr><td colspan='8' style='text-align:center;color:red'>No Record Found</td></tr>");
+        return;
+    }
+
+    var totalDebits = 0;
+    var totalCredits = 0;
+
+    response.forEach(function(item, index) {
+        var debitAmountss = parseFloat(item.debits) || 0;
+        var creditAmountss = parseFloat(item.credits) || 0;
+
+        totalDebits += debitAmountss;
+        totalCredits += creditAmountss;
+
+        var formattedDate = formatDate(item.journalDate);
+
+        var row = `<tr>
+            <td>${index + 1}</td>
+            <td>${formattedDate}</td>
+            <td>${item.journalTranId}</td>
+            <td>${item.tran_particulars}</td>
+            <td>${item.description}</td>
+            <td>${item.type}</td>
+            <td style="color:red">${debitAmountss.toFixed(2)}</td>
+            <td style="color:green">${creditAmountss.toFixed(2)}</td>
+        </tr>`;
+
+        $("#table-body").append(row);
+    });
+
+    var openingbalancedr = totalDebits < totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+    var openingbalancecr = totalDebits > totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+
+    var closingbal = `<tr style="background-color: #e0e0e0;">
+        <td colspan="4" class="bold-text" style="text-align: right;">Closing Balance:</td>
+        <td colspan="2"></td>
+        <td  style="color:red">${openingbalancedr.toFixed(2)}</td>
+        <td style="color:green">${openingbalancecr.toFixed(2)}</td>
+    </tr>`;
+
+    $("#table-body").append(closingbal);
+
+    var tallyTotalDebits = totalDebits + openingbalancedr;
+    var tallyTotalCredits = totalCredits + openingbalancecr;
+
+    var totalRow = `<tr style=" background-color: #f0f0f0;">
+        <td colspan="6" style="text-align: right;">Total:</td>
+        <td style="color:red">${tallyTotalDebits.toFixed(2)}</td>
+        <td style="color:green">${tallyTotalCredits.toFixed(2)}</td>
+    </tr>`;
+
+    $("#table-body").append(totalRow);
+}
+</script>
+
+
+
+
+
+<script>
+
+
+function downloadPdf() {    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Get page width for centering text
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    // **Fetch selected account name**
+    let selectedAccount = document.querySelector("input[list='accountnames']").value || "Unknown Account";
+    let accountName = selectedAccount.split("-")[1]?.trim() || "Unknown Account";  // Extracts the account name part
+
+    // Add company details (Centered)
+    doc.setFontSize(12);
+    doc.text("GTC Gandhi Trading Corporation", pageWidth / 2, 10, { align: "center" });
+    doc.setFontSize(10);
+    doc.text("(HO) NO.22B Muthu Nagar 3rd Street, Trichy Main Road, Dindigul - 624005", pageWidth / 2, 15, { align: "center" });
+    doc.text("(BO) Shop No 456(NP), Industrial Estate, Ambattur Industrial Estate, Chennai - 600098", pageWidth / 2, 20, { align: "center" });
+    doc.text("Phone: 9087134445 | E-Mail: gandhitradingcorp@gmail.com", pageWidth / 2, 25, { align: "center" });
+
+    // **Dynamically Insert Ledger Account Name (Centered)**
+    doc.setFontSize(12);
+    doc.text(accountName, pageWidth / 2, 35, { align: "center" });
+
+    // Date Range (Centered)
+    doc.setFontSize(10);
+    doc.text("Ledger Account Statement", pageWidth / 2, 40, { align: "center" });
+
+    // **Table Headers (List Format)**
+    const tableHeaders = ["Date", "Tran Id", "Particulars", "Particular Id", "Vch Type", "Debit", "Credit"]; // Debit before Credit
+
+    // Extract table data & calculate totals
+    const tableData = [];
+    let totalDebits = 0;
+    let totalCredits = 0;
+
+    document.querySelectorAll("#table-body tr").forEach((row) => {
+        const cols = row.querySelectorAll("td");
+        if (cols.length === 8) {
+            let debitAmount = parseFloat(cols[6].innerText.replace(/,/g, "")) || 0;
+            let creditAmount = parseFloat(cols[7].innerText.replace(/,/g, "")) || 0;
+
+            totalDebits += debitAmount;
+            totalCredits += creditAmount;
+
+            tableData.push([
+                cols[1].innerText, // Date
+                cols[2].innerText, // Tran Id
+                cols[3].innerText, // Particulars
+                cols[4].innerText, // Particular Id
+                cols[5].innerText, // Vch Type
+                debitAmount.toFixed(2), // Debit (Now before Credit)
+                creditAmount.toFixed(2)  // Credit
+            ]);
+        }
+    });
+
+    // **Calculate Closing Balances**
+    let closingBalanceDebit = totalDebits < totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+    let closingBalanceCredit = totalDebits > totalCredits ? Math.abs(totalDebits - totalCredits) : 0;
+
+    // **Tally the values for final total**
+    let tallyTotalDebits = totalDebits + closingBalanceDebit;
+    let tallyTotalCredits = totalCredits + closingBalanceCredit;
+
+    // **Generate Table**
+    doc.autoTable({
+        head: [tableHeaders],
+        body: tableData,
+        startY: 60,
+        theme: 'grid',
+        styles: { fontSize: 9 },
+        headStyles: { fillColor: [22, 160, 133], textColor: [255, 255, 255] },
+        columnStyles: {
+            5: { halign: 'right', fontStyle: 'bold', textColor: 'red' },   // Debit (Red)
+            6: { halign: 'right', fontStyle: 'bold', textColor: 'green' } // Credit (Green)
+        }
+    });
+
+    // **Closing Balance (Debit First, Then Credit)**
+    let closingBalanceY = doc.lastAutoTable.finalY + 6;
+    doc.text(`Closing Balance    :${closingBalanceDebit.toFixed(2)}`, 135, closingBalanceY); // Debit first
+    doc.text(`${closingBalanceCredit.toFixed(2)}`, 185, closingBalanceY); // Credit second
+
+    // **Draw a horizontal "X" line above the total values**
+    let lineY = closingBalanceY + 4;
+    doc.line(140, lineY, 190, lineY); // Horizontal line
+
+    // **Total Debit & Credit Balances (Debit First, Then Credit)**
+    let totalY = lineY + 6;
+    doc.text(`${tallyTotalDebits.toFixed(2)}`, 165, totalY);
+    doc.text(`${tallyTotalCredits.toFixed(2)}`, 182, totalY); // Swapped position
+
+    // **Save the PDF**
+    doc.save(`Account_Ledger_${accountName.replace(/\s+/g, "_")}.pdf`);
+}
+
+
+
+</script>
+
+
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-12">
+				<!-- Journal Entries List -->
+				<div class="container-fluid content">
+					<div class="row">
+						<!---------------------------------For Purchase----------------------------------------  -->
+
+						<div class="col-sm-12" th:if="${formmode}=='list'">
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">
+										<i class="fas fa-book"></i> Account Ledger
+									</div>
+									<button  id="downloadPdf" class="btn btn-xs btn-dark"
+										onclick="downloadPdf();">Download</button>
+								</div>
+
+
+								<div class="card-body" style="padding: 1rem;">
+
+
+									<!-- Search Input -->
+									<div
+										class="mb-3 d-flex justify-content-between align-items-center">
+										<div>
+
+											<!-- <select class="form-control">
+												<option>--Select Vendor--</option>
+											</select> -->
+
+											<input type="text" style="width: 350px;" list="accountnames"
+												class="form-control" placeholder="select vendor"
+												onchange="myaccountledger(this)" />
+											<datalist id="accountnames">
+
+												<option th:each="accountnameandnumber : ${liststrn}"
+													th:value="${accountnameandnumber.accountNumber + '-' + accountnameandnumber.accountName }"
+													th:text="${accountnameandnumber.accountNumber + '-' + accountnameandnumber.accountName }"></option>
+											</datalist>
+										</div>
+
+										<!-- Date Range Inputs with Search Button -->
+										 <div class="d-flex align-items-center" style="margin-left:-500px;">
+											<input type="date" id="fromdate" class="form-control"
+												style="width: 150px; " /> 
+												<input type="date" id="todate"
+												class="form-control" style="width: 150px;margin-left:10px" />
+											<button class="btn btn-secondary" onclick="myaccountledger(this);"> <i class="fa fa-search"></i>Search</button>
+										</div> 
+
+
+
+
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+
+									<!-- Table for displaying journal entries -->
+									<table id="dataTables" class="table table-striped">
+										<thead>
+											<tr>
+												<th>SNo</th>
+												<th>Date</th>
+												<th>Tran Id</th>
+												<th>Particulars</th>
+												<th>Particular Id</th>
+												<th>Vch Type</th>
+												<th class="debit">Debit</th>
+												<th class="credit">Credit</th>
+											</tr>
+										</thead>
+										<tbody id="table-body">
+
+											<tr>
+												<td
+													style="text-align: center; background-color: #D3D3D3; color: red;"
+													colspan="8">No Record Found</td>
+											</tr>
+
+										</tbody>
+
+									</table>
+									<div id="purchase-pagination-controls"></div>
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!---------------------------------For sale----------------------------------------  -->
+
+						<div class="col-sm-12" th:if="${formmode}=='wos'">
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">List Of General Ledger</div>
+								</div>
+
+								<div class="card-body" style="padding: 1rem;">
+									<div class="mb-3">
+										<button class="btn btn-primary" onclick="purchasefn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-shopping-cart"></i> PURCHASE ACCOUNT
+										</button>
+										<button class="btn btn-primary" onclick="wofn();"
+											style="background-color: #343a40; FONT-SIZE: small; border-color: #e5e5e5; color: white">
+											<i class="fas fa-dollar-sign"></i> SALE ACCOUNT
+										</button>
+										<button class="btn btn-primary" onclick="salariesfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> SALARY ACCOUNT
+										</button>
+
+										<button class="btn btn-primary" onclick="cashfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i>CASH ACCOUNT
+										</button>
+
+										<button class="btn btn-primary" onclick="bankfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-university"></i> BANK ACCOUNT
+										</button>
+
+										<!--<button class="btn btn-primary" onclick="vendorfn();"
+											style="FONT-SIZE: small;background-color: #f0f0f0;border-color: black;color: black">
+											<i class="fas fa-store"></i>
+											 VENDOR LEDGER
+										</button>-->
+
+										<button class="btn btn-primary" onclick="ven();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-store"></i> VENDOR LEDGER
+										</button>
+									</div>
+									<!-- Search Input -->
+									<div class="mb-3">
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTablesale()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									<!-- Table for displaying journal entries -->
+									<table id="saleTables" class="table table-striped">
+										<thead>
+											<tr>
+												<th>WO ID</th>
+												<th>DESCRIPTION</th>
+												<th>ITEM NAME</th>
+												<th>CURRENCY</th>
+												<th class="credit">CREDIT</th>
+											</tr>
+										</thead>
+										<tbody id="sale-body">
+											<tr th:each="listItem, index : ${list}"
+												th:id="${listItem?.woId}" class="userlist">
+												<td><a href="javascript:void(0);"
+													th:text="${listItem?.woId}"
+													th:attr="onclick='sale_Invoice(\'' + ${listItem?.woId} + '\')'">
+												</a></td>
+												<td th:text="${listItem?.description}"></td>
+												<td th:text="${listItem?.Item}"></td>
+												<td>INR</td>
+												<td hidden class="debit" th:text="${listItem?.totalAmount}"
+													th:value="${listItem?.totalAmount}"></td>
+												<!-- Debit -->
+												<td hidden class="credit" th:text="${listItem?.totalAmount}"
+													th:value="${listItem?.totalAmount}"></td>
+												<!-- Credit -->
+
+												<td class="credit"
+													th:text="${#numbers.formatDecimal(listItem?.amountPerItem, 1, 2)}"></td>
+												<!-- Credit -->
+											</tr>
+										<tfoot>
+											<tr>
+												<th colspan="3"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+												<th id="desc">SALE ACC. CREDIT</th>
+												<th id="creditTotal" class="credit">Total credit: 0</th>
+
+											</tr>
+										</tfoot>
+										</tbody>
+
+									</table>
+									<div id="sale-pagination-controls"></div>
+
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!---------------------------------For salaries----------------------------------------  -->
+
+
+
+
+						<div class="col-sm-12" th:if="${formmode}=='salaries'">
+
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">List Of General Ledger</div>
+								</div>
+
+
+								<div class="card-body" style="padding: 1rem;">
+
+									<div class="mb-3">
+										<div
+											class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-3">
+											<!-- Left: Buttons -->
+											<div class="d-flex gap-2">
+												<button class="btn btn-primary" onclick="purchasefn();"
+													style="font-size: small; background-color: #f0f0f0; border-color: black; color: black">
+													<i class="fas fa-shopping-cart"></i> PURCHASE ACCOUNT
+												</button>
+												<button class="btn btn-primary" onclick="wofn();"
+													style="font-size: small; background-color: #f0f0f0; border-color: black; color: black">
+													<i class="fas fa-dollar-sign"></i> SALE ACCOUNT
+												</button>
+												<button class="btn btn-primary" onclick="salariesfn();"
+													style="background-color: #343a40; font-size: small; border-color: #e5e5e5; color: white">
+													<i class="fas fa-money-bill-wave"></i> SALARY ACCOUNT
+												</button>
+												<button class="btn btn-primary" onclick="cashfn();"
+													style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+													<i class="fas fa-money-bill-wave"></i>CASH ACCOUNT
+												</button>
+
+												<!--<button class="btn btn-primary" onclick="vendorfn();"
+											style="FONT-SIZE: small;background-color: #f0f0f0;border-color: black;color: black">
+											<i class="fas fa-store"></i>
+											 VENDOR LEDGER
+										</button>-->
+
+												<button class="btn btn-primary" onclick="ven();"
+													style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+													<i class="fas fa-store"></i> VENDOR LEDGER
+												</button>
+
+												<button class="btn btn-primary" onclick="bankfn();"
+													style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+													<i class="fas fa-university"></i> BANK ACCOUNT
+												</button>
+											</div>
+
+											<!-- Right: Month/Year Dropdowns and Search Button -->
+											<div class="d-flex gap-2" style="font-size: small;">
+												<select class="form-control flex-grow-1" id="Monthlydata">
+													<option value="0">--Select Month--</option>
+												</select> <select class="form-control flex-grow-1" id="Yeardata">
+													<option value="0">--Select Year--</option>
+												</select>
+
+												<button class="btn btn-primary"
+													style="background-color: #343a40; border-color: #343a40;"
+													onclick="getMonthlyData()">Search</button>
+											</div>
+										</div>
+									</div>
+
+
+
+									<!-- Table for displaying journal entries -->
+									<table id="salary_Tables" class="table table-striped">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>EMP ID</th>
+												<th>EMP NAME</th>
+												<th>MONTH</th>
+												<th>YEAR</th>
+												<th>PAYMENT BY</th>
+												<th class="debit">DEBIT</th>
+											</tr>
+										</thead>
+										<tbody id="salary-body">
+											<tr th:each="listItem: ${lists}" th:id="${listItem?.salId}"
+												class="userlist">
+												<td th:text="${listItem?.salId}"></td>
+												<td th:text="${listItem?.empId}"></td>
+												<td th:text="${listItem?.empName}"></td>
+												<td th:text="${listItem?.month}"></td>
+												<td th:text="${listItem?.year}"></td>
+												<td th:text="${listItem?.Payment_By}"></td>
+												<td class="debit" th:text="${listItem?.netSalary}"></td>
+											</tr>
+										<tfoot>
+											<tr>
+												<th colspan="5"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+												<th id="desc">SALERY ACC. DEBIT</th>
+												<th id="debitTotal_sale" class="debit">Total Debit: 0</th>
+
+											</tr>
+										</tfoot>
+										</tbody>
+									</table>
+									<div id="salary-pagination-controls"></div>
+
+
+
+								</div>
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!------------------------------------------------------- Cash Account--------------------------------------------------------------->
+						<div class="col-sm-12" th:if="${formmode}=='cash'">
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">
+										<i class="fas fa-book"></i> LEDGER <input type="hidden"
+											id="formmode" th:value="${formmode}" />
+									</div>
+								</div>
+
+								<div class="card-body" style="padding: 1rem;">
+									<div class="mb-3">
+										<button class="btn btn-primary" onclick="purchasefn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-shopping-cart"></i> PURCHASE ACCOUNT
+										</button>
+										<button class="btn btn-primary" onclick="wofn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-dollar-sign"></i> SALE ACCOUNT
+										</button>
+										<button class="btn btn-primary" onclick="salariesfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> SALARY ACCOUNT
+										</button>
+
+										<button class="btn btn-primary" onclick="cashfn();"
+											style="background-color: #343a40; FONT-SIZE: small; border-color: #e5e5e5; color: white">
+											<i class="fas fa-money-bill-wave"></i> CASH ACCOUNT
+										</button>
+
+										<button class="btn btn-primary" onclick="bankfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-university"></i> BANK ACCOUNT
+										</button>
+
+										<!--<button class="btn btn-primary" onclick="vendorfn();"
+											style="FONT-SIZE: small;background-color: #f0f0f0;border-color: black;color: black">
+											<i class="fas fa-store"></i>
+											 VENDOR LEDGER
+										</button>-->
+
+										<button class="btn btn-primary" onclick="ven();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-store"></i> VENDOR LEDGER
+										</button>
+										<!-- <button class="btn btn-primary" onclick="vendorfn();">
+											<i class="fas fa-user-tie"></i> VENDOR
+										</button> -->
+									</div>
+
+									<!-- Search Input -->
+									<div class="mb-3">
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									<!-- Table for displaying journal entries -->
+									<table id="dataTables4" class="table table-striped">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Tran Id</th>
+												<th>Vendor Id</th>
+												<th>Vendor Name</th>
+												<th>Particulars</th>
+												<th>Particulars Id</th>
+												<th class="debit">DEBIT</th>
+												<th class="credit">CREDIT</th>
+											</tr>
+										</thead>
+										<tbody id="table-body">
+
+											<tr th:each="listItem, index : ${tran}" class="userlist">
+												<!--<td><a href="javascript:void(0);"
+													th:text="${listItem?.poId}"
+													th:attr="onclick='Purchase_Invoice(\'' + ${listItem?.poId} + '\')'">
+												</a></td>-->
+												<td
+													th:text="${#dates.format(listItem.acct_cls_date, 'dd-MM-yyyy')}"></td>
+												<td th:text="${listItem?.tran_id}"></td>
+												<td th:text="${listItem?.vendor_id}"></td>
+												<td th:text="${listItem?.vendor_name}"></td>
+												<td th:text="${listItem?.type}"></td>
+												<td th:text="${listItem?.po_id}"></td>
+												<td class="debit"
+													th:text="${#numbers.formatDecimal(listItem?.cr_amt, 1, 2)}"></td>
+												<td class="credit"
+													th:text="${#numbers.formatDecimal(listItem?.dr_amt,1,2)}"></td>
+
+
+											</tr>
+										<tfoot>
+											<tr>
+												<th colspan="6"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+
+												<th id="debitTotal" class="debit">Total Debit: 0</th>
+												<th id="creditTotal" class="credit">Total Credit: 0</th>
+
+											</tr>
+										</tfoot>
+										</tbody>
+
+									</table>
+									<div id="purchase-pagination-controls"></div>
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!----------------------------------------------- bank-------------------------------------------------------------->
+						<div class="col-sm-12" th:if="${formmode}=='bank'">
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">
+										<i class="fas fa-book"></i> LEDGER <input type="hidden"
+											id="formmode" th:value="${formmode}" />
+									</div>
+								</div>
+
+								<div class="card-body" style="padding: 1rem;">
+									<div class="mb-3">
+										<button class="btn btn-primary" onclick="purchasefn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-shopping-cart"></i> PURCHASE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="wofn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-dollar-sign"></i> SALE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="salariesfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> SALARY LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="cashfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> CASH LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="bankfn();"
+											style="background-color: #343a40; FONT-SIZE: small; border-color: #e5e5e5; color: white">
+											<i class="fas fa-university"></i> BANK LEDGER
+										</button>
+
+										<!--<button class="btn btn-primary" onclick="vendorfn();"
+											style="FONT-SIZE: small;background-color: #f0f0f0;border-color: black;color: black">
+											<i class="fas fa-store"></i>
+											 VENDOR LEDGER
+										</button>-->
+
+										<button class="btn btn-primary" onclick="ven();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-store"></i> VENDOR LEDGER
+										</button>
+
+										<!-- <button class="btn btn-primary" onclick="vendorfn();">
+											<i class="fas fa-user-tie"></i> VENDOR
+										</button> -->
+									</div>
+
+									<!-- Search Input -->
+									<div class="mb-3">
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									<!-- Table for displaying journal entries -->
+									<table id="dataTables4" class="table table-striped">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Tran Id</th>
+												<th>Vendor Id</th>
+												<th>Vendor Name</th>
+												<th>Particulars</th>
+												<th>Particulars Id</th>
+												<th class="debit">DEBIT</th>
+												<th class="credit">CREDIT</th>
+											</tr>
+										</thead>
+										<tbody id="table-body">
+
+											<tr th:each="listItem, index : ${tran}" class="userlist">
+												<!--<td><a href="javascript:void(0);"
+													th:text="${listItem?.poId}"
+													th:attr="onclick='Purchase_Invoice(\'' + ${listItem?.poId} + '\')'">
+												</a></td>-->
+												<td
+													th:text="${#dates.format(listItem.acct_cls_date, 'dd-MM-yyyy')}"></td>
+												<td th:text="${listItem?.tran_id}"></td>
+												<td th:text="${listItem?.vendor_id}"></td>
+												<td th:text="${listItem?.vendor_name}"></td>
+												<td th:text="${listItem?.type}"></td>
+												<td th:text="${listItem?.po_id}"></td>
+												<td class="debit"
+													th:text="${#numbers.formatDecimal(listItem?.cr_amt,1,2)}"></td>
+												<td class="credit"
+													th:text="${#numbers.formatDecimal(listItem?.dr_amt,1,2)}"></td>
+
+
+											</tr>
+										<tfoot>
+											<tr>
+												<th colspan="6"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+
+												<th id="debitTotal" class="debit">Total Debit: 0</th>
+												<th id="creditTotal" class="credit">Total Credit: 0</th>
+
+											</tr>
+										</tfoot>
+										</tbody>
+
+									</table>
+									<div id="purchase-pagination-controls"></div>
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+
+
+						<!-- vendor -->
+						<div class="col-sm-12" th:if="${formmode}=='vendor'">
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">
+										<i class="fas fa-book"></i> LEDGER <input type="hidden"
+											id="formmode" th:value="${formmode}" />
+									</div>
+								</div>
+
+								<div class="card-body" style="padding: 1rem;">
+									<div class="mb-3">
+										<button class="btn btn-primary" onclick="purchasefn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-shopping-cart"></i> PURCHASE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="wofn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-dollar-sign"></i> SALE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="salariesfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> SALARY LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="cashfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> CASH LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="bankfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-university"></i> BANK LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="vendorfn();"
+											style="background-color: #343a40; FONT-SIZE: small; border-color: #e5e5e5; color: white">
+											<i class="fas fa-store"></i> VENDOR LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="ven();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-store"></i> VL
+										</button>
+
+										<!-- <button class="btn btn-primary" onclick="vendorfn();">
+											<i class="fas fa-user-tie"></i> VENDOR
+										</button> -->
+									</div>
+
+									<!-- Search Input -->
+									<div class="mb-3">
+
+
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									<!-- Table for displaying journal entries -->
+									<table id="dataTables4" class="table table-striped">
+										<thead>
+											<tr>
+												<th>Vendor ID</th>
+												<th>Vendor Name</th>
+												<th>Vendor Office Account No</th>
+												<th>Vendor Balance</th>
+												<th>Tsk Balance</th>
+												<th class="debit">TOTAL Debit</th>
+												<th class="credit">Total Credit</th>
+
+
+
+											</tr>
+										</thead>
+										<tbody id="table-body">
+
+											<tr th:each="listItem, index : ${getvendor}" class="userlist">
+												<!--<td><a href="javascript:void(0);"
+													th:text="${listItem?.poId}"
+													th:attr="onclick='Purchase_Invoice(\'' + ${listItem?.poId} + '\')'">
+												</a></td>-->
+												<td th:text="${listItem.vendorId}"></td>
+												<td th:text="${listItem?.vendorName}"></td>
+												<td style="text-align: center"><a
+													href="javascript:void(0);" th:text="${listItem?.acctNum}"
+													th:attr="onclick='vendorledger(\'' + ${listItem?.vendorId} + '\')'">
+												</a></td>
+												<td th:text="${listItem?.balanceamount}"></td>
+												<td th:text="${listItem?.advanceamount}"></td>
+												<td class="debit" th:text="${listItem?.crAmt}"></td>
+												<td class="credit" th:text="${listItem?.drAmt}"></td>
+
+
+
+											</tr>
+										<tfoot>
+											<tr>
+												<th colspan="5"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+
+												<th id="debitTotal" class="debit">Total Debit: 0</th>
+												<th id="creditTotal" class="credit">Total Credit: 0</th>
+
+											</tr>
+										</tfoot>
+										</tbody>
+
+									</table>
+									<div id="purchase-pagination-controls"></div>
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+
+						<!------------------------------------------vd-------------------------------------------------------------->
+
+						<div class="col-sm-12" th:if="${formmode}=='ven'">
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">
+										<i class="fas fa-book"></i> LEDGER <input type="hidden"
+											id="formmode" th:value="${formmode}" />
+									</div>
+								</div>
+
+								<div class="card-body" style="padding: 1rem;">
+									<div class="mb-3">
+										<button class="btn btn-primary" onclick="purchasefn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-shopping-cart"></i> PURCHASE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="wofn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-dollar-sign"></i> SALE LEDGER
+										</button>
+										<button class="btn btn-primary" onclick="salariesfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> SALARY LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="cashfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-money-bill-wave"></i> CASH LEDGER
+										</button>
+
+										<button class="btn btn-primary" onclick="bankfn();"
+											style="FONT-SIZE: small; background-color: #f0f0f0; border-color: black; color: black">
+											<i class="fas fa-university"></i> BANK LEDGER
+										</button>
+
+										<!--<button class="btn btn-primary" onclick="vendorfn();"
+											style="FONT-SIZE: small;background-color: #f0f0f0;border-color: black;color: black">
+											<i class="fas fa-store"></i>
+											 VENDOR LEDGER
+										</button>-->
+
+										<button class="btn btn-primary" onclick="ven();"
+											style="background-color: #343a40; FONT-SIZE: small; border-color: #e5e5e5; color: white">
+											<i class="fas fa-store"></i> VENDOR LEDGER
+										</button>
+
+										<!-- <button class="btn btn-primary" onclick="vendorfn();">
+											<i class="fas fa-user-tie"></i> VENDOR
+										</button> -->
+
+										<div class="form-row mb-1 mt-2">
+
+											<div class="form-group col-md-2">
+												<select class="form-control" id="vendorid" name="">
+													<option>Select</option>
+													<option th:each="listItem: ${getvendor}"
+														th:value="${listItem.vendorId}"
+														th:text="${listItem.vendorId+'-'+listItem.vendorName}"></option>
+												</select>
+											</div>
+
+											<div class="form-group col-md-2">
+												<select class="form-control" id="Monthlydata">
+													<option value="0">--Select Month--</option>
+												</select>
+											</div>
+											<div class="form-group col-md-2">
+												<select class="form-control flex-grow-1" id="Yeardata">
+													<option value="0">--Select Year--</option>
+												</select>
+											</div>
+
+											<div class="form-group col-md-2">
+												<button class="btn btn-primary"
+													style="background-color: #343a40; border-color: #343a40;"
+													onclick="getvendorid()">Search</button>
+											</div>
+
+										</div>
+
+
+
+
+
+
+									</div>
+
+									<!-- Search Input -->
+									<div class="mb-3">
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									<!-- Table for displaying journal entries -->
+									<table id="dataTablesven" class="table table-striped">
+										<thead>
+											<tr>
+												<th>Date</th>
+												<th>Vendor Id</th>
+												<th>Vendor Name</th>
+												<th>Particulars</th>
+												<th>Particulars Id</th>
+												<th class="debit">DEBIT</th>
+												<th class="credit">CREDIT</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th colspan="5"></th>
+												<!-- Empty columns to align totals under Debit and Credit -->
+
+												<th id="debitTotal" class="debit">Total Debit: 0</th>
+												<th id="creditTotal" class="credit">Total Credit: 0</th>
+
+											</tr>
+										</tfoot>
+
+									</table>
+									<div id="purchase-pagination-controls"></div>
+
+
+								</div>
+
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)"
+											style="background-color: #343a40; border-color: #343a40;">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()"
+											style="background-color: #343a40; border-color: #343a40;">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+
+
+
+						<!--<div class="col-sm-12" th:if="${formmode}=='vendor'">
+
+
+							<div class="card" id="DayBillingList" style="margin-top: 10px;">
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="spur-card-title">List Of General Ledger</div>
+								</div>
+
+
+								<div class="card-body" style="padding: 1rem;">
+
+									<div class="mb-3">
+										<button class="btn-primary" onclick="purchasefn();">Purchase</button>
+										
+										<button class="btn-primary" onclick="wofn();">Sale</button>
+										<button class="btn-primary" onclick="salariesfn();">Salaries</button>
+										<button class="btn-primary" onclick=" vendorfn();" style="background-color:#343a40; border-color:#e5e5e5; color:white" >vendor</button>
+
+									</div>
+									
+									<div class="mb-3">
+										<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable()" class="form-control"
+											style="width: 18%; height: 34px;" />
+									</div>
+
+									
+									<table id="dataTables" class="table table-striped">
+										<thead>
+											<tr>
+													<th style="text-align: center;">Vendor Id</th>
+													<th style="text-align: center;">Vendor Name</th>
+													<th style="text-align: center;">Address</th>
+													<th style="text-align: center;">Mobile No</th>
+													<th style="text-align: center;">Deductee Type</th>
+													<th style="text-align: center;">Vendor Status</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+										</thead>
+										<tbody id="table-body">
+											<tr th:each="vendor : ${getvendor}">
+													<td th:text="${vendor.vendorDocId}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.vendorName}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.addressDetail1}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.mobileNo}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.deducteeType}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.statusOther}"
+														style="text-align: center;"></td>
+													<td style="text-align: center;">
+													
+															<input class="form-control-md checkToModify" onclick="vendorgl(this)" th:value="${vendor.vendorDocId}"
+																type="radio" />
+															
+														
+
+													</td>
+												</tr>
+											
+										
+										</tbody>
+									</table>
+									<div id="pagination-controls"></div>
+
+
+								</div>
+								<div class=" col-sm-13 text-center">
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<button class="btn btn-xs btn-primary mr-2" type="button"
+											id="Dashboard" onclick="contentLoad(this)">Home</button>
+										<button class="btn btn-xs btn-primary mr-2" id="btnback"
+											onclick="back()">Back</button>
+
+									</div>
+								</div>
+							</div>
+
+						</div>-->
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+
+</html>

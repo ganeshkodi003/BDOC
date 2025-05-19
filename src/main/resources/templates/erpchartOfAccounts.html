@@ -1,0 +1,1519 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+.form-group {
+	position: relative;
+	margin-bottom: 1.5rem;
+}
+
+.form-control {
+	width: 100%;
+	border: 2px solid #ccc;
+	border-radius: 8px;
+	font-size: 1rem;
+	outline: none;
+	background: transparent;
+	transition: border-color 0.3s ease, padding-top 0.3s ease;
+}
+
+.error {
+	color: red;
+	padding-top: 15px;
+}
+
+.form-control:focus {
+	border-color: #007bff;
+}
+
+.form-legend {
+	position: absolute;
+	top: 50%;
+	left: 15px;
+	transform: translateY(-50%);
+	font-size: 1rem;
+	color: #aaa;
+	background: white;
+	padding: 0 5px;
+	pointer-events: none;
+	transition: 0.3s ease;
+}
+
+/* When input or select is focused or has a value, move the label up */
+.form-control:focus ~ .form-legend, .form-control:not (:placeholder-shown
+	) ~ .form-legend {
+	top: -8px;
+	font-size: 1rem;
+	color: #007bff;
+}
+
+/* Hover effect when the input/select is focused */
+.form-control:focus:hover ~ .form-legend {
+	color: #0056b3; /* Darker shade of blue on hover */
+}
+
+/* Ensure the label returns to the normal color after focus or hover is removed */
+.form-control:not (:focus ) ~ .form-legend {
+	color: #aaa; /* Normal label color */
+}
+</style>
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: center;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: bold;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+
+.error-message {
+	color: red;
+	font-size: 12px;
+	margin-top: 5px;
+	display: block;
+}
+
+.dataTables_filter {
+	float: left;
+	text-align: right;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+</style>
+
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:5px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+</head>
+<script>
+
+function assosiateVerify(a) {
+
+	var id = a.getAttribute("data-resource");
+
+	location.href = './gj?formmode=verify' + '&id='
+			+ id;
+}
+function assosiateModify(a) {
+
+	var id = a.getAttribute("data-resource");
+
+	location.href = './gj?formmode=edit' + '&id='
+			+ id;
+}
+function assosiateDelete(a) {
+
+	var id = a.getAttribute("data-resource");
+
+	location.href = './gj?formmode=delete' + '&id='
+			+ id;
+}
+function assosiateView(a) {
+
+	var id = a.getAttribute("data-resource");
+
+	location.href = './gj?formmode=view' + '&id='
+			+ id;
+}
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+function Back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+function back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+
+function add(event) {
+
+    event.preventDefault();
+	location.href = './erpchartOfAccounts?formmode=add';
+}
+
+function listt(event) {
+    event.preventDefault();  // Prevent the default form submission behavior
+    location.href = './erpchartOfAccounts?formmode=list';
+}
+
+	
+</script>
+
+
+
+<script>
+function product_forpo(){
+	
+	 
+    var poid = document.getElementById('productName').value;
+ 
+ 
+
+ 
+    $.ajax({
+        url: './getStockpo?item=' + poid,
+        type: 'GET',  
+        success: function(response) {
+        	
+        	console.log(response);
+            if (response && response.length > 0) {
+             
+                var entity = response[0];  
+
+             // Set the category name value
+                document.getElementById('category_name1').value = entity.item || '';
+
+                // Populate the batch select options
+                var batchSelect = document.getElementById('batch1');
+                batchSelect.innerHTML = ''; // Clear any existing options
+                var defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.text = 'SELECT';
+                batchSelect.appendChild(defaultOption);
+
+                response.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = entity.hsnSacCode; 
+                    option.text = entity.hsnSacCode;
+                    batchSelect.appendChild(option);
+                });
+
+            } else {
+            	  document.getElementById('category_name1').value = '';
+                  var batchSelect = document.getElementById('batch1');
+                  batchSelect.innerHTML = '<option value="">SELECT</option>';
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            alert("Error fetching vendor details.");
+        }
+    });
+}
+
+$(document).ready(function () {
+    $('#dataTables').DataTable({
+        "pageLength": 20,        // Set the number of rows per page
+        "lengthChange": false,   // Hide the dropdown for changing rows per page
+        "ordering": false,       // Disable column sorting
+        "searching": true,       // Enable global search
+        "info": true,            // Show table information
+        "pagingType": "simple_numbers", // Pagination with only numbers
+
+        // Customizing DOM structure to place search box at the top left
+
+        "dom": '<"top"f>rt<"bottom"ip><"clear">'
+    });
+
+    // Remove the "Search:" label and add a placeholder to the search input
+    $('.dataTables_filter label').contents().filter(function () {
+        return this.nodeType === Node.TEXT_NODE;
+    }).remove(); // Remove the text node containing "Search:"
+
+    // Add a placeholder to the input field
+    $('.dataTables_filter input')
+        .attr('placeholder', 'Search...')
+        .css('margin-left', '0'); // Adjust margin since the label is removed
+
+    // Align the search box to the left corner
+    $('.dataTables_filter').css({
+        "float": "left",
+        "text-align": "left"
+    });
+});
+
+</script>
+
+<script>
+/* function product_name_typeFunction111() {
+    const productName = document.getElementById('productName').value;  // Get the selected product name
+    const category_name = document.getElementById('category_name');
+    const batchSelect = document.getElementById('batch');  // Select the batch dropdown
+
+    // Make an AJAX request to get batches based on the product name
+    $.ajax({
+        url: "./getStocksss?product_id=" + encodeURIComponent(productName),  // Use product name as the query parameter
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            let options = '<option>SELECT</option>';  // Default option
+            
+            $.each(res, function(index, data) {
+                const values = Object.values(data);
+                category_name.value = values[1];
+                options += `<option value="${values[0]}">${values[0]}</option>`;  // Assuming first value is batch
+            });
+
+            // Update the batch select field
+            batchSelect.innerHTML = options;
+
+            // Remove duplicate options if any
+            const uniqueOptions = [];
+            batchSelect.querySelectorAll('option').forEach(option => {
+                if (uniqueOptions.includes(option.value)) {
+                    option.remove();
+                } else {
+                    uniqueOptions.push(option.value);
+                }
+            });
+        },
+        error: function() {
+            batchSelect.innerHTML = '<option>Error retrieving batch</option>';  // Handle errors
+        }
+    });
+}
+
+ */
+
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+function submitchartofaccounts() {
+    var employeeSelect = document.getElementById('EmployeeId');
+    var vendorSelect = document.getElementById('VendorId');
+    var ownership = document.getElementById('Ownership').value;
+    var formData = new FormData($('#Erp_ChartOfAccounts')[0]);
+
+    if (ownership === 'Vendor') {
+    
+        formData.append("ownershipid", vendorSelect.value);
+    } else if (ownership === 'Employee') {
+        formData.append("ownershipid", employeeSelect.value);
+    } else if (ownership === 'Bank') {
+        formData.append("ownershipid", 'Bank');
+    } else if (ownership === 'Cash') {  // Fixed the duplicate condition
+        formData.append("ownershipid", 'Cash');
+    }
+
+    // Proceed with the AJAX request
+    $.ajax({
+        url: './erpAddchartofaccounts',
+        type: 'POST',
+        data: formData,
+        processData: false, // Prevent jQuery from processing the data
+        contentType: false, // Prevent jQuery from setting content type
+        success: function (response) {
+            $("#alertmsg").text(response);
+            $("#alert").modal("toggle");
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+
+function verifysubmit(a) {
+    // Get the id from the 'data-resource' attribute
+    var id = a.getAttribute("data-id");
+
+    // Debugging alert to check if the correct ID is captured
+    alert('Verifying ID: ' + id);
+
+    // Perform AJAX call to verify
+    $.ajax({
+        url: './gjfns?formmode=verify&id=' + id,  // Ensure the URL is correct
+        type: 'POST',
+        success: function(res) {
+            // Show alert with the response from the server
+            alert(res);
+        	window.history.back(); 
+        },
+        error: function(err) {
+            // Handle any errors from the AJAX request
+            alert('Error during verification: ' + JSON.stringify(err));
+        }
+    });
+}
+
+
+function deletesubmit(a) {
+    // Get the id from the 'data-resource' attribute
+    var id = a.getAttribute("data-id");
+
+    // Debugging alert to check if the correct ID is captured
+    alert('Delete ID: ' + id);
+
+    // Perform AJAX call to verify
+    $.ajax({
+        url: './gjfns?formmode=delete&id=' + id,  // Ensure the URL is correct
+        type: 'POST',
+        success: function(res) {
+            // Show alert with the response from the server
+            alert(res);
+        	window.history.back(); 
+        },
+        error: function(err) {
+            // Handle any errors from the AJAX request
+            alert('Error during verification: ' + JSON.stringify(err));
+        }
+    });
+}
+
+
+function editsubmit(a) {
+	
+    // Validate the category_name field
+    if ($('#category_name').val() === '' || $('#debit').val() === '' || $('#credit').val() === '') {
+        alert('Please fill the required fields !!!');
+        return; // Stop execution if validation fails
+    }
+    
+    $.ajax({
+        url: './gjedit?',
+        type: 'POST',
+        data: $('#gjadd').serialize(),
+        success: function (response) {
+            alert(response);
+            location.reload();
+        },
+        error: function(xhr, status, error) {
+            alert('Error: ' + error);
+        }
+    });
+
+}
+
+</script>
+<script>
+
+// Function to calculate total debit and credit
+function calculateTotals() {
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    // Calculate total for the General Journal table
+    document.querySelectorAll("#dataTables .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Calculate total for the Salaries table
+    document.querySelectorAll("#dataTables_salaries .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_salaries .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+    
+ // Calculate total for the vandor table
+    document.querySelectorAll("#dataTables_vandor .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_vandor .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+    
+
+    /*// Calculate total for the Sales table
+    document.querySelectorAll("#dataTables_sales .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_sales .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });*/
+
+    // Update the totals in the footer
+    document.getElementById('totalDebit').innerText = '-'+totalDebit.toFixed(2);
+    document.getElementById('totalCredit').innerText = totalCredit.toFixed(2);
+}
+
+// Call the function after page load or when data is modified
+window.onload = calculateTotals;
+</script>
+
+
+
+<script type="text/javascript">
+
+    var pageSize = 10; // Set page size for pagination
+
+    function showPage(tableId, page) {
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+        var pageCount = Math.ceil(rows.length / pageSize);
+        rows.hide();
+        rows.slice((page - 1) * pageSize, page * pageSize).show();
+
+        var $paginationControls = $('#pagination-controls-' + tableId);
+        $paginationControls.empty();
+
+        for (var i = 1; i <= pageCount; i++) {
+            $paginationControls.append('<button class="pagination-btn" onclick="showPage(\'' + tableId + '\', ' + i + ')">' + i + '</button> ');
+        }
+    }
+
+    // Initial Page load for all tables
+    $(document).ready(function () {
+        showPage('dataTables', 1);
+        showPage('dataTables_salaries', 1);
+        showPage('dataTables_sales', 1);
+    });
+
+    // Search Functionality
+    function searchTable(tableId, searchInputId) {
+        var input = $('#' + searchInputId).val().toUpperCase();
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+
+        rows.each(function () {
+            var cells = $(this).find('td');
+            var found = false;
+
+            cells.each(function () {
+                if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                    found = true;
+                    return false; // Exit loop early
+                }
+            });
+
+            if (found) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+function listt1(event)
+{
+	event.preventDefault();
+	var selectedvelue = event.target.getAttribute("data-value1");
+	//alert(selectedvelue);
+
+	if(selectedvelue === 'purchaseOrder')
+	{
+		 location.href = './gj?formmode=add';
+		
+	}
+	else if(selectedvelue === 'workOrder')
+		{
+		
+		 location.href = './gj?formmode=workorder';
+		 
+		}
+}
+</script>
+<script>
+
+function filterlist(event){
+	
+	event.preventDefault();
+	var selectedval = event.target.getAttribute("data-value1");
+	location.href='./gj?formmode=list' +'&order_type=' +selectedval;
+	
+}
+
+</script>
+
+<script>
+
+function workdetails(){
+	
+	 
+    var items = document.getElementById('itemname').value;
+ 
+
+ 
+    $.ajax({
+        url: './workdetails?item=' + items,
+        type: 'GET',  
+        success: function(response) {
+            if (response && response.length > 0) {
+             
+                var entity = response[0];  
+
+             // Set the category name value
+                document.getElementById('category_name').value = entity.item || '';
+
+                // Populate the batch select options
+                var batchSelect = document.getElementById('batch');
+                batchSelect.innerHTML = ''; // Clear any existing options
+                var defaultOption = document.createElement('option');
+                defaultOption.value = '';
+                defaultOption.text = 'SELECT';
+                batchSelect.appendChild(defaultOption);
+
+                response.forEach(function(item) {
+                    var option = document.createElement('option');
+                    option.value = item.hsnSacCode; 
+                    option.text = item.hsnSacCode;
+                    batchSelect.appendChild(option);
+                });
+
+            } else {
+            	  document.getElementById('category_name').value = '';
+                  var batchSelect = document.getElementById('batch');
+                  batchSelect.innerHTML = '<option value="">SELECT</option>';
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            alert("Error fetching vendor details.");
+        }
+    });
+}
+
+
+function getworkdetails() {
+    const woid = document.getElementById('itemname').value;
+    const hsn = document.getElementById('batch').value; 
+    const credit = document.getElementById('credit'); 
+    const debit = document.getElementById('debit'); 
+    const exdate = document.getElementById('expirydate'); 
+    
+ 
+
+    $.ajax({
+        url: "./getamountforWO?item=" + woid + "&hsnSacCode=" + hsn,
+        type: 'GET',
+        dataType: "json",
+        success: function(response) {
+        	console.log(response.rate);
+        	 if (response && response.length > 0) {
+        		 var entity = response[0]; 
+        		 console.log(entity);
+        		 document.getElementById('creditwo').value = entity.rate || '';
+        		 document.getElementById('debitwo').value = entity.rate || '';
+        		 document.getElementById('paymentbywo').value = entity.paymenttype || '';
+        		 document.getElementById('VendorId').value = entity.vendorId || '';
+        	 }
+        	 else{
+        		 document.getElementById('creditwo').value = '';
+        		 document.getElementById('debitwo').value ='';
+        		 document.getElementById('paymentbywo').value ='';
+        		 document.getElementById('VendorId').value ='';
+        	 }
+        	 
+        }
+    });
+    
+    
+    
+    
+}
+
+
+
+/* -------po----- */
+
+
+function getcurrentstockPO() {
+    const Poid = document.getElementById('productName').value;
+    const hsn = document.getElementById('batch1').value; 
+    const credit = document.getElementById('creditPO'); 
+    const debit = document.getElementById('debitPO'); 
+    const exdate = document.getElementById('expirydate');
+    const VendorIds = document.getElementById('VendorId'); 
+  
+
+    $.ajax({
+        url: "./getamountforPO?PO_ID=" + Poid + "&hsnSacCode=" + hsn,
+        type: 'GET',
+        dataType: "json",
+        success: function(response) {	
+        	
+        	 if (response && response.length > 0) {
+        		 
+        		
+        		 
+        		 var entity = response[0];
+        		 console.log(entity);
+        			 
+        	
+        		 
+        		 document.getElementById('creditPO').value = entity.rate || '';
+        		 document.getElementById('debitPO').value = entity.rate || '';
+        		 document.getElementById('paymentbypo1').value = entity.paymenttype || '';
+        		 document.getElementById('VendorId').value = entity.vendorId || '';
+        		 
+        	 }
+        	 else{
+        		 document.getElementById('creditPO').value = '';
+        		 document.getElementById('debitPO').value ='';
+        		 document.getElementById('paymentbypo1').value ='';
+        	 }
+        	
+        }
+    });
+}
+
+
+
+
+function submitwo(){
+	
+    if ($('#itemname').val() === '' || $('#debitwo').val() === '' || $('#creditwo').val() === '') {
+        alert('Please fill the required fields !!!');
+        return; // Stop execution if validation fails
+    }
+    
+    // Proceed with the AJAX request if validation passes
+    $.ajax({
+        url: './Addworkoredrtojurnal?',
+        type: 'POST',
+        data: $('#workorderadd').serialize(),
+        success: function (response) {
+            $("#alertmsg").text(response);
+        	$("#alert").modal("toggle");
+        }
+    });
+	
+}
+
+function accountcash(){
+	
+	var Accbanktype=document.getElementById('Accbanktype').value;
+	var bankaccount=document.getElementById('bankaccount');
+	var balance=document.getElementById('balance');
+	
+	let res=[];
+	 
+	$.ajax({
+	        url: './getOrganizationMaster?',
+	        type: 'GET',
+	        success: function (response) {
+	        	 console.log(response);
+	        	//alert(response.cash_balance);
+	        	
+	        	if(Accbanktype==='Account'){
+	        		bankaccount.style.display="block";
+	        		balance.value=response.account_balance;
+	        		
+	        		
+	        	}
+	        	else{
+	        		bankaccount.style.display="none";
+	        		balance.value=response.cash_balance;
+	        	}
+	        }
+	    });
+	
+	
+}
+function ownershipchange(){
+	var Ownership=document.getElementById('Ownership').value;
+	var vendoridselect=document.getElementById('vendoridselect');
+	var vendoridlab=document.getElementById('vendoridlab');
+	var Employeeselect=document.getElementById('Employeeselect');
+	var Employeeidlab=document.getElementById('Employeeidlab');
+	
+	
+	vendoridselect.style.display = 'none';
+	vendoridlab.style.display = 'none';
+	Employeeidlab.style.display = 'none';
+	Employeeselect.style.display = 'none';
+
+	if(Ownership=='Vendor'){
+		vendoridselect.style.display = 'block';
+		vendoridlab.style.display = 'block';
+	}
+	else if(Ownership=='Employee'){
+		Employeeidlab.style.display = 'block';
+		Employeeselect.style.display = 'block';
+		
+	}
+}
+
+function viewaccount(a){
+	 var accountnumber =a.getAttribute('data-account');
+	 //alert(accountnumber)
+	 location.href = './erpchartOfAccounts?formmode=account&accountnum='+accountnumber;
+}
+</script>
+
+
+
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-12">
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="Erp_ChartOfAccounts" autocomplete="off">
+							<div class="card">
+
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-user-plus mr-2"></i>Chart Of Accounts
+									</div>
+									<div>
+
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="listt(event);">
+											<i class="fas fa-list mr-1"></i> List
+										</button>
+									</div>
+								</div>
+
+
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="mb-3">
+										<!--<button class="btn-primary"  data-value1="purchaseOrder" onclick="listt1(event);" style="background-color:#e5e5e5; border-color:#e5e5e5; color:black">purchase order</button>
+										<button class="btn-primary"  data-value1="workOrder" onclick="listt1(event);">Work order</button>-->
+									</div>
+
+
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="fromAcctype">Account Type</label>
+											</div>
+											<div class="col-sm-3">
+												<select name="accountType" id="accountType"
+													class="form-control" required>
+													<option value="">SELECT</option>
+													<option value="Asset">Asset</option>
+													<option value="Liability">Liability</option>
+													<option value="Equity">Equity</option>
+													<option value="Income">Income</option>
+													<option value="Expense">Expense</option>
+
+												</select>
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="toAcctype">Account Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="accountNumber" th:value="${Accno}"
+													name="accountNumber" class="form-control form-control-sm"
+													readonly autocomplete="off" />
+											</div>
+										</div>
+
+										<div id="bankaccount">
+											<div class="row formline" style="margin-top: 20px;">
+												<div class="col-sm-2">
+													<label for="fromAcctype">Account Name</label>
+												</div>
+												<div class="col-sm-3">
+													<input type="text" id="accountName" name="accountName"
+														class="form-control form-control-sm" autocomplete="off" />
+												</div>
+
+												<div class="col-sm-1"></div>
+
+
+												<div class="col-sm-2">
+													<label for="entrydate"> Entry Date</label>
+												</div>
+												<div class="col-sm-3">
+													<input type="date" id="entrydate" name="entryDate"
+														th:value="${currentDate}"
+														class="form-control form-control-sm" autocomplete="off"
+														readonly />
+												</div>
+											</div>
+										</div>
+
+
+										<div class="row formline" style="margin-top: 20px;">
+
+											<div class="col-sm-2">
+												<label for="entrydate">Parent Account</label>
+											</div>
+											<div class="col-sm-3">
+
+												<select class="form-control form-control-sm"
+													name='parentaccount' id='parentaccount'>
+													<option value="">Select</option>
+													<option th:each="account:${liststrn}"
+														th:text="${account.accountNumber+'-'+account.accountName}"
+														th:value="${account.accountNumber}"></option>
+												</select>
+											</div>
+
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="entrydate">Remarks</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="remarks" name="remarks"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+
+											<div class="col-sm-2">
+												<label for="entrydate">Account Opening Balance</label>
+											</div>
+											<div class="col-sm-3">
+
+												<input type="number" id="openingbalance"
+													name="openingbalance" class="form-control form-control-sm"
+													autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+
+											<div class="col-sm-2">
+												<label for="entrydate">Ownership</label>
+											</div>
+											<div class="col-sm-3">
+
+												<select class="form-control form-control-sm"
+													name='ownership' onchange="ownershipchange()"
+													id='Ownership'>
+													<option value="">Select</option>
+													<option value='Bank'>Bank</option>
+													<option value='Cash'>Cash</option>
+													<option value='Vendor'>Vendor</option>
+													<option value='Employee'>Employee</option>
+												</select>
+											</div>
+
+
+
+
+											<div class="col-sm-2" id='vendoridlab' Style="display: none">
+												<label for="entrydate">Vendor Id</label>
+											</div>
+											<div class="col-sm-3" id='vendoridselect'
+												Style="display: none">
+
+												<select class="form-control form-control-sm"
+													name='ownershipids' id='VendorId'>
+													<option value="">Select</option>
+													<option th:each="vendor:${getvendor}"
+														th:text="${vendor.vendorId+'-'+vendor.vendorName}"
+														th:value="${vendor.vendorId + '-' + vendor.vendorName}"></option>
+
+												</select>
+											</div>
+
+											<div class="col-sm-2" id='Employeeidlab'
+												Style="display: none">
+												<label for="entrydate">Employee Id</label>
+											</div>
+											<div class="col-sm-3" id='Employeeselect'
+												Style="display: none">
+
+												<select class="form-control form-control-sm"
+													name='ownershipids' id='EmployeeId'>
+													<option value="">Select</option>
+													<option th:each="resourceids:${resourceids}"
+														th:text="${resourceids.resource_id+'-'+resourceids.resource_name}"
+														th:value="${resourceids.resource_id+'-'+resourceids.resource_name}"></option>
+
+												</select>
+											</div>
+
+
+
+
+
+
+
+
+
+
+
+										</div>
+									</div>
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-dark"
+											id="btnSubmit" onclick="submitchartofaccounts();">Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+
+				<!-------------------------------------------------------------- list------------------------------------------------------->
+
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i>Chart Of Accounts- List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left; font-weight: bold">Account
+														Type</th>
+													<th style="text-align: left; font-weight: bold">Account
+														Number</th>
+													<th style="text-align: left; font-weight: bold">Account
+														Name</th>
+													<th style="text-align: left; font-weight: bold">Date</th>
+													<!--<th style="text-align: center; font-weight: bold">Remarks</th>-->
+													<th style="text-align: right; font-weight: bold">Total
+														Credit Balance</th>
+													<th style="text-align: right; font-weight: bold">Total
+														Debit Balance</th>
+													<th style="text-align: right; font-weight: bold">Account
+														Balance</th>
+													<!--<th style="text-align: center; font-weight: bold">Action</th>-->
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(liststrn)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="liststrn : ${liststrn}">
+													<td th:text="${liststrn.accountType}"
+														style="text-align: left;"></td>
+													<td style="text-align: left;">
+													<a href="javascript:void(0);"
+														th:text="${liststrn.accountNumber}"
+														th:attr="data-account=${liststrn.accountNumber}"
+														onclick="viewaccount(this)"> </a>
+														</td>
+													<td th:text="${liststrn.accountName}"
+														style="text-align: left;"></td>
+													<td
+														th:text="${#dates.format(liststrn.entryDate,'dd-MM-yyyy')}"
+														style="text-align: left;"></td>
+													<!--<td th:text="${liststrn.remarks}" style="text-align: center;"></td>-->
+													<td th:text="${liststrn.totalCreditBalance}"
+														style="text-align: right;"></td>
+													<td th:text="${liststrn.totalDebitBalance}"
+														style="text-align: right;"></td>
+													<td th:text="${liststrn.accountBalance}"
+														style="text-align: right;"></td>
+													<!--<td style="text-align: center;"><input type="radio"
+														th:attr="data-account=${liststrn.accountNumber}"
+														onclick="viewaccount(this)"></td>-->
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+								</div>
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+				<div class="container-fluid content"
+					th:if="${formmode}=='childlist'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div th:if="${not #lists.isEmpty(liststrn)}" >
+									
+										<i class="fas fa-list mr-1"></i>Chart Of Accounts-Child
+										Account<span th:text="${'('+liststrn[0].parentaccount+')'}"></span>
+									</div>
+									
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left; font-weight: bold">Account
+														Type</th>
+													<th style="text-align: left; font-weight: bold">Account
+														Number</th>
+													<th style="text-align: left; font-weight: bold">Account
+														Name</th>
+													<th style="text-align: left; font-weight: bold">Date</th>
+													<!--<th style="text-align: center; font-weight: bold">Remarks</th>-->
+													<th style="text-align: right; font-weight: bold">Total
+														Credit Balance</th>
+													<th style="text-align: right; font-weight: bold">Total
+														Debit Balance</th>
+													<th style="text-align: right; font-weight: bold">Account
+														Balance</th>
+													<!--<th style="text-align: center; font-weight: bold">Action</th>-->
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(liststrn)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="liststrn : ${liststrn}">
+													<td th:text="${liststrn.accountType}"
+														style="text-align: left;"></td>
+													<td 
+														style="text-align: left;">
+														<a href="javascript:void(0);"
+														th:text="${liststrn.accountNumber}"
+														th:attr="data-account=${liststrn.accountNumber}"
+														onclick="viewaccount(this)"> </a>
+														
+														
+														</td>
+													<td th:text="${liststrn.accountName}"
+														style="text-align: left;"></td>
+													<td
+														th:text="${#dates.format(liststrn.entryDate,'dd-MM-yyyy')}"
+														style="text-align: left;"></td>
+													<!--<td th:text="${liststrn.remarks}" style="text-align: center;"></td>-->
+													<td th:text="${liststrn.totalCreditBalance}"
+														style="text-align: right;"></td>
+													<td th:text="${liststrn.totalDebitBalance}"
+														style="text-align: right;"></td>
+													<td th:text="${liststrn.accountBalance}"
+														style="text-align: right;"></td>
+													<!--<td style="text-align: center;"><input type="radio"
+														th:attr="data-account=${liststrn.accountNumber}"
+														onclick="viewaccount(this)"></td>-->
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+								</div>
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+				<!-- Journal Entries List -->
+					
+					<div class="container-fluid content"
+					th:if="${formmode}=='tranlist'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div th:if="${not #lists.isEmpty(trandata)}" >
+									
+										<i class="fas fa-list mr-1"></i>Chart Of Accounts
+									</div>
+									
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="add(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left; font-weight: bold">Date</th>
+													<th style="text-align: left; font-weight: bold">Tran Id</th>
+													<th style="text-align: left; font-weight: bold">Vendor Id</th>
+													<th style="text-align: left; font-weight: bold">Vendor Name</th>
+													<!--<th style="text-align: center; font-weight: bold">Remarks</th>-->
+													<th style="text-align: left; font-weight: bold">Particulars</th>
+													<th style="text-align: left; font-weight: bold">Particulars Id</th>
+													<th style="text-align: right; font-weight: bold">Debit</th>
+													<th style="text-align: right; font-weight: bold">Credit</th>
+													
+													<!--<th style="text-align: center; font-weight: bold">Action</th>-->
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(trandata)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="liststrn : ${trandata}">
+													<td th:text="${#dates.format(liststrn.journalDate,'dd-MM-yyyy')}"
+														style="text-align: left;"></td>
+													
+													<td th:text="${liststrn.journalTranId}"
+														style="text-align: left;"></td>
+														
+													<td  th:text="${liststrn.vendor_id}"
+														style="text-align: left;"></td>
+														
+													<td th:text="${liststrn.vendor_name}"
+														style="text-align: left;"></td>		
+													
+													<td th:text="${liststrn.tran_particulars}"
+														style="text-align: left;"></td>
+														
+													<td th:text="${liststrn.description}"
+														style="text-align: left;"></td>	
+														
+													
+													<td th:text="${liststrn.debits != null ? #numbers.formatDecimal(liststrn.debits, 1, 2) : '0.00'}"
+														style="text-align: right;"></td>
+													
+													<td  th:text="${liststrn.credits != null ? #numbers.formatDecimal(liststrn.credits, 1, 2) : '0.00'}"
+														style="text-align: right;"></td>
+													
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+								</div>
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERPS</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="listt(event);">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+</html>

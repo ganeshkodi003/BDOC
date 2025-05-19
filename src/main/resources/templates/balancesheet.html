@@ -1,0 +1,538 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+#pagination-controls {
+	margin: 20px 0;
+}
+
+.pagination-btn {
+	margin: 0 5px;
+	padding: 5px 10px;
+	border: 1px solid #007bff;
+	background-color: #f8f9fa;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.pagination-btn:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+.debit {
+	color: red;
+	text-align: right;
+}
+
+.credit {
+	color: green;
+	text-align: right;
+}
+
+footer {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 0.8em;
+	color: #666;
+}
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -23px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+</head>
+<script>
+
+
+
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+function Back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+
+/*function toggleSubRows(event) {
+	  let cell = event.target;
+
+	  // Handle if a span inside the cell is clicked
+	  if (cell.tagName.toLowerCase() === "span") {
+	    cell = cell.closest("td, th");
+	  }
+
+	  if (cell && (cell.tagName.toLowerCase() === "td" || cell.tagName.toLowerCase() === "th")) {
+	    const row = cell.parentNode;
+	    const rowIndex = row.rowIndex;
+
+	    const table = row.closest("table");
+
+	    // Remove sub-row if already there
+	    const nextRow = row.nextElementSibling;
+	    if (nextRow && nextRow.classList.contains("sub-row")) {
+	      table.deleteRow(rowIndex + 1);
+	      return;
+	    }
+
+	    // Insert new row below
+	    const newRow = table.insertRow(rowIndex + 1);
+	    newRow.classList.add("sub-row");
+
+	    // Insert two cells
+	    const leftCell = newRow.insertCell(0);
+	    const rightCell = newRow.insertCell(1);
+
+	    // Set colspan if the original table has more than 2 columns
+	    const totalCols = row.cells.length;
+	    if (totalCols > 2) {
+	      leftCell.colSpan = 1;
+	      rightCell.colSpan = totalCols - 1;
+	    } else {
+	      leftCell.colSpan = 1;
+	      rightCell.colSpan = 1;
+	    }
+	    
+	    
+
+	    // Fill the two cells
+	    leftCell.innerHTML = `<div style="padding: 8px; background-color: #f0f0f0;">
+	      <strong>Left Detail</strong>
+	    </div>`;
+
+	    rightCell.innerHTML = `<div style="padding: 8px; background-color: #f0f0f0;">
+	      <strong>Right Detail</strong>
+	    </div>`;
+	  }
+	}*/
+	
+	
+	function totallability() {
+	    //alert("function");
+	    var totalamount = 0;
+
+	    $('#liabilitiesTable tbody tr').each(function () {
+	        const Liabilitiesamount = parseFloat($(this).find('.Liabilitiesamount').text()) || 0;
+	        totalamount += Liabilitiesamount;
+	        //alert(totalamount);
+	    });
+
+	    $('#totalLiabilities').text(totalamount.toFixed(2));
+	    totallasset();
+	    
+	}
+	
+	function totallasset() {
+	    //alert("function");
+	    var totalamount = 0;
+
+	    $('#assetsTable tbody tr').each(function () {
+	        const Liabilitiesamount = parseFloat($(this).find('.assetamount').text()) || 0;
+	        totalamount += Liabilitiesamount;
+	        //alert(totalamount);
+	    });
+
+	    $('#totalasset').text(totalamount.toFixed(2));
+
+	    
+	}
+
+	window.onload = totallability;
+
+	
+	function toggleSubRows(event) {
+	    const arrowSpan = event.target; // <span> element clicked
+	    const rowType = arrowSpan.dataset.rowtype;
+	    const rowId = arrowSpan.dataset.rowid;
+	    const safeRowType = rowType.replace(/\s+/g, "-"); // For class names
+
+	    const currentRow = arrowSpan.closest("tr");
+
+	    if (arrowSpan.textContent === "▶") {
+	        arrowSpan.textContent = "▼"; // Open state
+
+	        console.log("Open for:", rowType, rowId);
+	        
+	        for (let i = 0; i < 3; i++) {
+	        	// Example: insert dummy sub-row
+		        const newRow = document.createElement("tr");
+		        newRow.classList.add(`${safeRowType}-subrow`);
+		        newRow.innerHTML = `
+		            <td style="background-color: #f0f0f0;">Sub-row for ${rowType}</td>
+		            <td style="background-color: #f0f0f0; text-align:right">1000</td>
+		        `;
+		        currentRow.insertAdjacentElement("afterend", newRow);
+	        }
+
+	        
+
+	    } else {
+	        arrowSpan.textContent = "▶"; // Close state
+
+	        let nextRow = currentRow.nextElementSibling;
+	        while (nextRow && nextRow.classList.contains(`${safeRowType}-subrow`)) {
+	            const rowToRemove = nextRow;
+	            nextRow = nextRow.nextElementSibling;
+	            rowToRemove.remove();
+	        }
+	    }
+	}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-12">
+
+				<div class="container-fluid content">
+  <div class="row">
+    <div class="col-sm-12">
+      <form autocomplete="off" id="list_journal" method="POST">
+        <div class="card" style="margin-top: 10px;">
+          <div class="card-header"
+            style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+            <div class="float-left" style="padding: 5px;">
+              <div class="spur-card-title">Balance Sheet</div>
+            </div>
+          </div>
+
+          <div class="card-body" style="padding: 1rem;">
+            <div class="row formline" style="margin-top: 20px;">
+              <div class="col-sm-2">
+                <!--<label for="from">Capital Amount</label>-->
+              </div>
+              <div class="col-sm-2">
+                <input type="hidden" id="previous" th:value="${caps}"
+                  class="form-control form-control-sm" autocomplete="off" required />
+              </div>
+            </div>
+
+            <!-- Side-by-side Tables -->
+            <div class="row">
+              <!-- Liabilities Table -->
+              <div class="col-sm-6">
+                <h5 style="font-weight: bold;">Liabilities</h5>
+                <table class="table table-bordered" id="liabilitiesTable">
+                  
+                  <tbody>
+                    <tr>
+                      <th>Capital<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);" data-rowtype="Capital Account" data-rowid="1">▶</span></th>
+                      <td style="text-align: right;" class="Liabilitiesamount" th:text="${caps}"></td>
+                    </tr>
+                    
+                     <tr>
+                    <th>Non-Current Liabilities<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></th>
+                    <td style="text-align: right;" class="Liabilitiesamount">0</td>
+                    </tr>   
+                    
+                    
+                    <tr>
+                    <th>Current Liabilities<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></th>
+                    <td style="text-align: right;" class="Liabilitiesamount" th:text="${CurrentLiabilities}"></td>
+                    </tr> 
+                    
+                    <tr>
+                    <th>Profit Loss A/c<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></th>
+                    <td style="text-align: right;" class="Liabilitiesamount">-400</td>
+                    </tr> 
+                                    
+                    <!-- You can add more rows here -->
+                  </tbody>
+                  <tfoot>
+					<tr>
+						<th>Total</th>
+						<th id="totalLiabilities" style="text-align: right;">0</th>
+					</tr>
+				</tfoot>
+                </table>
+              </div>
+
+              <!-- Assets Table -->
+              <div class="col-sm-6" Style="margin-left:-10px;">
+                <h5 style="font-weight: bold;">Assets</h5>
+                <table class="table table-bordered" id="assetsTable">
+                  
+                  <tbody>
+                  	  <tr>
+                      <td>Investments<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></td>
+                      <td style="text-align: right;" class="assetamount">0</td>
+                    </tr>
+                  
+                    <tr>
+                      <td>Non-current Asset<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></td>
+                      <td style="text-align: right;" class="assetamount" th:text="${Non_Current_Assets}"></td>
+                    </tr>                    
+                    
+                     <tr>
+                      <td>Current Asset<span class="arrow" style="float: right; cursor: pointer;" onclick="toggleSubRows(event);">▶</span></td>
+                      <td style="text-align: right;" class="assetamount" th:text="${currentasset}">1000</td>
+                    </tr>
+                    <!-- You can add more rows here -->
+                  </tbody>
+                  <tfoot>
+					<tr>
+						<th>Total</th>
+						<th id="totalasset" style="text-align: right;">0</th>
+					</tr>
+				</tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 text-center">
+            <div class="card-footer text-center"
+              style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+              <button class="btn btn-xs btn-dark" type="button" id="Dashboard" onclick="Home()">Home</button>
+              <button class="btn btn-xs btn-dark" id="btnback" onclick="back(event)">Back</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+				
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[NOTIFICATION_MASTER]    Script Date: 4/22/2025 2:08:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NOTIFICATION_MASTER](
+	[ID] [varchar](20) NULL,
+	[BRANCH_ID] [varchar](20) NULL,
+	[PROCESS] [varchar](50) NULL,
+	[ALERT] [varchar](50) NULL,
+	[EMAIL] [varchar](50) NULL,
+	[PASSWORD] [varchar](100) NULL,
+	[DEL_FLG] [varchar](1) NULL
+) ON [PRIMARY]
+GO
+
+

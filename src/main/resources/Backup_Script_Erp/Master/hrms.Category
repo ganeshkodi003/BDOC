@@ -1,0 +1,37 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[Category]    Script Date: 12/6/2024 12:52:17 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[Category](
+	[CategoryNo] [varchar](100) NULL,
+	[CategoryName] [varchar](100) NULL,
+	[del_flg] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+
+---sequence
+
+USE [HRMS]
+GO
+
+USE [HRMS]
+GO
+
+/****** Object:  Sequence [HRMS].[CategoryNo]    Script Date: 12/6/2024 12:53:00 PM ******/
+CREATE SEQUENCE [HRMS].[CategoryNo] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999
+ CACHE 
+GO
+
+

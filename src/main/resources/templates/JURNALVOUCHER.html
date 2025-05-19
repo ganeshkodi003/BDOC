@@ -1,0 +1,548 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<!--moment.js-->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+
+
+
+
+
+<script>
+	function Home() {
+
+		location.href = 'Dashboard';
+	}
+
+	function Back() {
+		window.history.back();
+	}
+</script>
+
+<script>
+function printWithCustomFileName() {
+    const poNumberElement = document.getElementById('poNumber');
+    if (!poNumberElement) {
+        alert("PO Number element not found!");
+        return;
+    }
+
+    const poNumber = poNumberElement.textContent.trim();
+    const originalTitle = document.title;
+
+    document.title = "INV_" + poNumber;
+
+    setTimeout(() => {
+        window.print();
+        document.title = originalTitle;
+    }, 500);
+
+    // Ensure only one page is printed
+    setTimeout(() => {
+        window.onafterprint = () => {
+            document.body.style.zoom = "reset";
+        };
+    }, 1000);
+}
+
+</script>
+
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #f9f9f9;
+	height: 300vh;
+}
+
+.container-manager {
+	width: 80%; /* Adjust the width as per your preference */
+	border: 2px solid #000; /* Add a black border */
+	padding: 20px;
+	background: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	/* Optional for a slight shadow effect */
+}
+
+.footer {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.table {
+	border-collapse: collapse;
+	/* Ensure borders are collapsed for a clean look */
+	width: 100%; /* Optional: Make the table span the full width */
+}
+
+.table th {
+	border: 1px solid #000;
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table tr {
+	border: 1px solid #000;
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table tr th {
+	border-bottom: 2px solid #000;
+	/* Add border only to the bottom of rows and headers */
+}
+
+.table td {
+	padding: 8px; /* Add padding for table cells */
+	border: none; /* Remove cell-specific borders */
+}
+
+.details {
+	margin-bottom: 10px;
+}
+
+.details div {
+	margin-bottom: 5px;
+}
+
+.notes {
+	border-bottom: 1px solid #ddd;
+}
+
+.signatures {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+	border-bottom: 1px solid #ddd;
+}
+
+.signature {
+	width: 30%;
+	text-align: center;
+}
+</style>
+<style>
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px;
+	border-bottom: 1px solid #ddd; /* Optional border for styling */
+}
+
+.header-image {
+	flex-shrink: 0; /* Prevent the image from resizing */
+	margin-right: 20px; /* Add some space between the image and text */
+}
+
+.text-content {
+	text-align: center; /* Center-align the text inside this container */
+	flex-grow: 0.5; /* Allow text to expand and occupy available space */
+}
+
+.details {
+	margin: 20px; /* Add spacing around the block */
+	
+}
+
+.title {
+	text-align: center; /* Center align the title */
+	font-weight: bold; /* Make it bold */
+	margin-bottom: 20px; /* Add some spacing below the title */
+}
+
+.details-content {
+	display: flex; /* Flexbox layout for side-by-side alignment */
+	justify-content: space-between; /* Space out left and right sections */
+	gap: 20px; /* Add spacing between left and right sections */
+}
+
+strong {
+	font-weight: 100;
+}
+</style>
+
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 20px;
+	padding-left: 20px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+<style>
+@media print {
+	.col-sm-2 {
+		display: none !important;
+	}
+	.container-manager {
+		width: 100%;
+		padding: 0;
+	}
+	body {
+		font-size: 19px;
+		margin-top: -900px !important;
+		padding: 0;
+	}
+	.details {
+		width: 98%;
+	}
+	.details-content{
+	padding:10%;}
+	.header, .table {
+		width: 98%;
+	}
+	.table th, .table td {
+		padding: 4px;
+		font-size: 19px;
+	}
+	@page {
+		size: A4;
+		margin: 10mm; /* Adjust margins for content */
+	}
+	.container-manager {
+		transform: scale(0.95); /* Adjust scaling as needed */
+		transform-origin: top left;
+	}
+	input {
+		border: none; /* Removes the border */
+		outline: none; /* Removes the focus outline */
+		background-color: transparent;
+		/* Optional: Makes background transparent */
+		font-size: 16px; /* Optional: Adjust font size */
+		color: #000; /* Optional: Adjust text color */
+	}
+
+	/* Hide interactive or unnecessary elements */
+	.no-print, .theebutton {
+		display: none !important;
+	}
+}
+</style>
+<script>
+$(document).ready(function() {
+    function calculateTaxInputs() {
+        let totaldebit = 0;
+        let totalcredit = 0;
+
+        // Loop through each row to calculate debit and credit
+        $('#purchaseInvoiceTable tbody tr').each(function() {
+            let debit = parseFloat($(this).find('td:nth-child(3)').text()) || 0;
+            let credit = parseFloat($(this).find('td:nth-child(4)').text()) || 0;
+            
+            totaldebit += debit;
+            totalcredit += credit;
+        });
+
+        // Set the calculated totals in the table footer
+        $('#totalDebit').text(totaldebit.toFixed(2)); 
+        $('#totalCredit').text(totalcredit.toFixed(2));
+        $('#amountInWords').html('<b>' + numberToWords(totaldebit) + '</b>');
+        $('#BillAmount').text('Bill Amount(Rs): '+totaldebit.toFixed(2));
+    }
+    
+    calculateTaxInputs();
+});
+
+//Function to convert numbers to words (supports numbers up to 999,999)
+function numberToWords(number) {
+	const words = [ '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six',
+			'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
+			'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen',
+			'Eighteen', 'Nineteen', 'Twenty', 'Thirty', 'Forty', 'Fifty',
+			'Sixty', 'Seventy', 'Eighty', 'Ninety' ];
+
+	function convertHundreds(n) {
+		if (n < 20)
+			return words[n];
+		const tens = Math.floor(n / 10);
+		const units = n % 10;
+		return words[tens + 18] + (units ? ' ' + words[units] : '');
+	}
+
+	function convertThousands(n) {
+		const hundreds = Math.floor(n / 100);
+		const remainder = n % 100;
+		return (hundreds ? words[hundreds] + ' Hundred ' : '')
+				+ (remainder ? convertHundreds(remainder) : '');
+	}
+
+	const thousands = Math.floor(number / 1000);
+	const remainder = number % 1000;
+	const thousandText = thousands ? convertThousands(thousands)
+			+ ' Thousand ' : '';
+	return thousandText + convertThousands(remainder);
+}
+</script>
+
+
+
+</head>
+<body>
+
+	<div class="col-sm-2">
+		<div th:insert="BTMHeaderMenu :: header"></div>
+	</div>
+
+
+
+
+
+	<div class="container-manager" th:if="${formmode}=='view'"
+		style="margin-top: -20%">
+		<div style="padding: 10px;" align="right">
+			<button class="no-print" onclick="printWithCustomFileName();">Print</button>
+		</div>
+		<div class="header">
+			<div class="header-content">
+				<img th:src="@{/images/TSK.PNG}" style="height: 80px;"
+					alt="Bornfire" class="header-image">
+			</div>
+			<div class=" text-content" style="text-align: center;">
+				<h1 style="font-weight: bold;">T.SenthilKumar & Company</h1>
+				<p style="font-weight: bold;">Fssai No: 12419006000855</p>
+				<p>284 B KRISHANA MARKET, KS BUILDING, ODDANCHATRAM,
+					DINDIGUL-624619</p>
+				<p>Ph: 9443743002, GSTIN/UIN: 33BUFPS2073F1ZQ, PAN: BUFPS2073F</p>
+
+			</div>
+		</div>
+
+
+		<div class="details">
+			<!-- Center and bold -->
+			<h2 class="title">JOURNAL VOUCHER</h2>
+
+			<div class="details-content">
+				
+				<!-- Right side -->
+				
+					<div>
+						<b>Voucher Number : </b><span style="font-weight:bold;" id="poNumber" th:text="${poid}"></span>
+					</div>
+					<br>
+					<div>
+						<b>Voucher Date:</b> <span style="font-weight:bold;"
+							th:text="${#dates.format(po_date, 'dd-MM-yyyy')}"></span>
+					</div>
+				
+			</div>
+			<br>
+
+			<table class="table" id="purchaseInvoiceTable">
+				<thead>
+					<tr>
+						<th style="text-align: center;">Dr/Cr</th>
+						<th style="text-align: center;">Account</th>
+						<th style="text-align: right;">Debit Rs</th>
+						<th style="text-align: right;">Credit Rs</th>
+
+					</tr>
+				</thead>
+				<tbody th:if="${currenttype=='purchaseorder'}">
+					<!-- Regular Data Rows -->
+					<tr style="text-align: center;">
+					<td >DR</td>
+					<td>Advance to Vendor</td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(PO_list[0].paidAmount,1,2)}"></td>
+					<td></td>
+					</tr>
+					
+					<tr style="text-align: center;">
+					<td style="text-align: center;" >CR</td>
+					<td style="text-align: center;" th:text="${paymenttype}"></td>
+					<td></td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(PO_list[0].paidAmount,1,2)}"></td>
+					</tr>
+														
+				</tbody>
+				
+				<tbody th:if="${currenttype=='purchaseInvoice'}">
+					<!-- Regular Data Rows -->
+					<tr style="text-align: center;">
+					<td >DR</td>
+					<td>Purchase</td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(PO_list[0].totalAmount,1,2)}"></td>
+					<td></td>
+					</tr>
+					
+					<tr th:if="${advance=='yes'}" style="text-align: center;">
+					<td style="text-align: center;" >CR</td>
+					<td style="text-align: center;">Advance to Vendor</td>
+					<td></td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(advanceamount,1,2)}"></td>
+					</tr>
+					
+					<tr th:if='${PO_list[0].paidAmount>0}' style="text-align: center;">
+					<td style="text-align: center;" >CR</td>
+					<td style="text-align: center;" th:text="${paymenttype}"></td>
+					<td></td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(PO_list[0].paidAmount,1,2)}"></td>
+					</tr>
+					
+					<tr th:if='${PO_list[0].balanceAmount>0}' style="text-align: center;">
+					<td style="text-align: center;" >CR</td>
+					<td style="text-align: center;">Accounts Payable</td>
+					<td></td>
+					<td style="text-align: right;" th:text="${#numbers.formatDecimal(PO_list[0].balanceAmount,1,2)}"></td>
+					</tr>
+					
+					
+														
+				</tbody>
+				<tfoot>
+    				<tr>
+        				<th style="text-align: right;" colspan="2">Total</th>
+        				<td style="text-align: right;" id="totalDebit"></td>
+        				<td style="text-align: right;" id="totalCredit"></td>
+    				</tr>
+				</tfoot>
+				
+			</table>
+
+
+
+			<div class="details" Style="margin-left:-2px">
+				<div>
+					<strong>Amount in Words:</strong> <span id="amountInWords"></span>
+				</div>
+				<br>
+
+				<div class="d-flex align-items-center">
+					<strong>Narration :</strong> <input type="text"
+						style="width: 50%; font-size: 12px;">
+				</div>
+				
+			</div>
+			<br>
+			<table class="table">
+				<thead>
+					<tr style="text-align: center;">
+						<th id="BillNo">Bill No</th>
+						<th th:text="${'Bill Date:'+#dates.format(po_date, 'dd-MM-yyyy')}" id="BillDate">Bill Date</th>
+						<th id="BillAmount">Bill Amount (Rs)</th>
+						<!--<th>Adjust Amount (Rs)</th>-->
+					</tr>
+				</thead>
+			</table>
+
+			
+			<br> <br>
+			
+			<div class="signatures">
+			<div class="signature">
+				<p style="font-weight: bold;">Prepared By</p>
+			</div>
+			<div class="signature">
+				<p style="font-weight: bold;">Verified By</p>
+			</div>
+			<div class="signature">
+				<p style="font-weight: bold;">Approved By</p>
+			</div>
+		</div>
+		 
+			<br>
+			<br>
+			<div class="footer">
+				<p style="font-size: x-large;">Always Use TSK Products</p>
+				<p>Head Office: 284 B KRISHANA MARKET, KS BUILDING, ODDANCHITRAM</p>
+				<p>GSTIN/UIN: 33BUFPS2073F1ZQ, PAN: BUFPS2073F, CONTACT NO:
+					9443743002</p>
+			</div>
+
+			<div class="card-footer text-center theebutton"
+				style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+				<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+					onclick="Home()">Home</button>
+
+
+				<button class="btn btn-xs btn-dark" id="btnback"
+					onclick="window.history.back();">Back</button>
+			</div>
+		</div>
+</body>
+
+
+</html>

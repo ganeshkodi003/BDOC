@@ -1,0 +1,933 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+#pagination-controls {
+	margin: 20px 0;
+}
+
+.pagination-btn {
+	margin: 0 5px;
+	padding: 5px 10px;
+	border: 1px solid #007bff;
+	background-color: #f8f9fa;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.pagination-btn:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+.debit {
+	color: red;
+	text-align: right;
+}
+
+.credit {
+	color: green;
+	text-align: right;
+}
+
+footer {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 0.8em;
+	color: #666;
+}
+</style>
+</head>
+<script>
+
+
+
+
+
+
+
+
+
+function assosiateView(a) {
+
+	var id = a.getAttribute("data-resource");
+
+	location.href = './gj?formmode=view' + '&id='
+			+ id;
+}
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+function Back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+
+
+
+
+// Function to calculate total debit and credit
+function calculateTotals() {
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    // Calculate total for the General Journal table
+    document.querySelectorAll("#dataTables .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Calculate total for the Salaries table
+    document.querySelectorAll("#dataTables_salaries .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_salaries .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Calculate total for the Sales table
+   /*  document.querySelectorAll("#dataTables_sales .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_sales .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    }); */
+    
+    document.querySelectorAll("#dataTables_wo .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_wo .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Update the totals in the footer
+    document.getElementById('totalDebit').innerText = '-' + totalDebit.toFixed(2);
+    document.getElementById('totalCredit').innerText = totalCredit.toFixed(2);
+}
+
+// Call the function after page load or when data is modified
+window.onload = calculateTotals;
+</script>
+
+
+
+<script type="text/javascript">
+
+    var pageSize = 10; // Set page size for pagination
+
+    function showPage(tableId, page) {
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+        var pageCount = Math.ceil(rows.length / pageSize);
+        rows.hide();
+        rows.slice((page - 1) * pageSize, page * pageSize).show();
+
+        var $paginationControls = $('#pagination-controls-' + tableId);
+        $paginationControls.empty();
+
+        for (var i = 1; i <= pageCount; i++) {
+            $paginationControls.append('<button class="pagination-btn" onclick="showPage(\'' + tableId + '\', ' + i + ')">' + i + '</button> ');
+        }
+    }
+
+    // Initial Page load for all tables
+    $(document).ready(function () {
+        showPage('dataTables', 1);
+        showPage('dataTables_salaries', 1);
+        //showPage('dataTables_sales', 1);
+        showPage('dataTables_wo', 1);
+    });
+
+    // Search Functionality
+    function searchTable(tableId, searchInputId) {
+        var input = $('#' + searchInputId).val().toUpperCase();
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+
+        rows.each(function () {
+            var cells = $(this).find('td');
+            var found = false;
+
+            cells.each(function () {
+                if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                    found = true;
+                    return false; // Exit loop early
+                }
+            });
+
+            if (found) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+ // Function to calculate total debit or credit from a specific table
+    function calculateTableTotals(tableId, isDebit) {
+        let total = 0;
+        const selector = isDebit ? '.debit' : '.credit';
+        
+        document.querySelectorAll(`#${tableId} tbody ${selector}`).forEach(cell => {
+            total += parseFloat(cell.textContent) || 0;
+        });
+        
+        return total;
+    }
+
+    // Function to populate the trial balance table with static rows and calculated totals
+    function populateTrialBalanceTable() {
+    	
+   
+        const trialBalanceBody = document.getElementById("tableBody");
+        let totalDebit = 0;
+        let totalCredit = 0;
+        let capitaln=document.getElementById("previous").value;
+
+        // Clear the trial balance table before adding new rows
+        trialBalanceBody.innerHTML = "";
+        
+       
+
+        // Static rows with placeholders for values
+        const staticRows = [
+            { id: 1, particular: "Capital", debit: "0", credit:"" },
+            { id: 2, particular: "Sales", debit: "0", credit: "Sales total" },
+            { id: 3, particular: "Sales Return", debit: "0", credit: "0" },
+            { id: 4, particular: "Drawings", debit: "0", credit: "0" },
+            { id: 5, particular: "Sundry Debitor", debit: "0", credit: "0" },
+            { id: 6, particular: "Freehold Premises", debit: "0", credit: "0" },
+            { id: 7, particular: "Purchases", debit: "purchase total", credit: "0" },
+            { id: 8, particular: "Return Outwards", debit: "0", credit: "0" },
+            { id: 9, particular: "Loan from Others", debit: "0", credit: "0" },
+            { id: 10, particular: "Sundry Creditors", debit: "0", credit: "0" },
+            { id: 11, particular: "Administrator's Expenses", debit: "0", credit: "0" },
+            { id: 12, particular: "Cash in Hand", debit: "0", credit: "0" },
+            { id: 13, particular: "Bills Payable", debit: "0", credit: "0" },
+            { id: 14, particular: "Wages", debit: "salaries total", credit: "0" },
+            { id: 15, particular: "Opening Stock", debit: "0", credit: "0" },
+            { id: 16, particular: "Factory Expenses", debit: "0", credit: "0" },
+            { id: 17, particular: "suspense", debit: "0", credit: "0" },
+        ];
+
+        // Add static rows to the trial balance
+        staticRows.forEach(row => {
+            trialBalanceBody.innerHTML += `
+                <tr>
+                    <td>${row.id}</td>
+                    <td>${row.particular}</td>
+                    <td></td>
+                    <td class="debit">${row.debit}</td>
+                    <td class="credit">${row.credit}</td>
+                </tr> `;
+                
+       
+        });
+
+        // Calculate totals for each table
+        const purchaseTotal = calculateTableTotals("dataTables", true); // Purchase debit total
+        const salariesTotal = calculateTableTotals("dataTables_salaries", true); // Salaries debit total
+        const workOrderTotal = calculateTableTotals("dataTables_wo", false); // Work Order credit total
+       
+        
+        // Calculate grand total
+        const capitalAmount = parseFloat(capitaln);
+        
+        totalDebit = purchaseTotal + salariesTotal;
+        totalCredit = workOrderTotal+capitalAmount;
+    
+ var suspense=0;
+var suspensetype="";
+        // Update specific static rows with calculated totals
+        trialBalanceBody.querySelectorAll("tr").forEach(row => {
+            const rowId = parseInt(row.cells[0].textContent);
+            if (rowId === 1) row.querySelector(".credit").textContent = capitalAmount.toFixed(2);
+            if (rowId === 7) row.querySelector(".debit").textContent = purchaseTotal.toFixed(2); // Purchase total
+            if (rowId === 14) row.querySelector(".debit").textContent = salariesTotal.toFixed(2); // Salaries total
+            if (rowId === 2) row.querySelector(".credit").textContent = workOrderTotal.toFixed(2);  // Sales/Work Order total
+     	   if (rowId === 17 && suspensetype === "credit") row.querySelector(".credit").textContent = suspense.toFixed(2);
+     	  if (rowId === 17 && suspensetype === "debit") row.querySelector(".debit").textContent = suspense.toFixed(2);
+           
+            
+            if(totalDebit > totalCredit){
+            	 console.log("credit")
+            	
+            	
+            	
+            	console.log("total debit" +totalDebit);
+            	console.log("total credit" +totalCredit);
+            	
+            	suspense= totalDebit - totalCredit;
+            	
+            	console.log("total suspense" +suspense);
+            	
+            	
+            	totalCredit= totalCredit + suspense;
+            	
+            	
+            	suspensetype="credit";
+            	
+            	
+            	
+            }
+             else if(totalDebit < totalCredit)
+            	{
+                  suspense=  totalCredit - totalDebit;
+                  console.log("debit")
+                  
+                   console.log(suspense);
+                  
+                  totalDebit= totalDebit + suspense;  
+
+              	suspensetype="debit";
+            	
+            	}
+           
+            
+        });
+
+       
+     
+        // Append totals to footer
+        document.getElementById("totalDebit").textContent ='-' + totalDebit.toFixed(2);
+        document.getElementById("totalCredit").textContent = totalCredit.toFixed(2);
+
+        // Check if debit and credit totals match
+        if (totalDebit !== totalCredit) {
+            console.warn("Total debit and credit amounts do not match!");
+        }
+    }
+
+    // Call the function to populate the trial balance table on page load
+    window.onload = populateTrialBalanceTable;
+
+</script>
+
+<script>
+
+function renderTransactions() {
+    const tableBody = document.getElementById("transactionBody");
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    transactions.forEach((transaction) => {
+        const row = document.createElement("tr");
+
+        // ID Cell
+        const idCell = document.createElement("td");
+        idCell.textContent = transaction.id;
+        row.appendChild(idCell);
+
+        // Particular Cell
+        const particularCell = document.createElement("td");
+        particularCell.textContent = transaction.particular;
+        row.appendChild(particularCell);
+
+        // Debit Cell
+        const debitCell = document.createElement("td");
+        debitCell.textContent = transaction.debit;
+        row.appendChild(debitCell);
+
+        // Credit Cell with Input Box
+        const creditCell = document.createElement("td");
+        const creditInput = document.createElement("input");
+        creditInput.type = "text";
+        creditInput.value = transaction.credit;
+        creditInput.addEventListener("input", (e) => {
+            transaction.credit = e.target.value; // Update the object with new input
+        });
+        creditCell.appendChild(creditInput);
+        row.appendChild(creditCell);
+
+        tableBody.appendChild(row);
+    });
+}
+
+function Capitalfn(event){
+	event.preventDefault();
+	var capital=document.getElementById("Capital").value;
+	var previous=document.getElementById("previous").value;
+	
+
+	if (capital){
+		alert(previous);
+	    
+		$.ajax({
+	        url: "./AddCapital?capitalnum="+capital+"&previous="+previous,
+	        type: 'GET',
+	        success: function(res) {
+	        	 location.reload();
+	             }
+	    });
+
+	}
+	else{
+		alert()
+	}
+}
+
+</script>
+
+
+
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-10">
+
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+							<form autocomplete="off" id="list_journal" method="POST">
+								<div class="card" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="float-left" style="padding: 5px;">
+											<div class="spur-card-title">Trail Balance</div>
+										</div>
+									</div>
+
+				<!-- Journal Entries List for purchase -->
+									<div class="card-body" style="padding: 1rem;" hidden >
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput" placeholder="Search..."
+												onkeyup="searchTable('dataTables', 'searchInput')"
+												class="form-control" style="width: 18%; height: 34px;" />
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th>GL ID</th>
+													<th>Product Name</th>
+													<th>Category Name</th>
+													<th style="font-size: 15px">Payment By</th>
+													<th>Batch</th>
+													<th class="debit">Debit</th>
+													<th class="credit">Credit</th>
+												</tr>
+											</thead>
+											<tbody id="table-body">
+												<tr th:each="listItem, index : ${Purchase}"
+													th:id="${listItem?.gjId}" class="userlist">
+													<td th:text="${listItem?.gjId}"></td>
+													<td th:text="${listItem?.productName}"></td>
+													<td th:text="${listItem?.categoryName}"></td>
+													<td th:text="${listItem?.Payment_By}"></td>
+													<td th:text="${listItem?.batch}"></td>
+													<td class="debit" th:text="${listItem?.credit}"></td>
+													<td class="credit" th:text="${listItem?.debit}"></td>
+												</tr>
+											</tbody>
+
+										</table>
+
+										<div id="pagination-controls-dataTables"></div>
+
+									</div>
+
+
+									<!------- --------work order or sale------------ -->
+
+
+									<div class="card-body" style="padding: 1rem;" hidden>
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput_wo"
+												placeholder="Search..."
+												onkeyup="searchTable('dataTables_wo', 'searchInput_wo')"
+												class="form-control" style="width: 18%; height: 34px;" />
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables_wo" class="table table-striped">
+											<thead>
+												<tr>
+													<th>GL ID</th>
+													<th>Product Name</th>
+													<th>Category Name</th>
+													<th style="font-size: 15px">Payment By</th>
+													<th>Batch</th>
+													<th class="debit">Debit</th>
+													<th class="credit">Credit</th>
+												</tr>
+											</thead>
+											<tbody id="table-body">
+												<tr th:each="listItem, index : ${wo}"
+													th:id="${listItem?.gjId}" class="userlist">
+													<td th:text="${listItem?.gjId}"></td>
+													<td th:text="${listItem?.productName}"></td>
+													<td th:text="${listItem?.categoryName}"></td>
+													<td th:text="${listItem?.Payment_By}"></td>
+													<td th:text="${listItem?.batch}"></td>
+													<td class="debit" th:text="${listItem?.credit}"></td>
+													<td class="credit" th:text="${listItem?.debit}"></td>
+												</tr>
+											</tbody>
+
+										</table>
+
+										<div id="pagination-controls-dataTables_wo"></div>
+
+									</div>
+
+									<!-- ---For salaries -->
+									<div class="card-body" style="padding: 1rem;" hidden>
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput_salaries"
+												placeholder="Search..."
+												onkeyup="searchTable('dataTables_salaries', 'searchInput_salaries')"
+												class="form-control" style="width: 18%; height: 34px;" />
+										</div>
+										<table id="dataTables_salaries" class="table table-striped">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Emp Id</th>
+													<th>Emp Name</th>
+													<th style="font-size: 15px">Payment By</th>
+													<th class="debit">Debit</th>
+													<th class="credit">Credit</th>
+												</tr>  
+											</thead>
+											<tbody id="table-body">
+												<tr th:each="listItem: ${salaries}"
+													th:id="${listItem?.salId}" class="userlist">
+													<td th:text="${listItem?.salId}"></td>
+													<td th:text="${listItem?.empId}"></td>
+													<td th:text="${listItem?.empName}"></td>
+													<td th:text="${listItem?.Payment_By}"></td>
+													<td class="debit" th:text="${listItem?.netSalary}"></td>
+													<td class="credit" th:text="${listItem?.netSalary}"></td>
+												</tr>
+
+											</tbody>
+										</table>
+										<div id="pagination-controls-dataTables_salaries"></div>
+
+									</div>
+								
+																
+	
+									<div class="card-body" style="padding: 1rem;">
+									<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<!--<label for="from">Capital Amount</label>-->
+											</div>
+											<div class="col-sm-2">		
+												<input type="hidden" id="previous" th:value="${cap.Capitalamount}" 
+													class="form-control form-control-sm"  autocomplete="off" required />	
+											</div>
+											
+										</div>
+									
+									
+ <table id="consolidatedTrialBalance">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">S.No</th>
+                    <th style="text-align: center;">Particular</th>
+                    <th style="text-align: center;">L.F.</th>
+                    <th style="text-align: center;width: 18%;">Debit</th>
+                    <th style="text-align: center;width: 10%;">Credit</th> 
+                </tr>
+            </thead>
+           <tbody id="tableBody">
+                         </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th id="totalDebit" class="debit"><span>-</span>0</th>
+                    <th id="totalCredit" class="credit">0</th>
+                </tr>
+            </tfoot>
+        </table>
+        
+<h1>TRAIL BALANCE</h1>
+       <table border="1" style="border-collapse: collapse; width: 100%;">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Description</th>
+            <th>No's</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Non-Current Assets -->
+        <tr>
+            <td rowspan="6">1</td>
+            <td><strong>Non-Current Assets</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Property, Plant & Equipment</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Other Intangible Assets</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Capital Work In Progress</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Financial Assets</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Other Non-Current Assets</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>TOTAL NON-CURRENT ASSETS</strong></td>
+            <td></td>
+        </tr>
+
+        <!-- Current Assets -->
+        <tr>
+            <td rowspan="7">2</td>
+            <td><strong>Current Assets</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Inventories</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Raw Material</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Packing Material</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Semi Finished Goods</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Finished Goods</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Balance with Banks</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>TOTAL CURRENT ASSETS</strong></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>TOTAL ASSETS</strong></td>
+            <td></td>
+        </tr>
+
+        <!-- Liabilities -->
+        <tr>
+            <td rowspan="4">3</td>
+            <td><strong>Liabilities</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Non-Current Liabilities</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Borrowings</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Provisions Non-Current Liability</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>TOTAL LIABILITIES</strong></td>
+            <td></td>
+        </tr>
+
+        <!-- Income -->
+        <tr>
+            <td>4</td>
+            <td><strong>Total Income</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <!-- Expenses -->
+        <tr>
+            <td rowspan="5">5</td>
+            <td><strong>Expenses</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Purchase of Stock-in-Trade</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Employee Benefits Expense</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Other Expenses</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Finance Cost</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Depreciations</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Net Profit and Loss</strong></td>
+            <td><strong>Credit: 0.00, Debit: 0.00</strong></td>
+        </tr>
+    </tbody>
+</table>
+ 
+        </div>
+
+
+
+									<div class=" col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button class="btn btn-xs btn-primary mr-2" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button class="btn btn-xs btn-primary mr-2" id="btnback"
+												onclick="back(event)">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+									
+
+</html>

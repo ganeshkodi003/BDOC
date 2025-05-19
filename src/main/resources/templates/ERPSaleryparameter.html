@@ -1,0 +1,3569 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<style>
+fieldset {
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	padding: 10px;
+	margin-top: -10px;
+}
+
+.btns {
+	float: right;
+	margin: 5px;
+}
+
+label {
+	font-size: 16px;
+}
+
+.col-sm-5 {
+	padding-bottom: 15px;
+}
+
+.list-body {
+	padding: 0px;
+}
+
+.error {
+	color: red;
+	padding-left: 10px;
+}
+
+.formline {
+	padding-bottom: 4px;
+}
+
+#finusertb {
+	width: 460px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	border: 2px solid skyblue !important;
+	border-bottom: unset !important;
+	background-color: unset !important;
+	color: black !important;
+	background-color: unset !important;
+}
+
+nav {
+	border-bottom: 2px solid grey;
+}
+
+.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
+
+.pat {
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
+
+input:focus, textarea:focus {
+	background-color: white;
+}
+</style>
+<style>
+.hidden {
+	display: none;
+}
+</style>
+<style>
+.input-group-text {
+	background-color: #f9fff6;
+	border-left: 0;
+}
+
+.form-control {
+	text-align: right;
+}
+</style>
+<style>
+.status-verified {
+	color: green;
+}
+
+.status-pending {
+	color: red;
+}
+</style>
+
+<style type="text/css">
+.navbar {
+	margin-left: -5px;
+	position: fixed; /* Keep it fixed */
+	top: 0;
+	width: 100%;
+	z-index: 1000; /* Ensure it's above other elements */
+}
+
+.content {
+	margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+
+.container-fluid {
+	width: 100%;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-left: 10px;
+	height: 70%;
+}
+
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -8px;
+	margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+
+	$(function() {
+
+		$("#date").datepicker({
+			changeMonth : true,
+			changeYear : true,
+			dateFormat : "dd-mm-yy"
+		});
+
+	});
+
+	function home() {
+		location.href = 'Dashboard';
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	function addpara() {
+		location.href = 'salary_parameters_ERP?formmode=add';
+	}
+
+	function listpara() {
+		location.href = 'salary_parameters_ERP?formmode=list';
+	}
+	function view_btn_submit(a) {
+		var srl_no = a.getAttribute("srl_no");
+		location.href = 'salary_parameters_ERP?formmode=view' + '&srl_no=' + srl_no;
+	}
+	
+	function modify_btn(a) {
+		var srl_no = a.getAttribute("srl_no");
+		location.href = 'salary_parameters_ERP?formmode=edit' + '&srl_no=' + srl_no;
+	}
+	function verify_btn_submit(a) {
+		var srl_no = a.getAttribute("srl_no");
+		location.href = 'salary_parameters_ERP?formmode=verify' + '&srl_no=' + srl_no;
+	}
+	function delete_btn_submit(a) {
+		var srl_no = a.getAttribute("srl_no");
+		location.href = 'salary_parameters_ERP?formmode=delete' + '&srl_no=' + srl_no;
+	}
+
+	function addParamData() {
+		
+		
+		if ($("#salaryparam").valid()) {
+
+			var url = "./add_salary_parameters?formmode=add";
+			$("#salaryparam").attr('action', url);
+
+			var options = {
+				success : showResponse
+			};
+
+			$("#salaryparam").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$("#alert").modal("toggle");
+			}
+			;
+		}
+	};
+
+	function editParamData(a) {
+
+		var srl_no = a.getAttribute("srl_no");
+		
+		var url = "./add_salary_parameters?formmode=edit" + "&srl_no=" +srl_no;
+		$("#salaryparam").attr('action', url);
+
+		var options = {
+			success : showResponse
+		};
+
+		$("#salaryparam").ajaxSubmit(options);
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			$("#alertmsg").text(responseText);
+			$("#alert").modal("toggle");
+		}
+		;
+	};
+	function verifyParamData(a) {
+
+		var srl_no = a.getAttribute("srl_no");
+		var url = "./add_salary_parameters?formmode=verify" + "&srl_no=" +srl_no;
+		$("#salaryparam").attr('action', url);
+		var options = {
+				success : showResponse
+			};
+		$("#salaryparam").ajaxSubmit(options);
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			$("#alertmsg").text(responseText);
+			$("#alert").modal("toggle");
+		}
+		;
+
+	}function del_ParamData(a) {
+
+		var srl_no = a.getAttribute("srl_no");
+		var url = "./add_salary_parameters?formmode=delete" + "&srl_no=" +srl_no;
+		$("#salaryparam").attr('action', url);
+		var options = {
+				success : showResponse
+			};
+		$("#salaryparam").ajaxSubmit(options);
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			$("#alertmsg").text(responseText);
+			$("#alert").modal("toggle");
+		}
+		;
+}
+	
+	
+//Check To Modify
+	$(document).ready(
+			function() {
+				$(".checkToModify").on(
+						'click',
+						function() {
+
+							$(this).prop('checked', true);
+
+							var resId = $(this).val();
+
+							var formMode = "edit";
+							
+							location.href = 'adminHolidayMaster?formmode='
+									+ formMode + '&resId=' + resId;
+
+						});
+			
+	//Check To View
+				$(".checkToView").on(
+						'click',
+						function() {
+
+							$(this).prop('checked', true);
+
+							var resId = $(this).val();
+
+							var formMode = "view1";
+							
+							location.href = 'adminHolidayMaster?formmode='
+									+ formMode + '&resId=' + resId;
+
+						});
+			});
+			
+	//Filter Table
+	$(document)
+			.ready(
+					function() {
+						$('.filterable .btn-filter')
+								.click(
+										function(event) {
+											event.preventDefault();
+											var $panel = $(this).parents(
+													'.filterable'), $filters = $panel
+													.find('.filters input'), $tbody = $panel
+													.find('.table tbody');
+											if ($filters.prop('disabled') == true) {
+												$filters
+														.prop('disabled', false);
+												$filters.first().focus();
+											} else {
+												$filters.val('').prop(
+														'disabled', true);
+												$tbody.find('.no-result')
+														.remove();
+												$tbody.find('tr').show();
+											}
+										});
+
+						$('.filterable .filters input')
+								.keyup(
+										function(e) {
+											/* Ignore tab key */
+											var code = e.keyCode || e.which;
+											if (code == '9')
+												return;
+											/* Useful DOM data and selectors */
+											var $input = $(this), inputContent = $input
+													.val().toLowerCase(), $panel = $input
+													.parents('.filterable'), column = $panel
+													.find('.filters th')
+													.index($input.parents('th')), $table = $panel
+													.find('.table'), $rows = $table
+													.find('tbody tr');
+											/* Dirtiest filter function ever ;) */
+											var $filteredRows = $rows
+													.filter(function() {
+														var value = $(this)
+																.find('td').eq(
+																		column)
+																.text()
+																.toLowerCase();
+														return value
+																.indexOf(inputContent) === -1;
+													});
+											/* Clean previous no-result if exist */
+											$table.find('tbody .no-result')
+													.remove();
+											/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+											$rows.show();
+											$filteredRows.hide();
+											/* Prepend no-result row if all rows are filtered */
+											if ($filteredRows.length === $rows.length) {
+												$table
+														.find('tbody')
+														.prepend(
+																$('<tr class="no-result text-center"><td colspan="'
+																		+ $table
+																				.find('.filters th').length
+																		+ '">No result found</td></tr>'));
+											}
+										});
+					});
+
+	/*]]>*/
+</script>
+
+<script>
+        function showElement(selectedOption) {
+
+                var elementToShow = document.getElementById('salaryparameter');
+               
+                    elementToShow.style.display = 'block';
+             
+        }
+    </script>
+<script>
+$(document).ready(function() {
+    setupInputListeners();
+});
+
+function setupInputListeners() {
+	
+	 const basic = document.getElementById("basic");
+	    const hra = document.getElementById("hra");
+	    const ltc = document.getElementById("ltc");
+	    const emp_pf = document.getElementById("emp_pf");
+	
+    var c3Value =  $("#costToCompany11").val();
+    var result = (c3Value * (basic.value / 100)) / 12;
+    $("#BASICSALARY1").val(Math.round(result));
+    var dd4=$("#BASICSALARY1").val();
+    $("#BASICSALARY2").val(dd4*12);
+    $("#BASICSALARY3").val(Math.round(dd4));
+    
+    var hra1 =  $("#costToCompany11").val();
+    var result1 = (c3Value * (hra.value / 100)) / 12;
+    $("#HRA1").val(Math.round(result1));
+
+    var dd5=$("#HRA1").val();
+    $("#HRA2").val(dd5*12);
+    $("#HRA3").val(Math.round(dd5));
+
+
+    
+    $("#MR2").val('1250');
+    var dA7=$("#MR2").val();
+    $("#MR3").val(dA7*12);
+    $("#MR4").val(dA7);
+    
+    $("#CA2").val('800');
+    var A7=$("#CA2").val();
+    $("#CA3").val(A7*12);
+    $("#CA4").val(A7);
+    
+    $("#BUS2").val('800');
+    var d72=$("#BUS2").val();
+    $("#BUS3").val(d72*12);
+    $("#BUS4").val(d72);
+    
+    var r22 = (c3Value * (ltc.value / 100)) / 12;
+    $("#LTA2").val(r22.toFixed(0));
+    var d41=$("#LTA2").val();
+    $("#LTA3").val(d41*12);
+    $("#LTA4").val(Math.round(d41).toFixed(0));
+    
+   
+    var r223= (c3Value * (emp_pf.value / 100)) / 12;
+    $("#PEC2").val(r223.toFixed(0));
+    var d71=$("#PEC2").val();
+    $("#PEC3").val(d71*12);
+    
+    $("#ALB3").val((c3Value/13).toFixed(0));
+    
+    
+    $("#PD4").val('1250');
+    
+    var k= parseFloat($("#PEC2").val());
+    $("#SD4").val(k);
+
+   
+    var a1 = parseFloat($("#BASICSALARY2").val()) || 0;
+    var a2 = parseFloat($("#HRA2").val()) || 0;
+    var a3 = parseFloat($("#MR3").val()) || 0;
+    var a4 = parseFloat($("#CA3").val()) || 0;
+    var a5 = parseFloat($("#BUS3").val()) || 0;
+    var a6 = parseFloat($("#LTA3").val()) || 0;
+    var a7 = parseFloat($("#PEC3").val()) || 0;
+    var a8 = parseFloat($("#ALB3").val()) || 0;
+    var e66 = c3Value - (a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8);
+    $("#SA3").val(e66.toFixed(0)); 
+    var r1 = parseFloat($("#SA3").val()) || 0;
+    var sa2 = (r1 / 12).toFixed(0); // Rounded to 2 decimal places
+    $("#SA2").val(sa2);
+    $("#SA4").val(sa2);
+    
+
+    var b1 = parseFloat($("#costToCompany11").val()) || 0;
+    var b2 = parseFloat($("#HRA").val()) || 0;
+    var b3 = parseFloat($("#SA1").val()) || 0;
+    var b4 = parseFloat($("#CA1").val()) || 0;
+    var b5 = parseFloat($("#MR1").val()) || 0;
+    var b6 = parseFloat($("#LA1").val()) || 0;
+    var b7 = parseFloat($("#EL1").val()) || 0;
+    var b8 = parseFloat($("#BUS1").val()) || 0;
+    var b9 = parseFloat($("#CMA1").val()) || 0;
+    var b10 = parseFloat($("#LTA1").val()) || 0;
+    var b11 = parseFloat($("#PEC1").val()) || 0;
+    var b12 = parseFloat($("#ALB1").val()) || 0;
+    var b13 = parseFloat($("#BASICSALARY").val()) || 0;
+    var bb = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8 + b9 + b10 + b11 + b12 + b13;
+    $("#GS1").val(bb.toFixed(0));
+    
+    var c2 = parseFloat($("#HRA1").val()) || 0;
+    var c3 = parseFloat($("#SA2").val()) || 0;
+    var c4 = parseFloat($("#CA2").val()) || 0;
+    var c5 = parseFloat($("#MR2").val()) || 0;
+    var c6 = parseFloat($("#LA2").val()) || 0;
+    var c7 = parseFloat($("#EL2").val()) || 0;
+    var c8 = parseFloat($("#BUS2").val()) || 0;
+    var c9 = parseFloat($("#CMA2").val()) || 0;
+    var c10 = parseFloat($("#LTA2").val()) || 0;
+    var c11 = parseFloat($("#PEC2").val()) || 0;
+    var c12 = parseFloat($("#ALB2").val()) || 0;
+    var c13 = parseFloat($("#BASICSALARY1").val()) || 0;
+    var cc = c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9 + c10 + c11 + c12 + c13;
+    $("#GS2").val(cc.toFixed(0));
+    
+    var d2 = parseFloat($("#HRA2").val()) || 0;
+    var d3 = parseFloat($("#SA3").val()) || 0;
+    var d4 = parseFloat($("#CA3").val()) || 0;
+    var d5 = parseFloat($("#MR3").val()) || 0;
+    var d6 = parseFloat($("#LA3").val()) || 0;
+    var d7 = parseFloat($("#EL3").val()) || 0;
+    var d8 = parseFloat($("#BUS3").val()) || 0;
+    var d9 = parseFloat($("#CMA3").val()) || 0;
+    var d10 = parseFloat($("#LTA3").val()) || 0;
+    var d11 = parseFloat($("#PEC3").val()) || 0;
+    var d12 = parseFloat($("#ALB3").val()) || 0;
+    var d13 = parseFloat($("#BASICSALARY2").val()) || 0;
+    var dd = d2 + d3 + d4 + d5 + d6 + d7 + d8 + d9 + d10 + d11 + d12 + d13;
+    $("#GS3").val(dd.toFixed(0)); 
+    
+    var e2 = parseFloat($("#HRA3").val()) || 0;
+    var e3 = parseFloat($("#SA4").val()) || 0;
+    var e4 = parseFloat($("#CA4").val()) || 0;
+    var e5 = parseFloat($("#MR4").val()) || 0;
+    var e6 = parseFloat($("#LA4").val()) || 0;
+    var e7 = parseFloat($("#EL4").val()) || 0;
+    var e8 = parseFloat($("#BUS4").val()) || 0;
+    var e9 = parseFloat($("#CMA4").val()) || 0;
+    var e10 = parseFloat($("#LTA4").val()) || 0;
+    var e11 = parseFloat($("#PEC4").val()) || 0;
+    var e12 = parseFloat($("#ALB4").val()) || 0;
+    var e13 = parseFloat($("#BASICSALARY3").val()) || 0;
+    var ee = e2 + e3 + e4 + e5 + e6 + e7 + e8 + e9 + e10 + e11 + e12 + e13;
+    $("#GS4").val(ee.toFixed(0));
+    
+    var k1= parseFloat($("#GS4").val());
+    var k2= parseFloat($("#SD4").val());
+    $("#NS4").val(k1-k2);
+    
+    //For special Allowance
+    var sa2 =  $("#SA2").val();
+    $("#sp_all").val(sa2);
+    
+    
+    
+};
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+	
+    const basic = document.getElementById("basic");
+    const hra = document.getElementById("hra");
+    const ltc = document.getElementById("ltc");
+    const emp_pf = document.getElementById("emp_pf");
+  
+    basic.addEventListener("input", function() {
+    	var c3Value =  $("#costToCompany11").val();
+        var result = (c3Value * (basic.value / 100)) / 12;
+        var roundedResult = Math.round(result);
+        $("#BASICSALARY1").val(roundedResult);
+        setupInputListeners();
+    });
+    hra.addEventListener("input", function() {
+    	var c3Value =  $("#costToCompany11").val();
+        var result = (c3Value * (hra.value / 100)) / 12;
+        var roundedResult = Math.round(result);
+        $("#HRA1").val(roundedResult);
+        setupInputListeners();
+    });
+    ltc.addEventListener("input", function() {
+    	var c3Value =  $("#costToCompany11").val();
+        var result = (c3Value * (ltc.value / 100)) / 12;
+        var roundedResult = Math.round(result);
+        $("#LTA2").val(roundedResult);
+        setupInputListeners();
+    });
+    emp_pf.addEventListener("input", function() {
+    	var c3Value =  $("#costToCompany11").val();
+        var result = (c3Value * (emp_pf.value / 100)) / 12;
+        var roundedResult = Math.round(result);
+        $("#PEC2").val(roundedResult);
+        setupInputListeners();
+    });
+
+    const css = document.getElementById("costToCompany11");
+    css.addEventListener("input", function() {
+        setupInputListeners();
+        
+    });
+    
+});
+
+/*
+function TaxDeduction(){
+	  //For National in Tax Deduction
+    var ctca =  $("#costToCompany11").val();
+    ctca = Number(ctca);
+    if(ctca >= 0 && ctca <= 30000){
+        $("#tax_ded").val('0');
+        $("#tax_fjt").val('0');
+    } if(ctca >= 30000 && ctca <= 50000){
+        $("#tax_ded").val('18');
+        $("#tax_fjt").val('0');
+    } if(ctca >= 50000 && ctca <= 270000){
+        $("#tax_ded").val('20');
+        $("#tax_fjt").val('3600');
+    } if(ctca >= 270000 && ctca <= 300000){
+        $("#tax_ded").val('33');
+        $("#tax_fjt").val('47600');
+    } if(ctca >= 300000 && ctca <= 350000){
+        $("#tax_ded").val('34');
+        $("#tax_fjt").val('57500');
+    }  if(ctca >= 350000 && ctca <= 400000){
+        $("#tax_ded").val('35');
+        $("#tax_fjt").val('74500');
+    }  if(ctca >= 400000 && ctca <= 450000){
+        $("#tax_ded").val('36');
+        $("#tax_fjt").val('92000');
+    }  if(ctca >= 450000 && ctca <= 500000){
+        $("#tax_ded").val('37');
+        $("#tax_fjt").val('110000');
+    } if(ctca >= 500000 && ctca <= 1000000){
+        $("#tax_ded").val('38');
+        $("#tax_fjt").val('128500');
+    } if(ctca >= 1000000 ){
+        $("#tax_ded").val('39');
+        $("#tax_fjt").val('318500');
+    } 
+}
+*/
+</script>
+
+<script>
+
+
+
+</script>
+
+
+
+
+<script>
+        $(document).ready(function() {
+            $('input[name="national"]').change(function() {
+                if ($('#radioYes').is(':checked')) {
+                	  $('#inputDiv').removeClass('hidden');
+                      $('#dropdownDiv').addClass('hidden');
+                } else if ($('#radioNo').is(':checked')) {
+                  
+                   $('#dropdownDiv').removeClass('hidden');
+                    $('#inputDiv').addClass('hidden');
+                }
+            });
+        });
+        
+        
+ function submitTaxGroup(){ 
+	 
+var ctc =  $("#costToCompany11").val();
+	 
+	 if(ctc==''){
+		 
+		 alert("Please Give CTC...")
+	 }else{
+	 var selectedgroup = document.getElementById("nationalDropdown").value;
+	if(!selectedgroup){
+    	alert("Please select a Group...");
+		
+	}else{
+		
+		  var url = "./getcoutriesdata?selectedgroup=" + selectedgroup;
+
+	        $.ajax({
+	            type: "GET", 
+	            url: url,
+	            dataType: "json",
+	            success: function(response) {
+	                console.log("Response:", response);
+	                
+	                if (response.length > 0) {
+	                    for (let i = 0; i < response.length; i++) {
+	                        var firstItem = response[i];
+	                        var min_amnt = firstItem.min_amount;
+	                        var max_amnt = firstItem.max_amount;
+	                        var tax = firstItem.tax_value;
+	                        var fjd = firstItem.fjd;
+
+	                        // Ensure ctc is defined and has a value
+	                        if (typeof ctc !== 'undefined' && ctc !== null && ctc > min_amnt && ctc <= max_amnt) {
+	                        	//alert("inside")
+	                            $("#tax_ded").val(tax);
+	                            $("#tax_fjt").val(fjd);
+	                        }
+	                    }
+	                }
+	                
+	            },
+	            error: function(xhr, status, error) {
+	                console.error("Error:", error);
+	            }
+	        });
+		
+	}
+        	
+        }
+ }
+ 
+ 
+ 
+    </script>
+
+<script>
+  
+/*   $(document).ready(function() {
+	  percentagecalulation()
+	}); */
+  </script>
+
+
+
+<script>
+    
+    function percentagecalulation(a) {
+    
+        var ctc = parseFloat($("#costToCompany11").val()) || 0; 
+        var Basicper = parseFloat($("#BASICSALARY").val()) || 0;
+        var hra = parseFloat($("#HRA").val()) || 0;
+        var specialallow = parseFloat($("#SA11").val()) || 0;
+        var medicalre = parseFloat($("#MR11").val()) || 0;
+        var conalw = parseFloat($("#CA11").val()) || 0;
+        var LUNCHALOW = parseFloat($("#LA11").val()) || 0;
+        var education = parseFloat($("#EL11").val()) || 0;
+        var business = parseFloat($("#BUS11").val()) || 0;
+        var carmaintain = parseFloat($("#CMA11").val()) || 0;
+        var leavetravel = parseFloat($("#LTA11").val()) || 0;
+        var PFE = parseFloat($("#PEC1").val()) || 0; 
+        var ProfessionalEDU = parseFloat($("#PD11").val()) || 0; 
+        var standarddedu = parseFloat($("#SD11").val()) || 0; 
+        var TAXDED = parseFloat($("#TD11").val()) || 0;
+        
+        /* ---anualbonus get from ctc-- */
+         var anualbonus = parseFloat($("#ALB11").val()) || 0;
+        
+        
+        var totalpercentage=Basicper+hra+specialallow+medicalre+conalw+LUNCHALOW+education+business+carmaintain+leavetravel+PFE+ProfessionalEDU+standarddedu+TAXDED;
+        
+        if (ctc === 0) {
+            //alert("Please enter a valid CTC.");
+            $("#alertmsg1").text("Please enter a valid CTC.");
+        	$("#alert1").modal("toggle");
+            return;
+        }
+        
+        if(totalpercentage > 100){
+        	$("#alertmsg1").text("!!!..should not Exceed 100..!!");
+        	$("#alert1").modal("toggle");
+        	 $("#BASICSALARY1, #BASICSALARY3, #BASICSALARY2,#HR1,#HR2,#HR3,#SA22,#SA33,#SA44,#MR22,#MR33,#MR44,#CA22,#CA33,#CA44,#LA22,#LA33,#LA44,#EL22,#EL33,#EL44,#BUS22,#BUS33,#BUS44,#CMA22,#CMA33,#CMA44,#LTA22,#LTA33,#LTA44,#PEC2,#PEC3,#PEC4,#PD22,#PD33,#PD44,#SD22,#SD33,#SD44,#TD22,#TD33,#TD44").val("0.00");
+        }
+        
+        
+        
+        if (Basicper || hra || specialallow || medicalre  || conalw || LUNCHALOW ||education ||business || carmaintain || leavetravel ||PFE ||ProfessionalEDU ||standarddedu ||TAXDED || anualbonus) {
+        	
+        	/* --basic salary--- */
+        	var calculatedValue = (ctc / 100) * Basicper;
+        	var mothly=calculatedValue/12;
+            $("#BASICSALARY1").val(mothly.toFixed(2));
+            $("#BASICSALARY2").val(calculatedValue.toFixed(2));
+            $("#BASICSALARY3").val(mothly.toFixed(2)); 
+            
+           /*  --houce rent allowance-- */
+            var calculatedHRA=(ctc/100) * hra; 
+           var monthlyHRA= calculatedHRA /12;
+           
+            $("#HRA1").val(monthlyHRA.toFixed(2));
+            $("#HRA2").val(calculatedHRA.toFixed(2));
+            $("#HRA3").val(monthlyHRA.toFixed(2));
+            
+            /* --special allowance-- */
+            var calculatedSAW=(ctc/100) * specialallow; 
+            var monthlySAW= calculatedSAW /12;
+            
+             $("#SA22").val(monthlySAW.toFixed(2));
+             $("#SA33").val(calculatedSAW.toFixed(2));
+             $("#SA44").val(monthlySAW.toFixed(2));
+             
+           /*  medical */
+             var calculatedMED=(ctc/100) * medicalre; 
+             var monthlyMED= calculatedMED /12;
+             
+              $("#MR22").val(monthlyMED.toFixed(2));
+              $("#MR33").val(calculatedMED.toFixed(2));
+              $("#MR44").val(monthlyMED.toFixed(2));
+              
+              /*  conalow */
+              var calculatedCON=(ctc/100) * conalw; 
+              var monthlyCON= calculatedCON /12;
+              
+               $("#CA22").val(monthlyCON.toFixed(2));
+               $("#CA33").val(calculatedCON.toFixed(2));
+               $("#CA44").val(monthlyCON.toFixed(2));
+               
+               /*  lunchalow */
+               var calculatedlun=(ctc/100) * LUNCHALOW; 
+               var monthlylun= calculatedlun /12;
+               
+                $("#LA22").val(monthlylun.toFixed(2));
+                $("#LA33").val(calculatedlun.toFixed(2));
+                $("#LA44").val(monthlylun.toFixed(2));
+                
+                /*  education */
+                var calculatedEDU=(ctc/100) * education; 
+                var monthlYEDU= calculatedEDU /12;
+                
+                 $("#EL22").val(monthlYEDU.toFixed(2));
+                 $("#EL33").val(calculatedEDU.toFixed(2));
+                 $("#EL44").val(monthlYEDU.toFixed(2));
+                 
+                 /*  business */
+                 var calculatedBUS=(ctc/100) * business; 
+                 var monthlYBUS= calculatedBUS /12;
+                 
+                  $("#BUS22").val(monthlYBUS.toFixed(2));
+                  $("#BUS33").val(calculatedBUS.toFixed(2));
+                  $("#BUS44").val(monthlYBUS.toFixed(2));
+                  
+                  /*  carmaintain */
+                  var calculatedcma=(ctc/100) * carmaintain; 
+                  var monthlYCAR= calculatedcma /12;
+                  
+                   $("#CMA22").val(monthlYCAR.toFixed(2));
+                   $("#CMA33").val(calculatedcma.toFixed(2));   
+                   $("#CMA44").val(monthlYCAR.toFixed(2));
+                   
+                   /*  leavetraval */
+                   var calculatedLEAVE=(ctc/100) * leavetravel; 
+                   var monthlYLEAVE= calculatedLEAVE /12;
+                   
+                    $("#LTA22").val(monthlYLEAVE.toFixed(2));
+                    $("#LTA33").val(calculatedLEAVE.toFixed(2));    
+                    $("#LTA44").val(monthlYLEAVE.toFixed(2));
+                    
+                    /*  PFE */
+                    var calculateDPF=(ctc/100) * PFE; 
+                    var monthlYPF= calculateDPF /12;
+                    
+                     $("#PEC2").val(monthlYPF.toFixed(2));
+                     $("#PEC3").val(calculateDPF.toFixed(2));
+                     $("#PEC4").val(monthlYPF.toFixed(2));  
+                     
+                     /*  PROFESSIONAL EDUCATION */
+                     var calculatePEDU=(ctc/100) * ProfessionalEDU; 
+                     var monthlYEDUU= calculatePEDU /12;
+                     
+                      $("#PD22").val(monthlYEDUU.toFixed(2));
+                      $("#PD33").val(calculatePEDU.toFixed(2));
+                      $("#PD44").val(monthlYEDUU.toFixed(2));  
+                      
+                      /*  standard deduction */
+                      var calculateSTSDED=(ctc/100) * standarddedu; 
+                      var monthlYSTSDED= calculateSTSDED /12;
+                      
+                       $("#SD22").val(monthlYSTSDED.toFixed(2));
+                       $("#SD33").val(calculateSTSDED.toFixed(2));
+                       $("#SD44").val(monthlYSTSDED.toFixed(2));
+                       
+                       /*  TAX deduction */
+                       var calculateTAXDED=(ctc/100) * TAXDED; 
+                       var monthlYTAXDED= calculateTAXDED /12;
+                       $("#TD22").val(monthlYTAXDED.toFixed(2));
+                        $("#TD33").val(calculateTAXDED.toFixed(2));
+                        $("#TD44").val(monthlYTAXDED.toFixed(2));
+                        
+                        
+                         // ----anualbonus--- 
+                       // var calculateANUALBONUS=(ctc/100) * anualbonus; 
+                          var calculateANUALBONUSMONTH= Math.round(anualbonus/12); 
+                        //var monthlYBONUS= calculateANUALBONUS /12;
+                        $("#ALB22").val(calculateANUALBONUSMONTH.toFixed(2));
+                         $("#ALB33").val(anualbonus.toFixed(2));
+                         $("#ALB44").val(calculateANUALBONUSMONTH.toFixed(2)); 
+                        
+                        
+                          /* ----month gross salary calculation-- */
+                        var grosssalarymonth = 
+                            parseFloat($("#BASICSALARY1").val()) +
+                            parseFloat($("#HRA1").val()) +
+                            parseFloat($("#SA22").val()) +
+                            parseFloat($("#MR22").val()) +
+                            parseFloat($("#CA22").val()) +
+                            parseFloat($("#LA22").val()) +
+                            parseFloat($("#EL22").val()) +
+                            parseFloat($("#BUS22").val()) +
+                            parseFloat($("#CMA22").val()) +
+                            parseFloat($("#LTA22").val());
+                            $("#GS2").val(grosssalarymonth.toFixed(2));
+                            $("#GS4").val(grosssalarymonth.toFixed(2));
+                            var deductionamountMONTH = 
+                                parseFloat($("#PEC2").val()) + 
+                                parseFloat($("#PD22").val()) +
+                                parseFloat($("#SD22").val()) +
+                                parseFloat($("#TD22").val());
+                            var momthlydection=grosssalarymonth - deductionamountMONTH;
+                             $("#NS2").val(momthlydection.toFixed(2));
+                             $("#NS4").val(momthlydection.toFixed(2));
+                             
+                             /* ----yearly gross and net salary calculation-- */
+                             var grosssalarymonth = 
+                                 parseFloat($("#BASICSALARY2").val()) +
+                                 parseFloat($("#HRA2").val()) +
+                                 parseFloat($("#SA33").val()) +
+                                 parseFloat($("#MR33").val()) +
+                                 parseFloat($("#CA33").val()) +
+                                 parseFloat($("#LA33").val()) +
+                                 parseFloat($("#EL33").val()) +
+                                 parseFloat($("#BUS33").val()) +
+                                 parseFloat($("#CMA33").val()) +
+                                 parseFloat($("#LTA33").val());
+                                 $("#GS3").val(grosssalarymonth.toFixed(2));
+                                 var deductionamountMONTH = 
+                                     parseFloat($("#PEC3").val()) + 
+                                     parseFloat($("#PD33").val()) +
+                                     parseFloat($("#SD33").val()) +
+                                     parseFloat($("#TD33").val());
+                                 var momthlydection=grosssalarymonth - deductionamountMONTH;
+                                  $("#NS3").val(momthlydection.toFixed(2));
+                 }
+        else {
+            $("#BASICSALARY1, #BASICSALARY3, #BASICSALARY2,#HR1,#HR2,#HR3,#SA22,#SA33,#SA44,#MR22,#MR33,#MR44,#CA22,#CA33,#CA44,#LA22,#LA33,#LA44,#EL22,#EL33,#EL44,#BUS22,#BUS33,#BUS44,#CMA22,#CMA33,#CMA44,#LTA22,#LTA33,#LTA44,#PEC2,#PEC3,#PEC4,#PD22,#PD33,#PD44,#SD22,#SD33,#SD44,#TD22,#TD33,#TD44").val("0.00");
+        }
+    }
+    
+
+    
+    
+    </script>
+
+
+
+<script>
+
+
+
+
+function select_org() {
+    const org_id = document.getElementById('org_id').value;
+
+    $.ajax({
+        url: './getorglist?org_id=' + org_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            const branchSelect = document.getElementById('branchId');
+            branchSelect.innerHTML = '<option value="">Select Branch</option>';
+
+            response.forEach(function(branchId) {
+                const option = document.createElement('option');
+                option.value = branchId;
+                option.text = branchId;
+                branchSelect.appendChild(option);
+            });
+        },
+
+        error: function(xhr, status, error) {
+            alert("Error: " + error);
+        }
+    });
+}
+
+
+
+</script>
+
+
+<script>
+
+function select_branch() {
+ const org_id = document.getElementById('org_id').value;
+    const branchId = document.getElementById('branchId').value;
+    if (!org_id || !branchId) {
+        alert("Please select both Organization and Branch.");
+        return;
+    }
+
+    const tableBody = document.getElementById('mytabless');
+
+    $.ajax({
+        url: './getuserbranchlistforclaimMAINsalary?branchId=' + branchId + '&org_id=' + org_id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            tableBody.innerHTML = ''; // Clear existing data
+
+            if (response.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="11" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.forEach((paralist, index) => {
+                    let row = `
+                        <tr>
+                            <td style="text-align: left;">${paralist.group_name || ''}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_basic_salary)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_cost_to_company)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_medical_reimbursement)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_conveyance_allowance)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_business_attire_reimbursement)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_leave_travel_allowance)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_professional_deduction)}</td>
+                            <td style="text-align: right;">${formatCurrency(paralist.ctc_tax_deduction)}</td>
+                            <td style="text-align: center;" class="${paralist.status === 'Verified' ? 'status-verified' : 'status-pending'}">
+                                ${paralist.status}
+                            </td>
+                            <td style="text-align: center;">
+                                <div class="dropdown">
+                                    <button class="btn btn-dark btn-secondary dropdown-toggle"
+                                        type="button" title="Action"
+                                        style="line-height: 0.7; font-size: 11px; color: white; background: black;"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <div class="dropdown-menu" style="background-color: #e3e3e4; color: #3a4550;">
+                                        <a class="dropdown-item" title="Modify" style="cursor: pointer;" onclick="modify_btn(this)" srl_no="${paralist.srl_no}">Modify</a>
+                                        <div class="dropdown-divider"></div>
+                                        ${paralist.status !== 'Verified' && paralist.role === 'ADM' ? `
+                                            <a class="dropdown-item" title="Verify" style="cursor: pointer;" onclick="verify_btn_submit(this)" srl_no="${paralist.srl_no}">Verify</a>
+                                            <div class="dropdown-divider"></div>
+                                        ` : ''}
+                                        <a class="dropdown-item" title="View" style="cursor: pointer;" onclick="view_btn_submit(this)" srl_no="${paralist.srl_no}">View</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" title="Delete" style="cursor: pointer;" onclick="delete_btn_submit(this)" srl_no="${paralist.srl_no}">Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("Error: " + error);
+        }
+    });
+}
+
+// Helper to format currency values to 2 decimal points
+function formatCurrency(value) {
+    if (value == null) return '0.00';
+    return parseFloat(value).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+</script>
+
+</head>
+<title>ERP</title>
+
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+				<div class="container-fluid content"
+					th:if="${formmode}=='add' OR ${formmode}=='list'">
+					<div class="row">
+						<div class="col-sm-12">
+
+							<form action="#" th:object="${salaryparam}" class="w-100"
+								method="post" autocomplete="off" id="salaryparam" name="form1">
+								<div class="card">
+									<div
+										class="card-header d-flex justify-content-between align-center"
+										style="font-size: 23px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<div class="float-left">
+											<b th:if="${formmode}=='add'">SALARY PARAMETER - ADD</b> <b
+												th:if="${formmode}=='list'">SALARY PARAMETER</b>
+										</div>
+										<div class="d-flex align-center gap-2 ">
+
+
+
+											<!-- Organization Selection -->
+											<select class="  form-control-sm" onchange="select_org();"
+												style="color: white; background-color: black;" id="org_id"
+												name="org_id">
+												<option value="">Select Organization</option>
+												<!-- Populate options dynamically using Thymeleaf -->
+												<option th:each="OrgId : ${OrgIds}" th:value="${OrgId}"
+													th:text="${OrgId}"></option>
+											</select>
+
+											<!-- Branch Selection -->
+											<select class=" form-control-sm"
+												style="background-color: black; color: white;"
+												onchange="select_branch();" id="branchId" name="branchId">
+												<option value="">Select Branch</option>
+												<!-- Populate options dynamically using Thymeleaf -->
+												<option th:each="branchId : ${branchIds}"
+													th:value="${branchId}" th:text="${branchId}"></option>
+											</select>
+
+
+
+
+											<button type="button" style="margin-top: -1px;"
+												class="btn btn-dark btn-xs btn-primary btns " id="btnAdd"
+												onclick="addpara();" th:if="${formmode}=='list'">Add</button>
+											<button type="button" style="margin-top: -1px;"
+												class="btn btn-dark btn-xs btn-primary btns" id="btnAdd"
+												onclick="listpara();">List</button>
+										</div>
+									</div>
+
+									<!-- The parameter list start -->
+									<div th:if="${formmode}=='list'">
+										<div class="row">
+											<div class="col-sm-12">
+												<div class="container-fluid">
+
+													<!-- <div class="card-body"> -->
+
+													<div class="table-container">
+														<div class="table-responsive"
+															style="overflow-y: auto; overflow-x: hidden; height: 65vh; margin-top: 0px">
+															<table
+																class="table  table-bordered  table-hover table-sm"
+																style="margin-bottom: 0px;" id="usertable">
+																<thead class="thead-light"
+																	style="position: sticky; top: 0; z-index: 1; background-color: white;">
+																	<tr>
+																		<th style="font-size: 15px; text-align: left;">Group</th>
+																		<th style="font-size: 15px; text-align: right;">Basic<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">CTC</th>
+																		<th style="font-size: 15px; text-align: right;">Medical<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">Conveyance<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">Attire<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">LTC<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">PT<span>%</span></th>
+																		<th style="font-size: 15px; text-align: right;">TD<span>%</span></th>
+																		<th style="font-size: 15px; text-align: center;">Status</th>
+																		<th style="font-size: 15px; text-align: center;">Action</th>
+
+																	</tr>
+																</thead>
+
+																<tbody id="mytabless">
+
+																	<tr th:each="paralist : ${getdatas}">
+
+																		<td style="text-align: left;"
+																			th:text="${paralist.group_name}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_basic_salary != null ? #numbers.formatDecimal(paralist.ctc_basic_salary, 1, 'COMMA', 2, 'POINT') : '0.00'}">
+																		</td>
+
+
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_cost_to_company !=null ? #numbers.formatDecimal(paralist.ctc_cost_to_company,1,'COMMA',2,'POINT') :'0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_medical_reimbursement !=null ? #numbers.formatDecimal(paralist.ctc_medical_reimbursement ,1,'COMMA',2, 'POINT') : '0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_conveyance_allowance !=null ? #numbers.formatDecimal(paralist.ctc_conveyance_allowance,1,'COMMA',2,'POINT' ) : '0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_business_attire_reimbursement !=null ? #numbers.formatDecimal(paralist.ctc_business_attire_reimbursement,1,'COMMA',2,'POINT') : '0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_leave_travel_allowance !=null ? #numbers.formatDecimal(paralist.ctc_leave_travel_allowance,1,'COMMA',2,'POINT') :'0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_professional_deduction !=null ? #numbers.formatDecimal(paralist.ctc_professional_deduction,1,'COMMA',2,'POINT') : '0.00'}"></td>
+																		<td style="text-align: right;"
+																			th:text="${paralist.ctc_tax_deduction !=null ? #numbers.formatDecimal(paralist.ctc_tax_deduction,1,'COMMA',2,'POINT') : '0.00'}"></td>
+																		<td
+																			th:class="${paralist.status} == 'Verified' ? 'status-verified' : 'status-pending'"
+																			style="text-align: center;"
+																			th:text="${paralist.status}"></td>
+																		<td style="text-align: center;">
+																			<div class="dropdown">
+																				<button
+																					class="btn btn-dark btn-secondary dropdown-toggle"
+																					type="button" id="dropdownMenuButton"
+																					title="Action"
+																					style="line-height: 0.7; font-size: 11px; color: white; background: black;"
+																					data-toggle="dropdown" aria-haspopup="true"
+																					aria-expanded="false">Action</button>
+																				<div class="dropdown-menu"
+																					aria-labelledby="dropdownMenuButton"
+																					style="background-color: #e3e3e4; color: #3a4550;">
+																					<a class="dropdown-item" title=" Modify"
+																						th:attr="srl_no= ${paralist.srl_no}"
+																						style="cursor: pointer; height: 20px; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																						id="edit_value" onclick="modify_btn(this)">Modify</a>
+																					<div class="dropdown-divider"></div>
+																					<a class="dropdown-item" title=verify
+																						th:attr="srl_no= ${paralist.srl_no}"
+																						th:if="${paralist.status != 'Verified'} and ${RoleMenu.role == 'ADM'}"
+																						style="cursor: pointer; height: 20px; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																						id="verify_value"
+																						onclick="verify_btn_submit(this)">Verify</a>
+																					<div class="dropdown-divider"></div>
+																					<a class="dropdown-item" title="View"
+																						th:attr="srl_no= ${paralist.srl_no}"
+																						style="cursor: pointer; height: 20px; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																						onclick="view_btn_submit(this)" id="view_btn">View
+																					</a>
+
+																					<div class="dropdown-divider"></div>
+
+
+																					<a class="dropdown-item" title="Delete"
+																						th:attr="srl_no= ${paralist.srl_no}"
+																						style="cursor: pointer; height: 20px; color: #3a4550; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																						onclick="delete_btn_submit(this)" id="delete_btn">Delete
+																					</a>
+
+
+																				</div>
+																			</div>
+																		</td>
+
+																	</tr>
+																</tbody>
+															</table>
+
+
+
+														</div>
+														<div class="card-footer  text-center">
+															<button type="button" class="btn btn-dark btn-primary"
+																id="btnHome" style="width:" onclick="home();">Home</button>
+															<button type="button" class="btn btn-dark btn-primary"
+																id="btnHome" style="width:" onclick="home();">Back</button>
+														</div>
+													</div>
+
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<!---------------------parameter List Ends--------------------------------------------------------->
+									<!---------------------parameter Add Starts--------------------------------------------------------->
+
+									<div class="card-body p-3" th:if="${formmode}=='add'">
+
+										<div class="form-group mb-0">
+
+											<div class="row formline" style="margin-left: -94px;">
+												<div class="col-4 col-lg-2">
+													<label for="dropdown"
+														style="FONT-SIZE: larger; transform: translateX(72px); margin-top: -5px; font-weight: 500;">Tax
+														Category</label>
+												</div>
+												<div class="col-4 col-lg-1">
+													<select id="group" onchange="showElement(this.value)"
+														class="form-control-sm " name="group_name"
+														style="background-color: #f9fff6;">
+														<option value="">Select</option>
+														<option value="GROUP-A">GROUP A</option>
+														<option value="GROUP-B">GROUP B</option>
+														<option value="GROUP-C">GROUP C</option>
+														<option value="GROUP-D">GROUP D</option>
+														<option value="GROUP-E">GROUP E</option>
+														<option value="GROUP-F">GROUP F</option>
+														<option value="GROUP-G">GROUP G</option>
+														<option value="GROUP-H">GROUP H</option>
+														<option value="GROUP-I">GROUP I</option>
+														<option value="GROUP-J">GROUP J</option>
+														<option value="GROUP-K">GROUP K</option>
+														<option value="GROUP-L">GROUP L</option>
+														<option value="GROUP-M">GROUP M</option>
+														<option value="GROUP-N">GROUP N</option>
+														<option value="GROUP-O">GROUP O</option>
+														<option value="GROUP-P">GROUP P</option>
+														<option value="GROUP-Q">GROUP Q</option>
+														<option value="GROUP-R">GROUP R</option>
+														<option value="GROUP-S">GROUP S</option>
+														<option value="GROUP-T">GROUP T</option>
+														<option value="GROUP-U">GROUP U</option>
+														<option value="GROUP-V">GROUP V</option>
+														<option value="GROUP-W">GROUP W</option>
+														<option value="GROUP-X">GROUP X</option>
+														<option value="GROUP-Y">GROUP Y</option>
+														<option value="GROUP-Z">GROUP Z</option>
+
+													</select>
+												</div>
+
+												<label class="col-sm-2">Organization Id</label>
+
+
+												<!-- Organization Selection -->
+												<select class=" col-sm-2 form-control-sm "
+													onchange="select_org();" id="org_id" name="org_id">
+													<option value="">Select Organization</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="OrgId : ${OrgIds}" th:value="${OrgId}"
+														th:text="${OrgId}"></option>
+												</select> <label class="col-md-1">Branch Id</label>
+
+
+												<!-- Branch Selection -->
+												<select class=" col-sm-2  form-control-sm "
+													onchange="select_branch();" id="branchId" name="branchId">
+													<option value="">Select Branch</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="branchId : ${branchIds}"
+														th:value="${branchId}" th:text="${branchId}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="card-body p-3" id="salaryparameter"
+										style="display: block" th:if="${formmode}=='add'">
+
+										<div class="table-responsive"
+											style="overflow-y: auto; overflow-x: hidden; height: 56vh; margin-top: -20px">
+
+
+
+											<fieldset hidden>
+												<!-- 		<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="DESCRIPTION" style="font-size: large;font-weight: 500;">DESCRIPTION</label>
+											</div>
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="PARAMETER_VALUE" style="font-size: large;font-weight: 500;">PARAMETER VALUE <span>(Monthly)</span></label>
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="basiclabel">BASIC</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="basic" 
+            					       class="form-control form-control-sm" name="des_basic" 
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="hralabel">HRA</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="hra" 
+            					       class="form-control form-control-sm" name="des_hra" 
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="medicallable">MEDICAL</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="medical"  
+													class="form-control form-control-sm" name="des_medical"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="conveyancelabel">CONVEYANCE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="conveyance"  
+													class="form-control form-control-sm" name="des_conveyance"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="attirelabel">ATTIRE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="attire"  
+													class="form-control form-control-sm" name="des_attire"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="ltclabel">LTC</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="ltc" 
+            					       class="form-control form-control-sm" name="des_ltc" 
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="emp_pflabel">EMPLOYER PF</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="emp_pf" 
+            					       class="form-control form-control-sm" name="des_employer_pf"  
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="spallowancelabel">SPECIAL ALLOWANCE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="sp_all" 
+													class="form-control form-control-sm" name="des_special_allowance" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="pf_taxlabel">PROFESSIONAL TAX</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="pf_tax"  
+													class="form-control form-control-sm" name="des_professional_tax"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="tax_label">TAX DEDUCTION</label>
+											</div>
+											<div class="col-4 col-lg-2">
+											<div class="input-group">
+												<input type="number" id="tax_ded" readonly
+													class="form-control form-control-sm" name="des_tax_deduction"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+           										  </div>
+											</div>
+											<div class="col-4 col-lg-2">
+											<label id="tax_label">FJT</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="number" id="tax_fjt" readonly
+													class="form-control form-control-sm" name="des_fjt"
+													autocomplete="off"  style="margin-left: -159px;background-color:#f9fff6; text-align: right;" />
+											</div>
+											</div>
+											<div class="col-4 col-lg-2"></div>
+											<div class="col-4 col-lg-2"></div> -->
+
+												<div class="row formline mt-2">
+													<div class="col-sm-auto"></div>
+													<div class="col-4 col-lg-1">
+														<label id="National">NATIONAL</label>
+													</div>
+													<div class="col-4 col-lg-1"
+														style="transform: translateX(200px);">
+														<label> <input type="radio" name="national"
+															value="yes" id="radioYes" checked> Yes
+														</label>
+													</div>
+													<label style="transform: translateX(200px);"> <input
+														type="radio" name="national" value="no" id="radioNo">
+														No
+													</label>
+
+
+
+													<div class="col-4 col-lg-4"
+														style="transform: translateX(250px);">
+
+														<div id="dropdownDiv" class="hidden">
+															<label for="nationalDropdown">Country :</label> <select
+																id="nationalDropdown" name="country" class="pat"
+																style="background-color: #f9fff6;"
+																onchange="submitTaxGroup()">
+																<option value="">Select</option>
+																<option th:each="country : ${countryList}"
+																	th:value="${country}" th:if="${country != null}"
+																	th:text="${country}"></option>
+															</select>
+														</div>
+
+													</div>
+												</div>
+
+												<div class="col-4 col-lg-2"></div>
+
+
+												<p>
+											</fieldset>
+											<p>
+											<div class="col-4 col-lg-2"></div>
+											<h4>SALARY PARAMETERS</h4>
+
+											<div class="col-4 col-lg-2"></div>
+											<fieldset>
+												<div class="row formline">
+													<div class="col-4 col-lg-3"
+														style="text-align: left; font-weight: 700; font-size: inherit;">
+														<label id="DESCRIPTION">Description</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="CTC"></label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Monthly">Monthly</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Yearly">Yearly</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Take_Home_Salary">Take Home Salary</label>
+													</div>
+													<div class="col-4 col-lg-2"></div>
+
+												</div>
+
+
+												<div class="form-group mb-0">
+
+
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="costToCompany">Cost To Company</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="costToCompany11" required
+																placeholder="CTC" oninput="percentagecalulation(this)"
+																class="form-control form-control-sm"
+																name="ctc_cost_to_company" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+														<div class="col-4 col-lg-2"></div>
+														<div class="col-4 col-lg-2"></div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+
+
+
+													<!-- 	<div class="row formline">
+											<div class="col-4 col-lg-3">
+												<label for="costToCompany">COST TO COMPANY</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany11"  required 
+													class="form-control form-control-sm" name="ctc_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany1" readonly
+													class="form-control form-control-sm" name="mon_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany2" readonly
+													class="form-control form-control-sm" name="year_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany3" readonly
+													class="form-control form-control-sm" name="ths_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+											
+										</div> -->
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="BASICSALARY">Basic Company</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="BASICSALARY"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_basic_salary" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+
+																<div class="input-group-append" style="height: 31px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BASICSALARY1" readonly
+																class="form-control form-control-sm"
+																name="mon_basic_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BASICSALARY2" readonly
+																class="form-control form-control-sm"
+																name="year_basic_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BASICSALARY3" readonly
+																class="form-control form-control-sm"
+																name="ths_basic_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<!-- <label for="HRA">HOUSE RENT ALLOWANCE</label> -->
+															<label for="specialallow">Direct Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="HRA"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_house_rent_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA1" readonly
+																class="form-control form-control-sm"
+																name="mon_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA2" readonly
+																class="form-control form-control-sm"
+																name="year_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA3" readonly
+																class="form-control form-control-sm"
+																name="ths_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="SA">Special Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="SA11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_special_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA22" readonly
+																class="form-control form-control-sm"
+																name="mon_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA33" readonly
+																class="form-control form-control-sm"
+																name="year_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA44" readonly
+																class="form-control form-control-sm"
+																name="ths_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="MR">Medical Reimbursement</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="MR11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_medical_reimbursement" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR22" readonly
+																class="form-control form-control-sm"
+																name="mon_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR33" readonly
+																class="form-control form-control-sm"
+																name="year_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR44" readonly
+																class="form-control form-control-sm"
+																name="ths_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="CA">Conveyance Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="CA11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_conveyance_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA22" readonly
+																class="form-control form-control-sm"
+																name="mon_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA33" readonly
+																class="form-control form-control-sm"
+																name="year_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA44" readonly
+																class="form-control form-control-sm"
+																name="ths_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="LA">Lunch Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+
+															<div class="input-group input-group-sm">
+																<input type="text" id="LA11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_lunch_allownace" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA22" readonly
+																class="form-control form-control-sm"
+																name="mon_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA33" readonly
+																class="form-control form-control-sm"
+																name="year_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA44" readonly
+																class="form-control form-control-sm"
+																name="ths_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<!-- <label for="EL">EDUCATION ALLOWANCE</label> -->
+															<label for="EL">Vehical Allowance</label>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="EL11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_education_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL22" readonly
+																class="form-control form-control-sm"
+																name="mon_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL33" readonly
+																class="form-control form-control-sm"
+																name="year_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL44" readonly
+																class="form-control form-control-sm"
+																name="ths_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<!-- <label for="BUS">BUSINESS ATTIRE REIMBURSEMENT</label> -->
+															<label for="BUS">Performance Pay</label>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="BUS11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_business_attire_reimbursement"
+																	autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS22" readonly
+																class="form-control form-control-sm"
+																name="mon_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS33" readonly
+																class="form-control form-control-sm"
+																name="year_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS44" readonly
+																class="form-control form-control-sm"
+																name="ths_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="CMA">Car Maintenance Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="CMA11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_car_maintenance_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA22" readonly
+																class="form-control form-control-sm"
+																name="mon_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA33" readonly
+																class="form-control form-control-sm"
+																name="year_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA44" readonly
+																class="form-control form-control-sm"
+																name="ths_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="LTA"> Leave Travel Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="LTA11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_leave_travel_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA22" readonly
+																class="form-control form-control-sm"
+																name="mon_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA33" readonly
+																class="form-control form-control-sm"
+																name="year_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA44" readonly
+																class="form-control form-control-sm"
+																name="ths_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="PEC">PF Employer Contribution</label>
+														</div>
+														<div class="col-4 col-lg-2">
+
+															<div class="input-group input-group-sm">
+																<input type="text" id="PEC1"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_pf_employer_contribution" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC2" readonly
+																class="form-control form-control-sm"
+																name="mon_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC3" readonly
+																class="form-control form-control-sm"
+																name="year_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC4" readonly
+																class="form-control form-control-sm"
+																name="ths_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="ALB">Annual Loyality Bonus*</label>
+														</div>
+														<div class="col-4 col-lg-2">
+
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="ALB11"
+																	class="form-control form-control-sm"
+																	oninput="percentagecalulation(this)"
+																	name="ctc_annual_loyalty_bonus" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">RS</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB22" readonly
+																class="form-control form-control-sm"
+																name="mon_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB33" readonly
+																class="form-control form-control-sm"
+																name="year_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB44" readonly
+																class="form-control form-control-sm"
+																name="ths_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="GS"> Gross Salary</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS1" readonly
+																class="form-control form-control-sm"
+																name="ctc_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS2" readonly
+																class="form-control form-control-sm"
+																name="mon_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS3" readonly
+																class="form-control form-control-sm"
+																name="year_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS4" readonly
+																class="form-control form-control-sm"
+																name="ths_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="PD"> Professional Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="PD11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_professional_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD22" readonly
+																class="form-control form-control-sm"
+																name="mon_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD33" readonly
+																class="form-control form-control-sm"
+																name="year_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD44" readonly
+																class="form-control form-control-sm"
+																name="ths_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="SD">Standard Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="SD11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_standard_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD22" readonly
+																class="form-control form-control-sm"
+																name="mon_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD33" readonly
+																class="form-control form-control-sm"
+																name="year_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD44" readonly
+																class="form-control form-control-sm"
+																name="ths_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="TD"> Tax Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="number" id="TD11"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_tax_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD22" readonly
+																class="form-control form-control-sm"
+																name="mon_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD33" readonly
+																class="form-control form-control-sm"
+																name="year_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD44" readonly
+																class="form-control form-control-sm"
+																name="ths_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="NS"> Net Salary</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS1" readonly
+																class="form-control form-control-sm"
+																name="ctc_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS2" readonly
+																class="form-control form-control-sm"
+																name="mon_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS3" readonly
+																class="form-control form-control-sm"
+																name="year_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS4" readonly
+																class="form-control form-control-sm"
+																name="ths_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+
+
+
+												</div>
+											</fieldset>
+										</div>
+
+										<div class="card-footer  text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+											<button type="button" class="btn btn-dark btn-primary"
+												id="btnHome" style="width: 120px" onclick="home();">Home</button>
+
+											<button type="button" class="btn btn-dark btn-xs btn-primary"
+												th:if="${formmode}=='add'" id="btnSubmit"
+												style="width: 120px" onclick="addParamData();">Submit</button>
+
+
+											<button type="button" class="btn btn-dark btn-primary"
+												id="btnBack" style="width: 120px" onclick="back();">Back</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Add and list ends -->
+
+				<!-- view, modify,verify and delete screens starts -->
+
+
+				<div class="container-fluid content"
+					th:if="${formmode}=='view'  OR ${formmode}=='verify' OR ${formmode}=='edit' OR ${formmode}=='delete'">
+					<div class="row">
+						<div class="col-sm-12">
+
+							<form action="#" th:object="${salaryparam}" class="w-100"
+								method="post" autocomplete="off" id="salaryparam" name="form1">
+								<div class="card">
+
+									<!-- ---table responsive--- -->
+
+
+
+									<div class="card-header border-bottom-0"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<div class="float-left">
+											<h4 th:if="${formmode}=='view'">SALARY PARAMETER - VIEW</h4>
+											<h4 th:if="${formmode}=='edit'">SALARY PARAMETER - EDIT</h4>
+											<h4 th:if="${formmode}=='verify'">SALARY PARAMETER -
+												VERIFY</h4>
+											<h4 th:if="${formmode}=='delete'">SALARY PARAMETER -
+												DELETE</h4>
+										</div>
+										<div class="btn btn-dark-group nav-buttons float-right">
+											<button type="button"
+												class="btn btn-dark btn-xs btn-primary btns" id="btnAdd"
+												onclick="addpara();" th:if="${formmode}=='list'"
+												style="font-size: 15px; width: -70px; size: 100px;">Add</button>
+											<button type="button"
+												class="btn btn-dark btn-xs btn-primary btns" id="btnAdd"
+												onclick="listpara();"
+												style="font-size: 15px; width: -70px; size: 100px;">List</button>
+										</div>
+									</div>
+
+									<div class="card-body p-3">
+										<div class="form-group mb-0">
+											<div class="row formline" style="margin-left: -94px;">
+												<div class="col-4 col-lg-2">
+													<label for="dropdown"
+														style="FONT-SIZE: larger; transform: translateX(72px); margin-top: -5px; font-weight: 500;">Tax
+														Category</label>
+												</div>
+												<div class="col-4 col-lg-1">
+													<select id="group" name="group_name"
+														style="background-color: #f9fff6;"
+														th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'">
+														<option th:text="${paramview.group_name}"></option>
+													</select> <select id="group" name="group_name"
+														style="background-color: #f9fff6;"
+														th:if="${formmode}=='edit'">
+														<option th:text="${paramview.group_name}">SELECT</option>
+														<option value="GROUP-A">GROUP A</option>
+														<option value="GROUP-B">GROUP B</option>
+														<option value="GROUP-C">GROUP C</option>
+														<option value="GROUP-D">GROUP D</option>
+														<option value="GROUP-E">GROUP E</option>
+														<option value="GROUP-F">GROUP F</option>
+														<option value="GROUP-G">GROUP G</option>
+														<option value="GROUP-H">GROUP H</option>
+														<option value="GROUP-I">GROUP I</option>
+														<option value="GROUP-J">GROUP J</option>
+														<option value="GROUP-K">GROUP K</option>
+														<option value="GROUP-L">GROUP L</option>
+														<option value="GROUP-M">GROUP M</option>
+														<option value="GROUP-N">GROUP N</option>
+														<option value="GROUP-O">GROUP O</option>
+														<option value="GROUP-P">GROUP P</option>
+														<option value="GROUP-Q">GROUP Q</option>
+														<option value="GROUP-R">GROUP R</option>
+														<option value="GROUP-S">GROUP S</option>
+														<option value="GROUP-T">GROUP T</option>
+														<option value="GROUP-U">GROUP U</option>
+														<option value="GROUP-V">GROUP V</option>
+														<option value="GROUP-W">GROUP W</option>
+														<option value="GROUP-X">GROUP X</option>
+														<option value="GROUP-Y">GROUP Y</option>
+														<option value="GROUP-Z">GROUP Z</option>
+													</select>
+												</div>
+
+
+												<label class="col-sm-2">Organization Id</label>
+
+
+												<!-- Organization Selection -->
+												<select class=" col-sm-2 form-control-sm "
+													th:if="${formmode=='edit'}" onchange="select_org();"
+													id="org_id" name="org_id">
+													<option th:text="${paramview.org_id}">Select
+														Organization</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="OrgId : ${OrgIds}"
+														th:if="${OrgId != paramview.org_id}" th:value="${OrgId}"
+														th:text="${OrgId}"></option>
+												</select> <select class=" col-sm-2 form-control-sm "
+													th:if="${formmode=='view'}" onchange="select_org();"
+													id="org_id" name="org_id" disabled>
+													<option th:text="${paramview.org_id}">Select
+														Organization</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="OrgId : ${OrgIds}"
+														th:if="${OrgId != paramview.org_id}" th:value="${OrgId}"
+														th:text="${OrgId}"></option>
+												</select> <select class=" col-sm-2 form-control-sm "
+													th:if="${formmode=='delete'}" onchange="select_org();"
+													id="org_id" name="org_id" disabled>
+													<option th:text="${paramview.org_id}">Select
+														Organization</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="OrgId : ${OrgIds}"
+														th:if="${OrgId != paramview.org_id}" th:value="${OrgId}"
+														th:text="${OrgId}"></option>
+												</select> <label class="col-md-1">Branch Id</label>
+
+
+												<!-- Branch Selection -->
+												<!-- <input type="text" class="form-control-sm" th:value="${paramview.branchId}" readonly/> -->
+
+												<!-- Branch Selection -->
+												<select class=" col-sm-2  form-control-sm "
+													onchange="select_branch();" id="branchId" name="branchId"
+													disabled>
+													<option th:text="${paramview.branchId}">Select
+														Branch</option>
+													<!-- Populate options dynamically using Thymeleaf -->
+													<option th:each="branchId : ${branchIds}"
+														th:value="${branchId}" th:text="${branchId}"></option>
+												</select>
+
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive"
+										style="overflow-y: auto; overflow-x: hidden; max-height: 60vh; margin-top: -20px">
+										<div class="card-body p-3" id="salaryparameter">
+
+											<fieldset hidden>
+
+												<!-- 	<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="DESCRIPTION" style="font-size: large;font-weight: 500;">DESCRIPTION</label>
+											</div>
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="PARAMETER_VALUE" style="font-size: large;font-weight: 500;">PARAMETER VALUE <span>(Monthly)</span></label>
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left; font-size: inherit;">
+												<label id="basiclabel">BASIC</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="basic"  th:value="${paramview.des_basic}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+            					       class="form-control form-control-sm" name="des_basic"  readonly
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+             								      
+         								   <input type="text" id="basic"  th:value="${paramview.des_basic}" th:if="${formmode}=='edit'"
+            					       class="form-control form-control-sm" name="des_basic"  
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="hralabel">HRA</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="hra" th:value="${paramview.des_hra}"  th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+            					       class="form-control form-control-sm" name="des_hra"  readonly
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+             								      
+         								   <input type="text" id="hra" th:value="${paramview.des_hra}"  th:if="${formmode}=='edit'"
+            					       class="form-control form-control-sm" name="des_hra"  
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="medicallable">MEDICAL</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="medical"  th:value="${paramview.des_medical}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													class="form-control form-control-sm" name="des_medical" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													
+												<input type="text" id="medical"  th:value="${paramview.des_medical}" th:if="${formmode}=='edit'"
+													class="form-control form-control-sm" name="des_medical" 
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="conveyancelabel">CONVEYANCE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="conveyance"  th:value="${paramview.des_conveyance}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													class="form-control form-control-sm" name="des_conveyance" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													
+												<input type="text" id="conveyance"  th:value="${paramview.des_conveyance}" th:if="${formmode}=='edit'"
+													class="form-control form-control-sm" name="des_conveyance" 
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="attirelabel">ATTIRE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="attire"  th:value="${paramview.des_attire}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													class="form-control form-control-sm" name="des_attire" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													
+												<input type="text" id="attire"  th:value="${paramview.des_attire}" th:if="${formmode}=='edit'"
+													class="form-control form-control-sm" name="des_attire" 
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="ltclabel">LTC</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="ltc" th:value="${paramview.des_ltc}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+            					       class="form-control form-control-sm" name="des_ltc" readonly
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+             								      
+         								   <input type="text" id="ltc" th:value="${paramview.des_ltc}" th:if="${formmode}=='edit'"
+            					       class="form-control form-control-sm" name="des_ltc" 
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="emp_pflabel">EMPLOYER PF</label>
+											</div>
+											 <div class="col-4 col-lg-2">
+       								 <div class="input-group">
+         								   <input type="text" id="emp_pf" th:value="${paramview.des_employer_pf}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+            					       class="form-control form-control-sm" name="des_employer_pf"  readonly
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+             								      
+         								   <input type="text" id="emp_pf" th:value="${paramview.des_employer_pf}" th:if="${formmode}=='edit'"
+            					       class="form-control form-control-sm" name="des_employer_pf"  
+             								      autocomplete="off" style="background-color:#f9fff6;" />
+            							<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+      										  </div>
+   											 </div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="spallowancelabel">SPECIAL ALLOWANCE</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="sp_all" th:value="${paramview.des_special_allowance}"
+													class="form-control form-control-sm" name="des_special_allowance" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="pf_taxlabel">PROFESSIONAL TAX</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="pf_tax"  th:value="${paramview.des_professional_tax}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													class="form-control form-control-sm" name="des_professional_tax" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													
+												<input type="text" id="pf_tax"  th:value="${paramview.des_professional_tax}" th:if="${formmode}=='edit'"
+													class="form-control form-control-sm" name="des_professional_tax" 
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2"></div>
+										</div>
+										
+										
+										<div class="row formline">
+											<div class="col-4 col-lg-3" style=" text-align: left;  font-size: inherit;">
+												<label id="tax_label">TAX DEDUCTION</label>
+											</div>
+											<div class="col-4 col-lg-2">
+											<div class="input-group">
+												<input type="number" id="tax_ded" th:value="${paramview.des_tax_deduction}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													class="form-control form-control-sm" name="des_tax_deduction" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													
+												<input type="text" id="tax_ded" th:value="${paramview.des_tax_deduction}" th:if="${formmode}=='edit'"
+													class="form-control form-control-sm" name="des_tax_deduction" readonly
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+													<div class="input-group-append" style="height: 31px;">
+           												     <span class="input-group-text">%</span>
+           										 </div>
+											</div>
+											</div>
+											<div class="col-4 col-lg-2">
+											<label id="tax_label">FJT</label>
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="tax_fjt"  readonly
+													class="form-control form-control-sm" name="des_fjt"th:value="${paramview.des_fjt}" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+													
+													autocomplete="off"  style="margin-left: -159px;background-color:#f9fff6; text-align: right;" />
+											<input type="text" id="tax_fjt" th:value="${paramview.des_fjt}" th:if="${formmode}=='edit'" readonly
+													class="form-control form-control-sm" name="des_fjt"
+													autocomplete="off"  style="margin-left: -159px;background-color:#f9fff6; text-align: right;" />
+											
+											</div>
+										</div> -->
+
+												<div class="row formline mt-2">
+													<div class="col-sm-auto"></div>
+													<div class="col-4 col-lg-1">
+														<label id="National">NATIONAL</label>
+													</div>
+													<div class="col-4 col-lg-1"
+														style="transform: translateX(200px);">
+														<label th:if="${formmode}=='edit'"> <input
+															type="radio" name="national" value="yes" id="radioYes"
+															th:checked="${paramview.national}"> Yes
+														</label> <label
+															th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'">
+															<input type="radio" name="national" value="yes"
+															id="radioYes" th:checked="${paramview.national}">
+															Yes
+														</label>
+													</div>
+													<label style="transform: translateX(200px);"
+														th:if="${formmode}=='edit'"> <input type="radio"
+														name="national" value="no" id="radioNo"
+														th:checked="${!paramview.national}"> No
+													</label> <label style="transform: translateX(200px);"
+														th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'">
+														<input type="radio" name="national" value="no"
+														id="radioNo" th:checked="${!paramview.national}">
+														No
+													</label>
+
+
+													<div class="col-4 col-lg-4"
+														style="transform: translateX(250px);"
+														th:if="${formmode} == 'edit'">
+														<div id="dropdownDiv"
+															th:class="${paramview.country} ? '' : 'hidden'">
+															<label for="nationalDropdown">Country :</label> <select
+																id="nationalDropdown" name="country" class="pat"
+																style="background-color: #f9fff6;"
+																onchange="submitTaxGroup()">
+																<option th:text="${paramview.country}">Select</option>
+																<option th:each="country : ${countryList}"
+																	th:value="${country}" th:if="${country != null}"
+																	th:text="${country}"></option>
+															</select>
+														</div>
+
+													</div>
+
+													<div class="col-4 col-lg-4"
+														style="transform: translateX(250px);"
+														th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'">
+														<div id="dropdownDiv"
+															th:class="${paramview.country} ? '' : 'hidden'">
+															<label for="nationalDropdown">Country :</label> <select
+																id="nationalDropdown" name="country" class="pat"
+																style="background-color: #f9fff6;">
+																<option th:text="${paramview.country}">Select</option>
+															</select>
+														</div>
+
+													</div>
+												</div>
+
+
+
+												<p>
+											</fieldset>
+											<p>
+											<div class="col-4 col-lg-2"></div>
+											<h4>SALARY PARAMETERS</h4>
+
+											<div class="col-4 col-lg-2"></div>
+											<fieldset>
+												<div class="row formline">
+													<div class="col-4 col-lg-3"
+														style="text-align: left; font-weight: 700; font-size: inherit;">
+														<label id="DESCRIPTION">Description</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="CTC">CTC</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Monthly">Monthly</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Yearly">Yearly</label>
+													</div>
+													<div class="col-4 col-lg-2"
+														style="text-align: center; font-weight: 700; font-size: inherit;">
+														<label id="Take_Home_Salary">Take Home Salary</label>
+													</div>
+													<div class="col-4 col-lg-2"></div>
+
+												</div>
+
+
+												<div class="form-group mb-0">
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="costToCompany">Cost To Company</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="costToCompany11" readonly
+																th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='delete'"
+																class="form-control form-control-sm"
+																name="ctc_cost_to_company"
+																th:value="${#numbers.formatDecimal(paramview.ctc_cost_to_company, 1, 2, 'POINT')}"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+
+															<input type="text" id="costToCompany11"
+																th:if="${formmode}=='edit'" required
+																th:value="${#numbers.formatDecimal(paramview.ctc_cost_to_company, 1, 2, 'POINT')}"
+																class="form-control form-control-sm"
+																name="ctc_cost_to_company" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<!-- <div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany1" readonly
+													class="form-control form-control-sm" name="mon_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany2" readonly
+													class="form-control form-control-sm" name="year_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div>
+											<div class="col-4 col-lg-2">
+												<input type="text" id="costToCompany3" readonly
+													class="form-control form-control-sm" name="ths_cost_to_company"
+													autocomplete="off"  style="background-color:#f9fff6; text-align: right;" />
+											</div> -->
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="BASICSALARY"> Basic Salary</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="BASICSALARY"
+																	oninput="percentagecalulation(this)"
+																	class="form-control form-control-sm"
+																	name="ctc_basic_salary"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_basic_salary, 1, 2, 'POINT')}"
+																	autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="number" id="" readonly
+																class="form-control form-control-sm"
+																name="mon_basic_salary"
+																th:value="${#numbers.formatDecimal(paramview.mon_basic_salary, 1, 2, 'POINT')}"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BASICSALARY2" readonly
+																th:value="${#numbers.formatDecimal(paramview.year_basic_salary, 1, 2, 'POINT')}"
+																class="form-control form-control-sm"
+																name="year_basic_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BASICSALARY3" readonly
+																th:value="${#numbers.formatDecimal(paramview.ths_basic_salary, 1, 2, 'POINT')}"
+																class="form-control form-control-sm"
+																name="ths_basic_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="HRA"> House Rent Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="HRA" readonly
+																	class="form-control form-control-sm"
+																	name="ctc_house_rent_allowance"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_house_rent_allowance, 1, 2, 'POINT')}"
+																	autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA1" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_house_rent_allowance, 1, 2, 'POINT')}"
+																name="mon_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_house_rent_allowance, 1, 2, 'POINT')}"
+																name="year_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="HRA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_house_rent_allowance, 1, 2, 'POINT')}"
+																name="ths_house_rent_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="SA">Special Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="SA1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_special_allowance, 1, 2, 'POINT')}"
+																	name="ctc_special_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_special_allowance, 1, 2, 'POINT')}"
+																name="mon_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_special_allowance, 1, 2, 'POINT')}"
+																name="year_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SA4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_special_allowance, 1, 2, 'POINT')}"
+																name="ths_special_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="MR">Medical Reimbursement</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="MR1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_medical_reimbursement, 1, 2, 'POINT')}"
+																	name="ctc_medical_reimbursement" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_medical_reimbursement, 1, 2, 'POINT')}"
+																name="mon_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_medical_reimbursement, 1, 2, 'POINT')}"
+																name="year_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="MR4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_medical_reimbursement, 1, 2, 'POINT')}"
+																name="ths_medical_reimbursement" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="CA"> Conveyance Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="CA1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_conveyance_allowance, 1, 2, 'POINT')}"
+																	name="ctc_conveyance_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_conveyance_allowance, 1, 2, 'POINT')}"
+																name="mon_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_conveyance_allowance, 1, 2, 'POINT')}"
+																name="year_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CA4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_conveyance_allowance, 1, 2, 'POINT')}"
+																name="ths_conveyance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="LA"> Lunch Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="LA1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_lunch_allownace, 1, 2, 'POINT')}"
+																	name="ctc_lunch_allownace" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_lunch_allownace, 1, 2, 'POINT')}"
+																name="mon_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_lunch_allownace, 1, 2, 'POINT')}"
+																name="year_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LA4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_lunch_allownace, 1, 2, 'POINT')}"
+																name="ths_lunch_allownace" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="EL">Education Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="EL1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_education_allowance, 1, 2, 'POINT')}"
+																	name="ctc_education_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_education_allowance, 1, 2, 'POINT')}"
+																name="mon_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_education_allowance, 1, 2, 'POINT')}"
+																name="year_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="EL4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_education_allowance, 1, 2, 'POINT')}"
+																name="ths_education_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="BUS"> Business Attre Reimbursement</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="BUS1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_business_attire_reimbursement, 1, 2, 'POINT')}"
+																	name="ctc_business_attire_reimbursement"
+																	autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_business_attire_reimbursement, 1, 2, 'POINT')}"
+																name="mon_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_business_attire_reimbursement, 1, 2, 'POINT')}"
+																name="year_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="BUS4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_business_attire_reimbursement, 1, 2, 'POINT')}"
+																name="ths_business_attire_reimbursement"
+																autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2"></div>
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="CMA"> Car Maintenance Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="CMA1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_car_maintenance_allowance, 1, 2, 'POINT')}"
+																	name="ctc_car_maintenance_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_car_maintenance_allowance, 1, 2, 'POINT')}"
+																name="mon_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_car_maintenance_allowance, 1, 2, 'POINT')}"
+																name="year_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="CMA4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_car_maintenance_allowance, 1, 2, 'POINT')}"
+																name="ths_car_maintenance_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="LTA"> Leave Travel Allowance</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="LTA1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_leave_travel_allowance, 1, 2, 'POINT')}"
+																	name="ctc_leave_travel_allowance" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_leave_travel_allowance, 1, 2, 'POINT')}"
+																name="mon_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_leave_travel_allowance, 1, 2, 'POINT')}"
+																name="year_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="LTA4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_leave_travel_allowance, 1, 2, 'POINT')}"
+																name="ths_leave_travel_allowance" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="PEC">PF Employer Contribution</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="PEC1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_pf_employer_contribution, 1, 2, 'POINT')}"
+																	name="ctc_pf_employer_contribution" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_pf_employer_contribution, 1, 2, 'POINT')}"
+																name="mon_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_pf_employer_contribution, 1, 2, 'POINT')}"
+																name="year_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PEC4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_pf_employer_contribution, 1, 2, 'POINT')}"
+																name="ths_pf_employer_contribution" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="ALB">Annual Loyalty Bonus*</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="ALB1"
+																	class="form-control form-control-sm"
+																	oninput="percentagecalulation(this);"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_annual_loyalty_bonus, 1, 2, 'POINT')}"
+																	name="ctc_annual_loyalty_bonus" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_annual_loyalty_bonus, 1, 2, 'POINT')}"
+																name="mon_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_annual_loyalty_bonus, 1, 2, 'POINT')}"
+																name="year_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="ALB4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_annual_loyalty_bonus, 1, 2, 'POINT')}"
+																name="ths_annual_loyalty_bonus" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="GS">Gross Salary</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS1" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ctc_gross_salary, 1, 2, 'POINT')}"
+																name="ctc_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_gross_salary, 1, 2, 'POINT')}"
+																name="mon_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_gross_salary, 1, 2, 'POINT')}"
+																name="year_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="GS4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_gross_salary, 1, 2, 'POINT')}"
+																name="ths_gross_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="PD">Professional Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+
+																<input type="text" id="PD1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_professional_deduction, 1, 2, 'POINT')}"
+																	name="ctc_professional_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_professional_deduction, 1, 2, 'POINT')}"
+																name="mon_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_professional_deduction, 1, 2, 'POINT')}"
+																name="year_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="PD4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_professional_deduction, 1, 2, 'POINT')}"
+																name="ths_professional_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="SD">Standard Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="SD1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_standard_deduction, 1, 2, 'POINT')}"
+																	name="ctc_standard_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_standard_deduction, 1, 2, 'POINT')}"
+																name="mon_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_standard_deduction, 1, 2, 'POINT')}"
+																name="year_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="SD4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_standard_deduction, 1, 2, 'POINT')}"
+																name="ths_standard_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="TD">Tax Deduction</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<div class="input-group input-group-sm">
+																<input type="text" id="TD1" readonly
+																	class="form-control form-control-sm"
+																	th:value="${#numbers.formatDecimal(paramview.ctc_tax_deduction, 1, 2, 'POINT')}"
+																	name="ctc_tax_deduction" autocomplete="off"
+																	style="background-color: #f9fff6; text-align: right;" />
+
+
+																<div class="input-group-append" style="height: 30px;">
+																	<span class="input-group-text">%</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_tax_deduction, 1, 2, 'POINT')}"
+																name="mon_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_tax_deduction, 1, 2, 'POINT')}"
+																name="year_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="TD4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_tax_deduction, 1, 2, 'POINT')}"
+																name="ths_tax_deduction" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+													<div class="row formline">
+														<div class="col-4 col-lg-3">
+															<label for="NS">Net Salary</label>
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS1" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ctc_net_salary, 1, 2, 'POINT')}"
+																name="ctc_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS2" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.mon_net_salary, 1, 2, 'POINT')}"
+																name="mon_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS3" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.year_net_salary, 1, 2, 'POINT')}"
+																name="year_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+														<div class="col-4 col-lg-2">
+															<input type="text" id="NS4" readonly
+																class="form-control form-control-sm"
+																th:value="${#numbers.formatDecimal(paramview.ths_net_salary, 1, 2, 'POINT')}"
+																name="ths_net_salary" autocomplete="off"
+																style="background-color: #f9fff6; text-align: right;" />
+														</div>
+
+
+													</div>
+												</div>
+
+											</fieldset>
+										</div>
+									</div>
+
+									<div class="card-footer  text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+										<button type="button" class="btn btn-dark btn-primary"
+											id="btnHome" style="width: 120px" onclick="home();">Home</button>
+
+										<button type="button" class="btn btn-dark btn-xs btn-primary"
+											th:if="${formmode}=='add'" id="btnSubmit"
+											style="width: 120px" onclick="addParamData();">Submit</button>
+										<button type="button" class="btn btn-dark btn-xs btn-primary"
+											th:if="${formmode}=='edit'"
+											th:attr="srl_no= ${paramview.srl_no}" id="btnSubmit"
+											style="width: 120px" onclick="editParamData(this);">Submit</button>
+										<button type="button" class="btn btn-dark btn-xs btn-primary"
+											th:if="${formmode}=='verify'"
+											th:attr="srl_no= ${paramview.srl_no}" id="btnSubmit"
+											style="width: 120px" onclick="verifyParamData(this);">Submit</button>
+										<button type="button" class="btn btn-dark btn-xs btn-primary"
+											th:if="${formmode}=='delete'"
+											th:attr="srl_no= ${paramview.srl_no}" id="btnSubmit"
+											style="width: 120px" onclick="del_ParamData(this);">Submit</button>
+
+
+										<button type="button" class="btn btn-dark btn-primary"
+											id="btnBack" style="width: 120px" onclick="back();">Back</button>
+									</div>
+								</div>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+			<br>
+
+
+			<div class="modal fade" id="alert">
+				<div
+					class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel"
+								style="text-align: center; color: white;">ERP</div>
+						</div>
+						<div class="modal-body"
+							style="text-align: center; background-color: #c6ccd2">
+							<p id="alertmsg" style="font-size: 16px;"></p>
+							<button type="button" class="btn btn-dark btn-primary"
+								data-dismiss="modal" style="width: 120px" onclick="back();">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="alert1">
+				<div
+					class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel"
+								style="text-align: center; color: white;">ERP</div>
+						</div>
+						<div class="modal-body"
+							style="text-align: center; background-color: #c6ccd2">
+							<p id="alertmsg1" style="font-size: 16px;"></p>
+							<button type="button" class="btn btn-dark btn-primary"
+								data-dismiss="modal" style="width: 120px"
+								onclick="window.location.reload()">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,2720 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+
+
+
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+
+<script>
+	
+	
+	
+function home(event) {
+	event.preventDefault();
+	location.href = 'Dashboard';
+}
+function back(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+
+function addpage(event){
+event.preventDefault();
+	
+	location.href='./ERPExpenses';
+
+}
+
+function POlist(event){
+	event.preventDefault();
+		location.href='./purchaseOrder?formmode=list';
+
+	}
+
+function registrationlist(event){
+	location.href='./VendorCreation';
+}
+</script>
+
+<script th:inline="javascript">
+document.addEventListener('DOMContentLoaded', () => {
+    // Event listener for the Add Row button
+    document.getElementById("addRowBtn").addEventListener("click", function (e) {
+        // Prevent the default behavior
+        e.preventDefault();
+
+     
+
+        // Get the table body element where rows will be added
+        const table = document.getElementById("itemTable").getElementsByTagName("tbody")[0];
+        const rowCount = table.rows.length;  // Get current row count
+        const newRow = table.insertRow(rowCount);  // Insert a new row
+
+        // Add the new row with dynamic content
+        newRow.innerHTML = `
+            <td>${rowCount + 1}</td>
+            <td><div class="input-group">
+			<input type="text" class="form-control" name="item"
+				id="item" placeholder="Item" list="wolist" onchange="expitemprice(this);"> <span onclick="viewitem();"
+				class="input-group-text">📦</span>
+		</div></td>
+
+		<td><input type="text" class="form-control" name="expensestype"
+			id="expensestype" placeholder="Expenses Type" readonly >
+		</td>
+
+			<td><input type="number" class="form-control" name="qty"
+				id="qty" placeholder="Qty" oninput="updatepriceforexp(this)">
+			</td>
+
+			
+			<td><input type="number" class="form-control"
+				name="expItemPrice" id="expItemPrice" placeholder="Price"
+				oninput="calculateTax(this)"></td>
+				
+			
+		
+			<td><input type="number" class="form-control"
+				name="amountPerItem" id="amountPerItem" placeholder="Amount">
+			</td>
+            <td><button class="btn btn-danger btn-sm remove-row">-</button></td>
+        `; 
+        updateTotals();
+    });
+});
+
+// Remove Row Functionality
+document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("remove-row")) {
+        const row = e.target.closest("tr");
+        row.remove();
+        updatepriceforexp(rowElement);
+    }
+});
+</script>
+
+
+<script>
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	paymenchange();
+	document.getElementById("paymentType").addEventListener("change", function () {
+		paymenchange();
+	});
+
+	// Dynamic Balance Calculation
+	document.getElementById("advanceAmount").addEventListener("input", function () {
+	    const total = parseFloat(document.getElementById("total").value) || 0;
+	    const advance = parseFloat(this.value) || 0;
+	    const balance = total - advance;
+	    document.getElementById("balance").value = balance.toFixed(2);
+	});
+
+
+});
+
+
+
+function paymenchange(){
+	const paymentType = document.getElementById("paymentType").value;
+
+    // Reset visibility for fields
+    document.getElementById("cashField").style.display = "none";
+    document.getElementById("chequeField").style.display = "none";
+
+    // Show relevant fields based on the selected payment type
+    if (paymentType === "cash") {
+        document.getElementById("cashField1").style.display = "block";
+    } else if (paymentType === "cheque") {
+        document.getElementById("cashField").style.display = "none"; // Show Amount field
+        document.getElementById("chequeField").style.display = "block"; // Show Reference Number field
+    }
+	
+}
+</script>
+
+<script>
+
+function expitemprice(input) {
+	
+	
+    const row = input.closest('tr');
+    const codes = input.value;
+    const itemcodew = codes.split("-");
+    const code=itemcodew[0];
+    const expItemPrice = row.querySelector('input[name="expItemPrice"]');
+    const amountPerItem = row.querySelector('input[name="amountPerItem"]');
+    const expensestype = row.querySelector('input[name="expensestype"]');
+    
+    
+ 
+    
+    $.ajax({
+        url: "./getexpensesdata?code=" + encodeURIComponent(code),
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+        	
+            $.each(res, function(index, data) {
+                const values = Object.values(data);
+                expensestype.value=values[3];
+                //expItemPrice.value = values[2];
+
+            
+
+                
+            });
+                        
+       
+        }
+    });
+   
+}
+</script>
+<script>
+
+function updatepriceforexp(rowElement) {
+    // Get the current row based on the element that triggered the event
+    const row = rowElement.closest('tr');
+
+    // Get the price and quantity inputs within the current row
+    const currentamount = parseFloat(row.querySelector('input[name="expItemPrice"]').value) || 0; // Default to 0 if invalid or empty
+    const qty = parseFloat(row.querySelector('input[name="qty"]').value) || 0;// Default to 0 if invalid or empty
+    
+    const taxAmountField = parseFloat(row.querySelector('input[name="amountPerItem"]').value) || 0;
+
+    // Calculate the total amount
+    const totalAmount = qty * currentamount;
+
+    // Update the amountPerItem field in the current row
+    row.querySelector('input[name="amountPerItem"]').value = totalAmount.toFixed(2); // Format to 2 decimal places
+
+    // Call the function to update the overall totals
+    addamountforexp();
+}
+
+function addamountforexp() {
+	
+
+  
+
+    var totalamount = 0;
+
+    $('#itemTable tbody tr').each(function(index) {
+        const row = $(this);
+
+        // Get the value of amountPerItem and convert it to a number
+        var amountPerItems = parseFloat(row.find('input[name="amountPerItem"]').val()) || 0;
+        
+        
+
+        // Add to total amount
+        totalamount += amountPerItems;
+
+    });
+    
+    document.querySelector('#totalexp').value = totalamount.toFixed(2);
+    document.querySelector('#totalAmounts').value = totalamount.toFixed(2);
+}
+
+
+</script>
+
+
+
+
+
+
+
+<script>
+function calculateTax(input) {
+    // Get the row where the input or selection was triggered
+    const row = input.closest('tr');
+
+    // Get references to the price, tax percentage, and tax amount fields
+    const priceField = row.querySelector('#price');
+    const taxPercentageField = row.querySelector('#taxPercentage');
+    const taxAmountField = row.querySelector('#taxAmount');
+    const qty = row.querySelector('#qty').value||0;
+
+    // Parse price value
+    const price = parseFloat(priceField.value) || 0;
+
+    // Extract numeric value from the selected tax percentage option
+    const taxPercentageMatch = taxPercentageField.value.match(/[\d.]+/);
+    const taxPercentage = taxPercentageMatch ? parseFloat(taxPercentageMatch[0]) : 0;
+
+    // Calculate the tax amount
+    const taxAmount = (price * taxPercentage *qty) / 100;
+
+    // Update the taxAmount field
+    taxAmountField.value = price > 0 ? taxAmount.toFixed(2) : '';
+    updateAmount(input);
+}
+
+
+function updateTotals() {
+    // Get all rows in the table body
+    const rows = document.querySelectorAll('tbody tr');
+
+    let totalQty = 0;
+    let totalAmount = 0;
+    let finalTotal = 0;
+    let taxAmount=0;
+    
+    // Loop through each row and sum up the values
+    rows.forEach(row => {
+        // Get the quantity and amount fields in the current row
+        const qtyField = row.querySelector('#qty');
+        const amountField = row.querySelector('#amountPerItem');
+        const taxAmountf = row.querySelector('#taxAmount');
+        
+
+        
+
+        // Parse the values as numbers, default to 0 if invalid
+        const qty = parseFloat(qtyField?.value) || 0;
+        const amount = parseFloat(amountField?.value) || 0;
+        const taxAmounts = parseFloat(taxAmountf?.value) || 0;
+
+      
+
+        // Add to the totals
+        totalQty += qty;
+        totalAmount += amount;
+        taxAmount +=taxAmounts
+        // Calculate the total for this row and add to finalTotal
+        finalTotal += (qty * amount);
+    });
+
+    // Update the footer fields
+    document.querySelector('#totalQty').value = totalQty.toFixed(2);
+    document.querySelector('#totalAmount').value = totalAmount.toFixed(2);
+    document.getElementById('totalAmounts').value = (taxAmount + totalAmount).toFixed(2);
+    document.getElementById('totaltaxAmount').value =taxAmount .toFixed(2);
+    
+    updateBalance();
+}
+
+
+</script>
+<script>
+// Function to update the balance
+function updateBalance() {
+    // Get the total amount and advance amount
+    const totalAmount = parseFloat(document.getElementById('totalAmounts').value) || 0;
+    const advanceAmount = parseFloat(document.getElementById('advanceAmount').value) || 0;
+      
+
+    // Calculate the balance (total - advance)
+    const balanceAmount = totalAmount - advanceAmount;
+
+    // Update the balance field
+    document.getElementById('balanceAmount').value = balanceAmount.toFixed(2); // Format with 2 decimal places
+    
+    const av = parseFloat(document.getElementById('advanceAmount').value) || 0;
+    //document.getElementById('paidAmount').value = av.toFixed(2); 
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	updateTotals();
+	// Optionally, if you want to trigger the balance calculation when the total amount changes
+document.getElementById('advanceAmount').addEventListener('input', updateBalance);
+});
+
+</script>
+
+
+<script>
+// Add event listener after DOM is loaded with an anonymous function
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('paidAmount').addEventListener('input', function() {
+        const paidAmount = parseFloat(document.getElementById('paidAmount').value) || 0;
+        
+        document.getElementById('advanceAmount').value = paidAmount.toFixed(2); 
+        
+        const totalAmount = parseFloat(document.getElementById('totalAmounts').value) || 0;
+        const advanceAmount = parseFloat(document.getElementById('advanceAmount').value) || 0;
+
+        // Calculate the balance (total - advance)
+        const balanceAmount = totalAmount - advanceAmount;
+
+        // Update the balance field
+        document.getElementById('balanceAmount').value = balanceAmount.toFixed(2);
+        
+        setTimeout(updateTotals, 2000);
+        
+    });
+});
+</script>
+
+<script>
+function poSubmit(event) {
+    let productList = []; // Changed var to let for better scoping
+
+    // Validate mandatory header fields
+    const vendorIds = document.getElementById('vendorId')?.value || "";
+    const vendorIdw = vendorIds.split("-");
+    const vendorId = vendorIdw[0] || "";
+    const orderDate = document.getElementById('orderDate')?.value || "";
+    const orderNo = document.getElementById('orderNo')?.value || "";
+    const dueDate = document.getElementById('dueDate')?.value || "";
+    const priceHeader = document.getElementById('priceHeader')?.value || "";
+    const totalAmount = parseFloat(document.getElementById('totalAmounts')?.value) || 0;
+    const totalQty = parseFloat(document.getElementById('totalQty')?.value) || 0;
+    const paymentType = document.getElementById('paymentType')?.value || "";
+   // alert(paymentType);
+    const paidAmount = parseFloat(document.getElementById('paidAmount')?.value) || 0;
+    const referenceNumber = document.getElementById('referenceNumber')?.value || "";
+    const advanceAmount = parseFloat(document.getElementById('advanceAmount')?.value) || 0;
+    const balanceAmount = parseFloat(document.getElementById('balanceAmount')?.value) || 0;
+    
+   /*  ----newfeaturesfor required */
+   
+    var isValid = true;
+	var mandatoryMessage = "Please fill the required field(s)";
+	
+	function validateField(field, errorMessage) {
+        if (!field.val().trim()) {
+            field.css("border-color", "red").attr("title", errorMessage);
+            isValid = false;
+        } else {
+            field.css("border-color", "").attr("title", ""); // Reset styles
+        }
+    }
+	
+	    validateField($('#vendorId'), mandatoryMessage);
+	    validateField($('#orderNo'), mandatoryMessage);
+	    validateField($('#orderDate'), mandatoryMessage);
+	    validateField($('#dueDate'), mandatoryMessage);
+
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+    
+    
+	
+    
+    // Check for mandatory header fields
+    if (!vendorIds || !orderDate  || !dueDate || !totalAmount) {
+        alert("Please fill all the required fields in the form header.");
+        return; // Stop function execution
+    }
+    
+    if (paymentType=='cheque' && !referenceNumber){
+    	alert("Please fill cheque referenceNumber.");
+        return;
+    }
+
+    // Iterate through each row in the item table to gather item data
+    let allRowsValid = true; // Flag to track row validation
+    $('#itemTable tbody tr').each(function(index) {
+        const row = $(this);
+
+        const itemcodes = row.find('input[name="itemcode"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+        
+        const item = row.find('input[name="item"]').val() || "";
+        const hsncode = row.find('input[name="HSN_code"]').val() || "";
+        const qty = parseFloat(row.find('input[name="qty"]').val()) || 0;
+        const unit = row.find('select[name="unit"]').val() || "";
+        const price = parseFloat(row.find('input[name="price"]').val()) || 0;
+        const taxPercentage = row.find('select[name="taxPercentage"]').val();
+        const taxAmount = parseFloat(row.find('input[name="taxAmount"]').val()) || 0;
+        const amountPerItem = parseFloat(row.find('input[name="amountPerItem"]').val()) || 0;
+        //alert(taxPercentage)
+       
+
+        // Add valid rows to productList
+        const listItem = {
+            itemcode,
+            item,
+            qty,
+            unit,
+            price,
+            taxPercentage,
+            taxAmount,
+            amountPerItem,
+            hsncode,
+            vendorId,
+            orderNo,
+            orderDate,
+            dueDate,
+            priceHeader,
+            totalAmount,
+            totalQty,
+            paymentType,
+            paidAmount,
+            referenceNumber,
+            advanceAmount,
+            balanceAmount
+        };
+        productList.push(listItem);
+    });
+
+    // Stop function execution if any rows are invalid
+    if (!allRowsValid) return;
+
+    // Proceed only if there is data to send
+    if (productList.length > 0) {
+        console.log(productList);
+        $.ajax({
+            type: 'POST',
+            url: './AddPo_submit?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productList),
+            success: function(response) {
+           /*      alert(response);
+             // Reload the page
+                window.location.reload(); */
+                var idArray = response.split('-');
+                
+                document.getElementById('modelidd').value=idArray[0];
+             
+                $("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+             
+             
+ 
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No valid data to send. Please fill out the required fields.");
+    }
+}
+
+
+
+$(document).ready(function () {
+
+    $('#vendorId, #orderNo, #orderDate, #dueDate')
+        .on('input', function () {
+            $(this).css("border-color", "");
+        });
+});
+
+
+
+
+function pomodifySubmit(event) {
+	
+	
+	
+	
+	
+
+	let productLists = [];
+    const vendorIds = document.getElementById('vendorId').value || 0;
+    const vendorIdw = vendorIds.split("-");
+    const vendorId=vendorIdw[0];
+    //alert(vendorId);
+    const orderDate = document.getElementById('orderDate').value || 0;
+    const orderNo = document.getElementById('orderNo').value || 0;
+    const poId = document.getElementById('poId').value || 0;
+    const dueDate = document.getElementById('dueDate').value || 0;
+    const priceHeader = document.getElementById('priceHeader').value || 0;
+    const totalAmount = document.getElementById('totalAmounts').value || 0;
+    const totalQty = document.getElementById('totalQty').value || 0;
+    const paymentType = document.getElementById('paymentType').value || 0;
+    const paidAmount = document.getElementById('paidAmount').value ? parseFloat(document.getElementById('paidAmount').value) : 0;
+    const referenceNumber = document.getElementById('referenceNumber').value || 0;
+    const advanceAmount = document.getElementById('advanceAmount').value || 0;
+    const balanceAmount = document.getElementById('balanceAmount').value || 0;
+    
+    
+    
+    /*  ----newfeaturesfor required */
+    
+    var isValid = true;
+	var mandatoryMessage = "Please fill the required field(s)";
+	
+	function validateField(field, errorMessage) {
+        if (!field.val().trim()) {
+            field.css("border-color", "red").attr("title", errorMessage);
+            isValid = false;
+        } else {
+            field.css("border-color", "").attr("title", ""); // Reset styles
+        }
+    }
+	
+	    validateField($('#vendorId'), mandatoryMessage);
+	    validateField($('#orderNo'), mandatoryMessage);
+	    validateField($('#orderDate'), mandatoryMessage);
+	    validateField($('#dueDate'), mandatoryMessage);
+
+	    if (!isValid) {
+	        alert(mandatoryMessage);
+	        return;
+	    }
+    
+    
+    
+    
+
+    if (!vendorId || !orderDate  || !dueDate || !totalAmount) {
+        alert("Please fill all the required fields in the form header.");
+        return; // Stop function execution
+    }
+    
+    if (paymentType=='cheque' && !referenceNumber){
+    	alert("Please fill cheque referenceNumber.");
+        return;
+    }
+
+    // Iterate through each row in the item table to gather item data
+    $('#itemTable tbody tr').each(function(index) {
+        const row = $(this);
+
+        const itemcodes = row.find('input[name="itemcode"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+       // alert(itemcode);
+        const item = row.find('input[name="item"]').val();
+        const hsncode = row.find('input[name="HSN_code"]').val();
+        const qty = row.find('input[name="qty"]').val();
+        const unit = row.find('select[name="unit"]').val();
+        const id = row.find('input[name="originalid"]').val()||null;
+        const price = row.find('input[name="price"]').val();
+        const taxPercentage = row.find('select[name="taxPercentage"]').val();
+        const taxAmount = row.find('input[name="taxAmount"]').val();
+        const amountPerItem = row.find('input[name="amountPerItem"]').val();
+
+        // Log row data for debugging
+        console.log("Processing row " + index);
+        console.log({
+        	itemcode,
+            item,
+            hsncode,
+            id,
+            qty,
+            unit,
+            orderNo,
+            price,
+            taxPercentage,
+            taxAmount,
+            amountPerItem
+        });
+
+        // Only push rows with complete data into productList
+        if (itemcode && item && qty && unit && price && taxPercentage && taxAmount && amountPerItem) {
+            const listItem = {
+            	itemcode,
+                item,
+                qty,
+                unit,
+                price,
+                taxPercentage,
+                taxAmount,
+                amountPerItem,
+
+                // Including common data fields
+                vendorId,
+                poId,
+                id,
+                orderNo,
+                orderDate,
+                dueDate,
+                priceHeader,
+                totalAmount,
+                totalQty,
+                paymentType,
+                paidAmount,
+                referenceNumber,
+                advanceAmount,
+                balanceAmount,
+                hsncode
+            };
+            productLists.push(listItem);
+        } else {
+            console.warn(`Row ${index} is missing data and will be skipped.`);
+        }
+    });
+
+    // Proceed only if there is data to send
+    if (productLists.length > 0) {
+    	console.log(productLists);
+        $.ajax({
+            type: 'POST',
+            url: './AddPo_submit?formmode=edit',
+            contentType: 'application/json',
+            data: JSON.stringify(productLists),
+            success: function(response) {
+				var idArray = response.split('-');
+                document.getElementById('modelidd').value=idArray[0];
+  
+            	$("#alertmsg").text(response);
+  				$("#alert").modal("toggle");
+
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+
+
+
+function viewscreen(a){
+	var Opid=a.getAttribute('data-expId');
+	location.href='./ERPExpenses?formmode=view&expId='+Opid ;
+}
+
+function modifyscreen(a){
+	var Opid=a.getAttribute('data-expId');
+	location.href='./ERPExpenses?formmode=modify&expId='+Opid ;
+}
+
+function confirmPO(a){
+	var Opid=a.getAttribute('data-Opid');
+	alert(Opid)
+	
+	location.href='./Invoice_Modify?formmode=modify&Opid='+Opid ;
+}
+
+
+</script>
+
+<script>
+function updateAmount(rowElement) {
+    // Get the current row based on the element that triggered the event
+    const row = rowElement.closest('tr');
+
+    // Get the price and quantity inputs within the current row
+    const currentamount = parseFloat(row.querySelector('input[name="price"]').value) || 0; // Default to 0 if invalid or empty
+    const qty = parseFloat(row.querySelector('input[name="qty"]').value) || 0;// Default to 0 if invalid or empty
+    
+    const taxAmountField = parseFloat(row.querySelector('input[name="taxAmount"]').value) || 0;
+
+    // Calculate the total amount
+    const totalAmount = qty * currentamount;
+
+    // Update the amountPerItem field in the current row
+    row.querySelector('input[name="amountPerItem"]').value = totalAmount.toFixed(2); // Format to 2 decimal places
+
+    // Call the function to update the overall totals
+    updateTotals();
+    calculateTax(rowElement);
+    
+}
+
+
+
+</script>
+
+
+<script>
+
+function Purchase_Invoice(id){
+	//alert(id)
+	location.href='./Purchase_Invoice?formmode=purchaseorder&id=' + id;
+	}
+	
+	
+function currectinvoice(){
+ var id=document.getElementById('modelidd').value;
+	location.href='./Purchase_Invoice?formmode=purchaseorder&id=' + id;
+	}
+
+
+</script>
+
+
+<SCRIPT>
+
+function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+$(document).ready(function () {
+    $('#dataTables').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers"// Pagination with only numbers
+       
+    });
+});
+
+
+
+</SCRIPT>
+
+<script>
+
+function togglre(){
+	$('#addcat').modal('show'); 
+	 }
+
+
+function viewitem(){
+	
+	$('#additem').modal('show');
+	}
+	
+function togglelistss(){
+	
+	$('#listmodal').modal('show');
+	$('#addcat').modal('hide');
+	
+	}
+	
+
+function CategoryCreation(){
+	if ($("#CategoryCreationadd").valid()) {
+
+		$.ajax({
+			url : './ErpexpCategoryCreation',
+			type : 'POST',
+			data : $('#CategoryCreationadd').serialize(),
+			success : function(response) {
+				alert(response);
+				$('#addcat').modal('hide');
+				location.reload();
+			}
+		});
+	}
+}
+
+
+/* ---item----- */
+
+function itemcreation(){
+	
+	var price=document.getElementById('expItemPriceaa').value;
+	
+
+
+	
+	if(price){
+	
+	if ($("#itemcreations").valid()) {
+		
+		
+
+		$.ajax({
+			url : './Erpexpitem',
+			type : 'POST',
+			data : $('#itemcreations').serialize(),
+			success : function(response) {
+			
+				
+				$('#alertmsg').text(response);
+				$('#alert').modal('show');
+				$('#additem').modal('hide');
+				location.reload();
+			}
+		});
+	}
+	}
+	else{
+		
+		alert("please fill required field")
+		
+	}
+	
+}
+
+</script>
+
+
+<script>
+
+
+
+</script>
+
+
+
+
+
+<script>
+
+function product_name_typeFunction1(input) {
+    const row = input.closest('tr');
+    const codes = input.value;
+    const itemcodew = codes.split("-");
+    const code=itemcodew[0];
+    const item = row.querySelector('input[name="item"]');
+    
+    const hsncode = row.querySelector('input[name="HSN_code"]');
+    const qty = row.querySelector('input[name="qty"]');
+    const unit = row.querySelector('select[name="unit"]');
+    const price = row.querySelector('input[name="price"]');
+    const taxPercentage = row.querySelector('select[name="taxPercentage"]');
+    const taxAmount = row.querySelector('input[name="taxAmount"]');
+    const amountPerItem = row.querySelector('input[name="amountPerItem"]');
+    const priceHeader =document.getElementById('priceHeader').value
+    //alert(code);
+    $.ajax({
+        url: "./getitemdetails?code=" + encodeURIComponent(code),
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+        	
+            $.each(res, function(index, data) {
+                const values = Object.values(data);
+                item.value = values[0];
+                hsncode.value= values[1];     
+                amountPerItem.value = values[13];
+                price.value = values[13];
+                
+                qty.value = 0;
+                //price.value = values[18];
+                //alert(price.value)
+                unit.value = values[3];
+                
+
+             // Normalize and check the value
+                const headerValue = values[14].trim().toLowerCase();
+              		//alert(headerValue);
+                    document.getElementById('priceHeader').value = headerValue;
+                    
+                    if(headerValue=='withtax'){
+                    	taxPercentage.value = values[28];
+                    	calculateTax(input);
+                    }
+                    
+                
+            });
+                        
+            updateTotals();
+            updateAmount(input);
+        }
+    });
+   
+}
+</script>
+
+<script>
+
+
+function Expensessubmit(event){
+	
+	event.preventDefault();
+	
+	let ExpenseLists = [];
+	
+	//const categoryname = document.getElementById('category').value || 0;
+ 	const expensesId = document.getElementById('expensesId').value || 0;
+ 
+    const exp_date = document.getElementById('exp_date').value || 0;
+    const paymentType = document.getElementById('paymentType').value || 0;
+    const referenceNumber = document.getElementById('referenceNumber').value || 0;
+    
+    const totalAmounts = document.getElementById('totalAmounts').value || 0;
+    
+    
+    console.log({
+    	expensesId,
+    	exp_date,
+    	paymentType,
+    	referenceNumber
+    	});
+  
+    alert("hi")
+   
+    // Iterate through each row in the item table to gather item data
+    $('#itemTable tbody tr').each(function(index) {
+        const row = $(this);
+
+        const itemcodes = row.find('input[name="item"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+        const itemname=itemcodew[1];
+    
+        const qty = row.find('input[name="qty"]').val();
+        const expItemPrice = row.find('input[name="expItemPrice"]').val();
+        const amountPerItem = row.find('input[name="amountPerItem"]').val();
+        const expensestype = row.find('input[name="expensestype"]').val();
+     
+        // Log row data for debugging
+        console.log("Processing row " + index);
+        console.log({
+        	itemcode,
+        	itemname,
+        	qty,
+            expItemPrice,
+            amountPerItem,
+        
+        });
+
+        // Only push rows with complete data into productList
+        if (expensesId) {
+            const listItem = {
+            		
+            		expItemCode : itemcode,
+            		expName: itemname,
+            		qty:qty,
+            		price:expItemPrice,
+            		amount:amountPerItem,
+            		expenses_type:expensestype,
+             
+
+                // Including common data fields
+               //expCategory: categoryname,
+               expId: expensesId,
+               expDate: exp_date,
+               paymentType: paymentType,
+               referenceNumber:referenceNumber,
+               totalAmount:totalAmounts
+             
+            };
+            ExpenseLists.push(listItem);
+        } else {
+            console.warn(`Row ${index} is missing data and will be skipped.`);
+        }
+    });
+
+    // Proceed only if there is data to send
+     if (ExpenseLists.length > 0) {
+    	console.log(ExpenseLists);
+        $.ajax({
+            type: 'POST',
+            url: './addexpenses',
+            contentType: 'application/json',
+            data: JSON.stringify(ExpenseLists),
+            success: function(response) {
+			/* 	var idArray = response.split('-');
+                document.getElementById('modelidd').value=idArray[0]; */
+  
+            	$("#alertmsg").text(response);
+  				$("#alert").modal("toggle");
+
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    } 
+	
+	
+	
+}
+
+function capital_submit(event){
+    event.preventDefault();
+    var value=$("#cr_amt").val();
+    if(value==''){
+    	alert("Please give the Deposit Amount")
+    }else{
+    // Collect form data and convert to JSON
+    var formData = {
+        acct_name: $("#acct_name").val(),
+        acct_num: $("#acct_num").val(),
+        acct_crncy: $("#acct_crncy").val(),
+        cr_amt: $("#cr_amt").val(),
+        acct_bal: $("#acct_bal").val()
+    };
+console.log(formData);
+    $.ajax({
+        type: 'POST',
+        url: './add_capital_tran',
+        contentType: 'application/json',  // Set the content type as JSON
+        data: JSON.stringify(formData),  // Convert the form data to JSON string
+        success: function(response) {
+            $("#alertmsg").text(response);
+            $("#alert").modal("toggle");
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", status, error);
+            alert("An error occurred while sending the data.");
+        }
+    });
+    }
+}
+
+
+
+
+
+</script>
+
+
+
+<script>
+
+function Expensesedit(event){
+	
+	
+	event.preventDefault();
+	
+	let ExpenseLists = [];
+	
+	const categoryname = document.getElementById('category').value || 0;
+ const expensesId = document.getElementById('expensesId').value || 0;
+ 
+    const exp_date = document.getElementById('exp_date').value || 0;
+    const paymentType = document.getElementById('paymentType').value || 0;
+    const referenceNumber = document.getElementById('referenceNumber').value || 0;
+    
+    const totalAmounts = document.getElementById('totalAmounts').value || 0;
+    const ids = document.getElementById('expuniqid').value
+    
+    console.log({categoryname,
+    	expensesId,
+    	exp_date,
+    	paymentType,
+    	referenceNumber,
+    	ids
+    	});
+  
+   
+   
+    // Iterate through each row in the item table to gather item data
+    $('#itemTable tbody tr').each(function(index) {
+        const row = $(this);
+        
+        const ids = row.find('input[id="expuniqid"]').val();
+
+        const itemcodes = row.find('input[name="item"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+        const itemname=itemcodew[1];
+  
+        const qty = row.find('input[name="qty"]').val();
+        const expItemPrice = row.find('input[name="expItemPrice"]').val();
+        const amountPerItem = row.find('input[name="amountPerItem"]').val();
+        const expensestype = row.find('input[name="expensestype"]').val();
+        
+     
+        // Log row data for debugging
+        console.log("Processing row " + index);
+        console.log({
+        	itemcode,
+        	itemname,
+        	qty,
+            expItemPrice,
+            amountPerItem,
+        
+        });
+
+        // Only push rows with complete data into productList
+        if (expensesId  && categoryname ) {
+            const listItem = {
+            		id:ids,
+            		
+            		expItemCode : itemcode,
+            		expName: itemname,
+            		qty:qty,
+            		price:expItemPrice,
+            		amount:amountPerItem,
+             
+
+                // Including common data fields
+               expCategory: categoryname,
+               expId: expensesId,
+               expDate: exp_date,
+               paymentType: paymentType,
+               referenceNumber:referenceNumber,
+               totalAmount:totalAmounts,
+               expenses_type:expensestype
+             
+            };
+            ExpenseLists.push(listItem);
+        } else {
+            console.warn(`Row ${index} is missing data and will be skipped.`);
+        }
+    });
+
+    // Proceed only if there is data to send
+      if (ExpenseLists.length > 0) {
+    	console.log(ExpenseLists);
+        $.ajax({
+            type: 'POST',
+            url: './editsubmitexpenses',
+            contentType: 'application/json',
+            data: JSON.stringify(ExpenseLists),
+            success: function(response) {
+		
+  
+            	$("#alertmsg").text(response);
+  				$("#alert").modal("toggle");
+
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    } 
+	 
+
+}
+</script>
+<script>
+function EXPLIST(event){
+	event.preventDefault();
+
+	location.href='./ERPExpenses?formmode=list';
+}
+</script>
+
+<script>
+
+function deletecat(a) {
+    var catid = a.getAttribute('data-catId');
+ 
+
+    $.ajax({
+        url: './deletecat',
+        type: 'POST',
+        data: { catId: catid },
+        success: function(response) {
+        	$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+				$('#listmodal').modal('hide');
+    
+        },
+        error: function(xhr, status, error) {
+            alert("Error deleting category: " + xhr.responseText || status);
+        }
+    });
+}
+
+</script>
+
+<script>
+function for_capital() {
+    var capital = document.getElementById('capital_amount');
+    var expenses_other = document.getElementById('expenses_other');
+    var expenses_otherw = document.getElementById('expenses_otherw');
+
+    // Ensure both elements are present
+    if (!capital || !expenses_other) {
+        console.log('One or more elements not found');
+        return; // Exit if any element is not found
+    }
+
+    // Get the selected category value
+    var selectedCategory = document.getElementById('category').value;
+
+    // Show or hide sections based on the selected category
+    if (selectedCategory === "CAPITAL AMOUNT") {
+        capital.style.display = 'block';  // Show Capital Amount section
+        expenses_other.style.display = 'none';  // Hide Expenses Other section
+        expenses_otherw.style.display = 'none';  // Hide Expenses Other section
+    } else {
+        // Remove the alert for testing purposes
+        console.log('Else block triggered');
+        capital.style.display = 'none';  // Hide Capital Amount section
+        expenses_other.style.display = 'block';  // Show Expenses Other section
+        expenses_otherw.style.display = 'block';  // Hide Expenses Other section
+    }
+}
+
+</script>
+
+
+
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+
+
+
+				<!-------------------------------------------- Add start ----------------------------------------------->
+
+
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+
+					
+    <div class="row"  style="display: block;">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class=""></i>Add Expenses
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="EXPLIST(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+
+							<!-- Form Body -->
+							<div class="card-body" >
+
+								<div class="form-row mb-2">
+									<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-3 d-flex align-items-center">
+										<div class="form-floating flex-grow-1 d-flex">
+											<!-- Split Select Box -->
+											<!--<div class="select-container flex-grow-1 position-relative">
+												<select class="form-control" id="category" name="category"
+													required onchange="for_capital()">
+													<option value="" disabled selected>--Select
+														Category--</option>
+														
+													<option th:each="Category : ${expenseslist}"
+														th:value="${Category.catName}"
+														th:text="${Category.catName}"></option>
+
+												</select> <label for="category" class="form-legend">Expenses
+													Category</label>
+											</div>
+											
+											<button type="button" style="border-radius: 8px;"
+												class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+												onclick="togglre();" id="addCategory">
+												<i class="fas fa-plus"></i>
+											</button>-->
+										</div>
+									</div>
+									<div class="form-group col-md-7"></div>
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-2" id="expenses_otherw">
+										<div class="form-floating">
+											<input type="text" class="form-control"
+												th:value="${EXPENSESS}" name="expensesId" id="expensesId"
+												placeholder="Expense No." readonly> <label
+												for="orderNo" class="form-legend">Expenses Id</label>
+										</div>
+									</div>
+								</div>
+
+                    <div class="card-body" id="expenses_other">
+
+								<div class="form-row mb-2">
+
+									<div class="form-group col-md-10"></div>
+									<!-- Order Date -->
+									<div class="form-group col-md-2" style="transform: translateX(18px);">
+										<div class="form-floating">
+											<input type="date" class="form-control" name="exp_date"
+												id="exp_date" required> <label for="orderDate"
+												class="form-legend"> Date</label>
+										</div>
+									</div>
+								</div>
+
+
+
+
+								<!-- Table -->
+								<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size: 15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th>Srl. NO</th>
+											<th>Expenses code</th>
+											<th>Expenses Type</th>
+											<th>Qty</th>
+											<th>Price/Unit</th>
+											<th>Amount</th>
+											<th>Action</th>
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+
+
+											<td>
+												<div class="input-group">
+													<input type="text" class="form-control" name="item"
+														id="item" placeholder="Item" list="wolist"
+														onchange="expitemprice(this);">
+														 <!--<span onclick="viewitem();" style="cursor: pointer;"class="input-group-text">📦</span>-->
+														<span onclick="togglre();" style="cursor: pointer;" class="input-group-text">📦</span>
+														
+													<!--<datalist id="wolist">
+														
+														<option th:each="woList : ${ExpItemlist}"
+															th:value="${woList.expItemId +'-'+ woList.expItemName}"
+															th:text="${woList.expItemId +'-'+ woList.expItemName}"></option>
+													</datalist>-->
+													
+												<datalist id="wolist">
+													<option th:each="Category : ${expenseslist}"
+														th:value="${Category.catId+'-'+Category.catName}"
+														th:text="${Category.catId+'-'+Category.catName}"></option>
+												</datalist>	
+
+												</div>
+											</td>
+
+											<td><input type="text" class="form-control" name="expensestype"
+												id="expensestype" placeholder="Expenses Type" readonly >
+											</td>
+											
+
+											<td><input type="number" class="form-control" name="qty"
+												id="qty" placeholder="Qty" oninput="updatepriceforexp(this)">
+											</td>
+
+
+											<td><input type="number" class="form-control"
+												name="expItemPrice" id="expItemPrice" placeholder="Price"
+												oninput="updatepriceforexp(this)"></td>
+
+
+
+											<td><input type="number" class="form-control"
+												name="amountPerItem" id="amountPerItem" oninput="addamountforexp();"   placeholder="Amount">
+											</td>
+											<td>
+												<button class="btn btn-danger btn-sm remove-row">-</button>
+											</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" class="text-right">Total</th>
+											<th style="font-weight: bold;"><input type="number"
+												class="form-control" name="totalexp" id="totalexp"
+												placeholder="" readonly></th>
+
+
+										</tr>
+									</tfoot>
+
+								</table>
+
+								<!-- Add Row Button -->
+								<button class="btn btn-primary" id="addRowBtn">+</button>
+								<div></div>
+								<br>
+								<!-- Payment Section -->
+								<div class="row align-items-start">
+									<!-- Payment Type Dropdown -->
+									<div class="col-md-3">
+										<label for="paymentType"><strong>Payment Type</strong></label>
+										<select class="form-control" id="paymentType"
+											name="paymentType">
+											<option value="" selected disabled>-- Select Payment
+												Type --</option>
+											<option value="cash">Cash</option>
+											<option value="cheque">Cheque</option>
+										</select>
+										<div id="chequeField" style="display: none; margin-top: 10px;">
+											<label for="referenceNumber"><strong>Reference
+													Number</strong></label> <input type="text" class="form-control"
+												id="referenceNumber" name="referenceNumber"
+												placeholder=" Reference Number">
+										</div>
+									</div>
+
+									<!-- Amount and Reference Number (Dynamic Fields) -->
+									<div class="col-md-2" id="dynamicFields">
+										<div id="cashField" style="display: none;">
+											<label for="amount"><strong>Amount</strong></label> <input
+												type="number" class="form-control" id="paidAmount"
+												name="paidAmount" placeholder="Enter Amount">
+										</div>
+
+									</div>
+
+									<!-- Total, Advance, and Balance Fields -->
+									<div class="col-md-3 offset-md-4">
+										<div class="form-group">
+											<label for="total"><strong>Total Amount</strong></label> <input
+												type="number" class="form-control" name="totalAmounts"
+												id="totalAmounts" placeholder="Total" readonly>
+										</div>
+
+
+									</div>
+								</div>
+
+
+								<br>
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+									
+									<button type="button" class="btn btn-xs btn-dark"
+										id="btnSubmit" onclick="Expensessubmit(event);">Submit</button>
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+</div>
+							</div>
+						</form>
+					</div>
+					
+					
+					
+					<!-------------------------capital Amount--------------  -->
+
+
+					<div class="container-fluid content" id="capital_amount"
+						style="display: none;">
+
+						<div class="row">
+							<!-- add-->
+							<form action="#" method="post" class="w-100"
+								id="capital_amount" autocomplete="off" style="transform: translateY(-98px);">
+
+
+								<!-- Form Body -->
+								<div class="card-body">
+
+
+
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="acct_name" name="acct_name"
+													value="TSK" readonly> <label for="name"
+													class="form-legend">Account Name</label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="acct_num"
+													name="acct_num" readonly value="TSK00001"> <label
+													for="acct_num" class="form-legend">Account Number</label>
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="acct_crncy"
+													name="acct_crncy" value="INR" readonly> <label
+													for="acct_crncy" class="form-legend">Currency</label>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="form-row mt-2 ">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="number" class="form-control" id="cr_amt" name="cr_amt" > <label for="cr_amt"
+													class="form-legend">Deposit Amount</label>
+											</div>
+										</div>
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" class="form-control" id="acct_bal"
+													name="acct_bal"  th:value="${cap_amt}" readonly > <label
+													for="acct_bal" class="form-legend">Balance Amount</label>
+											</div>
+										</div>
+
+									</div>
+
+									<br>
+
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-dark"
+											id="btnSubmit" onclick="capital_submit(event);">Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+
+
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+				<!------------------------------------------------- modify start-------------------------------------------------- -->
+
+
+
+				<div class="container-fluid content" th:if="${formmode}=='modify'">
+
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class=""></i>Expenses -Modify <span
+										th:text="${ '(' +expid +')'}"></span>
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="EXPLIST(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+
+							<!-- Form Body -->
+							<div class="card-body">
+
+								<div class="form-row mb-2">
+									<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-3 d-flex align-items-center">
+										<div class="form-floating flex-grow-1 d-flex">
+											<!-- Split Select Box -->
+											<div class="select-container flex-grow-1 position-relative">
+
+												<div class="select-container flex-grow-1 position-relative">
+													<select class="form-control" id="category" name="category"
+														required>
+														<option selected>--Select Category--</option>
+														<option value="CAPITAL AMOUNT">CAPITAL AMOUNT</option>
+														<option th:each="Category : ${expenseslist}"
+															th:value="${Category.catName}"
+															th:text="${Category.catName}"
+															th:selected="${categoryname==Category.catName}"></option>
+
+													</select> <label for="category" class="form-legend">Expenses
+														Category</label>
+
+												</div>
+
+
+
+											</div>
+											<button type="button" style="border-radius: 8px;"
+												class="btn btn-primary btn-sm ms-1 d-flex align-items-center"
+												onclick="togglre();" id="addCategory">
+												<i class="fas fa-plus"></i>
+											</button>
+
+										</div>
+									</div>
+									<div class="form-group col-md-7"></div>
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" th:value="${expid}"
+												name="expensesId" id="expensesId" placeholder="Expense No."
+												readonly> <label for="orderNo" class="form-legend">Expenses
+												Id</label>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="form-row mb-2">
+
+									<div class="form-group col-md-10"></div>
+									<!-- Order Date -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="date" class="form-control" th:value="${date}"
+												name="exp_date" id="exp_date"> <label
+												for="orderDate" class="form-legend"> Date</label>
+										</div>
+									</div>
+								</div>
+
+
+
+
+								<!-- Table -->
+								<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size: 15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th>Srl NO</th>
+											<th>Item</th>
+											<th>Qty</th>
+											<th>Price/Unit</th>
+											<th>Amount</th>
+											<th>Action</th>
+										</tr>
+
+									</thead>
+									<tbody>
+
+
+										<tr th:each="list,iterstat : ${alllist}">
+											<td th:text="${iterstat.index+1}">1</td>
+
+
+											<td>
+												<div class="input-group">
+													<input type="text" class="form-control" name="item"
+														th:value="${list.expItemCode+'-'+list.expName}" id="item"
+														placeholder="Item" list="wolist"
+														onchange="expitemprice(this);"> <span
+														onclick="viewitem();" style="cursor: pointer;"
+														class="input-group-text">📦</span>
+													<datalist id="wolist">
+														<!-- Dynamic Vendor Options -->
+														<option th:each="woList : ${ExpItemlist}"
+															th:value="${woList.expItemId +'-'+ woList.expItemName}"
+															th:text="${woList.expItemId +'-'+ woList.expItemName}"></option>
+													</datalist>
+													<input type="hidden" id="expuniqid" th:value="${list.id}">
+
+												</div>
+											</td>
+
+
+
+											<td><input type="number" class="form-control" name="qty"
+												th:value="${list.qty}" id="qty" placeholder="Qty"
+												oninput="updatepriceforexp(this)"></td>
+
+
+											<td><input type="number" class="form-control"
+												th:value="${list.price}" name="expItemPrice"
+												id="expItemPrice" placeholder="Price"
+												oninput="calculateTax(this)" readonly></td>
+
+
+
+											<td><input type="number" class="form-control"
+												th:value="${list.amount}" name="amountPerItem"
+												id="amountPerItem" placeholder="Amount" readonly></td>
+											<td>
+												<button class="btn btn-danger btn-sm remove-row">-</button>
+											</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" class="text-right">Total</th>
+											<th style="font-weight: bold;"><input
+												th:value="${total}" type="number" class="form-control"
+												name="totalexp" id="totalexp" placeholder="" readonly></th>
+
+
+										</tr>
+									</tfoot>
+
+								</table>
+
+								<!-- Add Row Button -->
+								<button class="btn btn-primary" id="addRowBtn">+</button>
+								<div></div>
+								<br>
+								<!-- Payment Section -->
+								<div class="row align-items-start">
+									<!-- Payment Type Dropdown -->
+									<div class="col-md-3">
+										<label for="paymentType"><strong>Payment Type</strong></label>
+										<select class="form-control" id="paymentType"
+											name="paymentType">
+											<option value="" th:value="${paymenttype}" disabled>--
+												Select Payment Type --</option>
+											<option value="cash">Cash</option>
+											<option value="cheque">Cheque</option>
+										</select>
+										<div id="chequeField" style="display: none; margin-top: 10px;">
+											<label for="referenceNumber"><strong>Reference
+													Number</strong></label> <input type="text" class="form-control"
+												id="referenceNumber" name="referenceNumber"
+												placeholder=" Reference Number">
+										</div>
+									</div>
+
+									<!-- Amount and Reference Number (Dynamic Fields) -->
+									<div class="col-md-2" id="dynamicFields">
+										<div id="cashField" style="display: none;">
+											<label for="amount"><strong>Amount</strong></label> <input
+												type="number" class="form-control" id="paidAmount"
+												name="paidAmount" placeholder="Enter Amount">
+										</div>
+
+									</div>
+
+									<!-- Total, Advance, and Balance Fields -->
+									<div class="col-md-3 offset-md-4">
+										<div class="form-group">
+											<label for="total"><strong>Total Amount</strong></label> <input
+												th:value="${total}" type="number" class="form-control"
+												name="totalAmounts" id="totalAmounts" placeholder="Total"
+												readonly>
+										</div>
+
+
+									</div>
+								</div>
+
+
+								<br>
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-dark"
+										id="btnSubmit" onclick="Expensesedit(event);">Submit</button>
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+				<!-- ------view----- -->
+
+
+
+
+				<div class="container-fluid content" th:if="${formmode}=='view'">
+
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class=""></i>Expenses - View <span
+										th:text="${ '(' +expid +')'}"></span>
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="EXPLIST(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+
+							<!-- Form Body -->
+							<div class="card-body">
+
+								<div class="form-row mb-2">
+									<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-3 d-flex align-items-center">
+										<div class="form-floating flex-grow-1 d-flex">
+											<!-- Split Select Box -->
+											<div class="select-container flex-grow-1 position-relative">
+
+												<input type="text" class="form-control"
+													th:value="${categoryname}" name="expensesId"
+													id="expensesId" placeholder="Expense No." readonly>
+												<label for="category" class="form-legend">Expenses
+													Category</label>
+											</div>
+
+										</div>
+									</div>
+									<div class="form-group col-md-7"></div>
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" th:value="${expid}"
+												name="expensesId" id="expensesId" placeholder="Expense No."
+												readonly> <label for="orderNo" class="form-legend">Expenses
+												Id</label>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="form-row mb-2">
+
+									<div class="form-group col-md-10"></div>
+									<!-- Order Date -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="date" class="form-control" th:value="${date}"
+												name="exp_date" id="exp_date" readonly> <label
+												for="orderDate" class="form-legend"> Date</label>
+										</div>
+									</div>
+								</div>
+
+
+
+
+								<!-- Table -->
+								<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size: 15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th>Srl.No</th>
+											<th>Item</th>
+											<th>Qty</th>
+											<th>Price/Unit</th>
+											<th>Amount</th>
+
+										</tr>
+
+									</thead>
+									<tbody>
+										<tr th:each="list,iterstat : ${alllist}">
+											<td th:text="${iterstat.index+1}">1</td>
+
+
+											<td>
+												<div class="input-group">
+													<input type="text" class="form-control" name="item"
+														th:value="${list.expName}" id="item" placeholder="Item"
+														readonly>
+
+
+
+												</div>
+											</td>
+
+
+
+											<td><input type="number" class="form-control" name="qty"
+												th:value="${list.qty}" id="qty" placeholder="Qty"
+												oninput="updatepriceforexp(this)" readonly></td>
+
+
+											<td><input type="number" class="form-control"
+												th:value="${list.price}" name="expItemPrice"
+												id="expItemPrice" placeholder="Price"
+												oninput="calculateTax(this)" readonly></td>
+
+
+
+											<td><input type="number" class="form-control"
+												th:value="${list.amount}" name="amountPerItem"
+												id="amountPerItem" placeholder="Amount" readonly></td>
+
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4" class="text-right">Total</th>
+											<th style="font-weight: bold;"><input
+												th:value="${total}" type="number" class="form-control"
+												name="totalexp" id="totalexp" placeholder="" readonly></th>
+
+
+										</tr>
+									</tfoot>
+
+								</table>
+
+								<!-- Add Row Button -->
+
+								<div></div>
+								<br>
+								<!-- Payment Section -->
+								<div class="row align-items-start">
+									<!-- Payment Type Dropdown -->
+									<div class="col-md-3">
+										<label for="paymentType"><strong>Payment Type</strong></label>
+										<select class="form-control" id="paymentType" disabled
+											name="paymentType">
+											<option value="" th:text="${paymenttype}">-- Select
+												Payment Type --</option>
+											<option value="cash">Cash</option>
+											<option value="cheque">Cheque</option>
+										</select>
+										<div id="chequeField" style="display: none; margin-top: 10px;">
+											<label for="referenceNumber"><strong>Reference
+													Number</strong></label> <input type="text" class="form-control"
+												id="referenceNumber" name="referenceNumber"
+												placeholder=" Reference Number">
+										</div>
+									</div>
+
+									<!-- Amount and Reference Number (Dynamic Fields) -->
+									<div class="col-md-2" id="dynamicFields">
+										<div id="cashField" style="display: none;">
+											<label for="amount"><strong>Amount</strong></label> <input
+												type="number" class="form-control" id="paidAmount"
+												name="paidAmount" placeholder="Enter Amount">
+										</div>
+
+									</div>
+
+									<!-- Total, Advance, and Balance Fields -->
+									<div class="col-md-3 offset-md-4">
+										<div class="form-group">
+											<label for="total"><strong>Total Amount</strong></label> <input
+												th:value="${total}" type="number" class="form-control"
+												name="totalAmounts" id="totalAmounts" placeholder="Total"
+												readonly>
+										</div>
+
+
+									</div>
+								</div>
+
+
+								<br>
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<!-- <button type="button" class="btn btn-xs btn-dark"
+										id="btnSubmit" onclick="Expensessubmit(event);">Submit</button> -->
+
+									<button class="btn btn-xs btn-dark" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+
+
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+				<!-------------------------------------------- List start ----------------------------------------------->
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i> Expenses - List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="addpage(event);">
+											<i class="fas fa-user-plus mr-2"></i> Add
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')"
+													class="form-control" />
+											</div>
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped" style="padding:10px;">
+											<thead>
+												<tr >
+													<th style="text-align: center;font-weight:bold;">EXP ID</th>
+													<th style="text-align: left;font-weight:bold; width:150px;">CATEGORY NAME</th>
+													<th style="text-align: center;font-weight:bold;">ITEM CODE</th>
+													<th style="text-align: left;font-weight:bold;">ITEM</th>
+													<th style="text-align: center;font-weight:bold;">DATE</th>
+													<th style="text-align: center;font-weight:bold;">TOTALAMOUNT</th>
+													<th style="text-align: center;font-weight:bold;">ACTION</th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(explist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="vendor : ${explist}">
+													<td th:text="${vendor.expId}" style="text-align: center;"></td>
+													<td th:text="${vendor.expCategory}"
+														style="text-align:left;"></td>
+													
+													<td th:text="${vendor.expItemCode}"
+														style="text-align: center;"></td>
+													
+													<td th:text="${vendor.expName}" style="text-align: left; width:140px;"></td>
+													<td
+														th:text="${#dates.format(vendor.expDate, 'dd-MM-yyyy')}"
+														style="text-align: center;"></td>
+
+													<td th:text="${vendor.totalAmount}"
+														style="text-align: right; width:140px;"></td>
+
+
+													<td style="text-align: center;">
+														<!--<input type="radio" name="yourRadioGroup" value="yourValue">-->
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-expId=${vendor.expId}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+																<a class="dropdown-item" title=" view"
+																	th:attr="data-expId=${vendor.expId}"
+																	style="cursor: pointer;" onclick="viewscreen(this)">View</a>
+
+																<!--<a class="dropdown-item" title=" Modify"
+																	th:attr="data-Opid=${vendor.poId}"
+																	style="cursor: pointer;" onclick="deletebtn(this)">Delete</a>-->
+
+
+															</div>
+														</div>
+
+													</td>
+
+
+
+
+
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">EXPENSES</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+
+
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.reload();">Close</button>
+
+					<input type="hidden" id="modelidd">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- -----modal-- -->
+
+
+	<div class=" modal fade" id="addcat">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<form action="#" method="post" class="w-100"
+					id="CategoryCreationadd" autocomplete="off">
+					<div
+						class="card-header d-flex justify-content-between align-items-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+						<div>
+							<i class="fas fa-user-plus mr-2"></i>Create Expense
+						</div>
+						<div>
+							<button class="btn btn-light btn-sm"
+								style="color: black; font-weight: bold; border-color: black;"
+								onclick="togglelistss();">
+								<i class="fas fa-list mr-1"></i> List
+							</button>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="form-row mt-2 ">
+							<div class="form-group col-md-6">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="catId"
+										th:value="${expensesid}" name="catId" required readonly>
+									<label for="name" class="form-legend">Expense Code</label>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="catName"
+										oninput="this.value = this.value.toUpperCase();"
+										name="catName" required> <label for="name"
+										class="form-legend">Exp Name</label>
+								</div>
+							</div>
+
+
+						</div>
+
+						<div class="form-row mt-2 ">
+							<div class="form-group col-md-6">
+								<div class="form-floating">
+									<select class="form-control" id="exptype" name="exptype">
+										<option value="">--Select Type--</option>
+										<option value="DIRECT">DIRECT</option>
+										<option value="INDIRECT">INDIRECT</option>
+
+
+									</select> <label for="vendorType" class="form-legend">Expenses
+										Type</label>
+
+								</div>
+							</div>
+
+
+
+						</div>
+
+
+						<div class="card-footer text-center"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+							<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+								onclick="CategoryCreation()">Submit</button>
+
+
+							<button class="btn btn-xs btn-dark" id="btnback"
+								onclick="window.location.reload();">Close</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- 	--------list---- -->
+
+
+	<div class=" modal fade" id="listmodal">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<form action="#" method="post" class="w-100"
+					id="CategoryCreationadd" autocomplete="off">
+					<div
+						class="card-header d-flex justify-content-between align-items-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+						<div>
+							<i class="fas fa-user-plus mr-2"></i>Expense Category List
+						</div>
+						<div>
+							<button class="btn btn-light btn-sm"
+								style="color: black; font-weight: bold; border-color: black;"
+								onclick="togglelist();">
+								<i class="fas fa-list mr-1"></i> List
+							</button>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="form-row mt-2 ">
+
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th style="text-align: center;">SL NO.</th>
+										<th style="text-align: center;">CATEGORY ID</th>
+										<th style="text-align: center;">CATEGORY NAME</th>
+										<th style="text-align: center;">ACTION</th>
+									</tr>
+								</thead>
+								<tbody th:each="catt, iterstat : ${expenseslist}">
+									<tr>
+										<td style="text-align: center;"
+											th:text="${iterstat.index + 1}"></td>
+										<td style="text-align: center;" th:text="${catt.catId}"></td>
+										<td style="text-align: center;" th:text="${catt.catName}"></td>
+										<td style="text-align: center;">
+											<!-- Add action buttons or links here -->
+											<button onclick="deletecat(this);"
+												th:attr="data-catId=${catt.catId}" type="button"
+												class="btn btn-sm btn-danger">Delete</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+
+
+
+
+						<div class="card-footer text-center"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+							<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+								onclick="CategoryCreation()">Submit</button>
+
+
+							<button class="btn btn-xs btn-dark" id="btnback"
+								onclick="window.location.reload();">Close</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- -------itemcreationfor expenses----- -->
+
+
+	<div class=" modal fade" id="additem">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<form action="#" method="post" class="w-100" id="itemcreations"
+					autocomplete="off">
+					<div
+						class="card-header d-flex justify-content-between align-items-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+						<div>
+							<i class="fas fa-plus mr-2"></i>Create Item
+						</div>
+						<div>
+							<!-- <button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="togglelist();">
+										<i class="fas fa-list mr-1"></i> List
+									</button> -->
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="form-row mt-2 ">
+							<div class="form-group col-md-4">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="expItemId"
+										name="expItemId" th:value="${ExpitemId}" readonly> <label
+										for="name" class="form-legend">Item Code</label>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="expItemName"
+										oninput="this.value = this.value.toUpperCase();"
+										name="expItemName" required> <label for="name"
+										class="form-legend">Item Name</label>
+								</div>
+							</div>
+
+							<div class="form-group col-md-4">
+								<div class="form-floating">
+									<input type="text" class="form-control" id="expItemPriceaa"
+										name="expItemPrice" required> <label for="name"
+										class="form-legend">Price/Item</label>
+								</div>
+							</div>
+
+
+
+
+
+						</div>
+
+
+
+
+						<div class="card-footer text-center"
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+							<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+								onclick="itemcreation()">Submit</button>
+
+
+							<button class="btn btn-xs btn-dark" id="btnback"
+								onclick="window.location.reload();">Close</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	
+
+
+
+
+
+
+
+</body>
+</html>

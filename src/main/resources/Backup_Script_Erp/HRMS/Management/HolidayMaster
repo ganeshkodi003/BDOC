@@ -1,0 +1,35 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[HOLIDAY_MASTER]    Script Date: 4/22/2025 1:02:01 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[HOLIDAY_MASTER](
+	[ORGN] [varchar](50) NULL,
+	[LOCATION] [varchar](50) NULL,
+	[CAL_YEAR] [varchar](10) NULL,
+	[CAL_MONTH] [varchar](20) NULL,
+	[RECORD_SRL] [float] NULL,
+	[RECORD_DATE] [datetime] NULL,
+	[HOLIDAY_DESC] [varchar](50) NULL,
+	[HOLIDAY_REMARKS] [varchar](50) NULL,
+	[HOLIDAY_FLG] [char](1) NULL,
+	[ENTRY_USER] [varchar](50) NULL,
+	[MODIFY_USER] [varchar](50) NULL,
+	[AUTH_USER] [varchar](50) NULL,
+	[ENTRY_TIME] [datetime] NULL,
+	[MODIFY_TIME] [datetime] NULL,
+	[AUTH_TIME] [datetime] NULL,
+	[DEL_FLG] [char](1) NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[MODIFY_FLG] [char](1) NULL,
+	[RECORD_STATUS] [varchar](50) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+

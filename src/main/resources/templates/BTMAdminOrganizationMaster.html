@@ -1,0 +1,2048 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/font-awesome/5.9.0/css/all.min.css"
+		th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+	<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+	<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<style>
+.custom-input {
+	height: 30px; /* Adjust the height as needed */
+	padding: 5px; /* Adjust padding as needed */
+}
+</style>
+<style>
+input, select {
+	height: 30px; /* Adjust height */
+	padding: 5px; /* Adjust padding */
+	border-radius: 5px; /* Rounded corners */
+	border: 1px solid #ccc; /* Light gray border */
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Inner shadow for 3D effect */
+	outline: none; /* Remove outline on focus */
+	transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	/* Smooth transition */
+}
+
+/* Add a hover effect for better UI */
+input:hover, select {
+	border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add focus effect for interaction feedback */
+input:focus, select {
+	border-color: #007bff; /* Change border color on focus */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* Light blue shadow on focus */
+}
+</style>
+<style>
+        #rowsTable1 {
+        
+            width: 17%;
+            border-collapse: collapse;
+        }
+       #rowsTable1 thead tr th, #rowsTable1 tbody tr td {
+           background-color: #e9ecef;
+       border: 1px solid #ced4da;
+            padding: 8px;
+            text-align: left;
+        }
+           
+    </style>
+	<style>
+	
+	
+		.btns {
+			float: right;
+			margin: 5px;
+		}
+
+		.col-sm-5 {
+			padding-bottom: 15px;
+		}
+
+		.list-body {
+			padding: 0px;
+		}
+
+		.error {
+			color: red;
+			padding-left: 10px;
+		}
+
+		.formline {
+			padding-bottom: 4px;
+		}
+
+		#finusertb {
+			width: 460px;
+		}
+
+		.dataTables_wrapper .dataTables_paginate .paginate_button {
+			padding: 0px;
+		}
+		
+
+		label {
+			font-size: 16px;
+		}
+
+		fieldset {
+			border: 1px solid #CCC;
+			border-radius: 5px;
+			padding: 10px;
+			margin-top: 10px;
+		}
+	</style>
+	
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:5px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>	
+	
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+	
+<style>
+ .arrow-tab-container {
+            display: flex;
+            margin-top:10px;
+        }
+
+        .arrow-tab {
+    position: relative;
+    padding: 10px 40px 10px 30px; /* Adjust padding for text alignment */
+    background-color: #e3e2e2; /* Dark grey background */
+    color: black; /* White text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Arrow tip for all tabs except the last */
+.arrow-tab:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -20px; /* Adjust for overlap */
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 24px solid transparent;
+    border-left: 20px solid #e3e2e2; /* Dark grey arrow tip */
+    z-index: 1;
+    transition: border-left-color 0.3s ease;
+}
+
+.arrow-tab:hover {
+    background-color: #e3e2e2; /* Lighter grey on hover */
+}
+
+.arrow-tab:hover::after {
+    border-left-color: #e3e2e2; /* Lighter grey arrow tip on hover */
+}
+
+.arrow-tab.active {
+    background-color: #000;
+    color: white; /* Black for active tab */
+}
+
+.arrow-tab.active::after {
+    border-left-color: #000; /* Black arrow tip for active tab */
+}
+
+
+</style>	
+	
+	
+	
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		$(function () {
+			$(
+				"#expiryDate,#disableDate,#disableTilDate,#passExDate,#effectiveTill,#dateofTravel,#travelReqDate")
+				.datepicker({
+					changeMonth: true,
+					changeYear: true,
+					dateFormat: "dd-mm-yy"
+				});
+		});
+
+		function home() {
+			document.getElementById('loadingModal').style.display = 'flex';
+			location.href = 'Dashboard';
+		}
+
+		function back() {
+			document.getElementById('loadingModal').style.display = 'flex';
+			window.history.back();
+		}
+		
+		function viewraw(a) {
+		    document.getElementById('loadingModal').style.display = 'flex';
+		    var id = a.getAttribute("data-branchid"); // Fixed typo here
+		    location.href = 'organizationMaster?formmode=branch_edit&id=' + id;  // Cleaned URL formatting
+		}
+
+
+
+		function modifyuser() {
+			document.getElementById('loadingModal').style.display = 'flex';
+			
+			location.href = 'organizationMaster?formmode=edit';
+		}
+
+		function submiteditform(a) {
+
+		if ($("#organizationDetails").valid()) {
+
+				var url = "./organizationMasterAdd?formmode=edit";
+				$("#organizationDetails").attr('action', url);
+
+				var options = {
+					success: showResponse
+				};
+
+				$("#organizationDetails").ajaxSubmit(options);
+				 // Show the loading modal before sending the request
+	           
+				
+
+				function showResponse(responseText, statusText, xhr, $form) {
+	        // approvalstages();
+					$("#alertmsg").text(responseText);
+					$('#alert').modal("toggle");
+					//location.href = 'organizationMaster';
+
+				}
+				;
+			}  
+            event.preventDefault();  
+		}; 
+		
+		
+		/////////////////////// For approval stages
+	
+		function approvalstages() {
+    // Check if "Yes" radio button is selected
+    if (document.getElementById('autoApprovalYesEdit').checked) {
+    	//alert()
+        var tableData = [];
+
+        // Loop through table rows to extract data
+        $('#rowsTable tbody tr').each(function() {
+            var row = {};
+            $(this).find('input').each(function() {
+                var inputName = $(this).attr('id');
+                var inputValue = $(this).val();
+                row[inputName] = inputValue;
+            });
+            tableData.push(row);
+        });
+        // Log the tableData to the console to view all values
+        console.log(tableData);
+
+        // Send data via AJAX
+        $.ajax({
+            url: './sendapprovalstages', // Replace with your controller endpoint
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(tableData),
+            success: function(response) {
+               // $("#alertmsg").text(response);
+                //$('#alert').modal("toggle");
+            },
+            error: function(error) {
+                alert('Error sending data:', error);
+            }
+        });
+    }
+
+    // If "No" radio button is selected, send a request to delete approval stages
+    else if (document.getElementById('autoApprovalNoEdit').checked) {
+        $.ajax({
+            url: "./deletestages", // Replace with your controller endpoint
+            type: 'POST',
+            success: function(response) {
+                // Optionally handle success here
+            },
+            error: function(error) {
+                // Optionally handle error here
+            }
+        });
+    }
+}
+		
+		
+		
+		
+		
+	</script>
+
+<script>
+	function generateRows() {
+		var Approver_stages = document.getElementById('Approver_stages').value;
+		var YesRadio = document.getElementById('autoApprovalYesEdit');
+		if(Approver_stages==''){
+			alert("Please fill the Approval Stages!!!");
+			YesRadio.checked = false;
+			
+		}else{
+			document.getElementById('Approver_stages').readOnly = true;
+			const myTable = document.getElementById('rowsTable');
+		    myTable.style.display = 'block'; // Show the table
+		    const numRows = document.getElementById('Approver_stages').value; // Get the number of rows from the input
+		    
+		    const tableBody = myTable.querySelector('tbody'); // Get table body element
+		    tableBody.innerHTML = ''; // Clear any existing rows
+		    
+		    // Generate rows based on the number of rows entered
+		    for (let i = 1; i <= numRows; i++) {
+		        const newRow = document.createElement('tr');
+		        
+		        newRow.innerHTML = `
+		            <td style="text-align: center;">${i}</td>
+		            <td style="text-align: center;"><input style="text-align: center;" type="number" id="days-${i}"  placeholder="Enter Days"></td>
+		        `;
+		        
+		        /*  newRow.innerHTML = `
+	        	  <td id=inputone-${i}  th:value=inputone-${i} style="text-align: left;transform: translateX(30px);"> ${i + num}</td>
+	              <td><input id=input-${i} type="text" style="text-align: left;transform: translateX(-300px);"></td>
+	          `; */
+		        
+		        tableBody.appendChild(newRow);
+		    }
+			
+		}
+	}
+
+</script>
+   <script>
+   function hideTableRadio() {
+	   var Approver_stages = document.getElementById('Approver_stages');
+            const myTable = document.getElementById('rowsTable');
+
+            // Hide the table
+            myTable.style.display = 'none';
+            document.getElementById('Approver_stages').value='';
+            Approver_stages.readOnly = false;
+        };
+    </script>
+    <script>
+    
+    function hideTable() {
+        const myTable = document.getElementById('rowsTable');
+        myTable.style.display = 'none';
+    }
+    
+    function validateInput(input) {
+        input.value = input.value.replace(/[^1-5]/g, '');
+    }
+    
+    let mbnval="true"
+		function validateMobileNumber(input) {
+			var mbname=input.getAttribute('mbname');
+		    const errorElement = document.getElementById(mbname);
+
+		    // Remove non-numeric characters and limit to 10 digits
+		    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+
+		    // Check if input length is exactly 10 digits
+		    if (input.value.length === 10) {
+		        errorElement.style.display = 'none'; // Hide error message
+		        input.setCustomValidity('');// Set validity to true
+		        mbnval="true"
+		    } else {
+		        errorElement.style.display = 'block'; // Show error message
+		        errorElement.textContent = 'Please enter exactly 10 digits.';
+		        input.setCustomValidity('Invalid');   // Set validity to false
+		        mbnval="false"
+		    }
+		}
+    
+    </script>
+    <script>
+        // Normal function for tab interaction
+        function activateTab(clickedTab) {
+            // Remove active class from all tabs
+            const arrowTabs = document.querySelectorAll('.arrow-tab');
+            arrowTabs.forEach(tab => tab.classList.remove('active'));
+            
+            var Generalidtab =document.getElementById('Generalidtab');
+            var Locationtab= document.getElementById('Locationtab');
+            var AdministrationOfficetab= document.getElementById('AdministrationOfficetab');
+            var EmployeeDetailstab= document.getElementById('EmployeeDetailstab');
+            var EmployeeMiscellaneoustab= document.getElementById('EmployeeMiscellaneoustab');
+            var branchid= document.getElementById('branchid');
+            var addbranch= document.getElementById('addbranch');
+            
+                        
+            
+            Generalidtab.style.display ="none";
+            Locationtab.style.display ="none";
+            AdministrationOfficetab.style.display ="none";
+            EmployeeDetailstab.style.display ="none";
+            EmployeeMiscellaneoustab.style.display ="none";
+            branchid.style.display ="none";
+            addbranch.style.display ="none";
+
+            const btnBranch = document.getElementById('btn_branch');
+            const btnedit = document.getElementById('btnedit');
+            
+            const Id = clickedTab.id;
+            //alert(Id)
+            
+            if(Id=='General'){
+            	btnBranch.style.display = "none";
+            	btnedit.style.display ="block";
+            	Generalidtab.style.display ="block";
+            	Locationtab.style.display ="block";
+            }
+            else if(Id=='Location'){
+            	btnBranch.style.display = "none";
+            	btnedit.style.display ="block";
+            	branchid.style.display ="block";
+            	
+            }else if(Id=='AdministrationOffice'){
+            	btnBranch.style.display = "none";
+            	btnedit.style.display ="block";
+            	AdministrationOfficetab.style.display ="block";
+            }else if(Id=='EmployeeDetails'){
+            	btnBranch.style.display = "none";
+            	btnedit.style.display ="block";
+            	EmployeeDetailstab.style.display ="block";
+            }else if(Id=='EmployeeMiscellaneous'){
+            	btnBranch.style.display = "none";
+            	btnedit.style.display ="block";
+            	EmployeeMiscellaneoustab.style.display ="block";
+            }
+            
+            
+
+            // Add active class to the clicked tab
+            clickedTab.classList.add('active');
+        }
+        
+        function addBranch(event) {
+            event.preventDefault();
+
+            const addBranch = document.getElementById('addbranch');
+            const branchId = document.getElementById('branchid');
+            const btnEdit = document.getElementById('btnedit');
+            const btnBranch = document.getElementById('btn_branch');
+
+            // Hide and show the right elements
+            branchId.style.display = "none";
+            addBranch.style.display = "block";
+            btnEdit.style.display = "none";
+            btnBranch.style.display = "inline-block";
+        }
+
+        
+        function Branchlist(event){
+        	event.preventDefault();
+        	var addbranch= document.getElementById('addbranch');
+       	 var branchid= document.getElementById('branchid');
+       	 branchid.style.display ="block";
+       	 addbranch.style.display ="none";
+        }
+        
+        
+
+        function searchTable(tableId, searchInputId) {
+            var input = $('#' + searchInputId).val().toUpperCase();
+            var $table = $('#' + tableId + ' tbody');
+            var rows = $table.find('tr');
+
+            rows.each(function () {
+                var cells = $(this).find('td');
+                var found = false;
+
+                cells.each(function () {
+                    if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                        found = true;
+                        return false; // Exit loop early
+                    }
+                });
+
+                if (found) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+
+    </script>
+    
+    <script type="text/javascript">
+    
+ // Extract form mode from URL (e.g., ?formmode=add or ?formmode=edit)
+    const urlParams = new URLSearchParams(window.location.search);
+    const formmode = urlParams.get("formmode") || "add";
+
+    // Improved validation function
+    function validateBranchForm() {
+        const fields = [
+            { id: "branchIds", name: "Branch ID" },
+            { id: "branchNames", name: "Branch Name" },
+            { id: "address1s", name: "Address Line 1" },
+            { id: "address2s", name: "Address Line 2" },
+            { id: "citys", name: "City" },
+            { id: "states", name: "State" },
+            { id: "countrys", name: "Country" },
+            { id: "postalCodes", name: "Postal Code", regex: /^\d{5,6}$/, errorMsg: "Postal Code must be 5 or 6 digits" },
+            { id: "landline1s", name: "Landline1", regex: /^\d{6,12}$/, errorMsg: "Landline must be 6-12 digits" },
+            { id: "landline2s", name: "Landline2", regex: /^\d{6,12}$/, errorMsg: "Landline must be 6-12 digits" },
+            { id: "mobileNos", name: "Mobile No.", regex: /^\d{10}$/, errorMsg: "Mobile No. must be 10 digits" },
+            { id: "alternateMobileNos", name: "Alternate Mobile No.", regex: /^\d{10}$/, errorMsg: "Alternate Mobile No. must be 10 digits" }
+        ];
+
+        let isValid = true;
+        let firstErrorField = null;
+
+        fields.forEach(field => {
+            const value = document.getElementById(field.id)?.value.trim();
+            if (!value) {
+                alert(`${field.name} is required`);
+                isValid = false;
+                if (!firstErrorField) firstErrorField = field.id;
+            } else if (field.regex && !field.regex.test(value)) {
+                alert(field.errorMsg || `Invalid ${field.name}`);
+                isValid = false;
+                if (!firstErrorField) firstErrorField = field.id;
+            }
+        });
+
+        if (firstErrorField) {
+            document.getElementById(firstErrorField).focus();
+        }
+
+        return isValid;
+    }
+
+    // Add - Submit the form via AJAX
+    function submit_branch() {
+        if (!validateBranchForm()) return; // Prevent submission on invalid data
+
+        const branchData = {
+            branchId: document.getElementById('branchIds').value.trim(),
+            branchName: document.getElementById('branchNames').value.trim(),
+            landline1: document.getElementById('landline1s').value.trim(),
+            landline2: document.getElementById('landline2s').value.trim(),
+            mobileNo: document.getElementById('mobileNos').value.trim(),
+            alternateMobileNo: document.getElementById('alternateMobileNos').value.trim(),
+            addressLine1: document.getElementById('address1s').value.trim(),
+            addressLine2: document.getElementById('address2s').value.trim(),
+            city: document.getElementById('citys').value.trim(),
+            state: document.getElementById('states').value.trim(),
+            country: document.getElementById('countrys').value.trim(),
+            postalCode: document.getElementById('postalCodes').value.trim(),
+            formmode: formmode
+        };
+
+        fetch(`branch_add?formmode=${formmode}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(branchData)
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            location.reload(); // Refresh page after success
+        })
+        .catch(error => console.error("Error:", error));
+    }
+
+
+    function edit_branch() {
+        if (!validateBranchForm()) return; // Prevent submission on invalid data
+
+        const branchData = {
+            branchId: document.getElementById('branchIds').value.trim(),
+            branchName: document.getElementById('branchNames').value.trim(),
+            landline1: document.getElementById('landline1s').value.trim(),
+            landline2: document.getElementById('landline2s').value.trim(),
+            mobileNo: document.getElementById('mobileNos').value.trim(),
+            alternateMobileNo: document.getElementById('alternateMobileNos').value.trim(),
+            addressLine1: document.getElementById('address1s').value.trim(),
+            addressLine2: document.getElementById('address2s').value.trim(),
+            city: document.getElementById('citys').value.trim(),
+            state: document.getElementById('states').value.trim(),
+            country: document.getElementById('countrys').value.trim(),
+            postalCode: document.getElementById('postalCodes').value.trim(),
+        };
+
+        const submitButton = document.getElementById('btnSubmit');
+        submitButton.innerText = "Saving...";
+        submitButton.disabled = true;
+
+        fetch("branch_add?formmode=edit", {  // Ensure formmode is passed as a URL parameter
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(branchData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(data => {
+            alert(data);
+
+            if (data.includes("Modified")) {
+            	 location.reload();  // Redirect after success
+            } else {
+                throw new Error("Branch update failed.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to update branch. Please try again.");
+        })
+        .finally(() => {
+            submitButton.innerText = "Submit";
+            submitButton.disabled = false;
+        });
+    }
+
+    </script>
+</head>
+<title>ERP</title>
+
+<body onload="hideTable();">
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+	<!---------------------User List Ends--------------------------------------------------------->
+	<!---------------------User Edit form Starts-------------------------------------------------->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-12">
+				<div class="container-fluid content" th:if=" ${formmode}=='view' OR ${formmode}=='edit'">
+					<div class="row">
+						
+							<form action="#" method="post" th:object="${organizationDetails}" autocomplete="off" class="w-100"
+								id="organizationDetails">
+								<div class="card border-0">
+									<div class="card-header border-bottom-0" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<div class="">
+											<h3 style="font-size: 1.4rem;font-weight:bold; " th:if="${formmode}=='view'">ORGANIZATION DETAILS</h3>
+											<h3 style="font-size: 1.4rem;font-weight:bold;" th:if="${formmode}=='edit'">ORGANIZATION DETAILS-MODIFY</h3>
+										</div>
+									</div>
+									<div class="table-responsive"
+										style="overflow-y: auto; max-height: 85vh; border: 1px solid #dee2e6; overflow-x: hidden;">
+										<div class="arrow-tab-container">
+									        <div class="arrow-tab active" id="General" onclick="activateTab(this)">General</div>
+									        <div class="arrow-tab" id="Location" onclick="activateTab(this)">Branch</div>
+									        <div class="arrow-tab" id="AdministrationOffice" onclick="activateTab(this)">Administration Office</div>
+									        <div class="arrow-tab" id="EmployeeDetails" onclick="activateTab(this)">Employee Details</div>
+									        <div class="arrow-tab" id="EmployeeMiscellaneous" onclick="activateTab(this)">Employee Miscellaneous Details</div>
+   											</div>
+									<div class="card-body p-0">
+										<fieldset class="" id="Generalidtab">
+											<legend>General</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="orgName">Organization Name</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" th:if=" ${formmode}=='view'" id="orgName"
+															th:value="${adminOrganization?.orgn_name}"
+															class="form-control form-control-sm" readonly /> <input
+															type="text" th:if=" ${formmode}=='edit'" id="orgName"
+															th:value="${adminOrganization?.orgn_name}"
+															class="form-control form-control-sm" name="orgn_name"
+															autocomplete="off" readonly />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="shortName">Short Name</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="shortName" th:if=" ${formmode} =='view'"
+															th:value="${adminOrganization?.short_name}"
+															class="form-control form-control-sm" readonly /> <input
+															type="text" id="shortName"
+															th:value="${adminOrganization?.short_name}"
+															th:if=" ${formmode}=='edit'" name="short_name"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="registrationNo">Registration No</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="registrationNo"
+															th:if=" ${formmode}=='view'"
+															th:value="${adminOrganization?.regn_no}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="registrationNo"
+															th:if=" ${formmode}=='edit'"
+															th:value="${adminOrganization?.regn_no}" name="regn_no"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="GSTRef">GST Ref</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="GSTRef" th:if=" ${formmode}=='view'"
+															th:value="${adminOrganization?.gst_ref}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.gst_ref}" id="registrationNo"
+															th:if=" ${formmode}=='edit'" name="gst_ref"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="dateofRegistration">Date of
+															Registration</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" th:if=" ${formmode}=='view'"
+															th:value="${#dates.format(adminOrganization?.dor,'dd-MM-yyyy')}"
+															id="dateofRegistration" class="form-control form-control-sm"
+															autocomplete="off" readonly /> <input type="text"
+															id="dateofRegistration" name="dor"
+															th:value="${#dates.format(adminOrganization?.dor,'dd-MM-yyyy')}"
+															th:if=" ${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="panRef">PAN_REF</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="panRef" th:if=" ${formmode}=='view'"
+															th:value="${adminOrganization?.pan_ref}" name=""
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="panRef"
+															th:value="${adminOrganization?.pan_ref}"
+															th:if=" ${formmode}=='edit'" name="pan_ref"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="dateCommencement">Date of Commencement</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="dateCommencement"
+															th:if=" ${formmode}=='view'"
+															th:value="${#dates.format(adminOrganization?.doc,'dd-MM-yyyy')}"
+															class="form-control form-control-sm" name=""
+															autocomplete="off" readonly /> <input type="text"
+															th:value="${#dates.format(adminOrganization?.doc,'dd-MM-yyyy')}"
+															th:if=" ${formmode}=='edit'" id="dateCommencement"
+															class="form-control form-control-sm" name="doc"
+															autocomplete="off" readonly />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="TANRef">TAN Ref</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="TANRef" th:if=" ${formmode}=='view'"
+															th:value="${adminOrganization?.tan_ref}" name=""
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="TANRef"
+															th:value="${adminOrganization?.tan_ref}"
+															th:if=" ${formmode}=='edit'" name="tan_ref"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="website">Website</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="website" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.website}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="website"
+															th:value="${adminOrganization?.website}" name="website"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="emailId">Email ID</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" th:if="${formmode}=='view'" id="emailId"
+															th:value="${adminOrganization?.email}" name=""
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="emailId"
+															th:value="${adminOrganization?.email}" name="email"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+													</div>
+												</div>
+											</div>
+
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="landline1">Landline1</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="landline1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.land_line_1}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="landline1"
+															th:value="${adminOrganization?.land_line_1}"
+															th:if="${formmode}=='edit'" name="land_line_1"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="landline2">Landline 2</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="landline2" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.land_line_2}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="landline2"
+															th:value="${adminOrganization?.land_line_2}"
+															th:if="${formmode}=='edit'" name="land_line_2"
+															class="form-control form-control-sm" autocomplete="off" />
+
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="mobileNo">Mobile No.</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.mobile}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="mobileNo"
+															th:value="${adminOrganization?.mobile}" name="mobile"
+															th:if="${formmode}=='edit'" th:attr="mbname=mobileError1" oninput="validateMobileNumber(this)"
+															class="form-control form-control-sm" autocomplete="off" />
+														<small id="mobileError1" style="color: red; display: none;">Please enter exactly 10 digits.</small>	
+															
+															
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="alternateMobille">Alternate Mobile No.</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="alternateMobille"
+															th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.alt_mobile}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="alternateMobille"
+															th:value="${adminOrganization?.alt_mobile}"
+															th:if="${formmode}=='edit'" name="alt_mobile"  th:attr="mbname=mobileError2" oninput="validateMobileNumber(this)"
+															class="form-control form-control-sm" autocomplete="off" />
+														<small id="mobileError2" style="color: red; display: none;">Please enter exactly 10 digits.</small>		
+													</div>
+												</div>
+											</div>
+											
+											
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="mobileNo">Account Balance</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.account_balance}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> 
+															<input type="text" id="Capitalamount"
+															th:value="${adminOrganization?.account_balance}" name="Capitalamount"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" readonly />
+													</div>		
+													<div class="col-sm-1"></div>
+													
+													<div class="col-sm-2">
+														<label for="mobileNo">Cash Balance</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.cash_balance}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> 
+															<input type="text" id="Capitalamount"
+															th:value="${adminOrganization?.cash_balance}" name="Capitalamount"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" readonly />
+													</div>	
+																								
+												</div>
+											</div>
+											
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="mobileNo">Current Account Balance</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.current_account_balance}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> 
+															<input type="text" id="Capitalamount"
+															th:value="${adminOrganization?.current_account_balance}" name="current_account_balance"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" readonly />
+													</div>		
+													<div class="col-sm-1"></div>
+													
+													<div class="col-sm-2">
+														<label for="mobileNo">Current Cash Balance</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.current_cash_balance}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> 
+															<input type="text" id="Capitalamount"
+															th:value="${adminOrganization?.current_cash_balance}" name="current_cash_balance"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" readonly />
+													</div>	
+																								
+												</div>
+											</div>
+											
+											
+											
+											<!--<div class="form-group mb-0">
+												<div class="row formline">
+													<div class="col-sm-2">
+														<label for="mobileNo">Initial cost.</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="mobileNo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.Capitalamount}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="Capitalamount"
+															th:value="${adminOrganization?.Capitalamount}" name="Capitalamount"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>		
+													
+																								
+												</div>
+											</div>-->
+											
+											
+											
+										</fieldset>
+
+										<fieldset class="" id="Locationtab">
+											<legend>Location</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="address1">Address Line 1</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="address1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_addr1}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.loc_addr1}" id="address1"
+															name="loc_addr1" th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="address2">Address Line 2</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="address2" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_addr2}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="address2"
+															name="loc_addr2" th:value="${adminOrganization?.loc_addr2}"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="city">City</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" value="" id="city"
+															th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_city}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.loc_city}" id="city"
+															name="loc_city" th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="state">State</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="state" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_state}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="state"
+															th:value="${adminOrganization?.loc_state}"
+															th:if="${formmode}=='edit'" name="loc_state"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="country">Country</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" value="" id="country"
+															th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_country}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" name="loc_country"
+															th:value="${adminOrganization?.loc_country}" id="country"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="postalCode">Postal Code</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="postalCode" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.loc_postal_code}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.loc_postal_code}"
+															id="postalCode" th:if="${formmode}=='edit'"
+															name="loc_postal_code" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+												</div>
+											</div>
+										</fieldset>
+										
+										
+<!--------------------------------------------------- branch list -------------------------------------------------->
+										<!-- Search Input -->
+										<div id="branchid" style="display:none">
+										<div class="card-header d-flex justify-content-between align-items-center" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; margin-top:5px; font-weight: bold; color: black;">
+									<div>Branch-List
+									</div>
+									<div>
+										 <!-- Add Button -->
+    <button class="btn btn-light btn-sm" style="color: black; font-weight: bold; border-color: black;" 
+            onclick="addBranch(event);">
+        <i class="fas fa-user-plus mr-2"></i> Add
+    </button>
+									</div>
+								</div>
+									
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center mt-3" >
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable('dataTables12', 'searchInput')"  class="form-control" />
+											</div>
+											</div>
+											
+										<table id="dataTables12" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">Branch Id</th>
+													<th style="text-align: left;">Branch Name</th>
+													<th style="text-align: left;">Country</th>
+													<th style="text-align: center;">Mobile Number</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+												<tbody>
+													<!-- Show message if list is empty -->
+													<tr th:if="${#lists.isEmpty(list)}">
+														<td colspan="8" style="text-align: center; color: red;">No
+															records found.</td>
+													</tr>
+
+													<!-- Iterate over the list and show rows -->
+													<tr th:each="up : ${list}">
+														<td th:text="${up.branchId}" style="text-align: center;"></td>
+														<td th:text="${up.branchName}" style="text-align: left;"></td>
+														<td th:text="${up.country}" style="text-align: left;"></td>
+														<td th:text="${up.mobileNo}" style="text-align: center;"></td>
+
+														<!-- Radio button with data binding -->
+														<td style="text-align: center;"><input type="radio"
+															th:attr="data-branchid=${up.branchId}"
+															onclick="viewraw(this);"></td>
+													</tr>
+												</tbody>
+
+											</table>
+										</div>
+										
+<!---------------------------------------- Add Branch------------------------------------------------->
+										
+										
+										<div id="addbranch" style="display:none">
+											<div class="card-header d-flex justify-content-between align-items-center" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; margin-top:5px; font-weight: bold; color: black;">
+													<div>Branch-Add</div>
+												<div>
+													<button class="btn btn-light btn-sm"  
+														style="color: black; font-weight: bold; border-color: black;"
+														onclick="Branchlist(event);">
+														<i class="fas fa-list mr-1"></i> list
+													</button>
+												</div>
+											</div>
+										
+											<div class="form-group mb-0 mt-2">
+												<fieldset class="" id="Generalidtab">
+												<legend>General</legend>
+												<div class="row formline">
+												<div class="col-auto"></div>												
+													<div class="col-sm-2">
+														<label for="addressOne">Branch Id</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="branchIds" name="branchId" th:if="${formmode}=='view'"
+														th:value="${Id}"	class="form-control form-control-sm" autocomplete="off" readonly
+														/> 
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="addressTwo">Branch Name</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="branchNames"  name="branchName" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off" /> 													
+													</div>
+												</div>
+												
+												
+												
+												<div class="row formline">
+												<div class="col-auto"></div>												
+													<div class="col-sm-2">
+														<label for="addressOne">Landline1</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="landline1s" name="landline1" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off"
+														/> 
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="addressTwo">Landline2</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="landline2s" name="landline2" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off" /> 													
+													</div>
+												</div>
+												
+												<div class="row formline">
+												<div class="col-auto"></div>												
+													<div class="col-sm-2">
+														<label for="addressOne">Mobile No.</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="mobileNos" name="mobileNo" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off"
+														/> 
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="addressTwo">Alternate Mobile No.</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="alternateMobileNos" name="alternateMobileNo" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off" /> 													
+													</div>
+												</div>
+												
+												
+												</fieldset>
+												
+											<fieldset class="">
+											<legend>Location</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="address1">Address Line 1</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="address1s" name="address1" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off"/> <input type="text"
+														 	id="address1s"
+															name="address1s" th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="address2">Address Line 2</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="address2s"  name="address2"th:if="${formmode}=='view'"
+															
+															class="form-control form-control-sm" autocomplete="off"/>
+															
+														<input type="text" id="address2s"
+															name="loc_addr2"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="city">City</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" value="" id="citys"
+															th:if="${formmode}=='view'"
+															
+															class="form-control form-control-sm" autocomplete="off"
+															 /> <input type="text" id="citys" name="loc_city" th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="state">State</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" id="states" th:if="${formmode}=='view'"															
+															class="form-control form-control-sm" autocomplete="off"/> 
+															<input type="text" id="states"
+															th:if="${formmode}=='edit'" name="loc_state"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="country">Country</label>
+													</div>
+													<div class="col-sm-3">
+														<input type="text" value="" id="countrys"
+															th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off"
+															/>
+															 <input type="text" name="loc_country"
+														 	id="countrys"
+															th:if="${formmode}=='edit'"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="postalCode">Postal Code</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="postalCodes" th:if="${formmode}=='view'"
+															class="form-control form-control-sm" autocomplete="off"/>
+														<input type="text"
+															id="postalCodes" th:if="${formmode}=='edit'"
+															name="loc_postal_code" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+												</div>
+											</div>
+										</fieldset>
+																								
+												
+											</div>
+											
+										
+										
+										
+										
+										</div>										
+																				
+
+										<fieldset class="" id="AdministrationOfficetab" style="display:none">
+											<legend>Administration Office</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="addressOne">Address Line 1</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="addressOne" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_addr1}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_addr1}" id="addressOne"
+															th:if="${formmode}=='edit'" name="regn_addr1"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="addressTwo">Address Line 2</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="addressTwo" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_addr2}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_addr2}" id="addressTwo"
+															th:if="${formmode}=='edit'" name="regn_addr2"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="city1">City</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="city1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_city}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_city}" id="city1"
+															th:if="${formmode}=='edit'" name="regn_city"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="state1">State</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="state1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_state}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_state}" id="state1"
+															th:if="${formmode}=='edit'" name="regn_state"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="country1">Country</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="country1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_country}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_country}" id="country1"
+															th:if="${formmode}=='edit'" name="regn_country"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="postalCode1">Postal Code</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="postalCode1" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.regn_postal_code}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.regn_postal_code}"
+															id="postalCode1" th:if="${formmode}=='edit'"
+															name="regn_postal_code" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+												</div>
+											</div>
+										</fieldset>
+
+
+										<fieldset class="" id="EmployeeDetailstab" style="display:none">
+											<legend>Employee Details</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="noEmp">No. of Employees</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="noEmp" th:if="${formmode}=='view'"
+														 th:value="${empcount}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text" id="noEmp"
+															th:if="${formmode}=='edit'"
+															 th:value="${empcount}" name="no_of_emp"
+															class="form-control form-control-sm" autocomplete="off" readonly/>
+
+													</div>
+													<div class="col-sm-1"></div>
+													<!-- <div class="col-sm-2">
+														<label for="lifePassword">Life of Password</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="lifePassword" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.life_of_pw?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.life_of_pw?.intValue()}"
+															id="lifePassword" th:if="${formmode}=='edit'"
+															name="life_of_pw" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div> -->
+													<div class="col-sm-2">
+														<label for="contract_labours">No. of Contract Workers</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="contract_labours" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.contract_labours}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> <input type="text"
+															th:value="${adminOrganization?.contract_labours}"
+															id="contract_labours" th:if="${formmode}=='edit'"
+															name="contract_labours" class="form-control form-control-sm"
+															autocomplete="off" readonly/>
+													</div>
+												</div>
+											</div>
+											</fieldset>
+											<fieldset class="" id="EmployeeMiscellaneoustab" style="display:none">
+											<legend>Employee Miscellaneous Details</legend>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="casualLeave">Casual Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="casualLeave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.casual_leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number"
+															th:value="${adminOrganization?.casual_leave?.intValue()}"
+															id="casualLeave" th:if="${formmode}=='edit'"
+															name="casual_leave" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="sickLeave">Sick Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="sick_Leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.sick_leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number"
+															th:value="${adminOrganization?.sick_leave?.intValue()}" id="sick_Leave"
+															th:if="${formmode}=='edit'" name="sick_leave"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="earnedLeave">Maternity Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="Maternity_Leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.Maternity_Leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number"
+															th:value="${adminOrganization?.Maternity_Leave?.intValue()}"
+															id="Maternity_Leave" th:if="${formmode}=='edit'"
+															name="Maternity_Leave" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="specialLeave">Paternity Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="Paternity_Leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.Paternity_Leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number" id="Paternity_Leave"
+															th:if="${formmode}=='edit'"
+															th:value="${adminOrganization?.Paternity_Leave?.intValue()}" 
+															name="Paternity_Leave"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+																						<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="earnedLeave">Compensatory offer Leave</label>
+													</div>
+													
+													<div class="col-sm-3">
+
+														<input type="text" id="Compensatory_Offer_Leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.Compensatory_Offer_Leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly /> 
+														<input type="number"
+															th:value="${adminOrganization?.Compensatory_Offer_Leave?.intValue()}"
+															id="Compensatory_Offer_Leave" th:if="${formmode}=='edit'"
+															name="Compensatory_Offer_Leave" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													 <div class="col-sm-2">
+														<label for="noEmp">Loss of Pay Leave</label> 
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="Loss_of_Pay_Leave" th:if="${formmode}=='view'"
+														th:value="${adminOrganization?.Loss_of_Pay_Leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															 readonly/> 
+
+														<input type="Number" id="Loss_of_Pay_Leave" th:if="${formmode}=='edit'"
+														th:value="${adminOrganization?.Loss_of_Pay_Leave?.intValue()}"
+															name="Loss_of_Pay_Leave" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+													
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="row formline">
+												<div class="col-auto"></div>
+													<div class="col-sm-2">
+														<label for="earnedLeave">Earned Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="earned_leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.earned_leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number"
+															th:value="${adminOrganization?.earned_leave?.intValue()}"
+															id="earned_leave" th:if="${formmode}=='edit'"
+															name="earned_leave" class="form-control form-control-sm"
+															autocomplete="off" />
+													</div>
+													<div class="col-sm-1"></div>
+													<div class="col-sm-2">
+														<label for="specialLeave">Bereavement Leave</label>
+													</div>
+													<div class="col-sm-3">
+
+														<input type="text" id="Bereavement_Leave" th:if="${formmode}=='view'"
+															th:value="${adminOrganization?.Bereavement_Leave?.intValue()}"
+															class="form-control form-control-sm" autocomplete="off"
+															readonly />
+														 <input type="number" id="Bereavement_Leave"
+															th:if="${formmode}=='edit'"
+															th:value="${adminOrganization?.Bereavement_Leave?.intValue()}" 
+															name="Bereavement_Leave"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+											</fieldset>
+											
+											<!-- <legend>Leave Approval Stages</legend> -->
+					<!-- <div class="form-group mb-0">
+    <div class="row formline">
+        Auto Approval Label
+        <div class="col-sm-2">
+            <label for="autoApproval">Auto Approval</label>
+        </div>
+
+        Radio Buttons for Decision
+        <div class="col-sm-4">
+            View Mode: Display Yes or No based on hasRecords
+            <label th:if="${formmode == 'view' && hasRecords}">
+                <input type="radio" name="decision" value="yes" id="autoApprovalYes" checked="checked" disabled="disabled">
+                Yes
+            </label>
+            <label th:if="${formmode == 'view' && !hasRecords}">
+                <input type="radio" name="decision" value="no" id="autoApprovalNo" checked="checked" disabled="disabled">
+                No
+            </label>
+            <div th:if="${formmode == 'edit'}">
+    <label for="yes" style="display: inline;">
+        <input type="radio" id="autoApprovalYesEdit" name="decision" value="yes" onclick="generateRows()"> Yes
+    </label>
+
+    <label for="no" style="display: inline; margin-left: 10px;">
+        <input type="radio" id="autoApprovalNoEdit" name="decision" value="no" onclick="hideTableRadio()"> No
+    </label>
+</div><br>
+    
+        </div>
+
+        Approval Status Label
+        <div class="col-sm-2">
+            <label for="autoApproval">Approval Status</label>
+        </div>
+
+        Dynamic Table Rendering
+        <div class="col-sm-3">
+            Edit Mode Table
+            <table id="rowsTable" th:if="${formmode == 'edit'}" style="display: none;">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 500; ">Approver</th>
+                        <th style="font-weight: 500; text-align:center;">Number of Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    Dynamically added rows will appear here
+                </tbody>
+            </table>
+
+            View Mode Table
+            <table id="rowsTable1" th:if="${formmode == 'view' && hasRecords}">
+                <thead>
+                    <tr>
+                        <th style="font-weight: 500;">Approver</th>
+                        <th style="font-weight: 500;">Number of Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="leave, iterStat : ${leaves}">
+                        <td style="text-align: center" th:text="${iterStat.index + 1}"></td>
+                        <td style="text-align: center" th:text="${leave.number_of_days?.intValue()}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> -->
+
+											
+</div>
+</div>
+<div class="card-footer d-flex justify-content-center gap-2" 
+     style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+    <!-- Home Button -->
+    <button type="button" class="btn btn-dark" id="btnHome" onclick="home()">Home</button>
+
+    <!-- Modify Button -->
+    <a class="btn btn-xs btn-dark text-white" id="btnedit" th:if="${formmode}=='view'" onclick="modifyuser();">Modify</a>
+
+    <!-- Branch Submit Button (Hidden initially) -->
+    <a class="btn btn-xs btn-dark text-white" id="btn_branch" th:if="${formmode}=='view'" 
+       onclick="submit_branch();" style="display:none;">Submit</a>
+
+    <!-- Submit Button for Edit Mode -->
+    <button class="btn btn-xs btn-dark" th:if="${formmode}=='edit'" id="btnsubmit" 
+            th:attr="data-formmode=${formmode}" form="organizationDetails" 
+            onclick="submiteditform(this);">Submit</button>
+
+    <!-- Back Button -->
+    <button class="btn btn-xs btn-dark" form="" id="btnback" onclick="back();">Back</button>
+
+   
+</div>
+
+
+								</div>
+							</form>
+						
+					</div>
+				</div>
+				
+				
+	<!--------------------------------------- Edit Branch --------------------------------- -->
+	
+	<div class="container-fluid content" th:if="${formmode}=='branch_edit'">
+					<div class="row">
+						
+							<form action="#" method="post" th:object="${organizationDetails}" autocomplete="off" class="w-100">
+								<div class="card border-0">
+									
+									<div class="table-responsive"
+										style="overflow-y: auto; max-height: 85vh; border: 1px solid #dee2e6; overflow-x: hidden;">
+										
+					<div>
+    <div class="card-header d-flex justify-content-between align-items-center" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; margin-top:5px; font-weight: bold; color: black;">
+        <div>Branch - Edit</div>
+       <!--  <div>
+            <button class="btn btn-light btn-sm" style="color: black; font-weight: bold; border-color: black;" onclick="Branchlist(event);">
+                <i class="fas fa-list mr-1"></i> list
+            </button>
+        </div> -->
+    </div>
+
+    <!-- General Info Section -->
+    <div class="form-group mb-0 mt-2">
+        <fieldset id="Generalidtab">
+            <legend>General</legend>
+            <div class="row formline">
+                <div class="col-auto"></div>
+                <div class="col-sm-2"><label for="branchId">Branch Id</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="branchIds" name="branchId" th:value="${branch?.branchId}" class="form-control form-control-sm" autocomplete="off" readonly/>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2"><label for="branchName">Branch Name</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="branchNames" name="branchName" th:value="${branch?.branchName}" class="form-control form-control-sm" autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="row formline">
+                <div class="col-auto"></div>
+                <div class="col-sm-2"><label for="landline1">Landline1</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="landline1s" name="landline1" th:value="${branch?.landline1}" class="form-control form-control-sm" autocomplete="off"/>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2"><label for="landline2">Landline2</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="landline2s" name="landline2" th:value="${branch?.landline2}" class="form-control form-control-sm" autocomplete="off"/>
+                </div>
+            </div>
+
+            <div class="row formline">
+                <div class="col-auto"></div>
+                <div class="col-sm-2"><label for="mobileNo">Mobile No.</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="mobileNos" name="mobileNo" th:value="${branch?.mobileNo}" class="form-control form-control-sm" autocomplete="off"/>
+                </div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2"><label for="alternateMobileNo">Alternate Mobile No.</label></div>
+                <div class="col-sm-3">
+                    <input type="text" id="alternateMobileNos" name="alternateMobileNo" th:value="${branch?.alternateMobileNo}" class="form-control form-control-sm" autocomplete="off"/>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Location Section -->
+        <fieldset>
+            <legend>Location</legend>
+            <div class="form-group mb-0">
+                <div class="row formline">
+                    <div class="col-auto"></div>
+                    <div class="col-sm-2"><label for="address1">Address Line 1</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="address1s" name="address1" th:value="${branch?.addressLine1}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2"><label for="address2">Address Line 2</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="address2s" name="address2" th:value="${branch?.addressLine2}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="row formline">
+                    <div class="col-auto"></div>
+                    <div class="col-sm-2"><label for="city">City</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="citys" name="city" th:value="${branch?.city}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2"><label for="state">State</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="states" name="state" th:value="${branch?.state}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                </div>
+
+                <div class="row formline">
+                    <div class="col-auto"></div>
+                    <div class="col-sm-2"><label for="country">Country</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="countrys" name="country" th:value="${branch?.country}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2"><label for="postalCode">Postal Code</label></div>
+                    <div class="col-sm-3">
+                        <input type="text" id="postalCodes" name="postalCode" th:value="${branch?.postalCode}" class="form-control form-control-sm" autocomplete="off"/>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+</div>
+
+<div class="card-footer d-flex justify-content-center" 
+     style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+
+    <!-- Home Button -->
+    <button type="button" class="btn btn-dark" id="btnHome" onclick="home()">Home</button>
+
+    <button type="button" class="btn btn-dark" id="btnSubmit" onclick="edit_branch();">
+      Submit
+    </button>
+
+    <!-- Back Button -->
+    <button type="button" class="btn btn-dark" id="btnBack" onclick="back();">Back</button>
+</div>
+
+</div>
+</form>
+</div>
+</div>
+				
+				<br>
+				<!-- <div class="container-fluid">
+					<div class="card">
+						<div class="card-body text-center">
+							<div class="form-group ">
+								<div class="container-fluid">
+									<div class="row row-cols-2 row-cols-lg-3">
+										<div class="col-4 col-lg-2">
+											<label>Entry User:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text" th:value="${session.USERID}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+										<div class="col-4 col-lg-2">
+											<label>Modify User:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text" th:value="${session.USERID}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+										<div class="col-4 col-lg-2">
+											<label>Verify User:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text" th:value="${session.USERID}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+									</div>
+									<div class="row row-cols-2 row-cols-lg-3">
+										<div class="col-4 col-lg-2">
+											<label>Entry Date:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text"
+												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+										<div class="col-4 col-lg-2">
+											<label>Modify Date:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text"
+												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+										<div class="col-4 col-lg-2">
+											<label>Verify Date:</label>
+										</div>
+										<div class="col-4 col-lg-2">
+											<input type="text"
+												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
+												class="form-control form-control-sm" autocomplete="off"
+												readonly  />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div align="right" style="margin-left: 870px; font-size: 18px">
+						Status : <font style="color: #00cc00; font-size: 18px">ACTIVE</font>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="alert">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">CIM
+						FINANCE</div>
+				</div>
+				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg" style="font-size: 16px;"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="back();">Close</button>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<!-- Loading Modal -->
+<div id="loadingModal" style="display: none;">
+    <div id="loadingContent">
+        <img th:src=@{/images/infins.gif} alt="Loading...">
+    </div>
+</div>
+
+</body>
+
+</html>

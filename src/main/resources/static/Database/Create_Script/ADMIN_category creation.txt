@@ -1,0 +1,11 @@
+CREATE TABLE [dbo].[Category](
+	[headcode] [varchar](100) NULL,
+	[headdescription] [varchar](100) NULL,
+	[categorycode] [varchar](100) NULL,
+	[categorydescription] [varchar](100) NULL,
+	[subcategorycode] [varchar](100) NULL,
+	[subcategorydescription] [varchar](100) NULL,
+	[assetcode] [varchar](100) NULL,
+	[del_flg] [varchar](100) NULL
+) ON [PRIMARY]
+GO

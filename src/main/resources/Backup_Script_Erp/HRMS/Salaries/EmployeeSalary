@@ -1,0 +1,31 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[EmployeeSalary]    Script Date: 4/22/2025 1:33:21 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EmployeeSalary](
+	[SAL_ID] [int] NULL,
+	[EMP_ID] [varchar](100) NULL,
+	[EMP_NAME] [varchar](100) NULL,
+	[GROSSSALARY] [decimal](18, 2) NULL,
+	[NETSALARY] [decimal](18, 2) NULL,
+	[Deductions] [decimal](18, 2) NULL,
+	[MONTH] [int] NULL,
+	[YEAR] [int] NULL,
+	[Attendancecount] [int] NULL,
+	[odcount] [int] NULL,
+	[leavecount] [int] NULL,
+	[holidaycount] [int] NULL,
+	[modifyflg] [varchar](50) NULL,
+	[Payment_By] [varchar](100) NULL,
+	[Working_days] [int] NULL,
+	[Designation] [varchar](10) NULL
+) ON [PRIMARY]
+GO
+
+

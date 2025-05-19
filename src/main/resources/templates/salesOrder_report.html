@@ -1,0 +1,641 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<style>
+.btns {
+	float: right;
+	margin: 5px;
+}
+
+.col-sm-5 {
+	padding-bottom: 15px;
+}
+
+.list-body {
+	padding: 0px;
+}
+
+.error {
+	color: red;
+	padding-left: 10px;
+}
+
+.formline {
+	padding-bottom: 4px;
+}
+
+#finusertb {
+	width: 460px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	border: 2px solid skyblue !important;
+	border-bottom: unset !important;
+	background-color: unset !important;
+	color: black !important;
+	background-color: unset !important;
+}
+
+nav {
+	border-bottom: 2px solid grey;
+}
+</style>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+
+	$(function() {
+
+		var finusers = /*[[${FinUserProfiles}]]*/null;
+
+		console.log(finusers);
+
+		$("#usertable,#finusertb").DataTable({
+			"info" : false,
+			"lengthChange" : false
+
+		});
+
+		$("#expiryDate,#disableDate,#disableTilDate,#passExDate,#effectiveTill")
+				.datepicker({
+					minDate : new Date(),
+					changeMonth : true,
+					changeYear : true,
+					dateFormat : "dd-mm-yy"
+				});
+
+	});
+
+	function getUserlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+		var Callurl = 'UserProfile?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		location.href = Callurl;
+	}
+
+	function finuser(a) {
+
+		$
+				.ajax({
+					type : 'get',
+					url : './Finuserdata?userid=' + a.id,
+
+					success : function(data) {
+
+						/*<![CDATA[*/
+
+						$('.finuserapply').html(data);
+
+						$(
+								"#expiryDate,#disableDate,#disableTilDate,#passExDate,#effectiveTill")
+								.datepicker({
+									changeMonth : true,
+									changeYear : true,
+									dateFormat : "dd-mm-yy"
+								});
+
+						/*]]>*/
+
+						$("#finusers").modal("hide");
+					}
+
+				})
+
+	}
+
+	function home() {
+		location.href = 'Dashboard'
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	function fnClick(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=edit&userid=' + userid
+	}
+
+	function adduser(a) {
+		location.href = 'UserProfile?formmode=add';
+	}
+
+	function list() {
+		location.href = 'UserProfile?formmode=list';
+	}
+
+	function verify(a) {
+
+		var entryuser = a.getAttribute("data-entry_user");
+		var modifyuser = a.getAttribute("data-modify_user");
+
+		var loginuser = /*[[${session.USERID}]]*/null;
+
+		if ((modifyuser != null && modifyuser == loginuser)
+				|| (modifyuser == null && entryuser == loginuser)) {
+
+			$("#alertmsg").text("Same user cannot verify");
+
+			$('#alert').modal("toggle");
+
+		} else {
+
+			if ($("#userProfile").valid()) {
+
+				var userid = a.getAttribute("data-userid");
+				var url = './verifyUser';
+				$("#userProfile").attr('action', url);
+
+				var options = {
+					success : showResponse
+				// post-submit callback 
+				};
+
+				$('#userProfile').ajaxSubmit(options);
+
+				function showResponse(responseText, statusText, xhr, $form) {
+
+					$("#alertmsg").text(responseText);
+
+					$('#alert').modal("toggle");
+
+				}
+				;
+
+			}
+
+		}
+
+	};
+
+	function passwordReset() {
+
+		var url = './passwordReset';
+		$("#userProfile").attr('action', url);
+
+		var options = {
+			success : showResponse
+		// post-submit callback 
+		};
+
+		$('#userProfile').ajaxSubmit(options);
+
+		function showResponse(responseText, statusText, xhr, $form) {
+
+			$("#alertmsg").text(responseText);
+
+			$('#alert').modal("toggle");
+
+		}
+		;
+	};
+
+	function roledesc() {
+
+		var roleid = $("#roleId").find(':selected').val();
+
+		if (roleid == 'ADM') {
+			$("#roleDesc").val("Admin");
+		} else if (roleid == 'ADT') {
+			$("#roleDesc").val("Audit");
+		} else if (roleid == 'GEN') {
+			$("#roleDesc").val("General User");
+		} else if (roleid == 'RECONADM') {
+			$("#roleDesc").val("Admin");
+		} else if (roleid == 'RECONGEN') {
+			$("#roleDesc").val("General User");
+		}
+		$(this).find(':selected').text();
+
+	}
+
+	function submitform() {
+
+		//Creating Validating Rules
+		$('#userProfile').validate({
+			messages : {
+				userid : "Please Provide User Id"
+			}
+		});
+
+		if ($("#userProfile").valid()) {
+
+			var formmode = /*[[${formmode}]]*/null;
+
+			var url = "./createUser?formmode=" + formmode;
+
+			$("#userProfile").attr('action', url);
+
+			var options = {
+				success : showResponse
+			// post-submit callback 
+			};
+
+			$("#userProfile").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+
+				$("#alertmsg").text(responseText);
+
+				$('#alert').modal("toggle");
+
+			}
+			;
+
+		}
+
+	};
+	$(function() {
+
+	/*$("#dailyDate").datepicker({
+		changeMonth : true,
+		changeYear : true,
+		maxDate : new Date(),
+		dateFormat : "dd-M-y",
+        viewMode: "months",
+	});
+	  $("#dailyDate").datepicker("setDate", "1");*/
+
+}); 
+	$(document).ready(function () {
+	    /* This is the function that will get executed after the DOM is fully loaded */
+	    var currentYear = (new Date()).getFullYear(); // Get the current year
+	    var startYear = currentYear - 5; // Start 5 years before the current year
+	    var endYear = currentYear + 5; // End 5 years after the current year
+
+	    for (var year = startYear; year <= endYear; year++) {
+	        if (year === currentYear) {
+	            // Add the current year as selected
+	            $('#year').append('<option selected value="' + year + '">' + year + '</option>');
+	        } else {
+	            // Add other years
+	            $('#year').append('<option value="' + year + '">' + year + '</option>');
+	        }
+	    }
+	});
+
+	/*]]>*/
+</script>
+<script>
+	
+	
+$(document).ready(function () {
+    // Get current date in YYYY-MM-DD format
+    let currentdate = new Date().toISOString().split('T')[0];
+
+    $("#POType").change(function () {
+        let poType = $("#POType").val(); // Store value for efficiency
+
+        if (poType === "Daily") {
+            $("#dailyDate").val(currentdate).prop("disabled", false);
+            $("#from_date, #to_date, #vendorId,#po_id").val('').prop("disabled", true);
+            
+        } else if (poType === "Associate") {
+            $("#dailyDate,#from_date, #to_date").val('').prop("disabled", true);
+            $("#from_date, #to_date, #po_id").prop("disabled", true);
+        } else if (poType === "Individual") {
+            $("#dailyDate, #po_id,#vendorId").val('').prop("disabled", true);
+            $("#from_date, #to_date").prop("disabled", false);
+        } 
+    });
+    
+    
+    $("#vendorId").change(function () {
+        let poType = $("#vendorId").val(); // Store value for efficiency
+
+        if (poType != "") {
+            $("#po_id").val('').prop("disabled", true);
+        } else{
+            $("#po_id").val('').prop("disabled", false);
+        }
+    });
+    
+    $("#po_id").change(function () {
+        let poType = $("#po_id").val(); // Store value for efficiency
+
+        if (poType != "") {
+            $("#vendorId").val('').prop("disabled", true);
+        } else{
+            $("#vendorId").val('').prop("disabled", false);
+        }
+    });
+    
+});
+
+
+</script>
+<script>
+function downloadconsolidate() {
+    //alert("my function SAN");
+    var POType = document.getElementById("POType").value;
+    var vendorId = document.getElementById("vendorId").value;
+    var po_cat = document.getElementById("po_cat").value;
+    var po_id = document.getElementById("po_id").value;
+    var dailyDate = document.getElementById("dailyDate").value;
+    var from_date = document.getElementById("from_date").value;
+    var to_date = document.getElementById("to_date").value;
+    var reportType = document.getElementById("reportType").value;
+
+    if(POType==''){
+        alert("Please select Sale Type...");
+        return;
+    }
+   
+    if(po_cat==''){
+        alert("Please select Sale category...");
+        return;
+    }
+    var vendorParts = vendorId.split("-");
+    var vendorCode = vendorParts[0];  // First part (TSKPV0022)
+    var vendorName = vendorParts[1];  // Second part (MANIKANDAN)
+
+    console.log("Vendor Code:", vendorCode);
+    console.log("Vendor Name:", vendorName);
+    
+    
+    location.href = './Download_WO_Report?' + 
+                    'POType=' + POType + 
+                    '&vendorCode=' + vendorCode + 
+                    '&po_cat=' + po_cat + 
+                    '&po_id=' + po_id + 
+                    '&dailyDate=' + dailyDate + 
+                    '&from_date=' + from_date + 
+                    '&to_date=' + to_date + 
+                    '&reportType=' + reportType;
+}
+
+	function get_poid() {
+	    var f = document.getElementById("po_cat").value; // Use .value
+	    var po_id = document.getElementById("po_id"); // Target dropdown
+
+	    $.ajax({
+	        url: "./get_woid?f=" + f, // Pass the value, not the element
+	        type: "GET",
+	        dataType: "json",
+	        success: function(res) {
+	            // Clear the existing options
+	            po_id.innerHTML = '<option value=""  selected>WO Id</option>';
+
+	            // Populate the dropdown with the response data
+	            res.forEach(function(poId) {
+	                var option = document.createElement("option");
+	                option.value = poId;
+	                option.textContent = poId;
+	                po_id.appendChild(option);
+	            });
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("Error occurred:", status, error);
+	        }
+	    });
+	}
+
+	</script>
+</head>
+<title>ERP</title>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content">
+	<!---------------------User List Ends--------------------------------------------------------->
+	<!---------------------User Edit form Starts-------------------------------------------------->
+		<div class="row">
+			<form action="#" method="post" autocomplete="off" style="width: 100%">
+				<div class="card">
+					<div class="card-header" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<h4>SALE ORDER REPORT</h4>
+					</div>
+					<div class="card-body p-0 mt-3">
+						<div class="panel-heading text-center">
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-right:60px">
+										<label class="">Sale Type </label>
+									</div>
+									<div class="col-sm-3">
+										<select id="POType" class="form-control form-control-sm" required>
+											<option value=""disabled selected>Select</option>
+											<option value="Associate">Associate</option>
+											<option value="Daily" >Daily</option>
+											<option value="Individual" >Individual</option>
+										</select>
+									</div>
+									<div class="col-sm-3"></div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-right:40px">
+										<label class="">Sale Vendor </label>
+									</div>
+									<div class="col-sm-3">
+											<select class="form-control form-control-sm" name="vendorId" id="vendorId"
+												onchange="readMakelistOptions()">
+												<option value="">Select Vendor</option>
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.vendorId +'-'+ woList.vendorName}"
+													th:text="${woList.vendorId +'-'+ woList.vendorName}">
+												</option>
+											</select>
+
+											<datalist id="wolist">
+												<!-- Dynamic Vendor Options -->
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.vendorId +'-'+ woList.vendorName}"
+													th:text="${woList.vendorId +'-'+ woList.vendorName}"></option>
+											</datalist>
+											</div>
+											<div class="col-sm-3"></div>
+										</div>
+									</div>
+							
+							 <div class="form-group ">
+								<div class="row" style="margin-left:-50;">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-right:35px" >
+										<label class="" >Sale Category </label>
+									</div>
+									<div class="col-sm-2">
+										<select name="po_cat" id="po_cat" style="width:160px"
+											class="form-control form-control-sm" onchange="get_poid()">
+											<option value="" selected>Category</option>
+											<option value="wo">Sale Order</option>
+											<option value="invoice">Sale invoice</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<select name="po_id" id="po_id" class="form-control form-control-sm" style="width:160px;margin-left:-70px; ">
+											<option value="" selected>wO Id</option>
+											
+										</select>
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+							</div>
+							
+							
+							
+							
+							<div class="form-group"  th:if="${RoleMenu?.role=='ADM'}">
+								<div class="row">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3"style="padding-left:50px" >
+										<label class="">Daily Report For Date </label>
+									</div>
+									<div class="col-sm-3">
+										<input type="date" id="dailyDate" value=""
+											class="form-control form-control-sm">
+									</div>
+									<div class="col-sm-3"></div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="row" style="margin-left:-50;">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-left:23px" >
+										<label class="" >Date - From & To </label>
+									</div>
+									<div class="col-sm-2">
+										<input type="date" id="from_date"  style="width:160px;"
+											class="form-control form-control-sm">
+									</div>
+									<div class="col-sm-2">
+										<input type="date" id="to_date"  style="width:160px;margin-left:-70px; "
+											class="form-control form-control-sm">
+									</div>
+									<div class="col-sm-2"></div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-right:43px">
+										<label class="">Report Type </label>
+									</div>
+									<div class="col-sm-3">
+										<select name="reportType" id="reportType"
+											class="form-control form-control-sm" required>
+											<option value=""disabled >Select</option>
+											<!-- <option value="Pdf">Pdf</option> -->
+											<option value="Excel" selected>Excel</option>
+										</select>
+									</div>
+									<div class="col-sm-3"></div>
+								</div>
+							</div>
+							<div class="form-group ">
+								<!-- <div class="row">
+									<div class="col-sm-2"></div>
+									<div class="col-sm-3" style="padding-right:65px">
+										<label class="">Report To </label>
+									</div>
+									<div class="col-sm-3" th:if="${RoleMenu?.role=='ADM'}">
+										<select name="arr.reportto" id="reportto" class="form-control form-control-sm" required>
+											<option value="Select"disabled selected>Select</option>
+											<option th:each="user : ${allusers}"
+																th:value="${user.resource_id}"
+																th:text="${user.resource_id+' '+user.resource_name}"></option>
+										</select>
+									</div>
+									<div class="col-sm-3" th:if="${RoleMenu?.role!='ADM'}">
+										<select name="arr.reportto" id="reportto" class="form-control form-control-sm" required>
+											<option  value="Select"disabled selected>Select</option>
+											<option selected
+																th:value="${session.USERID}"
+																th:text="${session.USERID+' '+session.USERNAME}"></option>
+										</select>
+									</div>
+									<div class="col-sm-3"></div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<button type="button" class="btn btn-dark btn-primary" id="btnHome" onclick="home();">Home</button>
+						<!-- <button type="button" class="btn btn-dark btn-primary" id="btngenerate" >Generate</button> -->
+						<button type="button" class="btn btn-dark btn-primary"  onclick="downloadconsolidate();" >Generate</button>
+						<button type="button" class="btn btn-dark btn-primary" id="btnBack"onclick="back();">Back</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	</div>
+	</div>
+	</div>
+</body>
+</html>

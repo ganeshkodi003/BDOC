@@ -1,0 +1,1014 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+#pagination-controls {
+	margin: 20px 0;
+}
+
+.pagination-btn {
+	margin: 0 5px;
+	padding: 5px 10px;
+	border: 1px solid #007bff;
+	background-color: #f8f9fa;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.pagination-btn:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+.debit {
+	color: red;
+	text-align: right;
+}
+
+.credit {
+	color: green;
+	text-align: right;
+}
+
+footer {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 0.8em;
+	color: #666;
+}
+</style>
+</head>
+<script>
+
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+
+
+function back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+
+
+function historys(event) {
+
+    event.preventDefault();
+	location.href = './Inward?formmode=history';
+}
+
+function listt(event) {
+    event.preventDefault();  // Prevent the default form submission behavior
+    location.href = './Inward';
+}
+
+	
+</script>
+
+<script>
+function product_name_typeFunction1() {
+    const productName = document.getElementById('productName').value;  // Get the selected product name
+    const category_name = document.getElementById('category_name');
+    const batchSelect = document.getElementById('batch');  // Select the batch dropdown
+
+    // Make an AJAX request to get batches based on the product name
+    $.ajax({
+        url: "./getStocksss?product_id=" + encodeURIComponent(productName),  // Use product name as the query parameter
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+            let options = '<option>SELECT</option>';  // Default option
+            
+            $.each(res, function(index, data) {
+                const values = Object.values(data);
+                category_name.value = values[1];
+                options += `<option value="${values[0]}">${values[0]}</option>`;  // Assuming first value is batch
+            });
+
+            // Update the batch select field
+            batchSelect.innerHTML = options;
+
+            // Remove duplicate options if any
+            const uniqueOptions = [];
+            batchSelect.querySelectorAll('option').forEach(option => {
+                if (uniqueOptions.includes(option.value)) {
+                    option.remove();
+                } else {
+                    uniqueOptions.push(option.value);
+                }
+            });
+        },
+        error: function() {
+            batchSelect.innerHTML = '<option>Error retrieving batch</option>';  // Handle errors
+        }
+    });
+}
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+function submitgj() {
+
+	 // Validate the category_name fiel
+            // Your validation rules
+            
+      if ($("#Inward_add").valid()) {  
+    
+    // Proceed with the AJAX request if validation passes
+    $.ajax({
+        url: './Addinward',
+        type: 'POST',
+        data: $('#Inward_add').serialize(),
+        success: function (response) {
+        	$("#alertmsg").text(response);
+        	$("#alert").modal("toggle");
+        }
+    });
+    
+}
+}
+
+
+
+</script>
+<script>
+
+// Function to calculate total debit and credit
+function calculateTotals() {
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    // Calculate total for the General Journal table
+    document.querySelectorAll("#dataTables .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Calculate total for the Salaries table
+    document.querySelectorAll("#dataTables_salaries .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_salaries .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Calculate total for the Sales table
+    document.querySelectorAll("#dataTables_sales .debit").forEach((cell) => {
+        totalDebit += parseFloat(cell.innerText) || 0;
+    });
+    document.querySelectorAll("#dataTables_sales .credit").forEach((cell) => {
+        totalCredit += parseFloat(cell.innerText) || 0;
+    });
+
+    // Update the totals in the footer
+    document.getElementById('totalDebit').innerText = '-'+totalDebit.toFixed(2);
+    document.getElementById('totalCredit').innerText = totalCredit.toFixed(2);
+}
+
+// Call the function after page load or when data is modified
+window.onload = calculateTotals;
+</script>
+
+
+
+<script type="text/javascript">
+
+    var pageSize = 10; // Set page size for pagination
+
+    function showPage(tableId, page) {
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+        var pageCount = Math.ceil(rows.length / pageSize);
+        rows.hide();
+        rows.slice((page - 1) * pageSize, page * pageSize).show();
+
+        var $paginationControls = $('#pagination-controls-' + tableId);
+        $paginationControls.empty();
+
+        for (var i = 1; i <= pageCount; i++) {
+            $paginationControls.append('<button class="pagination-btn" onclick="showPage(\'' + tableId + '\', ' + i + ')">' + i + '</button> ');
+        }
+    }
+
+    // Initial Page load for all tables
+    $(document).ready(function () {
+        showPage('dataTables', 1);
+        showPage('dataTables_salaries', 1);
+        showPage('dataTables_sales', 1);
+    });
+
+    // Search Functionality
+    function searchTable(tableId, searchInputId) {
+        var input = $('#' + searchInputId).val().toUpperCase();
+        var $table = $('#' + tableId + ' tbody');
+        var rows = $table.find('tr');
+
+        rows.each(function () {
+            var cells = $(this).find('td');
+            var found = false;
+
+            cells.each(function () {
+                if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                    found = true;
+                    return false; // Exit loop early
+                }
+            });
+
+            if (found) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+    
+    
+    function addg(a){
+    	
+    	var poid = $(a).val();
+    	//alert(poid);
+    	location.href = 'QualityCheck?formmode=QualityCheck&poid='+poid;
+    }
+    
+         
+</script>
+
+
+<script>
+function qualitycheck() {
+    // Debugging alert
+
+
+    // Get the value from the input
+    var poId1 = document.getElementById('poNumber').value;
+
+
+    // Check if poId1 is not empty
+    if (poId1) {
+        console.log("PO ID:", poId1); // Additional logging
+
+        $.ajax({
+            url: './CheckQuality',
+            type: 'POST',
+            data: { poId: poId1 },
+            success: function (response) {
+                // Update the alert message and toggle the modal
+                $("#alertmsg").text(response);
+                $("#alert").modal("toggle");
+            },
+            error: function (xhr, status, error) {
+                // Handle any error responses
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while checking quality.");
+            }
+        });
+    } else {
+        // Alert if the ID is not found
+        alert("ID Not Found");
+    }
+}
+
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the current date in 'YYYY-MM-DD' format
+        const today = new Date().toISOString().split('T')[0];
+        // Set the value of the date input field to today's date
+        document.getElementById('inDate').value = today;
+    });
+</script>
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-10">
+				<div class="container-fluid content"
+					th:if="${formmode}=='QualityCheck'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" id="Inward_add" method="post" class="w-100"
+							autocomplete="off">
+							<div class="card">
+
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; margin-top: 10px; color: black;">
+											QualityCheck
+											<!-- <span th:text="${inquiry.poId}">
+										
+										</span> -->
+										</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<!-- //<button class="btn btn-primary" onclick="addpo(event);" th:if="${formmode=='list'}">Add</button> -->
+										<button class="btn btn-primary" onclick="listt(event);">list</button>
+
+									</div>
+
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											
+											
+											<div class="col-sm-2">
+												<label for="from">Vendor ID</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="VendorId" name="VendorId"
+													th:value="${inquiry.vendorId}" required
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+											
+											<div class="col-sm-1"></div>
+											
+											<div class="col-sm-2">
+												<label for="from">Vendor Name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="vendorname" name="vendorName"
+													th:value="${inquiry.vendorName}" required
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+											
+
+												
+											</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="to">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="Address" name="date" required
+													th:value="${inquiry.Address}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+											
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="fromAcctype">Item</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="item" name="item"
+													th:value="${inquiry.item}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+										
+										<div class="col-sm-2">
+												<label for="to">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="poDate" name="date" required
+													th:value="${#dates.format(inquiry.date, 'yyyy-MM-dd')}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										
+											
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="expirydate">Rate</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="rate" name="rate"
+													th:value="${inquiry.rate}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="productName">Tax</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="tax" name="tax"
+													th:value="${inquiry.tax}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="toAcctype">Qty</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="quantity" name="qty"
+													th:value="${inquiry.qty}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="categoryName">Freight</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="freight" id="freight"
+													th:value="${inquiry.freight}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+											</div>
+											
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="entrydate">HSN/Sac Code</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="hsn_code" name="hsnSacCode"
+													th:value="${inquiry.hsnSacCode}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+											
+										</div>
+										
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="categoryName">Payment type</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="Paymenttype" id="Paymenttype"
+													th:value="${inquiry.Paymenttype}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+											</div>
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="categoryName">Vendor type</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="vendortype" id="vendortype"
+													th:value="${inquiry.vendortype}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+											</div>
+											
+																						
+										</div>
+										
+										
+
+									</div>
+								</div>
+
+
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; margin-top: 10px; color: black;">Gate-entry</h6>
+									</div>
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="inDate">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="date" id="inDate" name="inDate"
+													th:value="${vehicaldetails.inDate}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="gateEntryNumber">Gate Entry Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="gateEntryNumber"
+													name="gateEntryNumber"
+													th:value="${vehicaldetails.gateEntryNumber}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="billNumber">Bill Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="billNumber" name="billNumber"
+													th:value="${vehicaldetails.billNumber}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="invoiceNumber">Invoice number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="invoiceNumber" name="invoiceNumber"
+													th:value="${vehicaldetails.invoiceNumber}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="invoiceDate">Invoice date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="invoiceDate" name="invoiceDate"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly
+													th:value="${#dates.format(vehicaldetails.invoiceDate, 'yyyy-MM-dd')}" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="customerName">customer name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="customerName" name="customerName"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly th:value="${vehicaldetails.customerName}" />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="driverName">Driver Name</label>
+											</div>
+											<div class="col-sm-3">
+
+												<input type="text" name="driverName" id="driverName"
+													readonly class="form-control form-control-sm"
+													autocomplete="off" th:value="${vehicaldetails.driverName}">
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="vehicleNumber">vehicle Number</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="vehicleNumber" id="vehicleNumber"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly th:value="${vehicaldetails.vehicleNumber}">
+											</div>
+										</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="driverName">Purchase Id</label>
+											</div>
+											<div class="col-sm-3">
+
+												<input type="text" name="poNumber" id="poNumber"
+													th:value="${inquiry.poId}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+
+											</div>
+
+										</div>
+
+
+										<!-- Form Footer -->
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; margin-top: 15px; font-size: 23px; font-weight: 600;">
+											<button class="btn btn-xs btn-primary" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button type="button" class="btn btn-xs btn-primary"
+												id="btnSubmit" onclick="qualitycheck();"
+												style="width: 120px">Check</button>
+
+											<button class="btn btn-xs btn-primary" id="btnback"
+												type="button" onclick="back(event)">Back</button>
+										</div>
+									</div>
+						</form>
+					</div>
+				</div>
+
+				<!--poList -->
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<div class="col-sm-12">
+							<form autocomplete="off" id="list_po" method="POST">
+								<div class="card" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="float-left" style="padding: 5px;">
+											<div class="spur-card-title">List Of PO for Quality
+												Check</div>
+										</div>
+										<!-- <div class="float-right" style="padding: 5px;">
+											<button class="btn btn-primary" onclick="historys(event);">history</button>
+
+										</div>
+ -->
+									</div>
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput" placeholder="Search..."
+												onkeyup="searchTable('dataTables', 'searchInput')"
+												class="form-control" style="width: 18%; height: 34px;" />
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">ID</th>
+													<th style="text-align: center;">Vendor Name</th>
+													<th style="text-align: center;">Date</th>
+													<th style="text-align: center;">Item</th>
+													<th style="text-align: center;">Qty</th>
+													<th style="text-align: center;">HSN/Sac Code</th>
+													<th style="text-align: center;">Rate</th>
+													<th style="text-align: center;">Tax</th>
+													<th style="text-align: center;">Freight</th>
+													<th style="text-align: center;">Status</th>
+													<th style="text-align: center;">Action</th>
+
+												</tr>
+											</thead>
+											<tbody id="table-body" th:each="GetList :${poList}">
+												<tr>
+													<td th:text="${GetList.poId}"></td>
+													<td th:text="${GetList.vendorName}"></td>
+													<td th:text="${#dates.format(GetList.date, 'dd-MM-yyyy')}"></td>
+													<td th:text="${GetList.item}"></td>
+													<td th:text="${GetList.qty}"></td>
+													<td th:text="${GetList.hsnSacCode}"></td>
+													<td th:text="${GetList.rate}"></td>
+													<td th:text="${GetList.tax}"></td>
+													<td th:text="${GetList.freight}"></td>
+													<td th:text="${GetList.qcFlg.toString() == 'Y' ? 'Move to GD' : 'Waiting  for Check'}"
+														th:style="${GetList.qcFlg.toString() == 'Y' ? 'color:green;' : 'color:red;'}">
+													</td>
+
+													<td><input type="radio" th:value="${GetList.poId}"
+														onclick="addg(this);"></td>
+												</tr>
+											</tbody>
+
+										</table>
+
+										<div id="pagination-controls-dataTables"></div>
+
+									</div>
+
+
+									<div class=" col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button class="btn btn-xs btn-primary mr-2" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button class="btn btn-xs btn-primary" id="btnback"
+												type="button" onclick="back(event)">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- history list -->
+
+
+				<div class="container-fluid content" th:if="${formmode}=='history'">
+					<div class="row">
+						<div class="col-sm-12">
+							<form autocomplete="off" id="list_histoy" method="POST">
+								<div class="card" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="float-left" style="padding: 5px;">
+											<div class="spur-card-title">history Of Inward</div>
+										</div>
+										<div class="float-right" style="padding: 5px;">
+											<button class="btn btn-primary" onclick="listt(event);">list</button>
+
+										</div>
+
+									</div>
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput" placeholder="Search..."
+												onkeyup="searchTable('dataTables', 'searchInput')"
+												class="form-control" style="width: 18%; height: 34px;" />
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">gateEntry_Id</th>
+													<th style="text-align: center;">InDate</th>
+													<th style="text-align: center;">BillNumber</th>
+													<th style="text-align: center;">InvoiceNumber</th>
+													<th style="text-align: center;">InvoiceDate</th>
+													<th style="text-align: center;">vendorName</th>
+													<th style="text-align: center;">driverName</th>
+													<th style="text-align: center;">vehicleNumber</th>
+													<th style="text-align: center;">Po_id</th>
+
+												</tr>
+											</thead>
+											<tbody id="table-body" th:each="GetList :${gateList}">
+												<tr>
+													<td th:text="${GetList.gateEntryNumberGen}"></td>
+													<td
+														th:text="${#dates.format(GetList.inDate, 'dd-MM-yyyy')}"></td>
+													<td th:text="${GetList.billNumber}"></td>
+													<td th:text="${GetList.invoiceNumber}"></td>
+													<td
+														th:text="${#dates.format(GetList.invoiceDate,'dd-MM-yyyy')}"></td>
+													<td th:text="${GetList.customerName}"></td>
+													<td th:text="${GetList.driverName}"></td>
+													<td th:text="${GetList.vehicleNumber}"></td>
+													<td th:text="${GetList.poNumber}"></td>
+												</tr>
+											</tbody>
+
+										</table>
+
+										<div id="pagination-controls-dataTables"></div>
+
+									</div>
+
+
+									<div class=" col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button class="btn btn-xs btn-primary mr-2" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button class="btn btn-xs btn-primary" id="btnback"
+												type="button" onclick="back(event)">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERPS</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="listt(event);">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+
+</html>

@@ -1,0 +1,33 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[ERP_EXPENSES_MASTER]    Script Date: 4/22/2025 2:11:48 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ERP_EXPENSES_MASTER](
+	[EXP_ID] [varchar](100) NULL,
+	[EXP_CATEGORY] [varchar](100) NULL,
+	[EXP_DATE] [date] NULL,
+	[EXP_ITEM_CODE] [varchar](100) NULL,
+	[EXP_NAME] [varchar](100) NULL,
+	[QTY] [bigint] NULL,
+	[PRICE] [decimal](24, 2) NULL,
+	[AMOUNT] [decimal](24, 2) NULL,
+	[TOTAL_AMOUNT] [decimal](24, 2) NULL,
+	[PAYMENT_TYPE] [varchar](100) NULL,
+	[REFERENCE_NUMBER] [bigint] NULL,
+	[DEL_FLG] [varchar](1) NULL,
+	[MOD_FLG] [varchar](1) NULL,
+	[VERIFY_FLG] [varchar](1) NULL,
+	[ENTITY_FLG] [varchar](1) NULL,
+	[ID] [bigint] NULL,
+	[EXPENSES_type] [varchar](100) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+

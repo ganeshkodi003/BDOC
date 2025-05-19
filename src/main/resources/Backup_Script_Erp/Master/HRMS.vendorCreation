@@ -1,0 +1,72 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[VendorCreation]    Script Date: 12/6/2024 12:33:10 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[VendorCreation](
+	[vendor_id] [varchar](100) NULL,
+	[vendor_name] [varchar](100) NULL,
+	[mobile_no] [varchar](100) NULL,
+	[vendor_type] [varchar](100) NULL,
+	[gst_type] [varchar](100) NULL,
+	[msme_type] [varchar](100) NULL,
+	[msme_number] [varchar](100) NULL,
+	[buyer_address] [varchar](100) NULL,
+	[buyer_state] [varchar](100) NULL,
+	[buyer_district] [varchar](100) NULL,
+	[buyer_pincode] [varchar](100) NULL,
+	[shipping_address] [varchar](100) NULL,
+	[shipping_state] [varchar](100) NULL,
+	[shipping_district] [varchar](100) NULL,
+	[shipping_pincode] [varchar](100) NULL,
+	[bank_acno] [varchar](100) NULL,
+	[bank_name] [varchar](100) NULL,
+	[bank_branch_name] [varchar](100) NULL,
+	[branch_code] [varchar](100) NULL,
+	[bank_accountholdername] [varchar](100) NULL,
+	[ifsc_code] [varchar](100) NULL,
+	[opening_balance] [varchar](100) NULL,
+	[asofdate] [date] NULL,
+	[credit_limit] [varchar](100) NULL,
+	[credit_limitamount] [bigint] NULL,
+	[entry_flg] [varchar](50) NULL,
+	[modify_flg] [varchar](50) NULL,
+	[verify_flg] [varchar](50) NULL,
+	[entry_time] [varchar](100) NULL,
+	[entry_user] [varchar](100) NULL,
+	[gst_No] [varchar](100) NULL,
+	[emailid] [varchar](100) NULL,
+	[del_flg] [varchar](100) NULL,
+	[advanceamount] [decimal](18, 2) NULL,
+	[balanceamount] [decimal](18, 2) NULL,
+	[acc_no] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+
+--sequence
+
+
+USE [HRMS]
+GO
+
+USE [HRMS]
+GO
+
+/****** Object:  Sequence [HRMS].[vendor_Id]    Script Date: 12/6/2024 12:49:03 PM ******/
+CREATE SEQUENCE [HRMS].[vendor_Id] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999
+ CACHE 
+GO
+
+
+

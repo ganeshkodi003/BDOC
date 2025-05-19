@@ -1,0 +1,1781 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	function back(event) {
+
+		event.preventDefault();
+		window.history.back();
+	}
+
+	function submitadd() {
+
+		if ($("#WorkOrder_add").valid()) {
+
+			$.ajax({
+				url : './AddWO',
+				type : 'POST',
+				data : $('#WorkOrder_add').serialize(),
+				success : function(response) {
+					$("#alertmsg").text(response);
+					$("#alert").modal("toggle");
+				}
+			});
+		}
+	}
+</script>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+	
+    const buttons = document.querySelectorAll('.card-header .btn');
+    buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+        	event.preventDefault()
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to the clicked button
+            button.classList.add('active');
+            
+            document.getElementById('generalinformation').style.display = 'none';
+            document.getElementById('bankDetails').style.display = 'none';
+
+            // Show the relevant div based on the button clicked
+            if (button.id === 'generalinfo') {
+                document.getElementById('generalinformation').style.display = 'block';
+            } else if (button.id === 'bankdetailsfortsk') {
+                document.getElementById('bankDetails').style.display = 'block';
+            }
+        });
+    });
+});
+</script>
+
+<script>
+ function tabclicaaak(a){
+	
+	 
+	  if (a.id === 'generalinfo') {
+	        document.getElementById('generalinformation').style.display = 'block';
+	    } else if (a.id === 'bankdetailsfortsk') {
+	        document.getElementById('bankDetails').style.display = 'block';
+	    }
+	 
+ }
+
+</script>
+
+<script>
+function VendorRegistration(){
+  var date=document.getElementById('evaluationDate').value;
+
+	
+	 
+    $.ajax({
+        url: './addVendor',
+        type: 'POST',
+        data: $('#VendorRegistrationadd').serialize(),
+        success: function (response) {
+        	$("#alertmsg").text(response);
+        	$("#alert").modal("toggle");
+        	
+            //alert(response);
+            //location.reload();
+        }
+    });
+	
+	
+}
+
+
+function UpdateVendor(){
+	
+	
+
+	var vendorId=document.getElementById('vendorDocId').value;
+
+	
+	   $.ajax({
+	        url: './UpdateVendor',
+	        type: 'POST',
+	        data: $('#UpdateVendorRegistration').serialize(),
+	        success: function (response) {
+	        	$("#alertmsg").text(response);
+	        	$("#alert").modal("toggle");
+	        	
+	            //alert(response);
+	            //location.reload();
+	        }
+	    });
+	
+	
+}
+
+
+</script>
+
+<script>
+function registrationlist(event){
+	event.preventDefault();
+	
+	location.href='./vendorRegistration?formmode=list';
+}
+
+function newvendor(event){
+	
+event.preventDefault();
+	
+	location.href='./vendorRegistration?formmode=add';
+	
+}
+
+function modifyscreen(a){
+	
+	var venid=a.getAttribute('data-Venid');
+
+	
+	location.href='./vendorRegistration?formmode=Modify' + '&vendorDocId=' +venid;
+}
+
+</script>
+<script>
+
+function searchTable() {
+	// Get the search input value
+	var input = document.getElementById("searchInput");
+	var filter = input.value.toLowerCase(); // Convert to lowercase for case-insensitive search
+	var table = document.getElementById("dataTables");
+	var tbody = table.getElementsByTagName("tbody")[0];
+	var rows = tbody.getElementsByTagName("tr");
+
+	// Loop through all rows and hide those that don't match the search query
+	for (var i = 0; i < rows.length; i++) {
+		var row = rows[i];
+		var cells = row.getElementsByTagName("td");
+		var found = false;
+
+		// Loop through each cell in the row
+		for (var j = 0; j < cells.length; j++) {
+			if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+				found = true; // If a match is found, set found to true
+				break; // No need to check other cells
+			}
+		}
+
+		// Show or hide the row based on the search result
+		if (found) {
+			row.style.display = ""; // Show row
+		} else {
+			row.style.display = "none"; // Hide row
+		}
+	}
+}
+
+
+function Assetsub() {
+    var assetcat = document.getElementById('Assetcategory').value;
+    var assetsubcat = document.getElementById('Assetsubcategory');
+    
+    // Clear existing options
+    assetsubcat.innerHTML = "";
+
+    // Add default placeholder option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select Subcategory";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    assetsubcat.appendChild(defaultOption);
+
+    // Define arrays for asset subcategories
+    var Inventoriesop = ["Raw Material", "Packing Material"];
+    var TangibleAssetsop = ["Land", "Buildings", "Machinery", "Equipment"];
+    var IntangibleAssetsop = ["Trademarks", "Goodwill"];
+    var LongTermInvestments = ["Bonds", "Stocks"];
+
+    // Populate subcategories based on selected category
+    if (assetcat === "Inventories") {
+        Inventoriesop.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetsubcat.appendChild(newOption);
+        });
+    } else if (assetcat === "TangibleAssets") {
+        TangibleAssetsop.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetsubcat.appendChild(newOption);
+        });
+    } else if (assetcat === "IntangibleAssets") {
+        IntangibleAssetsop.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetsubcat.appendChild(newOption);
+        });
+    } else if (assetcat === "Long-TermInvestments") {
+        LongTermInvestments.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetsubcat.appendChild(newOption);
+        });
+    }
+}
+
+
+function Assetop() {
+    var assetvalue = document.getElementById('Assettype').value;
+    var assetoption = document.getElementById('Assetcategory');
+
+    // Clear existing options
+    assetoption.innerHTML = "";
+
+    // Add a default placeholder option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select Category";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    assetoption.appendChild(defaultOption);
+
+    // Define arrays for asset categories
+    var CurrentAssetsop = ["Inventories"];
+    var NonCurrentAssetsop = ["TangibleAssets", "IntangibleAssets", "Long-TermInvestments"];
+
+
+    // Populate options based on the selected asset type
+    if (assetvalue === 'CurrentAssets') {
+        CurrentAssetsop.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetoption.appendChild(newOption);
+        });
+    } else if (assetvalue === 'NonCurrentAssets') {
+        NonCurrentAssetsop.forEach(function(option) {
+            const newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            assetoption.appendChild(newOption);
+        });
+    }
+}
+
+
+</script>
+
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Vendor
+											Registration</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<button class="btn btn-primary"
+											onclick="registrationlist(event);">List</button>
+										<!-- 	<button class="btn btn-primary" onclick="wo">list</button> -->
+
+									</div>
+
+								</div>
+
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline">
+											<div class="col-sm-4">
+												<h4 style="color: blue;">vendor details</h4>
+											</div>
+
+											<div class="col-sm-4">
+												<h4 style="color: blue;">communication Details</h4>
+											</div>
+
+											<div class="col-sm-4">
+												<h4 style="color: blue;">Other Details</h4>
+											</div>
+										</div>
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="VendorName">VendorName*</label> <input
+													type="text" id="vendorName" name="vendorName"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+											<div class="col-sm-2">
+												<label for="from">Vendor Doc Id*</label> <input type="text"
+												title="Automatic Generation"
+													id="vendorDocId" name="vendorDocId" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="vendorgrade">VendorGrade*</label> <select
+													id="vendorGrade" name="vendorGrade"
+													class="form-control form-control-sm">
+													<option value="A">A</option>
+													<option value="B">B</option>
+													<option value="C">C</option>
+												</select>
+											</div>
+
+											<div class="col-sm-2">
+												<label for="vendorstatus">VendorStatus</label> <select
+													id="vendorStatus" name="vendorStatus"
+													class="form-control form-control-sm">
+													<option value="TRAIL">TRAIL</option>
+													<option value="ACTIVE">ACTIVE</option>
+													<option value="INACTIVE">INACTIVE</option>
+													
+
+												</select>
+											</div>
+
+											<div class="col-sm-2">
+												<label for="relatedprice">Relate price List*</label> <select
+													id="relatedPrice" name="relatedPrice"
+													class="form-control form-control-sm">
+													<option value="YES">YES</option>
+													<option value="NO">NO</option>
+
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<label for="deducee">Deductee Type*</label> <select
+													id="deducteeType" name="deducteeType"
+													class="form-control form-control-sm">
+													<option value="COMPANY">COMPANY</option>
+													<option value="INDIVIDUAL">INDIVIDUAL</option>
+												</select>
+											</div>
+										</div>
+
+										<!--  ----2--- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="salutation">salutation*</label> <select
+													id="salutation" name="salutation"
+													class="form-control form-control-sm">
+													<option value="A">Mr.</option>
+													<option value="B">Mrs.</option>
+
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<label for="vendorid">Vendor Id</label> <input type="text"
+													id="vendorId" name="vendorId"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="mobileno">Mobile No</label> <input type="text"
+													id="mobileNo" name="mobileNo"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="email">Email</label> <input type="email"
+													id="email" name="email"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="email">EvalutionDate</label> <input type="date"
+													id="evaluationDate" name="evaluationDate"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											<div class="col-sm-2">
+												<label for="Business">Nature of Business</label> <input
+													type="text" id="natureBusiness" name="natureBusiness"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+										<!--  -----3-- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="from">Vendor Doc Dt* </label> <input type="date"
+													id="vendorDocDate" name="vendorDocDate"
+													class=" form-control form-control-sm" autocomplete="off" />
+											</div>
+											<div class="col-sm-2">
+												<label for="vendortype">Vendor Type</label>
+												<select id="vendorType" name="vendorType" class="form-control form-control-sm">
+												<option value="">select</option>
+												<option value="Rmvendor">Rm Vendor </option>
+												<option value="packingvendor">Packing Vendor </option>
+												<option value="ssvendor">SS Vendor</option>
+												<option value="others">Others</option>
+												</select>	
+											</div>
+
+											<div class="col-sm-2">
+												<label for="phoneNo">phone No</label> <input type="text"
+													id="phoneNo" name="phoneNo"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="fax">Fax</label> <input type="text" id="faxNo"
+													name="faxNo" class="form-control form-control-sm"
+													autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="status">Status*</label> <select id="statusOther"
+													name="statusOther" class="form-control form-control-sm">
+													<option value="suspended">suspended</option>
+
+
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<label for="active">Active?*</label> <select id="active"
+													name="active" class="form-control form-control-sm">
+													<option value="YES">YES</option>
+													<option value="NO">NO</option>
+
+												</select>
+											</div>
+										</div>
+
+										<!--    ---4--- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="accountname"><span style="color: blue;">Account
+														Name</span></label> <input type="text" id="accountName"
+													name="accountName" class="form-control form-control-sm"
+													autocomplete="off" />
+
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="joindate">Joining Date*</label> <input
+													type="date" id="joiningDate" name="joiningDate"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="evaluation">Evaluation</label> <input
+													type="text" id="evaluation" name="evaluation"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="tdsapplicable">TDS Applicable?*</label> <select
+													id="tdsApplicable" name="tdsApplicable"
+													class="form-control form-control-sm">
+													<option value="YES">YES</option>
+													<option value="NO">NO</option>
+
+
+												</select>
+											</div>
+											<div class="col-sm-2">
+												<label for="typyofdeductee">Type of Deductee</label> <input
+													type="text" id="typeOfDeductee" name="typeOfDeductee"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="gpname">Select Group Name</label> <input
+													type="text" id="groupName" name="groupName"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+											
+											
+											
+											
+										</div>
+
+										<!--  ----5--- -->
+
+										<div class="row formline">
+
+											
+
+											<div class="col-sm-2">
+												<label for="gsttype">GST Registration Type</label> <select
+													id="gstRegiType" name="gstRegiType"
+													class="form-control form-control-sm">
+													<option value="REGISTERED">REGISTERED</option>
+													<option value="UN REGISTERED">UN REGISTERED</option>
+
+
+												</select>
+											</div>
+
+											<div class="col-sm-2">
+												<label for="trailmonth">Trail for Month*</label> <input
+													type="text" id="trailMonth" name="trailMonth"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="gstpartytype">GST Party Type</label> <select
+													id="gstPartyType" name="gstPartyType"
+													class="form-control form-control-sm">
+													<option value="DOMESTIC">DOMESTIC</option>
+												</select>
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="to">Asset type</label> 
+												<select id="Assettype"
+													class="form-control form-control-sm" name="Assettype" onchange="Assetop()"
+													required>
+													<option value="">-select-</option>
+													<option VALUE="CurrentAssets">Current Assets</option>
+													<option VALUE="NonCurrentAssets">Non-Current Assets</option>
+												</select>
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="entrydate">Asset Category</label> 
+												<select id="Assetcategory"
+													class="form-control form-control-sm" name="Assetcategory" onchange="Assetsub()"
+													required >
+												<option value="">-select-</option>
+												</select>
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="entrydate">Asset sub Category</label>
+												<select id="Assetsubcategory"
+													class="form-control form-control-sm" name="Assetsubcategory" 
+													required >
+												<option value="">-select-</option>
+												</select>
+												
+											</div>
+											
+											
+
+										</div>
+
+
+
+
+
+									</div>
+
+									<div class="card-header" id="tabs"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="row formline py-1">
+											<button class="btn btn-secondary mx-1 active"
+												id="generalinfo" onclick="tabclick(this);">General
+												Info</button>
+											<button class="btn btn-secondary mx-1" id="bankdetailsfortsk"
+												onclick="tabclick(this);">Bank Details</button>
+											<!-- 	<button class="btn btn-secondary mx-1">Contact Whim</button>
+											<button class="btn btn-secondary mx-1">Address Book</button>
+											<button class="btn btn-secondary mx-1">Event</button>
+											<button class="btn btn-secondary mx-1">Shipment Time</button>
+											<button class="btn btn-secondary mx-1">Branch Wise
+												Price Code</button>
+											<button class="btn btn-secondary mx-1">Related
+												Branch</button> -->
+										</div>
+									</div>
+
+									<div class="card-body">
+										<div class="form-group">
+
+
+											<!-- general info -->
+
+											<div id="generalinformation" style="display: none;">
+
+												<div class="row formline">
+													<div class="col-sm-4">
+														<span style="color: blue;">Address Details</span>
+													</div>
+													<div class="col-sm-4">
+														<span style="color: blue;">Other Details</span>
+													</div>
+
+												</div>
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address1 </label> <input type="text"
+															id="addressDetail1" name="addressDetail1"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">PAN No</label> <input type="text"
+															id="panNo" name="panNo"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">PAN Name*</label> <input
+															type="text" id="panName" name="panName"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address2 </label> <input type="text"
+															id="addressDetail2" name="addressDetail2"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">GST last 3Digit</label> <input
+															type="text" id="gst3Digit" name="gst3Digit"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">GSTIN No</label> <input
+															type="text" id="gstInNo" name="gstInNo"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address3 </label> <input type="text"
+															id="addressDetail3" name="addressDetail3"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">Introduced By</label> <input type="text"
+															id="introducedBy" name="introducedBy"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Range</label> <input type="text"
+															id="rangeOther" name="rangeOther"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-2">
+														<label for="from">city*</label> <input type="text"
+															id="city" name="city"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">State</label> <input type="text"
+															id="stateCity" name="stateCity"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Business Geography</label> <input
+															type="text" id="businessGeography"
+															name="businessGeography"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="vendorgrade">Division</label> <input
+															type="text" id="division" name="division"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-2">
+														<label for="from">Country</label> <input type="text"
+															id="country" name="country"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">StateCode</label> <input type="text"
+															id="stateCode" name="stateCode"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Comissionarate</label> <input
+															type="text" id="commissionerate" name="commissionerate"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="vendorgrade">Service Tax No</label> <input
+															type="text" id="serviceTaxNo" name="serviceTaxNo"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+
+
+											<!-- -----Bank Details---- -->
+
+
+											<div id="bankDetails" style="display: none;">
+
+												<div class="row formline">
+													<div class="col-sm-4">
+														<span style="color: blue;">Bank Details</span>
+													</div>
+
+
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Account No.</label> <input
+															type="text" id="bankAccNo" name="bankAccNo"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Name</label> <input type="text"
+															id="bankName" name="bankName"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Branch Name</label> <input
+															type="text" id="branchName" name="branchName"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Branch Code</label> <input type="text"
+															id="branchCode" name="branchCode"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Account Name</label> <input
+															type="text" id="bankAccName" name="bankAccName"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">IFSC Code</label> <input type="text"
+															id="ifscCode" name="ifscCode"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+
+
+									</div>
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-primary" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-primary"
+											id="btnSubmit" onclick="VendorRegistration();"
+											style="width: 120px">Submit</button>
+
+										<button class="btn btn-xs btn-primary" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+
+				<!-- -----VENDOR LIST----- -->
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Vendor List</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<button class="btn btn-primary" onclick="newvendor(event);">Add</button>
+										<!-- 	<button class="btn btn-primary" onclick="wo">list</button> -->
+
+									</div>
+
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable()" class="form-control" />
+											</div>
+											<!-- Date Search (Commented Out) -->
+											<!-- <div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div> -->
+										</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">Vendor Id</th>
+													<th style="text-align: center;">Vendor Name</th>
+													<th style="text-align: center;">Address</th>
+													<th style="text-align: center;">Mobile No</th>
+													<th style="text-align: center;">Deductee Type</th>
+													<th style="text-align: center;">Vendor Status</th>
+													<th style="text-align: center;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(getvendor)}">
+													<td colspan="7" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="vendor : ${getvendor}">
+													<td th:text="${vendor.vendorDocId}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.vendorName}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.addressDetail1}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.mobileNo}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.deducteeType}"
+														style="text-align: center;"></td>
+													<td th:text="${vendor.statusOther}"
+														style="text-align: center;"></td>
+													<td style="text-align: center;">
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-Venid=${vendor.vendorDocId}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+
+															</div>
+														</div>
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-primary" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-primary" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+
+				<!-- ----------vendor modify----- -->
+
+
+				<div class="container-fluid content" th:if="${formmode}=='Modify'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							th:object="${getvendormodify}" id="UpdateVendorRegistration"
+							autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Vendor
+											Update</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<button class="btn btn-primary"
+											onclick="registrationlist(event);">Regisration List</button>
+										<!-- 	<button class="btn btn-primary" onclick="wo">list</button> -->
+
+									</div>
+
+								</div>
+
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline">
+											<div class="col-sm-4">
+												<h4 style="color: blue;">vendor details</h4>
+											</div>
+
+											<div class="col-sm-4">
+												<h4 style="color: blue;">communication Details</h4>
+											</div>
+
+											<div class="col-sm-4">
+												<h4 style="color: blue;">Other Details</h4>
+											</div>
+										</div>
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="VendorName">VendorName*</label> <input
+													type="text" id="vendorName" name="vendorName"
+													th:value="${getvendormodify.vendorName}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+											<div class="col-sm-2">
+												<label for="from">Vendor Doc Id*</label> <input type="text"
+													id="vendorDocId" name="vendorDocId"
+													th:value="${getvendormodify.vendorDocId}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="vendorGrade">Vendor Grade*</label> <select
+													th:field="*{vendorGrade}" id="vendorGrade"
+													name="vendorGrade" class="form-control form-control-sm">
+													<option value="A"
+														th:selected="${getvendormodify.vendorGrade == 'A'}">A</option>
+													<option value="B"
+														th:selected="${getvendormodify.vendorGrade == 'B'}">B</option>
+													<option value="C"
+														th:selected="${getvendormodify.vendorGrade == 'C'}">C</option>
+												</select>
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="vendorStatus">Vendor Status</label> <select
+													th:field="*{vendorStatus}" id="vendorStatus"
+													name="vendorStatus" class="form-control form-control-sm">
+													<option value="TRAIL"
+														th:selected="${getvendormodify.vendorStatus == 'TRAIL'}">TRAIL</option>
+													<option value="ACTIVE"
+														th:selected="${getvendormodify.vendorStatus == 'ACTIVE'}">ACTIVE</option>
+													<option value="INACTIVE"
+														th:selected="${getvendormodify.vendorStatus == 'INACTIVE'}">INACTIVE</option>
+												</select>
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="relatedPrice">Relate Price List*</label> <select
+													th:field="*{relatedPrice}" id="relatedPrice"
+													name="relatedPrice" class="form-control form-control-sm">
+													<option value="YES"
+														th:selected="${getvendormodify.relatedPrice == 'YES'}">YES</option>
+													<option value="NO"
+														th:selected="${getvendormodify.relatedPrice == 'NO'}">NO</option>
+												</select>
+
+											</div>
+											<div class="col-sm-2">
+												<label for="deducteeType">Deductee Type*</label> <select
+													th:field="*{deducteeType}" id="deducteeType"
+													name="deducteeType" class="form-control form-control-sm">
+													<option value="COMPANY"
+														th:selected="${getvendormodify.deducteeType == 'COMPANY'}">COMPANY</option>
+													<option value="INDIVIDUAL"
+														th:selected="${getvendormodify.deducteeType == 'INDIVIDUAL'}">INDIVIDUAL</option>
+												</select>
+
+											</div>
+										</div>
+
+										<!--  ----2--- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="salutation">Salutation*</label> <select
+													th:field="*{salutation}" id="salutation" name="salutation"
+													class="form-control form-control-sm">
+													<option value="A"
+														th:selected="${getvendormodify.salutation == 'A'}">Mr.</option>
+													<option value="B"
+														th:selected="${getvendormodify.salutation == 'B'}">Mrs.</option>
+												</select>
+
+											</div>
+											<div class="col-sm-2">
+												<label for="vendorid">Vendor Id</label> <input type="text"
+													th:value="${getvendormodify.vendorId}" id="vendorId"
+													name="vendorId" class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="mobileno">Mobile No</label> <input type="text"
+													th:value="${getvendormodify.mobileNo}" id="mobileNo"
+													name="mobileNo" class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="email">Email</label> <input type="email"
+													th:value="${getvendormodify.email}" id="email" name="email"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="email">EvalutionDate</label> <input type="date"
+													id="evaluationDate" name="evaluationDate"
+													th:value="${#dates.format(getvendormodify.evaluationDate, 'yyyy-MM-dd')}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											<div class="col-sm-2">
+												<label for="Business">Nature of Business</label> <input
+													type="text" id="natureBusiness" name="natureBusiness"
+													th:value="${getvendormodify.natureBusiness}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+										<!--  -----3-- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="from">Vendor Doc Dt* </label> <input type="date"
+													id="vendorDocDate" name="vendorDocDate"
+													th:value="${#dates.format(getvendormodify.vendorDocDate, 'yyyy-MM-dd')}"
+													class=" form-control form-control-sm" autocomplete="off" />
+											</div>
+											<div class="col-sm-2">
+												<label for="vendortype">Vendor Type</label>
+												<select id="vendorType" name="vendorType" class="form-control form-control-sm">
+												<option value="">select</option>
+												<option value="Rmvendor" th:selected="${getvendormodify.vendorType}=='Rmvendor'">Rm Vendor </option>
+												<option value="packingvendor" th:selected="${getvendormodify.vendorType}=='packingvendor'">Packing Vendor </option>
+												<option value="ssvendor" th:selected="${getvendormodify.vendorType}=='ssvendor'">SS Vendor</option>
+												<option value="others" th:selected="${getvendormodify.vendorType}=='others'">Others</option>
+												</select>	
+												
+											</div>
+
+											<div class="col-sm-2">
+												<label for="phoneNo">phone No</label> <input type="text"
+													id="phoneNo" name="phoneNo"
+													th:value="${getvendormodify.phoneNo}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="fax">Fax</label> <input type="text" id="faxNo"
+													name="faxNo" class="form-control form-control-sm"
+													th:value="${getvendormodify.faxNo}" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="statusOther">Status*</label> <select
+													th:field="*{statusOther}" id="statusOther"
+													name="statusOther" class="form-control form-control-sm">
+													<option value="suspended"
+														th:selected="${getvendormodify.statusOther == 'suspended'}">suspended</option>
+													<option value="active"
+														th:selected="${getvendormodify.statusOther == 'active'}">active</option>
+													<option value="inactive"
+														th:selected="${getvendormodify.statusOther == 'inactive'}">inactive</option>
+												</select>
+
+											</div>
+											<div class="col-sm-2">
+												<label for="active">Active?*</label> <select
+													th:field="*{active}" id="active" name="active"
+													class="form-control form-control-sm">
+													<option value="YES"
+														th:selected="${getvendormodify.active == 'YES'}">YES</option>
+													<option value="NO"
+														th:selected="${getvendormodify.active == 'NO'}">NO</option>
+												</select>
+
+											</div>
+										</div>
+
+										<!--    ---4--- -->
+
+										<div class="row formline">
+
+											<div class="col-sm-2">
+												<label for="accountname"><span style="color: blue;">Account
+														Name</span></label> <input type="text" id="accountName"
+													name="accountName"
+													th:value="${getvendormodify.accountName}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="joindate">Joining Date*</label> <input
+													type="date" id="joiningDate" name="joiningDate"
+													th:value="${#dates.format(getvendormodify.joiningDate, 'yyyy-MM-dd')}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-2">
+												<label for="evaluation">Evaluation</label> <input
+													type="text" id="evaluation" name="evaluation"
+													th:value="${getvendormodify.evaluation}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="tdsApplicable">TDS Applicable?*</label> <select
+													th:field="*{tdsApplicable}" id="tdsApplicable"
+													name="tdsApplicable" class="form-control form-control-sm">
+													<option value="YES"
+														th:selected="${getvendormodify.tdsApplicable == 'YES'}">YES</option>
+													<option value="NO"
+														th:selected="${getvendormodify.tdsApplicable == 'NO'}">NO</option>
+												</select>
+
+											</div>
+											<div class="col-sm-2">
+												<label for="typyofdeductee">Type of Deductee</label> <input
+													type="text" id="typeOfDeductee" name="typeOfDeductee"
+													th:value="${getvendormodify.typeOfDeductee}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="gpname">Select Group Name</label> <input
+													type="text" id="groupName" name="groupName"
+													th:value="${getvendormodify.groupName}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+											
+										</div>
+
+										<!--  ----5--- -->
+
+										<div class="row formline">
+
+											
+
+
+											<div class="col-sm-2">
+												<label for="gstRegiType">GST Registration Type</label> <select
+													th:field="*{gstRegiType}" id="gstRegiType"
+													name="gstRegiType" class="form-control form-control-sm">
+													<option value="REGISTERED"
+														th:selected="${getvendormodify.gstRegiType == 'REGISTERED'}">REGISTERED</option>
+													<option value="UN REGISTERED"
+														th:selected="${getvendormodify.gstRegiType == 'UN REGISTERED'}">UN
+														REGISTERED</option>
+												</select>
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="trailmonth">Trail for Month*</label> <input
+													type="text" id="trailMonth" name="trailMonth"
+													th:value="${getvendormodify.trailMonth}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-2">
+												<label for="gstPartyType">GST Party Type</label> <select
+													th:field="*{gstPartyType}" id="gstPartyType"
+													name="gstPartyType" class="form-control form-control-sm">
+													<option value="DOMESTIC"
+														th:selected="${getvendormodify.gstPartyType == 'DOMESTIC'}">DOMESTIC</option>
+													<option value="IMPORT"
+														th:selected="${getvendormodify.gstPartyType == 'IMPORT'}">IMPORT</option>
+												</select>
+
+											</div>
+											
+											
+											<div class="col-sm-2">
+												<label for="to">Asset type</label> 
+												<select id="Assettype"
+													class="form-control form-control-sm" name="Assettype" onchange="Assetop()"
+													required>
+													<option th:text="${getvendormodify.Assettype}">-select-</option>
+													<option>Current Assets</option>
+													<option>Non-Current Assets</option>
+												</select>
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="entrydate">Asset Category</label> 
+												<select id="Assetcategory"
+													class="form-control form-control-sm" name="Assetcategory" onchange="Assetsub()"
+													required >
+												<option th:text="${getvendormodify.Assetcategory}">-select-</option>
+												</select>
+											</div>
+											
+											<div class="col-sm-2">
+												<label for="entrydate">Asset sub Category</label>
+												<select id="Assetsubcategory"
+													class="form-control form-control-sm" name="Assetsubcategory" 
+													required >
+												<option th:text="${getvendormodify.Assetsubcategory}">-select-</option>
+												</select>
+												
+											</div>
+											
+
+										</div>
+
+
+
+
+
+									</div>
+
+									<div class="card-header" id="tabs"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="row formline py-1">
+											<button class="btn btn-secondary mx-1 active"
+												id="generalinfo" onclick="tabclick(this);">General
+												Info</button>
+											<button class="btn btn-secondary mx-1" id="bankdetailsfortsk"
+												onclick="tabclick(this);">Bank Details</button>
+											<!-- 	<button class="btn btn-secondary mx-1">Contact Whim</button>
+											<button class="btn btn-secondary mx-1">Address Book</button>
+											<button class="btn btn-secondary mx-1">Event</button>
+											<button class="btn btn-secondary mx-1">Shipment Time</button>
+											<button class="btn btn-secondary mx-1">Branch Wise
+												Price Code</button>
+											<button class="btn btn-secondary mx-1">Related
+												Branch</button> -->
+										</div>
+									</div>
+
+									<div class="card-body">
+										<div class="form-group">
+
+
+											<!-- general info -->
+
+											<div id="generalinformation" style="display: none;">
+
+												<div class="row formline">
+													<div class="col-sm-4">
+														<span style="color: blue;">Address Details</span>
+													</div>
+													<div class="col-sm-4">
+														<span style="color: blue;">Other Details</span>
+													</div>
+
+												</div>
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address1 </label> <input type="text"
+															id="addressDetail1" name="addressDetail1"
+															th:value="${getvendormodify.addressDetail1}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">PAN No</label> <input type="text"
+															id="panNo" name="panNo"
+															th:value="${getvendormodify.panNo}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">PAN Name*</label> <input
+															type="text" id="panName" name="panName"
+															th:value="${getvendormodify.panName}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address2 </label> <input type="text"
+															id="addressDetail2" name="addressDetail2"
+															th:value="${getvendormodify.addressDetail2}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">GST last 3Digit</label> <input
+															type="text" id="gst3Digit" name="gst3Digit"
+															th:value="${getvendormodify.gst3Digit}"
+														
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">GSTIN No</label> <input
+															type="text" id="gstInNo" name="gstInNo"
+															th:value="${getvendormodify.gstInNo}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Address3 </label> <input type="text"
+															id="addressDetail3" name="addressDetail3"
+															
+															th:value="${getvendormodify.addressDetail3}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">Introduced By</label> <input type="text"
+															id="introducedBy" name="introducedBy"
+															th:value="${getvendormodify.introducedBy}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Range</label> <input type="text"
+															id="rangeOther" name="rangeOther"
+															th:value="${getvendormodify.rangeOther}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-2">
+														<label for="from">city*</label> <input type="text"
+															id="city" name="city"
+															th:value="${getvendormodify.city}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">State</label> <input type="text"
+															id="stateCity" name="stateCity"
+															th:value="${getvendormodify.stateCity}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Business Geography</label> <input
+															type="text" id="businessGeography"
+															name="businessGeography"
+															th:value="${getvendormodify.businessGeography}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="vendorgrade">Division</label> <input
+															type="text" id="division" name="division"
+															th:value="${getvendormodify.division}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-2">
+														<label for="from">Country</label> <input type="text"
+															id="country" name="country"
+															th:value="${getvendormodify.country}"
+														
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="from">StateCode</label> <input type="text"
+															id="stateCode" name="stateCode"
+																th:value="${getvendormodify.stateCode}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+
+													<div class="col-sm-2">
+														<label for="vendorgrade">Comissionarate</label> <input
+															type="text" id="commissionerate" name="commissionerate"
+															th:value="${getvendormodify.commissionerate}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+													<div class="col-sm-2">
+														<label for="vendorgrade">Service Tax No</label> <input
+															type="text" id="serviceTaxNo" name="serviceTaxNo"
+															th:value="${getvendormodify.serviceTaxNo}"
+															class="form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+
+
+											<!-- -----Bank Details---- -->
+
+
+											<div id="bankDetails" style="display: none;">
+
+												<div class="row formline">
+													<div class="col-sm-4">
+														<span style="color: blue;">Bank Details</span>
+													</div>
+
+
+												</div>
+
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Account No.</label> <input
+															type="text" id="bankAccNo" name="bankAccNo"
+															th:value="${getvendormodify.bankAccNo}"
+															
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Name</label> <input type="text"
+															id="bankName" name="bankName"
+															th:value="${getvendormodify.bankName}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Branch Name</label> <input
+															type="text" id="branchName" name="branchName"
+															th:value="${getvendormodify.branchName}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Branch Code</label> <input type="text"
+															id="branchCode" name="branchCode"
+																th:value="${getvendormodify.branchCode}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">Bank Account Name</label> <input
+															type="text" id="bankAccName" name="bankAccName"
+															th:value="${getvendormodify.bankAccName}"
+															
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+
+												<div class="row formline">
+
+													<div class="col-sm-4">
+														<label for="from">IFSC Code</label> <input type="text"
+															id="ifscCode" name="ifscCode"
+															th:value="${getvendormodify.ifscCode}"
+															class=" form-control form-control-sm" autocomplete="off" />
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
+
+
+									</div>
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-primary" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-primary"
+											id="btnSubmit" onclick="UpdateVendor();"
+											style="width: 120px">Modify</button>
+
+										<button class="btn btn-xs btn-primary" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERPS</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="registrationlist(event);">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+
+</html>

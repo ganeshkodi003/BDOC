@@ -1,0 +1,1530 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+.black-background {
+    background-color: black;
+    color:white;
+}
+.normal-background {
+    background-color:background-color:#e5e5e5;
+    color:white;
+    border-color:black;
+    color:black; 
+     
+}
+
+</style>
+
+<style>
+
+/* Wrapper for alignment */
+.toggle-wrapper {
+	display: flex;
+	align-items: left;
+	justify-content: left;
+	gap: 10px;
+	margin-top: 20px;
+}
+
+/* Headings */
+.toggle-wrapper h5 {
+	margin: 0;
+	color: #888;
+	font-weight: normal;
+	transition: color 0.3s ease;
+}
+
+.toggle-wrapper h5.active {
+	color: black; /* Highlight active label */
+	font-weight: bold;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 25px;
+}
+
+.toggle-switch input {
+	display: none; /* Hide default checkbox */
+}
+
+.slider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	border-radius: 25px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.slider:before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	background-color: white;
+	border-radius: 50%;
+	bottom: 2.5px;
+	left: 2.5px;
+	transition: transform 0.3s ease;
+}
+
+input:checked+.slider {
+	background-color: #ccc; /* Active color */
+}
+
+input:checked+.slider:before {
+	transform: translateX(25px); /* Move circle to the right */
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+		
+
+</style>
+
+ <style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:5px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+ 
+
+
+
+<script>
+	
+function modifyscreen(a){
+	var Opid=a.getAttribute('data-Opid');
+	location.href='./Inventory_po?formmode=view&Opid='+Opid ;
+}
+	
+function Purchase_Invoice(id){
+//alert(id)
+location.href='./Purchase_Invoice?id=' + id;
+}
+
+
+function back(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+
+
+
+function add(event){
+event.preventDefault();
+	
+	location.href='./purchaseOrder?';
+
+}
+
+function POlist(event){
+	event.preventDefault();
+		location.href='./Inventory_po';
+
+	}
+
+function registrationlist(event){
+	location.href='./VendorCreation';
+}
+</script>
+
+
+
+
+<script>
+
+
+function bankhide(event){
+	event.preventDefault();
+	var id=event.target.id;
+	var RawMaterialtable =document.getElementById('RawMaterialtable');
+	var SemiFinishedgoodstable =document.getElementById('SemiFinishedgoodstable');
+	var Finishedgoodstable =document.getElementById('Finishedgoodstable');
+	var storesandsparestable =document.getElementById('storesandsparestable');
+	var PackingMaterialstable =document.getElementById('PackingMaterialstable');
+	
+	
+	
+	
+	
+	
+	//alert(id)
+	if(id=='RawMaterial'){
+		
+		SemiFinishedgoodstable.style.display ="none";
+		Finishedgoodstable.style.display ="none";
+		storesandsparestable.style.display ="none";
+		PackingMaterialstable.style.display ="none";
+		RawMaterialtable.style.display ="block";
+		document.getElementById('RawMaterial').style.backgroundColor ="black";
+		document.getElementById('RawMaterial').style.color="white";
+		document.getElementById('SemiFinishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('SemiFinishedgoods').style.color="black";
+		document.getElementById('Finishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('Finishedgoods').style.color="black";
+		document.getElementById('storesandspares').style.backgroundColor ="#e5e5e5";
+		document.getElementById('storesandspares').style.color="black";
+		document.getElementById('PackingMaterials').style.backgroundColor ="#e5e5e5";
+		document.getElementById('PackingMaterials').style.color="black";
+		
+		
+	}
+
+	else if(id=='SemiFinishedgoods'){
+		RawMaterialtable.style.display ="none";
+		Finishedgoodstable.style.display ="none";
+		storesandsparestable.style.display ="none";
+		PackingMaterialstable.style.display ="none";
+		SemiFinishedgoodstable.style.display ="block";
+		document.getElementById('SemiFinishedgoods').style.backgroundColor ="black";
+		document.getElementById('SemiFinishedgoods').style.color="white";
+		document.getElementById('RawMaterial').style.backgroundColor ="#e5e5e5";
+		document.getElementById('RawMaterial').style.color="black";
+		document.getElementById('Finishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('Finishedgoods').style.color="black";
+		document.getElementById('storesandspares').style.backgroundColor ="#e5e5e5";
+		document.getElementById('storesandspares').style.color="black";
+		document.getElementById('PackingMaterials').style.backgroundColor ="#e5e5e5";
+		document.getElementById('PackingMaterials').style.color="black";
+		}
+	
+	else if(id=='Finishedgoods'){
+		RawMaterialtable.style.display ="none";
+		Finishedgoodstable.style.display ="block";
+		storesandsparestable.style.display ="none";
+		PackingMaterialstable.style.display ="none";
+		SemiFinishedgoodstable.style.display ="none";
+		document.getElementById('SemiFinishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('SemiFinishedgoods').style.color="black";
+		document.getElementById('RawMaterial').style.backgroundColor ="#e5e5e5";
+		document.getElementById('RawMaterial').style.color="black";
+		document.getElementById('Finishedgoods').style.backgroundColor ="black";
+		document.getElementById('Finishedgoods').style.color="white";
+		document.getElementById('storesandspares').style.backgroundColor ="#e5e5e5";
+		document.getElementById('storesandspares').style.color="black";
+		document.getElementById('PackingMaterials').style.backgroundColor ="#e5e5e5";
+		document.getElementById('PackingMaterials').style.color="black";
+		
+		
+	}
+	else if(id=='storesandspares'){
+		RawMaterialtable.style.display ="none";
+		Finishedgoodstable.style.display ="none";
+		storesandsparestable.style.display ="none";
+		PackingMaterialstable.style.display ="none";
+		storesandsparestable.style.display ="block";
+		document.getElementById('SemiFinishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('SemiFinishedgoods').style.color="black";
+		document.getElementById('RawMaterial').style.backgroundColor ="#e5e5e5";
+		document.getElementById('RawMaterial').style.color="black";
+		document.getElementById('Finishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('Finishedgoods').style.color="black";
+		document.getElementById('PackingMaterials').style.backgroundColor ="#e5e5e5";
+		document.getElementById('PackingMaterials').style.color="black";
+		document.getElementById('storesandspares').style.backgroundColor ="black";
+		document.getElementById('storesandspares').style.color="white";
+	}
+	else if(id=='PackingMaterials'){
+		console.log('Packing Materials button triggered');
+
+		RawMaterialtable.style.display ="none";
+		Finishedgoodstable.style.display ="none";
+		storesandsparestable.style.display ="none";
+		PackingMaterialstable.style.display ="block";
+		SemiFinishedgoodstable.style.display ="none";
+		document.getElementById('SemiFinishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('SemiFinishedgoods').style.color="black";
+		document.getElementById('RawMaterial').style.backgroundColor ="#e5e5e5";
+		document.getElementById('RawMaterial').style.color="black";
+		document.getElementById('Finishedgoods').style.backgroundColor ="#e5e5e5";
+		document.getElementById('Finishedgoods').style.color="black";
+		document.getElementById('storesandspares').style.backgroundColor ="#e5e5e5";
+		document.getElementById('storesandspares').style.color="black";
+		document.getElementById('PackingMaterials').style.backgroundColor ="black";
+		document.getElementById('PackingMaterials').style.color="white";
+	}
+}
+
+//below is for navigating from back button 
+document.addEventListener('DOMContentLoaded', function () {
+	  if (sessionStorage.getItem('backFromPackingMaterials') === 'true') {
+	    // Clear the flag
+	    sessionStorage.removeItem('backFromPackingMaterials');
+	    // Trigger the Packing Materials button programmatically
+	    document.getElementById('PackingMaterials').click();
+	  }
+	  else if(sessionStorage.getItem('backFromFinishedGoods') === 'true') {
+		    // Clear the flag
+		    sessionStorage.removeItem('backFromFinishedGoods');
+		    // Trigger the Packing Materials button programmatically
+		    document.getElementById('Finishedgoods').click();
+		  }
+	});
+	
+document.addEventListener('DOMContentLoaded', () => {
+	  const priceToggle = document.getElementById('priceToggle');
+	  const CurrentStock = document.getElementById('CurrentStock');
+	  const Stockhistory = document.getElementById('Stockhistory');
+	  var CurrentStocktable=document.getElementById('CurrentStocktable');
+	  var Stockhistorytable=document.getElementById('Stockhistorytable');
+	  
+
+	  priceToggle.addEventListener('change', () => {
+	    if (priceToggle.checked) {
+	    	CurrentStock.classList.remove('active');
+	    	Stockhistory.classList.add('active');
+	    	Stockhistorytable.style.display="block";
+		    CurrentStocktable.style.display="none";
+	      
+	    } else {
+	    	
+	    CurrentStock.classList.add('active');
+	    Stockhistory.classList.remove('active');
+	    Stockhistorytable.style.display="none";
+    	CurrentStocktable.style.display="block";
+	    
+	    }
+	  });
+	});
+
+$(document).ready(function () {
+    $('#dataTables1').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers" // Pagination with only numbers
+    });
+    
+});
+
+$(document).ready(function () {
+    $('#dataTables2').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers" // Pagination with only numbers
+    });
+});
+
+$(document).ready(function () {
+    $('#dataTables3').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers" // Pagination with only numbers
+    });
+});
+
+$(document).ready(function () {
+    $('#dataTables4').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers" // Pagination with only numbers
+    });
+});
+
+$(document).ready(function () {
+    $('#dataTables5').DataTable({
+        "pageLength": 20, // Set the number of rows per page
+        "lengthChange": false, // Hide the dropdown for changing rows per page
+        "ordering": false, // Enable column sorting
+        "searching": false, // Disable global search if not required
+        "info": true, // Show table information
+        "pagingType": "simple_numbers" // Pagination with only numbers
+    });
+});
+    
+
+
+function searchTable(tableId, searchInputId) {
+var input = $('#' + searchInputId).val().toUpperCase();
+var $table = $('#' + tableId + ' tbody');
+var rows = $table.find('tr');
+
+rows.each(function () {
+    var cells = $(this).find('td');
+    var found = false;
+
+    cells.each(function () {
+        if ($(this).text().toUpperCase().indexOf(input) > -1) {
+            found = true;
+            return false; // Exit loop early
+        }
+    });
+
+    if (found) {
+        $(this).show();
+    } else {
+        $(this).hide();
+    }
+});
+}
+
+function currentstock(event){
+	event.preventDefault();
+		location.href='./Inventory_po';
+
+	}
+	
+function stockhistory(event){
+	event.preventDefault();
+		location.href='./Inventory_po?formmode=withoutstock';
+
+	}	
+	
+	function viewfg(a){
+		 var item_code=a.getAttribute('data-fgproces');
+		 alert(item_code);
+		 location.href='./Inventory_po?formmode=fglistcode&item_code='+item_code;
+		
+		 
+		 
+	}
+	function viewraw(a){
+		 var item_code=a.getAttribute('data-rawproces');
+		 alert(item_code);
+		 location.href='./Inventory_po?formmode=rawlistcode&item_code='+item_code;		 
+	}
+	
+	function viewpm(a){
+		 var item_code=a.getAttribute('data-pmproces');
+		 alert(item_code);
+		 location.href='./Inventory_po?formmode=pmcode&item_code='+item_code;		 
+	}
+	
+
+</script>
+
+
+<script>
+
+function home(event) {
+	event.preventDefault();
+	location.href = 'Dashboard';
+}
+function back(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+</script>
+<script>
+function back2(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+</script>
+
+
+    <script type="text/javascript">
+function select_branch_one() {
+    const branchId = document.getElementById('branchId').value;
+
+    $.ajax({
+        url: './getbranch_one?branchId=' + branchId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            console.log("API Response:", response); // Debugging
+
+            const tableBody_one = document.getElementById('dataTablesBody_one');
+            const tableBody_two = document.getElementById('dataTablesBody_two');
+            const tableBody_three = document.getElementById('dataTablesBody_three');
+            const tableBody_four = document.getElementById('dataTablesBody_four');
+            const tableBody_five = document.getElementById('dataTablesBody_five');
+
+            // Clear existing data
+            tableBody_one.innerHTML = '';
+            tableBody_two.innerHTML = '';
+            tableBody_three.innerHTML = '';
+            tableBody_four.innerHTML = '';
+            tableBody_five.innerHTML = '';
+
+            // Table 1: Raw Material
+            if (!response.rawcurrent || response.rawcurrent.length === 0) {
+                tableBody_one.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.rawcurrent.forEach(item => {
+                    let row = `<tr>
+                        <td style="text-align: center;">${item[0]}</td>
+                        <td style="text-align: left;">${item[1]}</td>
+                        <td style="text-align: left;">${item[2]}</td>
+                        <td style="text-align: right;">${item[3]}</td>
+                        <td style="text-align: center;"><input type="radio" data-rawproces="${item[0]}" onclick="viewraw(this);"></td>
+                    </tr>`;
+                    tableBody_one.innerHTML += row;
+                });
+            }
+
+            // Table 2: Semi-Finished Goods
+            if (!response.processlist || response.processlist.length === 0) {
+                tableBody_two.innerHTML = `<tr><td colspan="9" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.processlist.forEach(item => {
+                    let kilograms = parseFloat(item.kilograms) || 0;
+                    let returnQuantity = parseFloat(item.returnquantity) || 0;
+                    let usingQuantity = parseFloat(item.useingquantity) || 0;
+
+                    let row = `<tr>
+                        <td style="text-align: center;">${item.processId}</td>
+                        <td style="text-align: left;">${item.makingproductName}</td>
+                        <td style="text-align: right;">${kilograms.toFixed(3)}</td>
+                        <td style="text-align: left;">${item.units}</td>
+                        <td style="text-align: right;">${returnQuantity.toFixed(3)}</td>
+                        <td style="text-align: right;">${usingQuantity.toFixed(3)}</td>
+                        <td style="text-align: left;">${item.returnquantityunit}</td>
+                        <td style="text-align: left;">${new Date(item.processStartDate).toLocaleDateString()}</td>
+                        <td style="text-align: left;">${new Date(item.processEndDate).toLocaleDateString()}</td>
+                    </tr>`;
+                    tableBody_two.innerHTML += row;
+                });
+            }
+
+            // Table 3: Finished Goods
+            if (!response.fglist || response.fglist.length === 0) {
+                tableBody_three.innerHTML = `<tr><td colspan="4" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.fglist.forEach(item => {
+                    let row = `<tr>
+                        <td style="text-align: left;">${item[0]}</td>
+                        <td style="text-align: left;">${item[1]}</td>
+                        <td style="text-align: right;">${item[2]}</td>
+                        <td style="text-align: center;"><input type="radio" data-fgproces="${item[0]}" onclick="viewfg(this);"></td>
+                    </tr>`;
+                    tableBody_three.innerHTML += row;
+                });
+            }
+
+            // Table 4: Packing Materials
+            if (!response.getPackingMaterials || response.getPackingMaterials.length === 0) {
+                tableBody_four.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.getPackingMaterials.forEach(item => {
+                    let quantity = parseFloat(item[3]) || 0;
+                    let row = `<tr>
+                        <td style="text-align: left;">${item[0]}</td>
+                        <td style="text-align: left;">${item[1]}</td>
+                        <td style="text-align: left;">${item[2]}</td>
+                        <td style="text-align: right;">${quantity.toFixed(2)}</td>
+                        <td style="text-align: center;"><input type="radio" data-pmproces="${item[0]}" onclick="viewpm(this);"></td>
+                    </tr>`;
+                    tableBody_four.innerHTML += row;
+                });
+            }
+
+            // Table 5: Stores and Spares
+            if (!response.storesandspares || response.storesandspares.length === 0) {
+                tableBody_five.innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.storesandspares.forEach(item => {
+                    let usingQty = parseFloat(item.useingqty) || 0;
+                    let row = `<tr>
+                        <td style="text-align: center;">${item.itemcode}</td>
+                        <td style="text-align: center;">${item.item}</td>
+                        <td style="text-align: center;">${item.batch}</td>
+                        <td style="text-align: center;">${item.unit}</td>
+                        <td style="text-align: right;">${usingQty.toFixed(2)}</td>
+                    </tr>`;
+                    tableBody_five.innerHTML += row;
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", error);
+            alert("Error fetching data: " + error);
+        }
+    });
+}
+</script>
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+
+
+				<!-------------------------------------------- List start ----------------------------------------------->
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+							<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div th:if="${title=='currentlist'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<h2><i class="fas fa-box mr-1"></i> Current Stock- List</h2>
+									</div>
+									<div class="d-flex align-items-center gap-4">
+										<!-- Branch Selection -->
+										<select class="btn btn-light btn-sm"
+											onchange="select_branch_one()"
+											style="color: black; font-weight: bold; border: 2px solid black; height: 32px; transform: translateX(-10px);"
+											id="branchId" name="branchId">
+											<option value="">Select Branch</option>
+											<!-- Populate options dynamically using Thymeleaf -->
+											<option th:each="branchId : ${branchIds}"
+												th:value="${branchId}" th:text="${branchId}"></option>
+										</select>
+									</div>
+
+								</div>
+								
+								<div th:if="${title=='historylist'}"
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-history mr-1"></i>Stock History- List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="currentstock(event);">
+											<i class="fas fa-box mr-1"></i>current stock
+										</button>
+									</div>
+									
+								</div>
+
+								<div class="card-body">
+								<div class="card-header" id="tabs" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+			<div class="row formline py-1 ml-1">
+				<button class="btn btn-secondary mx-1" style="background-color:black; border-color:black; color:white" id="RawMaterial" onclick="bankhide(event);">Raw Material</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="SemiFinishedgoods" onclick="bankhide(event);">Semi Finished goods</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="Finishedgoods" onclick="bankhide(event);">Finished goods</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="PackingMaterials" onclick="bankhide(event);">Packing Materials</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="storesandspares" onclick="bankhide(event);">Stores And Spares</button>							
+			</div>
+		</div>
+									<div class="table-responsive"
+										style="overflow-y: auto;overflow-x: hidden; max-height: 85vh;" >
+									<div class="card-body" style="padding: 1rem;" id="RawMaterialtable">
+										
+										<!-- Table for displaying current stock -->
+										<div id="CurrentStocktable">
+										
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center mt-3" >
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+											onkeyup="searchTable('dataTables1', 'searchInput')"  class="form-control" />
+											</div>
+											</div>
+						<!-- table 1 -->
+											
+										<table id="dataTables1" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;"><b>Item code</b></th>
+													<th style="text-align: left;"><b>Item Name</b></th>
+													<th style="text-align: left;"><b>Unit</b></th>
+													<th style="text-align: right;"><b>Quantity</b></th>
+													<th style="text-align: center;"><b>Action</b></th>
+													
+												</tr>
+											</thead>
+											<tbody id="dataTablesBody_one">
+												<tr th:if="${#lists.isEmpty(rawcurrent)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${rawcurrent}">
+													<td th:text="${item[0]}"
+														style="text-align: center;"></td>
+													<td th:text="${item[1]}"
+														style="text-align: left;"></td>
+													<td th:text="${item[2]}"
+														style="text-align: left;"></td>
+													<td th:text="${item[3]}"
+														style="text-align: right;"></td>
+														
+													<td style="text-align: center;"><input type="radio" th:attr="data-rawproces=${item[0]}" onclick="viewraw(this);"></td>	
+														
+													
+													
+
+												</tr>
+											</tbody>
+										</table>
+
+										
+									</div>
+									</div>
+																	
+									<!-- table 2 -->
+									<div class="card-body" style="padding: 1rem;display:none;" id="SemiFinishedgoodstable">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput2" placeholder="Search..."
+											onkeyup="searchTable('dataTables2', 'searchInput2')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables2" class="table table-striped">
+											<thead>
+												<tr>
+																	<th style="text-align: center;"><b>Process Id</b></th>
+																	<th style="text-align: left;"><b>Name</b></th>
+																	<th style="text-align: right;"><b>Required Qty</b></th>
+																	<th style="text-align: left;"><b>Required Unit</b></th>
+																	<th style="text-align: right;"><b>Return Qty</b></th>
+																	<th style="text-align: right;"><b>Remaining Qty</b></th>
+																	<th style="text-align: left;"><b>Return Unit</b></th>
+																	<th style="text-align: left;"><b>Starting Date</b></th>
+																	<th style="text-align: left;"><b>Ending Date</b></th>
+																	
+																	
+																
+
+																</tr>
+															</thead>
+															<tbody id="dataTablesBody_two">
+																	<tr th:if="${#lists.isEmpty(processlist)}">
+																		<td colspan="8" style="text-align: center; color: red;">No records found.</td>
+																	</tr>
+																<tr th:each="list : ${processlist}">
+													
+																	<td style="text-align: center;" th:text="${list.processId}"></td>
+																	<td style="text-align: left;" th:text="${list.makingproductName}"></td>
+																	<td style="text-align: right;" th:text="${#numbers.formatDecimal(list.kilograms,1,3)}"></td>
+																	<td style="text-align: left;" th:text="${list.units}"></td>
+																	<td style="text-align: right;" th:text="${#numbers.formatDecimal(list.returnquantity,1,3)}"></td>
+																	<td style="text-align: right;" th:text="${#numbers.formatDecimal(list.useingquantity,1,3)}"></td>
+																	<td style="text-align: left;" th:text="${list.returnquantityunit}"></td>
+																	<td style="text-align: left;" th:text="${#dates.format(list.processStartDate,'dd-MM-yyyy')}"></td>
+																	<td style="text-align: left;" th:text="${#dates.format(list.processEndDate,'dd-MM-yyyy')}"></td>
+																</tr>
+												
+											</tbody>
+											
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+									
+									
+									
+									<!-- table 3 -->
+						<div class="card-body" style="padding: 1rem;display:none" id='Finishedgoodstable'>
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput3" placeholder="Search..."
+											onkeyup="searchTable('dataTables3', 'searchInput3')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables3" class="table table-striped">
+												<thead >
+													<tr >
+														<th style="text-align: left; font-weight: bold;">Item Codes</th>
+														<th style="text-align: left; font-weight: bold;">Item Name</th>
+														<th style="text-align: right; font-weight: bold;">Quantity</th>
+														<th style="text-align: center; font-weight: bold;">Action</th>
+														
+													</tr>
+												</thead>
+											<tbody id="dataTablesBody_three">
+												<tr th:if="${#lists.isEmpty(fglist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="fglists : ${fglist}">
+													
+													<td style="text-align: left;" th:text="${fglists[0]}">SFG001</td>
+													<td style="text-align: left;" th:text="${fglists[1]}"></td>
+													<td style="text-align: right;" th:text="${fglists[2]}"></td>
+													<td style="text-align: center;"><input type="radio" th:attr="data-fgproces=${fglists[0]}" onclick="viewfg(this);"></td>
+																	
+												</tr>
+											</tbody>
+										
+										
+										
+										</table>
+										
+										
+										
+
+										<div id="pagination-controls"></div>
+									</div>			
+									
+																	
+											<!-- table 4 -->
+									
+									<div class="card-body" style="padding: 1rem; display:none" id="PackingMaterialstable">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput5" placeholder="Search..."
+											onkeyup="searchTable('dataTables5', 'searchInput5')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables5" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left;font-weight: bold;">Item code</th>
+													<th style="text-align: left;font-weight: bold;">Item Name</th>
+													<th style="text-align: left;font-weight: bold;">Unit</th>
+													<th style="text-align: right;font-weight: bold;">Quantity</th>
+													<th style="text-align: center;font-weight: bold;">Action</th>
+													
+												</tr>
+											</thead>
+											<tbody id="dataTablesBody_four">
+												<tr th:if="${#lists.isEmpty(getPackingMaterials)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${getPackingMaterials}">
+													<td th:text="${item[0]}"
+														style="text-align: left;"></td>
+													<td th:text="${item[1]}"
+														style="text-align: left;"></td>
+													<td th:text="${item[2]}"
+														style="text-align: left;"></td>
+													<td th:text="${#numbers.formatDecimal(item[3], 1, 2, 'POINT')}" style="text-align: right;"></td>
+
+														
+													<td style="text-align: center;"><input type="radio" th:attr="data-pmproces=${item[0]}" onclick="viewpm(this);"></td>	
+														
+													
+													
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+													
+									
+									<!-- table 5 -->
+									<div class="card-body" style="padding: 1rem; display:none" id="storesandsparestable">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput4" placeholder="Search..."
+											onkeyup="searchTable('dataTables4', 'searchInput4')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables4" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;font-weight: bold;">Item code</th>
+													<th style="text-align: center;font-weight: bold;">Item Name</th>
+													<th style="text-align: center;font-weight: bold;">Batch</th>
+													<th style="text-align: center;font-weight: bold;">Unit</th>
+													<th style="text-align: right;font-weight: bold;">Quantity</th>
+												</tr>
+											</thead>
+											<tbody id="dataTablesBody_five">
+												<tr th:if="${#lists.isEmpty(storesandspares)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${storesandspares}">
+													<td th:text="${item.itemcode}"
+														style="text-align: center;"></td>
+													<td th:text="${item.item}"
+														style="text-align: center;"></td>
+													<td th:text="${item.batch}"
+														style="text-align: center;"></td>
+													<td th:text="${item.unit}"
+														style="text-align: center;"></td>
+													<td th:text="${#numbers.formatDecimal(item.useingqty,2,2)}"
+														style="text-align: right;"></td>
+													
+
+												</tr>
+											</tbody>
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>
+									
+								</div>
+								</div>	
+	
+									<!-- table 3 -->
+									<!-- 	<div class="card-body" style="padding: 1rem;display:none" id='Finishedgoodstable'>
+										Search Input
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput3" placeholder="Search..."
+											onkeyup="searchTable('dataTables3', 'searchInput3')"  class="form-control" />
+											</div>
+											</div>
+
+										Table for displaying journal entries
+										<table id="dataTables3" class="table table-striped">
+												<thead>
+													<tr>
+														<th style="text-align: center;font-weight: bold;">Item Code</th>
+														<th style="text-align: center;font-weight: bold;">Item Name</th>
+														<th style="text-align: right;font-weight: bold;">Qty</th>
+														<th style="text-align: center;font-weight: bold;">Action</th>
+														
+													</tr>
+												</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(fglist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="fglists : ${fglist}">
+													
+													<td style="text-align: center;" th:text="${fglists[0]}">SFG001</td>
+													<td style="text-align: center;" th:text="${fglists[1]}"></td>
+													<td style="text-align: right;" th:text="${fglists[2]}"></td>
+													<td style="text-align: center;"><input type="radio" th:attr="data-fgproces=${fglists[0]}" onclick="viewfg(this);"></td>
+																	
+												</tr>
+											</tbody>
+										
+										
+										
+										</table>
+										
+										
+										
+
+										<div id="pagination-controls"></div>
+									</div>
+									 -->
+									
+								
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-- viewlist -->
+				<div class="container-fluid content" th:if="${formmode}=='fglist'">
+					<div class="card ">
+					
+						
+						<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i>Finished Goods List
+									</div>
+									
+								</div>
+		
+					<br>
+					<!-- Table -->
+					<div class="row">
+						<div class="col-lg-12">
+							
+
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-12"></div>
+									</div>
+									<!-- Table -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											
+												<form method="post" autocomplete="off" id="addStockHistory"
+													th:fragment="finuserapply">
+
+													<div class="card-body" style="padding: 1rem;" >
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput3" placeholder="Search..."
+											onkeyup="searchTable('dataTables3', 'searchInput3')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables3" class="table table-striped">
+												<thead>
+													<tr>
+														<th style="text-align: center;font-weight: bold;">Fg Id</th>
+														<th style="text-align: center;font-weight: bold;">Item Name</th>
+														<th style="text-align: center;font-weight: bold;">Base unit</th>
+														<th style="text-align: right;font-weight: bold;">Qty</th>
+														<th style="text-align: center;font-weight: bold;">Date</th>
+													</tr>
+												</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(fglist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="list : ${fglist}">
+													
+													<td style="text-align: center;" th:text="${list.fgId}">SFG001</td>
+													<td style="text-align: center;" th:text="${list.mfgProductName}"></td>
+													<td style="text-align: center;" th:text="${list.baseUnit}"></td>
+													<td style="text-align: right;" th:text="${list.usingQuantity}"></td>
+													<td style="text-align: center;" th:text="${#dates.format(list.createDate,'dd-MM-yyyy')}"></td>
+																	
+												</tr>
+											</tbody>
+										
+										
+										
+										</table>
+
+										<div id="pagination-controls"></div>
+									</div>				
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+
+										<button class="btn btn-xs btn-dark" type="button" id="btnBack" onclick="back2(event);">Back</button>
+								<script>
+function back2(event) {
+  // Store a flag to indicate "Back" was clicked
+  sessionStorage.setItem('backFromFinishedGoods', 'true');
+  // Redirect to Inventory_po
+  location.href = './Inventory_po';
+}
+
+</script>
+								</div> 
+								</div>
+
+								
+								
+								
+								</div>
+							</div>
+						</div>
+						
+						<!-- raw -->
+						<div class="container-fluid content" th:if="${formmode}=='rawlistcode'">
+					<div class="card ">
+					
+						
+						<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<h2><i class="fas fa-list mr-1"></i>Raw Materials-List</h2>
+									</div>
+									
+								</div>
+		
+					<br>
+					<!-- Table -->
+					<div class="row">
+						<div class="col-lg-12">
+							
+
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-12"></div>
+									</div>
+									<!-- Table -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											
+												<form method="post" autocomplete="off" id="addStockHistory"
+													th:fragment="finuserapply">
+
+													<div class="card-body" style="padding: 1rem;" >
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput3" placeholder="Search..."
+											onkeyup="searchTable('dataTables3', 'searchInput3')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables1" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;font-weight: bold;">Item code</th>
+													<th style="text-align: center;font-weight: bold;">Item Name</th>
+													<th style="text-align: center;font-weight: bold;">Po Id</th>
+													<th style="text-align: center;font-weight: bold;">Batch</th>
+													<th style="text-align: right;font-weight: bold;">Quantity</th>
+													<th style="text-align: center;font-weight: bold;">Unit</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(rawcurrent)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${rawcurrent}">
+													<td th:text="${item.itemcode}"
+														style="text-align: center;"></td>
+													<td th:text="${item.item}"
+														style="text-align: center;"></td>
+													<td th:text="${item.poId}"
+														style="text-align: center;"></td>	
+													<td th:text="${item.batch}"
+														style="text-align: center;"></td>
+													<td th:text="${item.useingqty}"
+														style="text-align: right;"></td>	
+													<td th:text="${item.unit}"
+														style="text-align: center;"></td>
+													
+
+												</tr>
+											</tbody>
+										</table>
+										<div id="pagination-controls"></div>
+									</div>				
+												</form>
+											</div>
+										</div>
+									</div>
+									
+									<div class="card-footer text-center" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+
+										<button class="btn btn-xs btn-dark" type="button" id="btnBack" onclick="back2(event);">Back</button>
+								
+								</div>
+								</div>
+
+								
+								
+								
+								</div>
+							</div>
+						</div>
+						
+						<!-- pm -->
+						<div class="container-fluid content" th:if="${formmode}=='pmlistcode'">
+					<div class="card ">
+					
+						
+						<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i>Packing Materials-List
+									</div>
+									
+								</div>
+		
+					<br>
+					<!-- Table -->
+					<div class="row">
+						<div class="col-lg-12">
+							
+
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-lg-12"></div>
+									</div>
+									<!-- Table -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											
+												<form method="post" autocomplete="off" id="addStockHistory"
+													th:fragment="finuserapply">
+
+													<div class="card-body" style="padding: 1rem;" >
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput3" placeholder="Search..."
+											onkeyup="searchTable('dataTables3', 'searchInput3')"  class="form-control" />
+											</div>
+											</div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables1" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;font-weight: bold;">Item code</th>
+													<th style="text-align: center;font-weight: bold;">Item Name</th>
+													<th style="text-align: center;font-weight: bold;">Po Id</th>
+													<th style="text-align: center;font-weight: bold;">Batch</th>
+													<th style="text-align: right;font-weight: bold;">Quantity</th>
+													<th style="text-align: center;font-weight: bold;">Unit</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(rawcurrent)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="item : ${rawcurrent}">
+													<td th:text="${item.itemcode}"
+														style="text-align: center;"></td>
+													<td th:text="${item.item}"
+														style="text-align: center;"></td>
+													<td th:text="${item.poId}"
+														style="text-align: center;"></td>	
+													<td th:text="${item.batch}"
+														style="text-align: center;"></td>
+													<td th:text="${item.useingqty}"
+														style="text-align: right;"></td>	
+													<td th:text="${item.unit}"
+														style="text-align: center;"></td>
+													
+													
+
+												</tr>
+											</tbody>
+										</table>
+										<div id="pagination-controls"></div>
+									</div>				
+												</form>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="home(event)">Home</button>
+
+										<button class="btn btn-xs btn-dark" type="button" id="PackingMaterials" onclick="back3(event);">Back</button>
+								<script>
+function back3(event) {
+  // Store a flag to indicate "Back" was clicked
+  sessionStorage.setItem('backFromPackingMaterials', 'true');
+  // Redirect to Inventory_po
+  location.href = './Inventory_po';
+}
+
+</script>
+								</div>
+								</div>
+
+								
+								
+								
+								</div>
+							</div>
+						</div>
+				
+			
+				
+				
+				
+				
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[FINISHED_GOODS_TABLE]    Script Date: 22-04-2025 12:01:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FINISHED_GOODS_TABLE](
+	[FG_ID] [varchar](100) NULL,
+	[RETURN_QUANTITY] [decimal](24, 2) NULL,
+	[RETURN_UNIT] [varchar](100) NULL,
+	[REMAINING_QUANTITY] [decimal](24, 2) NULL,
+	[ITEM_CODE] [varchar](100) NULL,
+	[ITEM_NAME] [varchar](100) NULL,
+	[CATEGORY] [varchar](100) NULL,
+	[BASE_UNIT] [varchar](100) NULL,
+	[BATCH] [varchar](100) NULL,
+	[QTY] [decimal](18, 2) NULL,
+	[USING_QUANTITY] [decimal](24, 2) NULL,
+	[REQ_QTY] [decimal](24, 2) NULL,
+	[MFG_PRODUCT_NAME] [varchar](100) NULL,
+	[DEL_FLG] [varchar](50) NULL,
+	[MOD_FLG] [varchar](50) NULL,
+	[create_date] [date] NULL,
+	[exp_date] [date] NULL,
+	[packingmaterialprice] [decimal](18, 3) NULL,
+	[totalprice] [decimal](18, 3) NULL,
+	[FG_itemcode] [varchar](100) NULL,
+	[FG_name] [varchar](100) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+

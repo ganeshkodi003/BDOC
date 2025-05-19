@@ -1,0 +1,1717 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+
+
+<style>
+.pat {
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+}
+</style>
+
+
+
+<style type="text/css">
+.navbar {
+	margin-left: -5px;
+	position: fixed; /* Keep it fixed */
+	top: 0;
+	width: 100%;
+	z-index: 1000; /* Ensure it's above other elements */
+}
+
+.content {
+	margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+
+.container-fluid {
+	width: 100%;
+	padding-right: 0px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -8px;
+	margin-left: -22px;
+}
+</style>
+
+
+<style>
+#paySlipContent {
+	width: 100%;
+	padding: 20px;
+	font-family: arial;
+}
+
+table {
+	page-break-inside: auto;
+}
+
+tr {
+	page-break-inside: avoid;
+	page-break-after: auto;
+}
+
+thead {
+	display: table-header-group;
+}
+
+tfoot {
+	display: table-footer-group;
+}
+</style>
+
+<style>
+#paySlipWrapper table {
+	width: 100%;
+	table-layout: fixed;
+	word-wrap: break-word;
+	font-size: 12px;
+}
+
+#paySlipWrapper td, #paySlipWrapper th {
+	padding: 10px;
+	font-size: 12px;
+}
+
+#paySlipWrapper img {
+	max-width: 100%;
+	height: auto;
+}
+</style>
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+<script th:inline="javascript">
+	
+</script>
+<script>
+	// JavaScript function to switch between tabs
+
+	function home() {
+
+		location.href = 'Dashboard';
+	}
+
+	function Back(event) {
+		event.preventDefault();
+		window.history.back();
+	}
+
+	function adduser(a) {
+
+		location.href = 'paystructures?formmode=add';
+
+	}
+	function back() {
+		history.back();
+	}
+
+	function back1() {
+		location.reload();
+	}
+
+	function modifyuser(a) {
+		var emp_no = a.getAttribute("data-attr");
+		alert(emp_no);
+		var salaryMonth = a.getAttribute("data-attr2");
+		//alert(salaryMonth);
+		var empname = a.getAttribute("data-attr3");
+		//alert(empname);
+		 
+		 
+		location.href = 'paystructures?formmode=edit&emp_no='  + emp_no + '&salaryMonth=' + salaryMonth + '&empname=' + empname;
+
+	}
+	
+	function verifyuser(a) {
+		var emp_no = a.getAttribute("data-attr");
+		alert(emp_no);
+		var salaryMonth = a.getAttribute("data-attr2");
+		//alert(salaryMonth);
+		var empname = a.getAttribute("data-attr3");
+		//alert(empname);
+		 
+		 
+		location.href = 'paystructures?formmode=verify&emp_no='  + emp_no+ '&salaryMonth=' + salaryMonth + '&empname=' + empname;
+
+	}
+	function enquiryuser(a) {
+		var emp_no = a.getAttribute("data-attr");
+		alert(emp_no);
+		var salaryMonth = a.getAttribute("data-attr2");
+		//alert(salaryMonth);
+		var empname = a.getAttribute("data-attr3");
+		//alert(empname);
+		location.href = 'paystructures?formmode=enquiry&emp_no='  + emp_no + '&salaryMonth=' + salaryMonth + '&empname=' + empname;
+	}
+	
+	function deletepage(a) {
+		var emp_no = a.getAttribute("data-attr");
+		alert(emp_no);
+		var salaryMonth = a.getAttribute("data-attr2");
+		//alert(salaryMonth);
+		var empname = a.getAttribute("data-attr3");
+		//alert(empname);
+		location.href = 'paystructures?formmode=delete&emp_no='  + emp_no + '&salaryMonth=' + salaryMonth + '&empname=' + empname;
+	}
+	
+	function Employeepayslip(a){
+		var emp_no = a.getAttribute("data-attr");
+		alert(emp_no);
+		var salaryMonth = a.getAttribute("data-attr2");
+		alert(salaryMonth);
+		var empname = a.getAttribute("data-attr3");
+		
+		location.href = 'Employeepayslip?emp_no='  + emp_no+ '&salaryMonth=' + salaryMonth + '&empname=' + empname;
+		//location.href = './Employeepayslip';
+		
+	}
+	
+	
+	
+
+	function addsubmit(a) {
+
+		 var emp = $("#emp_no").val();
+		 var sal = $("#salary_month").val();
+		 var name = $("#emp_name").val();
+		    
+		     if (emp == "") {
+		        alert("Please fill the employee number field.");
+		        return false; // Exit the function
+		    }
+		    
+		    if (sal == "") {
+		        alert("Please fill the salary month field.");
+		        return false; // Exit the function
+		    }
+		    
+		    if (name == "") {
+		        alert("Please fill the Employee name field.");
+		        return false; // Exit the function
+		    }
+		     
+		var formMode = a.getAttribute("data-formmode");
+
+		if ($("#stp").valid()) {
+
+			var url = "./AddScreen1";
+
+			$("#stp").attr('action', url);
+
+			var options = {
+				success : showResponse
+			};
+
+			$("#stp").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$('#alert').modal("toggle");
+
+			}
+			;
+		}
+	};
+
+	function showResponse(responseText, statusText, xhr, $form) {
+		$("#alertmsg").text(responseText);
+		$('#alert').modal("toggle");
+
+	};
+
+	function modifysubmit(a) {
+		var formMode = a.getAttribute("data-formmode");
+		//alert(formMode)
+		 var sal = $("#salary_month").val();
+		 var name = $("#emp_name").val();
+		// alert(sal);
+		// alert(name);
+		if ($("#crgbck1").valid()) {
+
+			var url = './modifyscreen1?formMode=' + formMode + "&sal=" + sal + "&name=" + name ;
+
+			$("#crgbck1").attr('action', url);
+
+			var options = {
+				success : showResponse
+			};
+
+			$("#crgbck1").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$('#alert').modal("toggle");
+
+			}
+			;
+		}
+	};
+
+	function deleteuser(a) {
+		var empno = a.getAttribute("data-formmode");
+
+		alert(empno);
+
+		$.ajax({
+			url : './deletescreen1?emp_no=' + empno,
+			data : $("#upon").serialize(),
+			type : 'GET',
+			success : function(data) {
+				//alert(data)
+				//location.reload();
+				$("#alertmsg1").text(data);
+				$('#alert1').modal("toggle");
+			}
+		});
+	}
+	
+	function verifysubmit(a) {
+		var formMode = a.getAttribute("data-formmode");
+		//alert(formMode)
+		 var sal = $("#salary_month").val();
+		 var name = $("#emp_name").val();
+		// alert(sal);
+		// alert(name);
+		if ($("#crgbck1").valid()) {
+
+			var url = './verifyscreen1?formMode=' + formMode + "&sal=" + sal + "&name=" + name ;
+
+			$("#crgbck1").attr('action', url);
+
+			var options = {
+				success : showResponse
+			};
+
+			$("#crgbck1").ajaxSubmit(options);
+
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#alertmsg").text(responseText);
+				$('#alert').modal("toggle");
+
+			}
+			;
+		}
+	};
+
+	function calculateBasic1() {
+	    var ctcInput = document.getElementById('ctc_amt');
+	    var ctcAmt = parseFloat(ctcInput.value);
+
+	    if (isNaN(ctcAmt) || ctcAmt <= 0) {
+	        clearFields();
+	        return;
+	    }
+	    
+	    var basicPay, hra, mediReimb, spf, annual_loyal_bonus, splAllow, convAllow, bussAttire, leaveTravelAllow, pfEmployerContribution, grossSalary, totalDeductions, netSalary;
+
+	    if (ctcAmt === 200000 || ctcAmt === 250000) {
+	        basicPay = ctcAmt * 0.5 / 12; 
+	        hra = ctcAmt * 0.2 / 12;
+	        mediReimb = 1250 * 12 / 12;
+	        spf = 1500 * 12 / 12; 
+	        annual_loyal_bonus = ctcAmt / 13 / 12;
+	        splAllow = ctcAmt - (basicPay + hra + mediReimb + spf + annual_loyal_bonus); 
+	        convAllow = 0; 
+	        bussAttire = 0;
+	        leaveTravelAllow = 0;
+	        pfEmployerContribution = 1500 * 12 / 12;
+	        
+	        grossSalary = basicPay + hra + splAllow + mediReimb + convAllow + bussAttire + leaveTravelAllow + annual_loyal_bonus + spf;
+	        totalDeductions = 0;
+	        netSalary = grossSalary - totalDeductions;
+	    } 
+	    else if (ctcAmt === 300000) {
+	        basicPay = ctcAmt * 0.5 / 12;
+	        hra = ctcAmt * 0.2 / 12;
+	        mediReimb = 1250;
+	        spf = 1800;
+	        annual_loyal_bonus = ctcAmt / 13 / 12;
+	        splAllow = ctcAmt / 12 - (basicPay + hra + mediReimb + spf + annual_loyal_bonus); 
+	        convAllow = 0;
+	        bussAttire = 0;
+	        leaveTravelAllow = 0;
+	        pfEmployerContribution = 1800;
+
+	        grossSalary = basicPay + hra + splAllow + mediReimb;
+	        totalDeductions = 0;
+	        netSalary = grossSalary - pfEmployerContribution - spf;
+
+	        document.getElementById('basic_pay').value = basicPay.toFixed(2);
+	        document.getElementById('hra').value = hra.toFixed(2);
+	        document.getElementById('spl_allow').value = splAllow.toFixed(2);
+	        document.getElementById('medi_reimb').value = mediReimb.toFixed(2);
+	        document.getElementById('conv_allow').value = convAllow.toFixed(2);
+	        document.getElementById('buss_attire').value = bussAttire.toFixed(2);
+	        document.getElementById('leave_travel_allow').value = leaveTravelAllow.toFixed(2);
+	        document.getElementById('gross_salary').value = grossSalary.toFixed(2);
+	        document.getElementById('annual_loyal_bonus').value = annual_loyal_bonus.toFixed(2);
+	        document.getElementById('total_deductions').value = totalDeductions.toFixed(2);
+	        document.getElementById('net_salary').value = netSalary.toFixed(2);
+	    }
+
+	    else if (ctcAmt > 300000) {
+	        basicPay = ctcAmt * 0.5; 
+	        hra = ctcAmt * 0.2;
+	        mediReimb = 1250 * 12 ;
+	        spf = 1800 * 12; 
+	        annual_loyal_bonus = ctcAmt / 13;
+	        convAllow = 800 * 12 ; 
+	        bussAttire = 800 * 12;
+	        leaveTravelAllow = ctcAmt * 0.04;
+	        splAllow = ctcAmt - (basicPay + hra + mediReimb + spf + convAllow + bussAttire + leaveTravelAllow + annual_loyal_bonus);
+	        pfEmployerContribution = 1800 * 12;
+	        
+
+	        grossSalary = basicPay + hra + splAllow + mediReimb;
+	        totalDeductions = 0;
+	        netSalary = grossSalary - pfEmployerContribution - spf;
+	        
+	        document.getElementById('basic_pay').value = basicPay.toFixed(2);
+		    document.getElementById('hra').value = hra.toFixed(2);
+		    document.getElementById('spl_allow').value = splAllow.toFixed(2);
+		    document.getElementById('medi_reimb').value = mediReimb.toFixed(2);
+		    document.getElementById('conv_allow').value = convAllow.toFixed(2);
+		    document.getElementById('buss_attire').value = bussAttire.toFixed(2);
+		    document.getElementById('leave_travel_allow').value = leaveTravelAllow.toFixed(2);
+		    document.getElementById('gross_salary').value = grossSalary.toFixed(2);
+		    document.getElementById('spf').value = spf.toFixed(2);
+		    document.getElementById('annual_loyal_bonus').value = annual_loyal_bonus.toFixed(2);
+		    document.getElementById('total_deductions').value = totalDeductions.toFixed(2);
+		    document.getElementById('net_salary').value = netSalary.toFixed(2);
+	    } else if (emp_no === "BFI0049") {
+	        basicPay = ctcAmt * 0.5 ; 
+	        hra = ctcAmt * 0.2;
+	        mediReimb = 1250 * 12;
+	        spf = 2400 * 12; 
+	        annual_loyal_bonus = ctcAmt / 13;
+	        convAllow = 800 * 12; 
+	        bussAttire = 800 * 12;
+	        leaveTravelAllow = ctcAmt * 0.04;
+	        splAllow = ctcAmt - (basicPay + hra + mediReimb + spf + convAllow + bussAttire + leaveTravelAllow + annual_loyal_bonus);
+	        pfEmployerContribution = 1800 * 12 ;
+	        
+	        grossSalary = basicPay + hra + splAllow + mediReimb + convAllow + bussAttire + leaveTravelAllow + annual_loyal_bonus + spf;
+	        totalDeductions = 0;
+	        netSalary = grossSalary - totalDeductions;
+	        
+	        document.getElementById('basic_pay').value = basicPay.toFixed(2);
+		    document.getElementById('hra').value = hra.toFixed(2);
+		    document.getElementById('spl_allow').value = splAllow.toFixed(2);
+		    document.getElementById('medi_reimb').value = mediReimb.toFixed(2);
+		    document.getElementById('conv_allow').value = convAllow.toFixed(2);
+		    document.getElementById('buss_attire').value = bussAttire.toFixed(2);
+		    document.getElementById('leave_travel_allow').value = leaveTravelAllow.toFixed(2);
+		    document.getElementById('gross_salary').value = grossSalary.toFixed(2);
+		    document.getElementById('spf').value = spf.toFixed(2);
+		    document.getElementById('annual_loyal_bonus').value = annual_loyal_bonus.toFixed(2);
+		    document.getElementById('total_deductions').value = totalDeductions.toFixed(2);
+		    document.getElementById('net_salary').value = netSalary.toFixed(2);
+	    } else {
+	        alert("Invalid CTC amount. Please enter either 200000, 250000, or an amount above 300000 lakhs.");
+	        clearFields();
+	        return;
+	    }
+	}
+
+	function clearFields() {
+	    var fields = document.querySelectorAll('input[type="text"]');
+	    fields.forEach(function(field) {
+	        field.value = '';
+	    });
+	}
+</script>
+<script>
+	$(function() {
+		$(".datepicker").datepicker({
+			dateFormat : "dd-mm-yy",
+			changeMonth : true,
+			numberOfMonths : 1,
+			gotoCurrent : true,
+			yearRange : '-80:+1000'
+		});
+	});
+	
+	$(function() {
+	    $(".datepicker1").datepicker({
+	        dateFormat: "mm-yy", 
+	        changeMonth: true, 
+	        changeYear: true, 
+	        showButtonPanel: true,
+	        onClose: function(dateText, inst) {
+	            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+	            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+	            $(this).datepicker('setDate', new Date(year, month, 1));
+	        }
+	    }).focus(function() {
+	        $('.ui-datepicker-calendar').hide();
+	    });
+	});
+</script>
+<script>
+
+
+ $(document).ready(function() {
+    $('input[name="national"]').change(function() {
+        if ($('#radioYes').is(':checked')) {
+        	 $('#dropdownDiv').show();
+        		var nationalvalue = $('input[name="national"]:checked').val(); 
+        		//alert(nationalvalue);
+        		
+        		var url = "./nationalvalues?nationalvalue=" + nationalvalue;
+        		 $.ajax({
+        		       type: "GET", 
+        		       url: url,
+        		       dataType: "json",
+        		       success: function(response) {
+        		           console.log("Response:", response);
+        		           
+        		           $('#nationalDropdown').empty();
+        		            $('#nationalDropdown').append('<option value="">Select</option>');
+        		            $.each(response, function(index, value) {
+        		                $('#nationalDropdown').append('<option value="' + value + '">' + value + '</option>');
+        		            });
+        		            $('#dropdownDiv').show();
+        		       }
+        		       });
+        	 
+        	 
+        } else if ($('#radioNo').is(':checked')) {
+        	 $('#dropdownDiv').show();
+        	 
+        		var nationalvalue = $('input[name="national"]:checked').val(); 
+        		//alert(nationalvalue);
+        		var url = "./nationalvalues?nationalvalue=" + nationalvalue;
+       		 $.ajax({
+       		       type: "GET", 
+       		       url: url,
+       		       dataType: "json",
+       		       success: function(response) {
+       		           console.log("Response:", response);
+       		           
+       		           $('#nationalDropdown').empty();
+       		            $('#nationalDropdown').append('<option value="">Select</option>');
+       		            $.each(response, function(index, value) {
+       		                $('#nationalDropdown').append('<option value="' + value + '">' + value + '</option>');
+       		            });
+       		            $('#dropdownDiv').show();
+       		       }
+       		       });
+        }
+    });
+}); 
+ 
+ 
+ function submitTaxGroup(){ 
+	
+	 	 var selectedgroup = document.getElementById("nationalDropdown").value;
+	 	
+	 		  var url = "./getctcdatas?selectedgroup=" + selectedgroup;
+
+	 	        $.ajax({
+	 	            type: "GET", 
+	 	            url: url,
+	 	            dataType: "json",
+	 	            success: function(response) {
+	 	            	 console.log("Response:", response);
+	 	                
+	 	                    var ctc = response.ctc_cost_to_company;
+	 	                   
+	 	                   
+	 	                    $("#ctc_amt").val(ctc);
+	 	                    $("#basic_pay").val(response.year_basic_salary);
+	 	                    $("#hra").val(response.year_house_rent_allowance);
+	 	                    $("#spl_allow").val(response.year_special_allowance);
+	 	                    $("#medi_reimb").val(response.year_medical_reimbursement);
+	 	                    $("#conv_allow").val(response.year_conveyance_allowance);
+	 	                    $("#lunch_allow").val(response.year_lunch_allownace);
+
+	 	                    $("#edu_allow").val(response.year_education_allowance);
+	 	                    $("#buss_attire").val(response.year_business_attire_reimbursement);
+	 	                    $("#car_maint").val(response.year_car_maintenance_allowance);
+	 	                    $("#leave_travel_allow").val(response.year_leave_travel_allowance);
+	 	                   // $("#outstn_allow").val(response.);
+	 	                    $("#annual_loyal_bonus").val(response.year_annual_loyalty_bonus);
+	 	                   // $("#otr_allow").val(response.);
+	 	                    $("#gross_salary").val(response.year_gross_salary);
+	 	                    $("#net_salary").val(response.year_net_salary);
+	 	               
+	 	                
+	 	            },
+	 	            error: function(xhr, status, error) {
+	 	                console.error("Error:", error);
+	 	            }
+	 	        });
+	 		
+	 	
+	         	
+	         
+	  }
+	  
+	  
+ 
+</script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+	
+	
+	
+ $(document).ready(function() {
+        if ($('#radioYes').is(':checked')) {
+        	
+        	// $('#dropdownDiv').show();
+        		var nationalvalue = $('input[name="national"]:checked').val(); 
+        		//alert(nationalvalue);
+        		
+        		var url = "./nationalvaluesone?nationalvalue=" + nationalvalue;
+        		 $.ajax({
+        		       type: "GET", 
+        		       url: url,
+        		       dataType: "json",
+        		       success: function(response) {
+        		          
+        		       }
+        		       });
+        	 
+        	 
+        } else if ($('#radioNo').is(':checked')) {
+        	// $('#dropdownDiv').show();
+        	 
+        		var nationalvalue = $('input[name="national"]:checked').val(); 
+        		//alert(nationalvalue);
+        		var url = "./nationalvaluesone?nationalvalue=" + nationalvalue;
+        	//	alert()
+       		 $.ajax({
+       		       type: "POST", 
+       		       url: url,
+       		       dataType: "json",
+       		       success: function(response) {
+       		    	//alert(response)
+       		       }
+       		       });
+        }
+   
+}); 
+ 
+ 
+	
+/*]]>*/
+</script>
+
+<script type="text/javascript">
+
+$(function() {
+
+	$(
+			"#date_of_birth,#date_of_pay,#record_date,#date_of_joining,#ctc_eff_date")
+			.datepicker({
+
+				changeMonth : true,
+				changeYear : true,
+				dateFormat : "dd-mm-yy",
+				yearRange: "1800:2100",
+			});
+
+});
+function validateMobileNumber(input) {
+    const mobileHelp = document.getElementById('mobileHelp');
+    if (input.value.length === 10) {
+        mobileHelp.style.display = 'none';
+    } else {
+        mobileHelp.style.display = 'block';
+    }
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+	
+	
+    document.getElementById("email_id").addEventListener("input", function () {
+        const emailField = this;
+        const emailValue = emailField.value.trim();
+        const emailError = document.getElementById("emailError");
+        
+
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Check if the email matches the regex
+        if ( emailValue == "" || emailRegex.test(emailValue)) {
+            emailError.style.display = "none"; // Hide the error message
+            emailField.classList.remove("is-invalid");
+            emailField.classList.add("is-valid");
+            emailval=true;
+            //alert(emailval);
+        } else {
+            emailError.style.display = "block"; // Show the error message
+            emailField.classList.remove("is-valid");
+            emailField.classList.add("is-invalid");
+            emailval=false;
+        }
+    });
+});
+</script>
+
+<script>
+function basedgroup(a) {
+    var groupbased = a.value;
+ 
+
+    $.ajax({
+        url: './getdetailsbasedgroup',
+        type: 'GET', // Corrected 'TYPE' to 'type'
+        data: { group_name: groupbased }, 
+        success: function(response) {
+        	
+        console.log(response.mon_gross_salary);
+        
+        var totaldeductions=(response.mon_pf_employer_contribution)+(response.mon_professional_deduction)+
+                             (response.mon_standard_deduction)+(response.mon_tax_deduction);
+        console.log("DEDUCTIONS" +totaldeductions);
+          $("#ctc_amt").val(response.ctc_cost_to_company != null ? response.ctc_cost_to_company.toFixed(2) : "0.00");
+        $("#basic_pay").val(response.mon_basic_salary != null ? response.mon_basic_salary.toFixed(2) : "0.00");
+        $("#hra").val(response.mon_house_rent_allowance != null ? response.mon_house_rent_allowance.toFixed(2) : "0.00");
+        $("#spl_allow").val(response.mon_special_allowance != null ? response.mon_special_allowance.toFixed(2) : "0.00");
+        $("#medi_reimb").val(response.mon_medical_reimbursement != null ? response.mon_medical_reimbursement.toFixed(2) : "0.00");
+        $("#conv_allow").val(response.mon_conveyance_allowance != null ? response.mon_conveyance_allowance.toFixed(2) : "0.00");
+        $("#lunch_allow").val(response.mon_lunch_allownace != null ? response.mon_lunch_allownace.toFixed(2) : "0.00");
+        $("#edu_allow").val(response.mon_education_allowance != null ? response.mon_education_allowance.toFixed(2) : "0.00");
+        $("#buss_attire").val(response.mon_business_attire_reimbursement != null ? response.mon_business_attire_reimbursement.toFixed(2) : "0.00");
+        $("#car_maint").val(response.mon_car_maintenance_allowance != null ? response.mon_car_maintenance_allowance.toFixed(2) : "0.00");
+        $("#leave_travel_allow").val(response.mon_leave_travel_allowance != null ? response.mon_leave_travel_allowance.toFixed(2) : "0.00");
+        $("#annual_loyal_bonus").val(response.mon_annual_loyalty_bonus != null ? response.mon_annual_loyalty_bonus.toFixed(2) : "0.00");
+        $("#gross_salary").val(response.mon_gross_salary != null ? response.mon_gross_salary.toFixed(2) : "0.00");
+        $("#net_salary").val(response.mon_net_salary != null ? response.mon_net_salary.toFixed(2) : "0.00");
+        /*  --DEDUCTION-- */
+      $("#spf").val(response.mon_pf_employer_contribution != null ? response.mon_pf_employer_contribution.toFixed(2) : "0.00");
+        $("#prof_tax").val(response.mon_professional_deduction != null ? response.mon_professional_deduction.toFixed(2) : "0.00");
+        $("#tds").val(response.mon_tax_deduction != null ? response.mon_tax_deduction.toFixed(2) : "0.00");
+        $("#otr_ded").val(response.mon_standard_deduction != null ? response.mon_standard_deduction.toFixed(2) : "0.00");
+        $("#total_deductions").val(totaldeductions .toFixed(2)); 
+   },
+        error: function(xhr, status, error) {
+            // It's good practice to handle errors
+            console.error("Error occurred: ", error);
+        }
+    });
+}
+
+
+
+</script>
+<script>
+
+$(document).ready(function () {
+	const yearSelect = document.getElementById("yearSelect");
+	const currentYear = new Date().getFullYear();
+
+	for (let y = 2000; y <= currentYear + 10; y++) {
+	  const option = document.createElement("option");
+	  option.value = y;
+	  option.textContent = y;
+	  yearSelect.appendChild(option);
+	}
+
+
+	});
+</script>
+
+<script>
+function getmonthwise(event) {
+	event.preventDefault();
+    var month = document.getElementById('monthSelect').value.trim();
+    var year = document.getElementById('yearSelect').value.trim();
+
+    if (!month || !year) {
+        alert("Please select both month and year.");
+        return;
+    }
+
+    //alert("Selected Month: " + month);
+    //alert("Selected Year: " + year);
+
+    $.ajax({
+        url: './getdetailsformonthbased',
+        type: 'GET',
+        data: {
+            month: month,
+            year: year
+        },
+        success: function(response) {
+            var tbody = document.getElementById('mytable1');
+            tbody.innerHTML = ''; // Clear previous data
+            
+            
+            if (response.length === 0) {
+                var noDataRow = `
+                    <tr>
+                        <td colspan="11" style="color:red; text-align:center;">No Record Found</td>
+                    </tr>
+                `;
+                tbody.innerHTML = noDataRow;
+                return;
+            }
+
+            response.forEach(function(entity, index) {
+            	
+            	
+            
+           
+                var row = `
+                    <tr>
+                        <td>${entity.empId ?? '-'}</td>
+                        <td style="text-align: center;">${entity.empName ?? '-'}</td>
+                        <td style="text-align: center;">ODC</td>
+                        <td style="text-align: center;">${entity.designation ?? '-'}</td>
+                        <td style="text-align: center;">${entity.netSalary ?? '0.00'}</td>
+                        <td style="text-align: center;">${entity.workingdays ?? '0'}</td>
+                        <td style="text-align: center;">${entity.attendanceCount ?? '0'}</td>
+                        <td style="text-align: center;">${entity.leaveCount ?? '0'}</td>
+                        <td style="text-align: center;">${entity.netSalary ?? '0.00'}</td>
+                        <td style="text-align: center;">0.00</td>
+                        <td>
+                        <button type="button" class="btn btn-primary" 
+							id="btnmodify"
+							th:attr="data-attr=${entity?.empId}, data-attr2=${entity?.month}, data-attr3=${entity?.empName},data-attr4=${entity?.year}"
+							style="text-align: center;background-color:black;color:white;"
+							onclick="Employeesalaryslip(this);">Salary
+							Slip</button>
+                        </td>
+                    </tr>
+                `;
+                
+                console.log(row);
+                tbody.innerHTML += row;
+            });
+        },
+        error: function(xhr, status, error) {
+            alert("Error fetching data: " + error);
+            console.error("AJAX Error: ", status, error);
+        },
+        complete: function() {
+            console.log("AJAX request completed.");
+        }
+    });
+}
+</script>
+
+
+<script>
+function Employeesalaryslip(a){
+	event.preventDefault();
+	var emp_no = a.getAttribute("data-attr");
+	//alert(emp_no);
+	var salaryMonth = a.getAttribute("data-attr2");
+	//alert(salaryMonth);
+	var empname = a.getAttribute("data-attr3");
+	//alert(empname);
+	var year = a.getAttribute("data-attr4");
+	//alert(year);
+	location.href = 'employeesalaryslip?formmode=Employeemonthlysalaryslip&empId='  + emp_no+ '&month=' + salaryMonth + '&empName=' + empname + '&year='+year;
+}
+</script>
+
+<script>
+
+function numberToWords(num) {
+    const a = [
+        '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten',
+        'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 
+        'Eighteen', 'Nineteen'
+    ];
+    const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+    if ((num = num.toString()).length > 9) return 'Overflow';
+
+    let n = ('000000000' + num).substr(-9).match(/.{1,3}/g);
+    let str = '';
+
+    const getWords = (n) => {
+        let num = parseInt(n);
+        if (num === 0) return '';
+        if (num < 20) return a[num];
+        if (num < 100) return b[Math.floor(num / 10)] + (num % 10 ? ' ' + a[num % 10] : '');
+        return a[Math.floor(num / 100)] + ' Hundred ' + (num % 100 !== 0 ? getWords(num % 100) : '');
+    };
+
+    if (parseInt(n[0]) !== 0) str += getWords(n[0]) + ' Million ';
+    if (parseInt(n[1]) !== 0) str += getWords(n[1]) + ' Thousand ';
+    if (parseInt(n[2]) !== 0) str += getWords(n[2]);
+
+    return str.trim();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const netSalaryElement = document.getElementById('netsalary');
+   
+    const salaryText = netSalaryElement.textContent.trim();
+    const netSalary = parseFloat(salaryText);
+    //alert("the netsalary" +netSalary)
+   document.getElementById('amountInWords').innerText = numberToWords(Math.floor(netSalary));
+   //document.getElementById('amountInWords1').innerText = numberToWords(Math.floor(netSalary));
+   
+});
+</script>
+
+
+<script>
+
+function downloadPaySlip(event) {
+  event.preventDefault();
+  
+  const element = document.getElementById('paySlipWrapper');
+  //const empId=document.getElementById('emp_no').textContent.trim();
+  const salarymonth = document.getElementById('salarymonth').textContent.trim();
+  const ename = document.getElementById('employeename').textContent.trim();
+  const year = document.getElementById('getyear').textContent.trim();
+  
+  //alert("year" +year);
+
+  element.style.display='block';
+
+  const opt = {
+    margin: [0.2, 0.2, 0.2, 0.2], // top, left, bottom, right
+    //filename: 'TSK-PaySlip-' + salarymonth + '-' + ename + '.pdf',
+    filename:'TSK-PaySlip-' +ename+'-'+ salarymonth+'-'+year+ '.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      logging: false
+    },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
+  
+  setTimeout(function() {
+	  location.href='./employeesalaryslip';
+	}, 1000);
+}
+</script>
+
+<script>
+
+function navigateother(event){
+	event.preventDefault();
+     window.location.href='./employeesalaryslip';
+}
+
+</script>
+
+
+</head>
+
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12" style="margin-top: 20px;">
+				<div class="container-fluid content">
+					<div th:if="${formmode}=='list'">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-header">
+										<div class="float-left">
+											<div STYLE="font-size: 1.3rem;">
+												<!-- <i class="fas fa-list mr-1"></i> -->
+												<b> PAY STRUCTURE - LIST </b>
+											</div>
+										</div>
+										<div class="float-right">
+											<button type="button"
+												class="btn  btn-dark btn-xs btn-primary btns" id="btnadd"
+												style="text-align: center;" onclick="adduser(this);">Add</button>
+										</div>
+									</div>
+									<div class="card-body"
+										style="margin-top: -21px; margin-left: -21px; margin-right: -20px;">
+										<div class="table-responsive">
+											<table class="table">
+												<thead class="thead-light">
+													<tr
+														style="white-space: nowrap; overflow: hidden; text-align: center"
+														class="align-bottom">
+														<th>Emp Id</th>
+														<th style="text-align: left; width: 15%">Employee
+															Name</th>
+														<th style="text-align: right; width: 6%">Gross Salary</th>
+														<th style="text-align: right">Deductions</th>
+														<th style="text-align: right">Net Salary</th>
+														<th style="text-align: center">Status</th>
+														<th>Eff Date</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody id="placelist">
+													<tr th:each="salpay : ${salarypay}"
+														style="white-space: nowrap; overflow: hidden; text-align: center">
+														<td th:text="${salpay?.emp_no}"></td>
+														<td style="text-align: left" th:text="${salpay?.emp_name}"></td>
+														<td
+															th:text="${#numbers.formatDecimal(salpay?.gross_salary	,1,'COMMA',2,'POINT')}"
+															align="right">CHENNAI</td>
+														<td
+															th:text="${#numbers.formatDecimal(salpay?.total_deductions	,1,'COMMA',2,'POINT')}"
+															align="right">CHENNAI</td>
+														<td
+															th:text="${#numbers.formatDecimal(salpay?.net_salary ,1,'COMMA',2,'POINT')}"
+															align="right">CHENNAI</td>
+														<td style="text-align: left;"
+															th:style="${salpay.verify_flg == 'Y' ? 'color: green;' : 'color: red;'}">
+															<span
+															th:text="${salpay.verify_flg == 'Y' ? 'Verified' : 'UnVerified'}"></span>
+														</td>
+
+
+														<td
+															th:text="${#dates.format(salpay?.ctc_eff_date,'dd-MM-yyyy')}">
+														</td>
+														<td>
+															<div class="dropdown">
+																<button
+																	class="btn  btn-dark btn-dark btn-xs btn-info btns"
+																	type="button" id="dropdownMenuButton"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">Action</button>
+																<div class="dropdown-menu"
+																	aria-labelledby="dropdownMenuButton">
+																	<button type="button" class="dropdown-item"
+																		id="btnmodify"
+																		th:attr="data-attr=${salpay?.emp_no}, data-attr2=${salpay?.salary_month}, data-attr3=${salpay?.emp_name}"
+																		style="text-align: center;"
+																		onclick="modifyuser(this);">Modify</button>
+																	<div class="dropdown-divider"></div>
+
+																	<button type="button" class="dropdown-item"
+																		id="btndelete"
+																		th:attr="data-attr=${salpay?.emp_no}, data-attr2=${salpay?.salary_month}, data-attr3=${salpay?.emp_name}"
+																		style="text-align: center;"
+																		onclick="deletepage(this);">Delete</button>
+
+																	<div class="dropdown-divider"></div>
+
+																	<button type="button" class="dropdown-item"
+																		id="btnEnquiry"
+																		th:attr="data-attr=${salpay?.emp_no}, data-attr2=${salpay?.salary_month}, data-attr3=${salpay?.emp_name}"
+																		style="text-align: center;"
+																		onclick="enquiryuser(this);">Enquiry</button>
+
+																	<div
+																		th:if="${salpay.verify_flg == 'N' || salpay.verify_flg == null } "
+																		class="dropdown-divider"></div>
+
+																	<button type="button" class="dropdown-item"
+																		th:if="${salpay.verify_flg == 'N' || salpay.verify_flg == null } "
+																		id="btnmodify"
+																		th:attr="data-attr=${salpay?.emp_no}, data-attr2=${salpay?.salary_month}, data-attr3=${salpay?.emp_name}"
+																		style="text-align: center;"
+																		onclick="verifyuser(this);">Verify</button>
+
+																	<!-- ---payslip-- -->
+
+																	<div class="dropdown-divider"></div>
+																	<button type="button" class="dropdown-item"
+																		id="btnmodify"
+																		th:attr="data-attr=${salpay?.emp_no}, data-attr2=${salpay?.salary_month}, data-attr3=${salpay?.emp_name}"
+																		style="text-align: center;"
+																		onclick="Employeepayslip(this);">Pay Slip</button>
+
+
+
+
+																</div>
+
+															</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div
+										class="card-footer text-center d-flex m-auto bg-white border-top-0">
+										<button type="button"
+											class="btn  btn-dark btn-xs btn-primary mr-2" id="btnHome"
+											onclick="home();">Home</button>
+										<button type="button"
+											class="btn  btn-dark btn-xs btn-primary ml-2" id="btnBack"
+											onclick="back();">Back</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- -------list start-- -->
+
+
+					<div th:if="${formmode}=='employeesalarylist'">
+						<div class="row">
+							<div class="col-sm-12">
+								<form action="#" id="stp" method="post">
+									<div class="card w-100 border">
+										<div class="card-header">
+											<div class="justify-content-between">
+												<div class="float-left" style="font-size:1.3rem;">
+													<b th:if="${formmode}=='employeesalarylist'">EMPLOYEE
+														LIST</b>
+												</div>
+												<div class="d-flex gap-2 align-items-center"
+													style="margin-left: 1200px;">
+													<select
+														style="width: 100px; margin-left: 5px; background-color: black; color: white;"
+														id="monthSelect" class="form-control form-control-sm">
+														<option value="">--Month--</option>
+														<option value="1">01</option>
+														<option value="2">02</option>
+														<option value="3">03</option>
+														<option value="4">04</option>
+														<option value="5">05</option>
+														<option value="6">06</option>
+														<option value="7">07</option>
+														<option value="8">08</option>
+														<option value="9">09</option>
+														<option value="10">10</option>
+														<option value="11">11</option>
+														<option value="12">12</option>
+													</select> <select id="yearSelect"
+														class="form-control form-control-sm"
+														style="width: 100px; margin-left: 5px; background-color: black; color: white;">
+														<option value="">Year</option>
+														<!-- Years will be inserted here via JS -->
+													</select>
+													<button class="btn btn-secondary  form-control-sm"
+														onclick="getmonthwise(event);"
+														style="background-color: black; color: white; margin-left: 5px;">Search</button>
+												</div>
+
+											</div>
+										</div>
+										<div class="">
+											<div class="table-responsive"
+												style="overflow-x: hidden; overflow-y: auto; max-height: 65vh;">
+												<table class="table">
+													<thead class="thead-light"
+														style="position: sticky; top: 0; z-index: 1;">
+														<tr
+															style="white-space: nowrap; overflow: hidden; text-align: center"
+															class="align-bottom">
+															<th style="text-align:left;">Emp Id</th>
+															<th style="text-align: left;">Employee Name</th>
+															<th style="text-align: left;">HQ</th>
+															<th style="text-align: left;">Designation</th>
+															<th style="text-align: right;">Salary</th>
+															<th style="text-align: right;">Month Work days</th>
+															<th style="text-align: right;">Present Days</th>
+															<th style="text-align: right;">Absent Count</th>
+															<th style="text-align: right;">Actual Salary</th>
+															<th style="text-align: right;">Advance</th>
+															<th>Action</th>
+														</tr>
+													</thead>
+													<tbody id="mytable1">
+														<tr th:if="${#lists.isEmpty(Employeelist)}">
+															<td colspan="11" style="color: red;">No Record Found</td>
+														</tr>
+
+														<tr
+															style="white-space: nowrap; overflow: hidden; text-align: center"
+															th:each="employeesalary,indexStat : ${Employeelist}">
+															<td  style="text-align: left;"
+																th:text="${employeesalary.empId !=null ? employeesalary.empId : '-'}"></td>
+															<td style="text-align: left;"
+																th:text="${employeesalary.empName !=null ? employeesalary.empName : '-' }"></td>
+															<td style="text-align: left;">ODC</td>
+															<td style="text-align: left;"
+																th:text="${employeesalary.Designation !=null ? employeesalary.Designation : '-'}"></td>
+															<td style="text-align: right;"
+																th:text="${employeesalary.netSalary !=null ? employeesalary.netSalary : '0.00' }"></td>
+															<td style="text-align: right;"
+																th:text="${employeesalary.workingdays !=null ? employeesalary.workingdays : '0'}">-</td>
+															<td style="text-align: right;"
+																th:text="${employeesalary.attendanceCount !=null ? employeesalary.attendanceCount : '0'}"></td>
+															<td style="text-align: right;"
+																th:text="${employeesalary.leaveCount !=null ? employeesalary.leaveCount : '0'}"></td>
+															<td style="text-align: right;"
+																th:text="${employeesalary.netSalary !=null ? employeesalary.netSalary : '0.00'}"></td>
+															<td style="text-align: right;">0.00</td>
+
+															<td>
+
+																<button type="button" class="btn btn-primary" 
+																	id="btnmodify"
+																	th:attr="data-attr=${employeesalary?.empId}, data-attr2=${employeesalary?.month}, data-attr3=${employeesalary?.empName},data-attr4=${employeesalary?.year}"
+																	style="text-align: center;background-color:black;color:white;"
+																	onclick="Employeesalaryslip(this);">Salary
+																	Slip</button>
+
+
+															</td>
+
+
+															<!-- <td>
+<div class="dropdown">
+																	<button
+																		class="btn  btn-dark btn-dark btn-xs btn-info btns"
+																		type="button" id="dropdownMenuButton"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false">Action</button>
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuButton">
+																		---payslip--
+																		<div class="dropdown-divider"></div>
+																		<button type="button" class="dropdown-item"
+																			id="btnmodify"
+																			th:attr="data-attr=${employeesalary?.empId}, data-attr2=${employeesalary?.month}, data-attr3=${employeesalary?.empName},data-attr4=${employeesalary?.year}"
+																			style="text-align: center;"
+																			onclick="Employeesalaryslip(this);">
+																			Salary Slip</button>
+																	</div>
+																</div>
+</td> -->
+														</tr>
+													</tbody>
+												</table>
+
+
+											</div>
+											<div
+												class="card-footer text-center d-flex justify-content-center">
+
+												<button type="button"
+													class="btn  btn-dark btn-dark btn-xs btn-primary mr-2"
+													id="btnHome" onclick="home();">Home</button>
+												<button type="button"
+													class="btn  btn-dark btn-dark btn-xs btn-primary ml-2"
+													id="stp" th:attr="data-formmode=${stp}"
+													onclick="addsubmit(this);">Submit</button>
+												<button type="button"
+													class="btn  btn-dark btn-dark btn-xs btn-primary ml-2"
+													id="btnBack" onclick="back();">Back</button>
+											</div>
+										</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+					<!-- ******************************************* SALARY DOWNLOAD********************************************************************************************** -->
+
+
+					<div class="container-fluid content"
+						th:if="${formmode}=='Employeemonthlysalaryslip'">
+
+
+						<div class="row">
+							<!-- add-->
+							<form action="#" method="post" class="w-100"
+								id="VendorRegistrationadd" autocomplete="off">
+
+
+
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class=""></i>Employee Salary Slip
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: white; background-color: black; font-weight: bold; border-color: black;"
+											onclick="downloadPaySlip(event);">Download</button>
+									</div>
+								</div>
+
+
+
+
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="table-responsive"
+										style="overflow-y: auto; max-height: 80vh;">
+										<div id="" style="width: 100%; display: block;">
+
+											<div id="paySlipWrapper"
+												style="background: white; width: 8.27in; min-height: 11.69in; font-size: 12px;">
+												<table class="table" id="paySlipContent"
+													style="width: 90%; border-collapse: collapse; text-align: center;">
+													<thead>
+														<tr>
+															<th style="text-align: center;"><img
+																src="./images/TSK.PNG" alt="TSK Logo"
+																style="height: 100px;"></th>
+															<th colspan="4"
+																style="text-align: center; vertical-align: middle; color: darkblue; white-space: nowrap; font-size: 30px; margin-top: -10px;">T.SENTHIL
+																KUMARAN&COMPANY</th>
+														</tr>
+														<tr>
+															<th colspan="5"
+																style="font-weight: bold; text-align: center; font-size: 20px;">PAY
+																SLIP</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Employee
+																No</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.emp_no}">BFI0125</td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">Salary
+																Month</td>
+															<td style="text-align: left;" id="salarymonth"
+																th:text="${employeesalarydetails.month}">2025</td>
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Employee
+																Name</td>
+															<td style="text-align: left;" id="employeename"
+																th:text="${EmployeeSlip.emp_name}">SANJEEVI</td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">No
+																of Days</td>
+															<td style="text-align: left;"
+																th:text="${employeesalarydetails.workingdays}">31</td>
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Designation</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.emp_desig}">DEV</td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">Days
+																Paid</td>
+															<td style="text-align: left;"
+																th:text="${employeesalarydetails.attendanceCount}">31</td>
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Group</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.emp_group}">A</td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">LOP</td>
+															<td style="text-align: left;"
+																th:text="${employeesalarydetails.leaveCount}">-</td>
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Division</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.emp_division}"></td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">Payment
+																Mode</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.payment_mode}"></td>
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;">PF
+																Account No.</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.spf_acct_no}">000000001</td>
+															<td></td>
+															<td style="font-weight: bold; text-align: left;">Bank
+																Account No.</td>
+															<td style="text-align: left;"
+																th:text="${EmployeeSlip.bank_acct_no}">000000011</td>
+														</tr>
+
+														<tr
+															style="text-align: left; font-weight: bold; font-size: 20px;">
+															<th colspan="3">EARNINGS</th>
+															<th colspan="2">DEDUCTIONS</th>
+
+														</tr>
+														<tr>
+															<th
+																style="font-weight: bold; text-align: left; font-size: 13px;">Description</th>
+															<th
+																style="font-weight: bold; text-align: left; font-size: 13px;">Standard
+																Amount</th>
+															<th
+																style="font-weight: bold; text-align: left; font-size: 13px;">Actual
+																Amount</th>
+															<th
+																style="font-weight: bold; text-align: left; font-size: 13px;">Description</th>
+															<th
+																style="font-weight: bold; text-align: left; font-size: 13px;">Standard
+																Amount</th>
+
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Basic</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.basic_pay}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.basic_pay}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">Staff
+																Provident Fund</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.spf}">0.00</td>
+
+														</tr>
+
+														<tr>
+															<!-- <td style="font-weight: bold; text-align: left;">House Rent Allowance</td> -->
+															<td style="font-weight: bold; text-align: left;">Direct
+																Allowance</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.hra}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.hra}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">Income
+																Tax</td>
+															<td style="text-align: right;">0.00</td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Special
+																Allowance</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.spl_allow}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.spl_allow}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">Profession
+																Tax</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.prof_tax}">0.00</td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Medical
+																Reimbursement</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.medi_reimb}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.medi_reimb}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">ESI</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.esi !=null ? EmployeeSlip.esi  : '0.00' }">0.00</td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Conveyance
+																Allowance</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.conv_allow}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.conv_allow}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">Recoveries</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.recovery !=null ? EmployeeSlip.recovery : '0.00'}">0.00</td>
+
+														</tr>
+
+														<tr>
+															<!-- <td style="font-weight: bold; text-align: left;">Other Deductions</td> -->
+															<td style="font-weight: bold; text-align: left;">Lunch
+																Allowance</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.lunch_allow}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.lunch_allow}">0.00</td>
+															<td style="text-align: left;"></td>
+															<td style="text-align: right;"></td>
+
+														</tr>
+
+														<tr>
+															<!-- <td style="font-weight: bold; text-align: left;">Business Attire Reimbursement</td> -->
+															<td style="font-weight: bold; text-align: left;">Vehicle
+																Allowance</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.edu_allow}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.edu_allow}">0.00</td>
+															<td style="font-weight: bold; text-align: left;"></td>
+															<td style="font-weight: bold; text-align: right;"></td>
+
+														</tr>
+
+														<tr>
+															<!-- <td style="font-weight: bold; text-align: left;">Leave Travel Allowance</td> -->
+															<td style="font-weight: bold; text-align: left;">Performance
+																Pay</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.buss_attire}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.buss_attire}">0.00</td>
+															<td style="font-weight: bold; text-align: left;"></td>
+															<td style="font-weight: bold; text-align: right;"></td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Project
+																Allowance</td>
+															<td style="text-align: right;">0.00</td>
+															<td style="text-align: right;">0.00</td>
+															<td style="font-weight: bold; text-align: left;"></td>
+															<td style="font-weight: bold; text-align: right;"></td>
+
+														</tr>
+
+
+
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Annual
+																Loyalty Bonus</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.annual_loyal_bonus !=null ?EmployeeSlip.annual_loyal_bonus : '0.00'}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.annual_loyal_bonus !=null ?EmployeeSlip.annual_loyal_bonus : '0.00'}">0.00</td>
+															<td style="font-weight: bold; text-align: left;"></td>
+															<td style="font-weight: bold; text-align: right;"></td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Gross
+																Salary</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.gross_salary}">0.00</td>
+															<td style="text-align: right;"
+																th:text="${EmployeeSlip.gross_salary}">0.00</td>
+															<td style="font-weight: bold; text-align: left;">Total
+																Deductions</td>
+															<td style="text-align: right;"
+																th:text="${employeesalarydetails.deductions}">0.00</td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;">Net
+																Salary</td>
+															<td style="text-align: right;" id="netsalary"
+																th:text="${employeesalarydetails.netSalary}">0.00</td>
+															<td style="text-align: left;" id="amountInWords"
+																colspan="3">Amount In Words</td>
+
+
+														</tr>
+														<tr style="text-align: left; font-size: 20px;">
+															<th colspan="5">INCOME TAX</th>
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;"
+																colspan="2">Provisional Tax FY</td>
+															<td style="text-align: right;">0.00</td>
+															<td colspan="2" rowspan="4"
+																style="vertical-align: middle; background-color: white;">
+																<img src="./images/TSK-Digital seal.jpg" alt="TSK"
+																style="height: 120px; width: 150px;">
+															</td>
+
+														</tr>
+														<tr>
+															<td style="font-weight: bold; text-align: left;"
+																colspan="2">Cumulative Tax Deducted</td>
+															<td style="text-align: right;">0.00</td>
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;"
+																colspan="2">Tax Per Month</td>
+															<td style="text-align: right;">0.00</td>
+
+														</tr>
+
+														<tr>
+															<td style="font-weight: bold; text-align: left;"
+																colspan="2">Balance Tax Due</td>
+															<td style="text-align: right;">0.00</td>
+															<td th:text="${employeesalarydetails.year}" id="getyear"
+																hidden></td>
+
+														</tr>
+
+
+													</tbody>
+												</table>
+											</div>
+											<div>
+
+
+												<!-- 	-----normal block----- -->
+
+											</div>
+
+
+
+											<br>
+
+											<div class="card-footer text-center"
+												style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+												<button class="btn btn-xs btn-dark" type="button"
+													id="Dashboard" onclick="home(event)">Home</button>
+
+												<button type="button" class="btn btn-xs btn-dark"
+													id="btnSubmit" onclick="Expensessubmit1(event);">Submit</button>
+
+												<button class="btn btn-xs btn-dark" id="btnback"
+												onclick="navigateother(event)"
+													>Back</button>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+
+
+
+
+
+
+
+
+					</div>
+
+					<!-- ***************************************************** SALARY DOWNLOAD ENDS ************************************************************************************************** -->
+
+
+					<!-- ***************************************************** EDIT STARTS ************************************************************************************************** -->
+
+					<!-- *****************************************************end of EDIT***************************************************************************** -->
+
+					<!-- ***************************************************** VERIFY ************************************************************************************************** -->
+
+					<!-- *****************************************************end of VERIFY***************************************************************************** -->
+
+					<!-- *****************************************************ENQUIRY***************************************************************************** -->
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg" style="font-size: 16px;"></p>
+					<button type="button" class="btn  btn-dark btn-primary"
+						data-dismiss="modal" onclick="back();" style="width: 120px">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="alert1">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">CIM FINANCE</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg1" style="font-size: 16px;"></p>
+					<button type="button" class="btn  btn-dark btn-primary"
+						data-dismiss="modal" onclick="back();" style="width: 120px">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

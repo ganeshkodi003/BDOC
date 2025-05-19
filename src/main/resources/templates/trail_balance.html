@@ -1,0 +1,860 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+#pagination-controls {
+	margin: 20px 0;
+}
+
+.pagination-btn {
+	margin: 0 5px;
+	padding: 5px 10px;
+	border: 1px solid #007bff;
+	background-color: #f8f9fa;
+	color: #007bff;
+	cursor: pointer;
+}
+
+.pagination-btn:hover {
+	background-color: #007bff;
+	color: white;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+	padding: 20px;
+}
+
+h1 {
+	text-align: center;
+	color: #333;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border: 1px solid #ccc;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f0f0f0;
+}
+
+tr:nth-child(even) {
+	background-color: #f7f7f7;
+}
+
+.debit {
+	color: red;
+	text-align: right;
+}
+
+.credit {
+	color: green;
+	text-align: right;
+}
+
+footer {
+	text-align: center;
+	margin-top: 30px;
+	font-size: 0.8em;
+	color: #666;
+}
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -23px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+</head>
+<script>
+
+
+
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+function Back(event) {
+    event.preventDefault();
+	window.history.back();
+}
+
+
+
+</script>
+
+
+
+
+
+
+<script>
+
+function purchase_pop(){
+	//location.href='./ledger';
+	$('#addcat').modal('show'); 	
+	
+}
+function sale_pop(){
+	//location.href='./ledger?formmode=wo';
+	$('#addcat_sale').modal('show'); 	
+	
+}
+
+function wages_pop(){
+	var currentMonth = new Date().getMonth() + 1;
+	 var currentYear = new Date().getFullYear();
+	location.href="ledger?formmode=salaries&month="+currentMonth+"&year="+currentYear;
+}
+
+function closechange(event) {
+
+	event.preventDefault();
+	$('#addcat').modal('hide');
+	//$('#addcategory').modal('hide');
+	//$('#addsubcategory').modal('hide');
+	
+}
+function closechange_sale(event) {
+
+	event.preventDefault();
+	$('#addcat_sale').modal('hide');
+	
+}
+
+</script>
+
+<script>
+
+
+
+
+
+function Purchase_Invoice(Opid){
+	//alert(id)
+	location.href='./Payment_Out?formmode=invoice_view&Opid='+Opid ;
+	}
+function sale_Invoice(Opid){
+	//alert(id)
+	location.href='./paymentin?formmode=historyview&Opid='+Opid ;
+	}
+</script>
+<script type="text/javascript">
+
+
+ // Function to calculate total debit or credit from a specific table
+    function calculateTableTotals(tableId, isDebit) {
+        let total = 0;
+        const selector = isDebit ? '.debit' : '.credit';
+        
+        document.querySelectorAll(`#${tableId} tbody ${selector}`).forEach(cell => {
+            total += parseFloat(cell.textContent) || 0;
+        });
+        
+        return total;
+    }
+
+    // Function to populate the trial balance table with static rows and calculated totals
+    function populateTrialBalanceTable() {
+    	var total_amount = [[${total}]];  // Thymeleaf variable injection
+    	var sale_amt = [[${sale_amt}]];  // Thymeleaf variable injection
+    	var wages_amt = [[${wages_amt}]];  // Thymeleaf variable injection
+    	var caps = [[${caps}]];  // Thymeleaf variable injection
+    	var currentasset = [[${currentasset}]];
+    	var Non_Current_Assets = [[${Non_Current_Assets}]];
+    	var CurrentLiabilities = [[${CurrentLiabilities}]];
+    	var Expense_Account = [[${Expense_Account}]];
+    	
+    	
+    	
+    	
+
+
+    	  
+   
+        const trialBalanceBody = document.getElementById("tableBody");
+        let totalDebit = 0;
+        let totalCredit = 0;
+        let capitaln=document.getElementById("previous").value;
+
+        // Clear the trial balance table before adding new rows
+        trialBalanceBody.innerHTML = "";
+        
+       
+
+        // Static rows with placeholders for values
+        const staticRows = [
+            { id: 1, particular:  `<span onclick="toggleSubRows(this, 'Capital Account','1')">Capital<span class="arrow" style="float: right;">▶</span></span>`, debit: "0", credit:"" },
+            /*{ id: 2, particular: "Purchase", debit: "0", credit: "0" },
+            { id: 3, particular: "Purchase Return", debit: "0", credit: "0" },
+            { id: 4, particular: "Sale", debit: "0", credit: "0" },
+            { id: 5, particular: "Sale Return", debit: "0", credit: "0" },*/
+          
+            
+            
+            { id: 2, particular: "Drawings", debit: "0", credit: "0" },
+            { id: 3, particular: `<span onclick="toggleSubRows(this, 'Current Assets','3')">Current Assets<span class="arrow" style="float: right;">▶</span></span>`, debit: "0", credit: "0" },
+            { id: 4, particular: `<span onclick="toggleSubRows(this, 'Non-Current Assets','4')">Non-Current Assets<span class="arrow" style="float: right;">▶</span></span>`, debit: "0", credit: "0" },
+            { id: 5, particular: `<span onclick="toggleSubRows(this, 'Current Liabilities','5')">Current Liabilities<span class="arrow" style="float: right;">▶</span></span>`, debit: "0", credit: "0" },
+            { id: 6, particular: `<span onclick="toggleSubRows(this, 'Expense Account','6')">Expense<span class="arrow" style="float: right;">▶</span></span>`, debit: "0", credit: "0" },
+            { id: 7, particular: "Suspense", debit: "0", credit: "0" },
+            /*{ id: 9, particular: `<a href="#" onclick="purchase_pop()">Purchases</a>`, debit: "purchase total", credit: "0" },
+            { id: 8, particular: "Return Outwards", debit: "0", credit: "0" },
+            { id: 9, particular: "Loan from Others", debit: "0", credit: "0" },
+            { id: 10, particular: "Sundry Creditors", debit: "0", credit: "0" },
+            { id: 11, particular: "Administrator's Expenses", debit: "0", credit: "0" },
+            { id: 12, particular: "Cash in Hand", debit: "0", credit: "0" },
+            { id: 13, particular: "Bills Payable", debit: "0", credit: "0" },
+            { id: 14, particular:  `<a href="#" onclick="wages_pop()">Wages</a>`, debit: "salaries total", credit: "0" },
+            { id: 15, particular: "Opening Stock", debit: "0", credit: "0" },
+            { id: 16, particular: "Factory Expenses", debit: "0", credit: "0" },
+            { id: 17, particular: "Suspense", debit: "0", credit: "0" },*/
+        ];
+
+        // Add static rows to the trial balance
+        staticRows.forEach(row => {
+            trialBalanceBody.innerHTML += `
+                <tr>
+                    <td>${row.id}</td>
+                    <td>${row.particular}</td>
+                    <td></td>
+                    <td class="debit">${row.debit}</td>
+                    <td class="credit">${row.credit}</td>
+                </tr> `;
+                
+       
+        });
+
+        // Calculate totals for each table
+        const purchaseTotal = total_amount; // Purchase debit total
+        const salariesTotal = wages_amt; // Salaries debit total
+        const workOrderTotal = sale_amt; // Work Order credit total
+        const currentassettotal=currentasset;
+        const Non_Current_Assetstotal=Non_Current_Assets;
+        const CurrentLiabilitiestotal=CurrentLiabilities;
+       
+        
+        // Calculate grand total
+        const capitalAmount = caps;
+        
+        //totalDebit = purchaseTotal + salariesTotal;
+        totalDebit = currentassettotal+Expense_Account;
+        
+        //totalCredit = workOrderTotal+capitalAmount+Non_Current_Assetstotal+CurrentLiabilities;
+        totalCredit = capitalAmount+Non_Current_Assetstotal+CurrentLiabilities;
+        
+        //alert(totalDebit);
+        //alert(totalCredit);
+    
+ var suspense=0;
+var suspensetype="";
+        // Update specific static rows with calculated totals
+        trialBalanceBody.querySelectorAll("tr").forEach(row => {
+            const rowId = parseInt(row.cells[0].textContent);
+            if (rowId === 1) row.querySelector(".credit").textContent = capitalAmount.toFixed(2);
+            //if (rowId === 2) row.querySelector(".debit").textContent = parseFloat(purchaseTotal).toFixed(2);
+            if (rowId === 3) row.querySelector(".debit").textContent = parseFloat(currentassettotal).toFixed(2);
+            if (rowId === 4) row.querySelector(".debit").textContent = parseFloat(Non_Current_Assetstotal).toFixed(2);
+            if (rowId === 5) row.querySelector(".credit").textContent = parseFloat(CurrentLiabilitiestotal).toFixed(2);
+            if (rowId === 6) row.querySelector(".debit").textContent = parseFloat(Expense_Account).toFixed(2);
+            //if (rowId === 4) row.querySelector(".credit").textContent = workOrderTotal.toFixed(2);
+            
+            //if (rowId === 7) row.querySelector(".debit").textContent = '-'+parseFloat(total_amount).toFixed(2) // Purchase total
+            //if (rowId === 14) row.querySelector(".debit").textContent = '-'+parseFloat(wages_amt).toFixed(2); // Salaries total
+            //if (rowId === 2) row.querySelector(".credit").textContent = parseFloat(sale_amt).toFixed(2) // Sales/Work Order total
+     	   if (rowId === 7 && suspensetype === "credit") row.querySelector(".credit").textContent = suspense.toFixed(2);
+     	  if (rowId === 7 && suspensetype === "debit") row.querySelector(".debit").textContent = suspense.toFixed(2);
+           
+            
+            if(totalDebit > totalCredit){
+            	 console.log("credit")
+            	
+            	
+            	
+            	console.log("total debit" +totalDebit);
+            	console.log("total credit" +totalCredit);
+            	
+            	suspense= totalDebit - totalCredit;
+            	
+            	console.log("total suspense" +suspense);
+            	
+            	
+            	totalCredit= totalCredit + suspense;
+            	
+            	
+            	suspensetype="credit";
+            	
+            	
+            	
+            }
+             else if(totalDebit < totalCredit)
+            	{
+                  suspense=  totalCredit - totalDebit;
+                  console.log("debit")
+                  
+                   console.log(suspense);
+                  
+                  totalDebit= totalDebit + suspense;  
+
+              	suspensetype="debit";
+            	
+            	}
+           
+            
+        });
+
+       
+     
+        // Append totals to footer
+        document.getElementById("totalDebit").textContent =totalDebit.toFixed(2) || 0;
+        document.getElementById("totalCredit").textContent = totalCredit.toFixed(2) || 0;
+
+        // Check if debit and credit totals match
+        if (totalDebit !== totalCredit) {
+            console.warn("Total debit and credit amounts do not match!");
+        }
+    }
+
+    // Call the function to populate the trial balance table on page load
+   window.onload = populateTrialBalanceTable;
+
+   function toggleSubRows(element, rowType, rowId) {
+	    console.log("Row ID:", rowId); // Debugging
+
+	    // Find the current row element
+	    const currentRow = element.closest("tr");
+	    const newRowId = (parseFloat(rowId) + 0.1).toFixed(1);
+
+	    // Ensure rowType is safe for class names
+	    const safeRowType = rowType.replace(/\s+/g, "-");
+
+	    // Change arrow symbol dynamically
+	    let arrowSpan = element.querySelector(".arrow");
+
+	    if (arrowSpan.textContent === "▶") {
+	        arrowSpan.textContent = "▼"; // Open state
+
+	        $.ajax({
+	            url: `./getaccountdata?accountname=${encodeURIComponent(rowType)}`,
+	            type: 'GET',
+	            dataType: "json",
+	            success: function(res) {
+	                console.log("Response received:", res);
+
+	                if (!res || res.length === 0) return; // Exit if no data
+
+	                let nextRow = currentRow.nextElementSibling;
+
+	                if (!nextRow || !nextRow.classList.contains(`${safeRowType}-subrow`)) {
+	                    for (let i = 0; i < res.length; i++) {
+	                    	const rowNumber = (parseFloat(newRowId) + (res.length - 1 - i) * 0.1).toFixed(1);
+
+	                        const newRow = document.createElement("tr");
+	                        newRow.classList.add(`${safeRowType}-subrow`);
+
+	                        // Generate row content based on rowType
+	                        let rowContent = "";
+
+	                        if (rowType === 'Capital Account') {
+	                            rowContent = `
+	                                <td style="background-color: #f0f0f0; text-align: right;">${rowNumber}</td>
+	                                <td style="background-color: #f0f0f0; text-align: left;">${res[i].accountName}</td>
+	                                <td style="background-color: #f0f0f0; text-align: center;"></td>
+	                                <td class="debit" style="background-color: #f0f0f0; text-align: right;">0.00</td>
+	                                <td class="credit" style="background-color: #f0f0f0; text-align: right;">${res[i].accountBalance.toFixed(2)}</td>
+	                            `;
+	                        } else if (rowType === 'Current Assets' || rowType === 'Non-Current Assets' ||rowType === 'Expense Account') {
+	                            rowContent = `
+	                                <td style="background-color: #f0f0f0; text-align: right;">${rowNumber}</td>
+	                                <td style="background-color: #f0f0f0; text-align: left;">${res[i].accountName}</td>
+	                                <td style="background-color: #f0f0f0; text-align: center;"></td>
+	                                <td class="debit" style="background-color: #f0f0f0; text-align: right;">${res[i].accountBalance.toFixed(2)}</td>
+	                                <td class="credit" style="background-color: #f0f0f0; text-align: right;">0.00</td>
+	                            `;
+	                        } else if (rowType === 'Current Liabilities') {
+	                            rowContent = `
+	                                <td style="background-color: #f0f0f0; text-align: right;">${rowNumber}</td>
+	                                <td style="background-color: #f0f0f0; text-align: left;">${res[i].accountName}</td>
+	                                <td style="background-color: #f0f0f0; text-align: center;"></td>
+	                                <td class="debit" style="background-color: #f0f0f0; text-align: right;">0.00</td>
+	                                <td class="credit"  style="background-color: #f0f0f0; text-align: right;">${res[i].accountBalance.toFixed(2)}</td>
+	                            `;
+	                        }
+
+	                        newRow.innerHTML = rowContent;
+	                        currentRow.insertAdjacentElement("afterend", newRow);
+	                    }
+	                }
+	            },
+	            error: function(err) {
+	                console.error("Error fetching data:", err);
+	            }
+	        });
+
+	    } else {
+	        arrowSpan.textContent = "▶"; // Close state
+
+	        let nextRow = currentRow.nextElementSibling;
+
+	        while (nextRow && nextRow.classList.contains(`${safeRowType}-subrow`)) {
+	            console.log("Removing:", nextRow);
+	            const rowToRemove = nextRow;
+	            nextRow = nextRow.nextElementSibling;
+	            rowToRemove.remove();
+	        }
+	    }
+	}
+
+
+
+
+</script>
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar (Left) -->
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<!-- Main Content (Right) -->
+			<div class="col-sm-12">
+
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+							<form autocomplete="off" id="list_journal" method="POST">
+								<div class="card" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="float-left" style="padding: 5px;">
+											<div class="spur-card-title">Trail Balances</div>
+										</div>
+									</div>
+
+			
+									<div class="card-body" style="padding: 1rem;">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<!--<label for="from">Capital Amount</label>-->
+											</div>
+											<div class="col-sm-2">
+												<input type="hidden" id="previous"
+													th:value="${caps}"
+													class="form-control form-control-sm" autocomplete="off"
+													required />
+											</div>
+
+										</div>
+
+										<table id="consolidatedTrialBalance">
+											<thead>
+												<tr>
+													<th style="text-align: center;">S.No</th>
+													<th style="text-align: center;">Particular</th>
+													<th style="text-align: center;">L.F.</th>
+													<th style="text-align: center; width: 18%;">Debit</th>
+													<th style="text-align: center; width: 10%;">Credit</th>
+												</tr>
+											</thead>
+											<tbody id="tableBody">
+											<!-- Dynamic rows -->
+											</tbody>
+											<tfoot>
+												<tr>
+													<th colspan="3">Total</th>
+													<th id="totalDebit" class="debit"><span>-</span>0</th>
+													<th id="totalCredit" class="credit">0</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+
+
+									<div class=" col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button  class="btn btn-xs btn-dark" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button  class="btn btn-xs btn-dark" id="btnback"
+												onclick="back(event)">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<!------------------------pop up for purchase--------------------------------------  -->
+
+
+<div class="modal fade" id="addcat">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content fullscreen-modal">
+			<form action="#" method="post" class="w-100" id="HeadCodeCreation"
+				autocomplete="off">
+				<div
+					class="card-header d-flex justify-content-between align-items-center"
+					style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+					<div>
+						<i class="fas fa-file"></i> Values of Trial Balance
+					</div>
+					<div>
+						<!-- Additional header content if needed -->
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-row"
+						style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd;">
+						<!-- Trial Balance Table -->
+						<table class="table table-bordered table-striped">
+							<thead class="table-header"
+								style="position: sticky; top: 0; background: white; z-index: 2;">
+								<tr>
+									<th style="text-align: center">Srl.No.</th>
+									<th style="text-align: center">Description</th>
+									<th style="text-align: center">Remarks</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Main row for Current Assets -->
+								<tr data-bs-toggle="collapse" data-bs-target="#currentAssets"
+									class="clickable">
+									<td>1</td>
+									<td><a href="#" class="text-decoration-none">Current
+											Assets</a></td>
+									<td  style="text-align:right">Value</td>
+								</tr>
+								<!-- Sub-rows for Current Assets -->
+								<tr class="collapse" id="currentAssets"
+									th:each="item, index : ${Getunique}">
+									<td th:text="'1.' + (${index.index} + 1)"></td>
+									<td th:text="${item.description}"></td>
+									<td  style="text-align:right" th:text="${item.totalAmount}"></td>
+								</tr>
+
+
+
+								<!-- Main row for Non-Current Assets -->
+								<tr data-bs-toggle="collapse" data-bs-target="#nonCurrentAssets"
+									class="clickable">
+									<td>2</td>
+									<td><a href="#" class="text-decoration-none">Non-Current
+											Assets</a></td>
+									<td  style="text-align:right">Value</td>
+								</tr>
+								<tr class="collapse" id="nonCurrentAssets"
+									th:each="item, index : ${getUnique_non}">
+									<td th:text="'2.' + (${index.index} + 1)"></td>
+									<td th:text="${item.description}"></td>
+									<td  style="text-align:right"
+										th:text="${item.totalAmount != null ? #numbers.formatDecimal(item.totalAmount, 1, 2) : '0.00'}"></td>
+								</tr>
+
+
+							</tbody>
+						</table>
+
+
+					</div>
+					<br>
+					<div class="card-footer text-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+						<button class="btn btn-xs btn-dark" id="btnback"
+							onclick="closechange(event);">Close</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!------------------------pop up for Sale--------------------------------------  -->
+
+
+<div class="modal fade" id="addcat_sale">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content fullscreen-modal">
+			<form action="#" method="post" class="w-100" id="HeadCodeCreation"
+				autocomplete="off">
+				<div
+					class="card-header d-flex justify-content-between align-items-center"
+					style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+					<div>
+						<i class="fas fa-file"></i> Values of Trial Balance
+					</div>
+					<div>
+						<!-- Additional header content if needed -->
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-row"
+						style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd;">
+						<!-- Trial Balance Table -->
+						<table class="table table-bordered table-striped">
+							<thead class="table-header"
+								style="position: sticky; top: 0; background: white; z-index: 2;">
+								<tr>
+									<th style="text-align: center">Srl.No.</th>
+									<th style="text-align: center">Description</th>
+									<th style="text-align: center">Remarks</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Main row for Current Assets -->
+								<tr data-bs-toggle="collapse" data-bs-target="#currentAssets"
+									class="clickable">
+									<td>1</td>
+									<td><a href="#" class="text-decoration-none">Current
+											Assets</a></td>
+									<td  style="text-align:right">Value</td>
+								</tr>
+								<!-- Sub-rows for Current Assets -->
+								<tr class="collapse" id="currentAssets"
+									th:each="item, index : ${Getunique_sale}">
+									<td th:text="'1.' + (${index.index} + 1)"></td>
+									<td th:text="${item.description}"></td>
+									<td th:text="${item.totalAmount}"  style="text-align:right "></td>
+								</tr>
+
+
+
+								<!-- Main row for Non-Current Assets -->
+								<tr data-bs-toggle="collapse" data-bs-target="#nonCurrentAssets"
+									class="clickable">
+									<td>2</td>
+									<td><a href="#" class="text-decoration-none">Non-Current
+											Assets</a></td>
+									<td style="text-align:right">Value</td>
+								</tr>
+								<tr class="collapse" id="nonCurrentAssets"
+									th:each="item, index : ${getUnique_non_sale}">
+									<td th:text="'2.' + (${index.index} + 1)"></td>
+									<td th:text="${item.description}"></td>
+									<td  style="text-align:right"
+										th:text="${item.totalAmount != null ? #numbers.formatDecimal(item.totalAmount, 1, 2) : '0.00'}"></td>
+								</tr>
+
+
+							</tbody>
+						</table>
+
+
+					</div>
+					<br>
+					<div class="card-footer text-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+						<button class="btn btn-xs btn-dark" id="btnback"
+							onclick="closechange_sale(event);">Close</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+</html>

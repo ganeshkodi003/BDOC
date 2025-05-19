@@ -1,0 +1,62 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[LEAVE_MASTER]    Script Date: 4/22/2025 1:13:27 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[LEAVE_MASTER](
+	[LEAVE_REFERENCE] [varchar](50) NULL,
+	[RECORD_NO] [float] NULL,
+	[EMPLOYEE_ID] [varchar](50) NULL,
+	[EMPLOYEE_NAME] [varchar](50) NULL,
+	[DESIGNATION] [varchar](50) NULL,
+	[DATE_OF_JOIN] [datetime] NULL,
+	[LEAVE_CATEGORY] [varchar](20) NULL,
+	[NO_OF_DAYS] [varchar](20) NULL,
+	[FROM_DATE] [datetime] NULL,
+	[TO_DATE] [datetime] NULL,
+	[REASON_FOR_LEAVE] [varchar](100) NULL,
+	[REMARKS] [varchar](50) NULL,
+	[LEAVE_BLC] [varchar](20) NULL,
+	[MODIFY_FLG] [char](1) NULL,
+	[DEL_FLG] [char](1) NULL,
+	[ENTITY_FLG] [char](1) NULL,
+	[REJECT_REMARKS] [varchar](100) NULL,
+	[ENTRY_USER] [varchar](50) NULL,
+	[MODIFY_USER] [varchar](50) NULL,
+	[AUTH_USER] [varchar](50) NULL,
+	[ENTRY_TIME] [datetime] NULL,
+	[MODIFY_TIME] [datetime] NULL,
+	[AUTH_TIME] [datetime] NULL,
+	[STATUS] [varchar](30) NULL,
+	[YEAR] [float] NULL,
+	[DEVICE] [varchar](20) NULL,
+	[CASUAL_LEAVE] [float] NULL,
+	[APPR_EMAIL_1] [varchar](100) NULL,
+	[APPR_EMAIL_2] [varchar](100) NULL,
+	[APPR_EMAIL_3] [varchar](100) NULL,
+	[APPR_EMAIL_4] [varchar](100) NULL,
+	[APPR_EMAIL_5] [varchar](100) NULL,
+	[APPR_NO_DAYS_1] [float] NULL,
+	[APPR_NO_DAYS_2] [float] NULL,
+	[APPR_NO_DAYS_3] [float] NULL,
+	[APPR_NO_DAYS_4] [float] NULL,
+	[APPR_NO_DAYS_5] [float] NULL,
+	[APPR_EMAIL_STATUS_1] [varchar](30) NULL,
+	[APPR_EMAIL_STATUS_2] [varchar](30) NULL,
+	[APPR_EMAIL_STATUS_3] [varchar](30) NULL,
+	[APPR_EMAIL_STATUS_4] [varchar](30) NULL,
+	[APPR_EMAIL_STATUS_5] [varchar](30) NULL,
+	[APPROVAL_STAGE] [varchar](30) NULL,
+	[BRANCH_ID] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[LEAVE_MASTER] ADD  DEFAULT ('N') FOR [DEL_FLG]
+GO
+
+

@@ -1,0 +1,26 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[TM_EMPLOYEE_LEAVE_COUNTER]    Script Date: 4/22/2025 1:15:19 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TM_EMPLOYEE_LEAVE_COUNTER](
+	[LEAVE_REF] [varchar](50) NULL,
+	[RECORD_NO] [float] NULL,
+	[EMP_ID] [varchar](50) NULL,
+	[EMP_NAME] [varchar](50) NULL,
+	[LEAVE_CATEGORY] [varchar](100) NULL,
+	[LEAVE_COUNTER] [float] NULL,
+	[LEAVE_DATE] [datetime] NULL,
+	[LEAVE_DAY] [varchar](15) NULL,
+	[HALF_DAY_COUNTER] [char](1) NULL,
+	[LEAVE_DESC] [varchar](50) NULL,
+	[DEL_FLG] [char](1) NULL
+) ON [PRIMARY]
+GO
+
+

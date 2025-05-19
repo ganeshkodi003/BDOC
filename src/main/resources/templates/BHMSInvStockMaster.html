@@ -1,0 +1,397 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	$(function() {
+
+		$("#dataTables").DataTable({
+			"destroy" : true,
+			"scrollY" : 400,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"pageLength" : 100,
+			"lengthChange" : false,
+
+		});
+	});
+    $(document).ready(function () {
+        
+    	$("#Upload").on("click", function() {
+    		
+    		 $.ajax( {
+    		      url: './fileimport',
+    		      type: 'POST',
+    		      data: new FormData($("#fileuploadd")[0]),
+    		      enctype: 'multipart/form-data',
+    		      processData: false,
+    		      contentType: false
+    		    } );
+    		    e.preventDefault();
+    		  
+
+	
+});  
+});
+
+
+  
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+	
+	function searchTabletStock(a) {
+
+		
+			var pro_name =document.getElementById("product_name1").value;
+			var tyy = '';
+			console.log(pro_name);
+			
+			$('#currentStockList').empty();
+
+			$
+					.ajax({
+						url : "./getCurrentStockUsingProductName?product_name=" + pro_name,
+						type : 'GET',
+						
+
+						success : function(response) {
+							var selectedRefCode = response;
+							var trHTML = '';
+
+							$.each(response, function(key, value) {
+
+								var li = Object.entries(value);
+								//window.alert(value.MFR);
+								trHTML += '<tr id='+value['id']+'><td>' + value['id'] + '</td><td>' + value['MFR']
+										+ '</td><td>' + value['BATCH'] + '</td><td>' + value['PRODUCT_NAME']
+										+ '</td><td>' + value['CATEGORY_NAME'] + '</td><td>' + value['PKG']
+										+ '</td><td>' + value['UNITS'] + '</td><td>' + value['MRP']
+										+ '</td><td>' + value['SUB_UNITS'] + '</td><td>' + value['SUB_UNITS_COST']
+										+ '</td><td>' + value['GST_PERCENT']+ '</td><td>' + value['NO_OF_UNITS']+ '</td><td>'
+										+ '</td><td><i style="font-size: 16px; padding: 5px" class="fas fa-edit" onclick="show()"></i></td></tr>';
+							});
+							$('#dataTables').append(trHTML);
+							
+						}
+					});
+
+		
+	}
+	
+	function show() {
+		var rowId = event.target.parentNode.parentNode.id;
+		window.alert(rowId);
+		location.href = "./BHMSInvStockMasterEdit?id="+rowId
+	}
+
+	function back() {
+		location.href = './currentStock'
+			window.history.back();
+	}
+</script>
+
+<body>
+
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+
+		<form th:if="${mode}=='check'" autocomplete="off" id="generalpatient"
+			method="POST">
+
+			<div class="card ">
+
+				<div class="card-header"
+					style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+					<div class="spur-card-title">Stock Search</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<div class="form-row">
+
+						<div class="col-md-2">
+							<label>Product Name</label> <input type="text" name="combobox "
+								list="pronameList" id="product_name1"
+								onchange="searchTabletStock(this)">
+							<datalist id="pronameList">
+								<option th:each="operator : ${productList}"
+									th:value="${operator.PRODUCT_NAME}"
+									th:text="${operator.PRODUCT_NAME}"></option>
+							</datalist>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="card " id="DayBillingList" style="margin-top:10px;">
+
+				<div class="card-header"
+					style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+					<div class="spur-card-title">Stock Available</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+					<table class="table table-striped " id="dataTables"  >
+						<thead class="stats-secondary">
+							<tr>
+								<th style="font-size: 15px">Product ID</th>
+								<th style="font-size: 15px">MFR</th>
+								<th style="font-size: 15px">Batch</th>
+								<th style="font-size: 15px">Product Name</th>
+								<th style="font-size: 15px">Category Name</th>
+								<th style="font-size: 15px">PKG</th>
+								<th style="font-size: 15px">Units</th>
+								<th style="font-size: 15px">MRP</th>
+								<th style="font-size: 15px">Sub Units</th>
+								<th style="font-size: 15px">Sub Units Cost</th>
+								<th style="font-size: 15px; width: 50px">GST %</th>
+								<th style="font-size: 15px; width: 50px">No Of Units</th>
+								<!-- <th style="font-size: 15px; width: 50px">Expiry Date</th> -->
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="currentStockList">
+							<tr th:each="listItem : ${stockList}" th:id="${listItem[0]}"
+								class="userlist">
+								<td style="width: 100px" th:text="${listItem[0]}"></td>
+								<td style="width: 50px" th:text="${listItem[1]}"></td>
+								<td style="width: 50px" th:text="${listItem[2]}"></td>
+								<td style="width: 120px" th:text="${listItem[3]}"></td>
+								<td style="width: 120px" th:text="${listItem[4]}"></td>
+								<td style="width: 50px" th:text="${listItem[5]}"></td>
+								<td style="width: 50px" th:text="${listItem[6]}"></td>
+								<td style="width: 50px" th:text="${listItem[10]}"></td>
+								<td style="width: 100px" th:text="${listItem[7]}"></td>
+
+								<td style="width: 150px" th:text="${listItem[9]}"></td>
+								<td style="width: 100px" th:text="${listItem[11]}"></td>
+								<td style="width: 100px" th:text="${listItem[8]}"></td>
+								<!-- <td style="width: 100px" th:text="${listItem[12]}"></td> -->
+								<td style="width: 100px"><i
+									style="font-size: 16px; padding: 5px" class="fas fa-edit"
+									onclick="show()"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class=" col-sm-13 text-center">
+					<div class="card-footer text-center"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<button class="btn btn-xs btn-primary mr-2"
+							type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+						<button class="btn btn-xs btn-primary mr-2"
+							id="btnback" onclick="back()">Back</button>
+
+					</div>
+				</div>
+				</div>
+		</form>
+
+
+
+
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[Category]    Script Date: 4/22/2025 2:05:48 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Category](
+	[headcode] [varchar](100) NULL,
+	[headdescription] [varchar](100) NULL,
+	[categorycode] [varchar](100) NULL,
+	[categorydescription] [varchar](100) NULL,
+	[subcategorycode] [varchar](100) NULL,
+	[subcategorydescription] [varchar](100) NULL,
+	[assetcode] [varchar](100) NULL,
+	[del_flg] [varchar](100) NULL
+) ON [PRIMARY]
+GO
+
+

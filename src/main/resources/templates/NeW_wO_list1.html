@@ -1,0 +1,3296 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: center;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+fieldset {
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+</style>
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:1px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+<script>
+	
+function sales_Invoice(event){
+	//var id=document.getElementById('PIradio').value;
+	event.preventDefault();
+	var id = event.target.getAttribute('data-wid');
+	//alert(id);
+
+	location.href='./Sales_Invoice?formmode=saleinvoice&id=' + id;
+	}
+
+function history_view(a){
+	//var id=document.getElementById('PIradio').value;
+
+	var id=a.getAttribute('data-wid');
+
+	location.href='./new_wo_list1?formmode=historyview&id=' + id;
+	}
+
+
+function back(event) {
+
+	event.preventDefault();
+	window.history.back();
+}
+
+function historys(event){
+event.preventDefault();
+	
+	location.href='./new_wo_list1?formmode=history';
+}
+
+function POlist(event){
+	event.preventDefault();
+		location.href='./purchaseOrder?formmode=list';
+
+	}
+
+function registrationlist(event){
+	event.preventDefault();
+	location.href='./new_wo_list1';
+}
+</script>
+
+<script th:inline="javascript">
+document.addEventListener('DOMContentLoaded', () => {
+    // Event listener for the Add Row button
+    document.getElementById("addRowBtn").addEventListener("click", function (e) {
+        // Prevent the default behavior
+        e.preventDefault();
+
+        // Fetch the ItemList passed from Thymeleaf into JavaScript
+        var itemList = /*[[${ItemList}]]*/ [];
+
+        // Dynamically build the datalist options using the ItemList
+        let datalistOptions = '';
+        itemList.forEach(item => {
+            // Assuming item.itemCode is what you want to display in the datalist
+            datalistOptions += `<option value="${item.itemCode+'-'+item.itemName}" />`;
+        });
+        
+       
+
+        // Get the table body element where rows will be added
+        const table = document.getElementById("itemTable").getElementsByTagName("tbody")[0];
+        const rowCount = table.rows.length;  // Get current row count
+        const newRow = table.insertRow(rowCount);  // Insert a new row
+
+        // Add the new row with dynamic content
+        newRow.innerHTML = `
+            <td>${rowCount + 1}</td>
+            <td>
+                <input type="text" class="form-control" name="itemcode" placeholder="Code" list="itemList${rowCount + 1}" onchange="product_name_typeFunction1(this)">
+                <datalist id="itemList${rowCount + 1}">
+                    ${datalistOptions} <!-- Dynamically added options -->
+                </datalist>
+            </td>
+            <td><input type="text" class="form-control" name="item" id="item" placeholder="Item"></td>
+            <td><select class="form-control" name="batch" onchange="stockchange(this)" id="batch"><option>select</option></select>
+            <input type="hidden" class="form-control" name="HSN_code" id="hsncode" placeholder="HSN_code" ></td>	
+			<td><input type="text" class="form-control" name="stock"  id="stock" ></td>
+            <td><input type="number" class="form-control" name="qty" id="qty" oninput="updateAmount(this)" placeholder=" Qty"></td>
+            <td>
+                <select class="form-control" name="unit" id="unit">
+                    <option value="NONE">NONE</option>
+                    <option value="BAGS">BAGS</option>
+                    <option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+                    <option value="BOX">BOX</option>
+                    <option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+                    <option value="CANS">CANS (CAN)</option>
+                    <option value="CARTONS">CARTONS (CTN)</option>
+                    <option value="DOZENS">DOZENS (DZN)</option>
+                    <option value="GRAMMES">GRAMMES (GM)</option>
+                    <option value="KILOGRAMS">KILOGRAMS (KG)</option>
+                    <option value="LITRES">LITRES (LTR)</option>
+                    <option value="METERS">METERS (MTR)</option>
+                    <option value="MILILITRE">MILILITRE (ML)</option>
+                    <option value="NUMBERS">NUMBERS (NOS)</option>
+                    <option value="PACKS">PACKS (PAC)</option>
+                    <option value="PAIRS">PAIRS (PRS)</option>
+                    <option value="PIECES">PIECES (PCS)</option>
+                    <option value="QUINTAL">QUINTAL (QTL)</option>
+                    <option value="ROLLS">ROLLS (ROL)</option>
+                    <option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+                    <option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+                    <option value="TABLETS">TABLETS (TBS)</option>
+                </select>
+            </td>
+             <td><button class="btn btn-danger btn-sm remove-row">-</button></td>
+        `;
+        setTimeout(() => toggleTaxPercentage(), 1000);
+        updateTotals();
+    });
+});
+
+// Remove Row Functionality
+document.addEventListener("click", function (e) {
+    if (e.target && e.target.classList.contains("remove-row")) {
+        const row = e.target.closest("tr");
+        row.remove();
+        updateTotals();
+    }
+});
+</script>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+	paymenchange();
+	document.getElementById("paymentType").addEventListener("change", function () {
+	    const paymentType = this.value;
+
+	    // Reset visibility for fields
+	    document.getElementById("cashField").style.display = "none";
+	    document.getElementById("chequeField").style.display = "none";
+
+	    // Show relevant fields based on the selected payment type
+	    if (paymentType === "cash") {
+	        document.getElementById("cashField").style.display = "block";
+	    } else if (paymentType === "cheque" ||paymentType ==='Rtgs') {
+	        document.getElementById("cashField").style.display = "block"; // Show Amount field
+	        document.getElementById("chequeField").style.display = "block"; // Show Reference Number field
+	    }
+	});
+
+	// Dynamic Balance Calculation
+	document.getElementById("advanceAmount").addEventListener("input", function () {
+	    const total = parseFloat(document.getElementById("total").value) || 0;
+	    const advance = parseFloat(this.value) || 0;
+	    const balance = total - advance;
+	    document.getElementById("balance").value = balance.toFixed(2);
+	});
+
+
+});
+
+
+
+function paymenchange(){
+	const paymentType = document.getElementById("paymentType").value;
+
+    // Reset visibility for fields
+    document.getElementById("cashField").style.display = "none";
+    document.getElementById("chequeField").style.display = "none";
+
+    // Show relevant fields based on the selected payment type
+    if (paymentType === "cash") {
+        document.getElementById("cashField").style.display = "block";
+    } else if (paymentType === "cheque" ||paymentType ==='Rtgs') {
+        document.getElementById("cashField").style.display = "block"; // Show Amount field
+        document.getElementById("chequeField").style.display = "block"; // Show Reference Number field
+    }
+	
+}
+
+</script>
+
+<script>
+function product_name_typeFunction1(input) {
+    const row = input.closest('tr');
+    const codes = input.value;
+    const itemcodew = codes.split("-");
+    const code=itemcodew[0];
+    const item = row.querySelector('input[name="item"]');
+    
+    const hsncode = row.querySelector('input[name="HSN_code"]');
+    const qty = row.querySelector('input[name="qty"]');
+    const unit = row.querySelector('select[name="unit"]');
+    
+    /* const price = row.querySelector('input[name="price"]');
+    const taxPercentage = row.querySelector('select[name="taxPercentage"]');
+    const taxAmount = row.querySelector('input[name="taxAmount"]');
+    const amountPerItem = row.querySelector('input[name="amountPerItem"]');
+    const priceHeader =document.getElementById('priceHeader').value */
+    //alert(code);
+    $.ajax({
+        url: "./getitemdetails?code=" + encodeURIComponent(code),
+        type: 'GET',
+        dataType: "json",
+        success: function(res) {
+        	//alert("hi");
+            $.each(res, function(index, data) {
+                const values = Object.values(data);
+                item.value = values[0];
+                hsncode.value= values[1];     
+                //amountPerItem.value = values[6];
+                //price.value = values[6];
+                
+                qty.value = 0;
+                //price.value = values[18];
+                //alert(price.value)
+                unit.value = values[3];
+                //var saletype=document.getElementById('saletype').value;
+                //alert(saletype);
+                /*if(values[32]=='Amount'){
+                	
+                	if(saletype){
+                	if(saletype=='Retailer'){
+                		price.value = values[36];
+                    }
+                	else if(saletype=='Distributor'){
+                		price.value = values[33];
+                	}
+                	else if(saletype=='Customer'){
+                		price.value = values[34];
+                	}
+                	else if(saletype=='SS'){
+                		price.value = values[35];
+                	}
+                	}else{
+                		alert("please Select VendorId")
+                		location.reload();
+                	}
+                	
+                }else if(values[32]=='Percentage'){
+                	//alert("percentage")
+                	var percentage=0;
+                	var cal=0;
+                	var total=0;
+                	if(saletype=='Retailer'){
+                		percentage=values[36];
+                		cal=(values[6]/100)*percentage;
+                		//alert(cal)
+                		total=values[6]-cal;
+                		price.value = total.toFixed(2);
+                    }
+                	else if(saletype=='Distributor'){
+                		
+                		percentage=values[33];
+                		cal=(values[6]/100)*percentage;
+                		alert(cal)
+                		total=values[6]-cal;
+                		price.value = total.toFixed(2);
+                		
+                	}
+                	else if(saletype=='Customer'){
+                		
+                		percentage=values[34];
+                		cal=(values[6]/100)*percentage;
+                		alert(cal)
+                		total=values[6]-cal;
+                		price.value = total.toFixed(2);
+                	}
+                	else if(saletype=='SS'){
+                		
+                		percentage=values[35];
+                		cal=(values[6]/100)*percentage;
+                		alert(cal)
+                		total=values[6]-cal;
+                		price.value = total.toFixed(2);
+                	}
+                	else{
+                		alert("please Select VendorId")
+                		location.reload();
+                	}
+                	
+                }*/
+                
+                
+                
+
+            /* // Normalize and check the value
+                const headerValue = values[7].trim().toLowerCase();
+              		//alert(headerValue);
+                    document.getElementById('priceHeader').value = headerValue;
+                    
+                    if(headerValue=='withtax'){
+                    	taxPercentage.value = values[25];
+                    	calculateTax(input);
+                    }*/
+                    
+                   
+                    
+                
+            });
+            bachupdate1(input);
+            updateTotals();
+            updateAmount(input);
+           
+        }
+    });
+   
+}
+
+function bachupdate1(input){
+	const tableRows = document.querySelectorAll('#itemTable tbody tr');
+	const row = input.closest('tr');
+    const codes = input.value;
+    const itemcodew = codes.split("-");
+    const code=itemcodew[0];
+	const dfoption = document.createElement('option');
+	const batch =row.querySelector('select[name="batch"]');
+	batch.innerHTML = "";
+	dfoption.textContent = "Select";
+	batch.appendChild(dfoption);
+	
+	$.ajax({
+	        url: "./getfgdata?code="+code,
+	        type: 'GET',
+	        success: function(res) {
+	        	const batchSet = new Set(); 
+	        	
+	        	for (let p = 0; p < tableRows.length; p++) {
+	        	    const row = tableRows[p];
+
+	        	    if (row) { // Ensure row exists before accessing elements inside it
+	        	        const batchrow = row.querySelector('select[name="batch"]')?.value;
+	        	        const itemCoderow = row.querySelector('input[name="itemCode"]')?.value;
+
+	        	        if (batchrow) {
+	        	            batchSet.add(batchrow);
+	        	        }
+	        	    }
+	        	}
+
+	        	
+	        	    res.forEach((data) => {
+	        	        if (!batchSet.has(data.fgId)) {
+	        	            const newOption = document.createElement('option');
+	        	            newOption.textContent = data.fgId;
+	        	            newOption.value = data.fgId;
+	        	            batch.appendChild(newOption);
+	        	            fglist.push(data);
+	        	        }
+	        	    });
+	        	
+
+	        	
+	        }
+	    })
+	
+	
+}
+</script>
+
+
+<script>
+function calculateTax(input) {
+    // Get the row where the input or selection was triggered
+    const row = input.closest('tr');
+
+    // Get references to the price, tax percentage, and tax amount fields
+    const priceField = row.querySelector('#price');
+    const taxPercentageField = row.querySelector('#taxPercentage');
+    const taxAmountField = row.querySelector('#taxAmount');
+    const qty = row.querySelector('#qty').value||0;
+
+    // Parse price value
+    const price = parseFloat(priceField.value) || 0;
+
+    // Extract numeric value from the selected tax percentage option
+    const taxPercentageMatch = taxPercentageField.value.match(/[\d.]+/);
+    const taxPercentage = taxPercentageMatch ? parseFloat(taxPercentageMatch[0]) : 0;
+
+    // Calculate the tax amount
+    const taxAmount = (price * taxPercentage *qty) / 100;
+
+    // Update the taxAmount field
+    taxAmountField.value = price > 0 ? taxAmount.toFixed(2) : '';
+    updateAmount(input);
+}
+
+function updateTotals() {
+    // Get all rows in the table body
+    const rows = document.querySelectorAll('tbody tr');
+
+    let totalQty = 0;
+    let totalAmount = 0;
+    let finalTotal = 0;
+    let taxAmount=0;
+    
+    // Loop through each row and sum up the values
+    rows.forEach(row => {
+        // Get the quantity and amount fields in the current row
+        const qtyField = row.querySelector('#qty');
+        //const amountField = row.querySelector('#amountPerItem');
+        //const taxAmountf = row.querySelector('#taxAmount');
+        
+
+        
+
+        // Parse the values as numbers, default to 0 if invalid
+        const qty = parseFloat(qtyField?.value) || 0;
+        //const amount = parseFloat(amountField?.value) || 0;
+        //const taxAmounts = parseFloat(taxAmountf?.value) || 0;
+
+      
+
+        // Add to the totals
+        totalQty += qty;
+        //totalAmount += amount;
+        //taxAmount +=taxAmounts
+        // Calculate the total for this row and add to finalTotal
+        //finalTotal += (qty * amount);
+    });
+
+    // Update the footer fields
+    document.querySelector('#totalQty').value = totalQty.toFixed(2);
+    //document.querySelector('#totalAmount').value = totalAmount.toFixed(2);
+    //document.getElementById('totalAmounts').value = (taxAmount + totalAmount).toFixed(2);
+    //document.getElementById('totaltaxAmount').value =taxAmount .toFixed(2);
+    
+    //updateBalance();
+}
+
+
+let fglist=[];
+function bachupdate(){
+	
+	 $('#itemTable tbody tr').each(function (index) {
+	        const newrow = $(this);        	
+	const dfoption = document.createElement('option');
+	const itemcode = newrow.find('input[name="itemcode"]').val();
+	
+	const batch = newrow.find('select[name="batch"]')[0];
+	
+	batch.innerHTML = "";
+	dfoption.textContent = "Select";
+	batch.appendChild(dfoption);
+	
+	$.ajax({
+	        url: "./getfgdata?code="+itemcode,
+	        type: 'GET',
+	        success: function(res) {
+	        	
+	        	res.forEach((data) => {
+	        		fglist.push(data);
+	        		const newOption = document.createElement('option');
+	        		newOption.textContent=data.fgId;
+	        		newOption.value=data.fgId;
+	        		batch.appendChild(newOption);
+	        		
+	        	});
+	        	
+	        	console.log(fglist);
+	        	
+	        }
+	    })
+	 })
+	
+}
+
+</script>
+<script>
+// Function to update the balance
+function updateBalance() {
+    // Get the total amount and advance amount
+    const totalAmount = parseFloat(document.getElementById('totalAmounts').value) || 0;
+    const advanceAmount = parseFloat(document.getElementById('advanceAmount').value) || 0;
+      
+
+    // Calculate the balance (total - advance)
+    const balanceAmount = totalAmount - advanceAmount;
+
+    // Update the balance field
+    document.getElementById('balanceAmount').value = balanceAmount.toFixed(2); // Format with 2 decimal places
+    
+    const av = parseFloat(document.getElementById('advanceAmount').value) || 0;
+    //document.getElementById('paidAmount').value = av.toFixed(2); 
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	setTimeout(bachupdate,2000);
+	updateTotals()
+	// Optionally, if you want to trigger the balance calculation when the total amount changes
+document.getElementById('advanceAmount').addEventListener('input', updateBalance);
+});
+
+</script>
+
+
+<script>
+// Add event listener after DOM is loaded with an anonymous function
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('paidAmount').addEventListener('input', function() {
+    	
+        const paidAmount = parseFloat(document.getElementById('paidAmount').value) || 0;
+        
+        const totalAmount = parseFloat(document.getElementById('totalAmounts').value) || 0;
+        const advanceAmount = parseFloat(document.getElementById('advanceAmount').value) || 0;
+
+        const All=paidAmount + advanceAmount;
+        
+        const balanceAmount = totalAmount - All;
+
+        // Update the balance field
+        document.getElementById('balanceAmount').value = balanceAmount.toFixed(2);
+        
+       // setTimeout(updateTotals, 2000);
+        
+    });
+});
+</script>
+
+<script>
+
+function saleordermodify(event) {
+	  
+
+    let productLists = []; // Changed var to let for better scoping
+    const branchId = document.getElementById('branchId').value || "";
+    const vendorIds = document.getElementById('vendorId').value || 0;
+    const vendorIdw = vendorIds.split("-");
+    const vendorId=vendorIdw[0];
+	//alert(vendorId);
+	
+	const orderNo = document.getElementById('orderNo')?.value || 0;
+	const vendor_name = document.getElementById('vendorname').value || "";
+	const saletype = document.getElementById('saletype')?.value || 0;
+    const SHIPPING_ADDRESS = document.getElementById('SHIPPING_ADDRESS')?.value || 0;
+    const phoneno = document.getElementById('PHONE_NO')?.value || 0;
+    const orderDate = document.getElementById('orderDate')?.value || 0;
+    const woId = document.getElementById('woId')?.value || 0;
+    //const dueDate = document.getElementById('dueDate')?.value || 0;
+    const priceHeader = document.getElementById('priceHeader')?.value || 0;
+    const totalAmount = document.getElementById('totalAmounts')?.value || 0;
+    const totalQty = document.getElementById('totalQty')?.value || 0;
+    const paymentType = document.getElementById('paymentType')?.value || 0;
+    const paidAmount = document.getElementById('paidAmount')?.value ? parseFloat(document.getElementById('paidAmount').value) : 0;
+    const referenceNumber = document.getElementById('referenceNumber')?.value || 0;
+    const advanceAmount = document.getElementById('advanceAmount')?.value || 0;
+    const balanceAmount = document.getElementById('balanceAmount')?.value || 0;
+    
+    const deliverytype = document.getElementById('DeliveryType')?.value || null;
+	
+    // ---address ---
+    const bill_companyname = document.getElementById('bill_companyname')?.value || '';
+    const ship_companyname = document.getElementById('ship_companyname')?.value || '';
+    const bill_address = document.getElementById('bill_address')?.value || '';
+    const ship_address = document.getElementById('ship_address')?.value || '';
+    const bill_street = document.getElementById('bill_street')?.value || '';
+    const ship_street = document.getElementById('ship_street')?.value || '';
+    const bill_dis = document.getElementById('bill_dis')?.value || '';
+    const ship_dis = document.getElementById('ship_dis')?.value || '';
+    const bill_pincode = document.getElementById('bill_pincode')?.value || '';
+    const ship_pincode = document.getElementById('ship_pincode')?.value || '';
+    const bill_phno = document.getElementById('bill_phno')?.value || '';
+    const ship_phno = document.getElementById('ship_phno')?.value || '';
+    const bill_email = document.getElementById('bill_email')?.value || '';
+    const ship_email = document.getElementById('ship_email')?.value || '';
+    const bill_gstno = document.getElementById('bill_gstno')?.value || '';
+    const ship_gstno = document.getElementById('ship_gstno')?.value || '';
+
+    
+    if (paymentType=='cheque' && !referenceNumber){
+    	alert("Please fill cheque referenceNumber.");
+        return;
+    }
+    
+    if (!vendorIds || !branchId || !orderDate || !totalAmount || !advanceAmount ||!bill_companyname||!ship_companyname||!bill_address||!ship_address||!bill_dis||!ship_dis||!bill_pincode||!ship_pincode||!bill_phno||!ship_phno ||!deliverytype) {
+        alert("Please fill all the required fields in the form header.");
+        return; 
+    }
+    let isBatchSelected = true;
+    // Iterate through each row in the item table to gather item data
+    $('#itemTable tbody tr').each(function (index) {
+        const row = $(this);
+
+        const itemcodes = row.find('input[name="itemcode"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+        const item = row.find('input[name="item"]').val();
+        const batch = row.find('select[name="batch"]').val();
+        
+        if (batch.trim() === 'Select') {  
+        	alert("Please Select Batch In Row-"+index+1);
+        	 isBatchSelected = false;
+            return;  
+        }
+        const qty = row.find('input[name="qty"]').val();
+        const id = row.find('input[name="id"]')?.val()||null;
+        const unit = row.find('select[name="unit"]').val();
+        const price = row.find('input[name="price"]').val();
+        const taxPercentage = row.find('select[name="taxPercentage"]').val();
+        const taxAmount = row.find('input[name="taxAmount"]').val();
+        const amountPerItem = row.find('input[name="amountPerItem"]').val();
+        const stock = row.find('input[name="stock"]').val();
+        const hsncode = row.find('input[name="HSN_code"]').val(); 
+
+        // Log row data for debugging
+        console.log("Processing row " + index);
+        console.log({
+        	id,
+        	woId,
+        	
+        	ship_dis,
+        	orderNo,
+        	itemcode,
+            item,
+            qty,
+            unit,
+            price,
+            taxPercentage,
+            taxAmount,
+            amountPerItem
+        });
+
+        if (itemcode && item && qty && unit && price && taxPercentage && taxAmount && amountPerItem) {
+            const listItem = {
+            	woId,
+            	branchId,
+            	vendor_name,
+            	orderNo,
+            	saletype,
+            	itemcode,
+                item,
+                qty,
+                unit,
+                price,
+                taxPercentage,
+                taxAmount,
+                amountPerItem,
+                vendorId,
+                SHIPPING_ADDRESS,
+                phoneno,
+                orderDate,
+                priceHeader,
+                totalAmount,
+                totalQty,
+                paymentType,
+                paidAmount,
+                referenceNumber,
+                advanceAmount,
+                balanceAmount,
+                bill_companyname,
+                ship_companyname,
+                bill_address,
+                ship_address,
+                bill_street,
+                ship_street,
+                bill_dis,
+                bill_pincode,
+                ship_pincode,
+                bill_phno,
+                ship_phno,
+                bill_email,
+                ship_email,
+                bill_gstno,
+                ship_gstno,
+                ship_dis,
+                batch,
+                stock,
+                hsncode,
+                deliverytype
+            };
+            productLists.push(listItem);
+        } else {
+            console.warn(`Row ${index} is missing data and will be skipped.`);
+        }
+    });
+    
+    if (!isBatchSelected) {
+        return; // Exit function
+    }
+    //console.log("Product List to send:", JSON.stringify(productLists));
+
+    if (productLists.length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: './Addsaleinvoice?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productLists),
+            success: function (response) {
+            	$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+
+function Home() {
+
+	location.href = 'Dashboard';
+}
+
+
+function updateAmount(rowElement) {
+    // Get the current row based on the element that triggered the event
+    const row = rowElement.closest('tr');
+
+    // Get the price and quantity inputs within the current row
+    //const currentamount = parseFloat(row.querySelector('input[name="price"]').value) || 0; // Default to 0 if invalid or empty
+    const qty = parseFloat(row.querySelector('input[name="qty"]').value) || 0;// Default to 0 if invalid or empty
+    var stock =row.querySelector('input[name="stock"]').value;
+    //const taxAmountField = parseFloat(row.querySelector('input[name="taxAmount"]').value) || 0;
+	if(qty>stock){
+		row.querySelector('input[name="qty"]').value=stock;
+		var balance=qty-stock;
+		alert("Please Add Other Row And Give "+balance+" Quantity")
+		qty=stock;
+	}
+    // Calculate the total amount
+   
+    //const totalAmount = qty * currentamount;
+
+    // Update the amountPerItem field in the current row
+    //row.querySelector('input[name="amountPerItem"]').value = totalAmount.toFixed(2); // Format to 2 decimal places
+
+    // Call the function to update the overall totals
+    updateTotals();
+    //calculateTax(rowElement)
+}
+
+function stockchange(input){
+	const row = input.closest('tr');
+    const batch = input.value;
+   	var stock =row.querySelector('input[name="stock"]');
+   	var qty =row.querySelector('input[name="qty"]').value;
+    
+   	
+    
+    fglist.forEach((data) => {
+    	//alert(data.fgId);
+    	if(data.fgId==batch){
+    		//alert(batch);
+    		if(qty>data.usingQuantity){
+    			//alert(qty)
+    			row.querySelector('input[name="qty"]').value=data.usingQuantity;
+    			var balance=qty-data.usingQuantity;
+    			stock.value=data.usingQuantity;
+    			alert("Please Add Other Row And Give "+balance+" Quantity")
+    		}
+    		else{
+    		stock.value=data.usingQuantity;
+    		}
+    	}
+    })
+    
+    updateAmount(input)
+    
+    
+}
+
+
+</script>
+<script>
+
+function directsaleorder(event) {
+	  
+
+    let productLists = []; // Changed var to let for better scoping
+    const branchId = document.getElementById('branchId').value || "";
+    const vendorIds = document.getElementById('employee_id').value || 0;
+    const vendorIdw = vendorIds.split("-");
+    const vendorId=vendorIdw[0];
+	//alert(vendorId);
+	
+	const orderNo = document.getElementById('orderNo')?.value || 0;
+	const vendor_name = document.getElementById('resource_name').value || "";
+	
+     const phoneno = document.getElementById('PHONE_NO')?.value || 0;
+    const orderDate = document.getElementById('orderDate')?.value || 0;
+    const totalQty = document.getElementById('totalQty').value || 0;
+     let isBatchSelected = true;
+    // Iterate through each row in the item table to gather item data
+    $('#itemTable tbody tr').each(function (index) {
+        const row = $(this);
+
+        const itemcodes = row.find('input[name="itemcode"]').val();
+        const itemcodew = itemcodes.split("-");
+        const itemcode=itemcodew[0];
+        const item = row.find('input[name="item"]').val();
+        const batch = row.find('select[name="batch"]').val();
+        
+        if (batch.trim() === 'Select') {  
+        	alert("Please Select Batch In Row-"+index+1);
+        	 isBatchSelected = false;
+            return;  
+        }
+        const qty = row.find('input[name="qty"]').val();
+        //const id = row.find('input[name="id"]')?.val()||null;
+        const unit = row.find('select[name="unit"]').val();
+        const stock = row.find('input[name="stock"]').val();
+        const hsncode = row.find('input[name="HSN_code"]').val(); 
+
+        // Log row data for debugging
+        console.log("Processing row " + index);
+        console.log({
+        	orderNo,
+        	itemcode,
+            item,
+            qty,
+            unit
+            
+        });
+
+        if (itemcode && item && qty && unit) {
+            const listItem = {
+            	branchId,
+            	vendor_name,
+            	orderNo,
+            	itemcode,
+                item,
+                qty,
+                unit,
+                vendorId,
+                phoneno,
+                orderDate,
+                totalQty,
+                batch,
+                stock,
+                hsncode
+                
+            };
+            productLists.push(listItem);
+        } else {
+            console.warn(`Row ${index} is missing data and will be skipped.`);
+        }
+    });
+    
+    if (!isBatchSelected) {
+        return; // Exit function
+    }
+    //console.log("Product List to send:", JSON.stringify(productLists));
+
+    if (productLists.length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: './SaleOut?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productLists),
+            success: function (response) {
+            	$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+
+
+
+
+
+
+</script>
+
+<script>
+
+function flashprice(event){
+	event.preventDefault();
+    location.href='./SalesOrder?formmode=flashsale';
+}
+
+</script>
+
+<script>
+
+$(document).ready(function () {
+    $('#dataTables').DataTable({
+        "pageLength": 20,        // Set the number of rows per page
+        "lengthChange": false,   // Hide the dropdown for changing rows per page
+        "ordering": false,       // Disable column sorting
+        "searching": true,       // Enable global search
+        "info": true,            // Show table information
+        "pagingType": "simple_numbers", // Pagination with only numbers
+
+        // Customizing DOM structure to place search box at the top left
+
+        "dom": '<"top"f>rt<"bottom"ip><"clear">'
+    });
+
+    // Remove the "Search:" label and add a placeholder to the search input
+    $('.dataTables_filter label').contents().filter(function () {
+        return this.nodeType === Node.TEXT_NODE;
+    }).remove(); // Remove the text node containing "Search:"
+
+    // Add a placeholder to the input field
+    $('.dataTables_filter input')
+        .attr('placeholder', 'Search...')
+        .css('margin-left', '0'); // Adjust margin since the label is removed
+
+    // Align the search box to the left corner
+    $('.dataTables_filter').css({
+        "float": "left",
+        "text-align": "left"
+    });
+});
+
+
+function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+
+
+</script>
+<script>
+
+function toggleTaxPercentage() {
+    // Get the entire table
+    const table = document.getElementById("itemTable");
+    if (!table) {
+        alert("Table not found");
+        console.error("Table not found");
+        return;
+    }
+
+    // Get all rows in the table body (skipping the header rows)
+    const rows = table.querySelectorAll("tbody tr");
+
+    // Iterate over all rows
+    rows.forEach((row, index) => {
+       
+
+        // Get the taxPercentage dropdown in the current row
+        const taxPercentage = row.querySelector("select[name='taxPercentage']");
+        if (!taxPercentage) {
+            console.warn(`Tax Percentage dropdown not found in row ${index}`);
+            return;
+        }
+
+        // Enable or disable the taxPercentage dropdown based on the priceHeader value
+        if (priceHeader.value === "withtax") {
+            console.log(`With Tax Selected for row ${index}`);
+            taxPercentage.disabled = false;
+        } else if (priceHeader.value === "withouttax") {
+            console.log(`Without Tax Selected for row ${index}`);
+            taxPercentage.disabled = true;
+            taxPercentage.value = "NONE"; // Clear the selected value
+        } else {
+            console.log(`Default case for row ${index}`);
+            taxPercentage.disabled = false; // Enable for other cases
+        }
+    });
+}
+</script>
+<script>
+function follow_up(event) {
+    event.preventDefault();
+    currentdate();
+
+    var modalElement = document.getElementById('followUpModal');
+    if (modalElement) {
+        var myModal = new bootstrap.Modal(modalElement);
+        myModal.show();
+    } else {
+        console.error("Modal with ID 'followUpModal' not found!");
+    }
+}
+
+function currentdate() {
+    var dateField = document.getElementById("your_date_input_id");
+    if (dateField) {
+        var today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        dateField.value = today;
+    } else {
+        console.error("Element with ID 'your_date_input_id' not found!");
+    }
+}
+
+  function closeModal() {
+	  var myModal = new bootstrap.Modal(document.getElementById('followUpModal'));
+	  myModal.hide();  // This hides the modal using Bootstrap's modal API
+	}
+	
+
+  function submitFollowUp() {
+
+  	  // Safely fetch elements
+  	  const WoidS = document.getElementById("Woid");
+  	  const invoice_date = document.getElementById("invoice_date");
+  	  const balanceAmountS = document.getElementById("balanceAmount");
+  	  const DueDateS = document.getElementById("DueDate");
+  	  const ven_id = document.getElementById("ven_id");
+  	  
+  	  const woId = WoidS.value.trim();
+  	  const invoiceDate = invoice_date.value.trim();
+  	  const balanceAmount = balanceAmountS.value.trim();
+  	  const dueDate = DueDateS.value.trim();
+  	  const vendorId = ven_id.value.trim();
+  	 
+
+
+  	  // Prepare follow-up data
+  	  const followUpEntity = {
+  			woId,
+  			invoiceDate,
+  			balanceAmount,
+  			dueDate,
+  			vendorId,
+  	  };
+
+  	  // AJAX request
+  	  $.ajax({
+  	    type: "POST",
+  	    url: "./follow_up?formmode=add",
+  	    contentType: "application/json",
+  	    data: JSON.stringify(followUpEntity),
+  	    success: function (res) {
+  	    	//alert(res);
+  	    	
+    	$("#followUpModal").css('display', 'none'); 
+          	$("#alertmsg11").text(res);
+          	$('#alert11').modal("toggle");  
+  	      
+  	    },
+  	    error: function (xhr, status, error) {
+  	      console.error("AJAX error:", status, error);
+  	     // alert("An error occurred while saving Follow-Up details.");
+  	    },
+  	  });
+  }
+  
+  function closetab(){
+
+	  
+    	  $(".modal-backdrop").remove();
+  }
+  function follow_list(){
+
+  	$("#followUpModal").css('display', 'none'); 
+  	$('#follow_list').modal('show'); 	 
+  	
+  }
+  function closechangefollow(event){
+  	
+
+  	$("#followUpModal").css('display', 'none'); 
+  	location.reload();
+  }
+
+  function followsearchTable(tableId, inputId) {
+      // Get the value of the search input and convert it to lowercase for case-insensitive matching
+      var input = document.getElementById(inputId);
+      var filter = input.value.toLowerCase();
+      
+      // Get the table and its rows
+      var table = document.getElementById(tableId);
+      var rows = table.getElementsByTagName('tr');
+      
+      // Loop through each row (starting from index 1 to skip the header row)
+      for (var i = 1; i < rows.length; i++) {
+          var cells = rows[i].getElementsByTagName('td');
+          
+          // Initialize a variable to track if the row should be displayed
+          var rowMatch = false;
+          
+          // Loop through the columns of each row (each cell)
+          for (var j = 0; j < cells.length; j++) {
+              var cell = cells[j];
+              
+              // If the cell's content matches the search input, show the row
+              if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                  rowMatch = true;
+                  break;  // Exit loop early if match is found
+              }
+          }
+          
+          // Show or hide the row based on whether a match was found
+          if (rowMatch) {
+              rows[i].style.display = '';  // Show the row
+          } else {
+              rows[i].style.display = 'none';  // Hide the row
+          }
+      }
+  }
+  
+  function deletebyid(a){
+  	SRL_NO=a.getAttribute('data-Categoryid');
+  	$('#confirmationModal').modal('show');
+  	
+  	
+
+  	
+  }
+
+
+  function deletebyidtog(){
+  	$.ajax({
+  		url : './deleteCategory?SRL_NO='+SRL_NO,
+  		type : 'POST',
+  		success : function(response) {
+  			$('#confirmationModal').modal('hide');
+  			alert(response);
+  			location.reload();
+  			
+  		}
+  	});
+
+  	
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+	  let advanceAmount1 =document.getElementById("advanceAmount").value;
+	 
+	  automatictransaction();
+	    var invoiceDateField = document.getElementById("invoice_date");
+	    if (invoiceDateField) {
+	        var today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
+	        invoiceDateField.value = today;
+	    }
+	});
+
+</script>
+
+<script>
+
+
+function automatictransaction(){
+var paymentType = document.getElementById("paymentType");
+var automatictype=document.getElementById("automatictran").value;
+var chequeField=document.getElementById("chequeField");
+var amountField=document.getElementById("dynamicFields");
+
+
+
+
+
+
+
+if(automatictype==='No'){
+	paymentType.disabled = true;
+	   chequeField.querySelectorAll("input").forEach(input => input.disabled = true);
+       amountField.querySelectorAll("input").forEach(input => input.disabled = true);
+       paymentType.value="";
+       paymenchange();
+       document.getElementById("paidAmount").value=0;
+       document.getElementById("advanceAmount").value=advanceAmount1;
+       updateBalance();
+	}
+
+else{
+	paymentType.disabled =false;
+	 chequeField.querySelectorAll("input").forEach(input => input.disabled = false);
+     amountField.querySelectorAll("input").forEach(input => input.disabled = false);
+}
+}
+
+</script>
+
+
+		
+    
+    <script type="text/javascript">
+    
+    
+    
+    function select_branch() {
+        const branchId = document.getElementById('branchId').value;
+        console.log("Selected Branch ID: ", branchId);  // Debugging
+
+        $.ajax({
+            url: './getbranchlist_saleInv?branchId=' + branchId,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log("Received Response:", response); // Debugging
+
+                const tableBody = document.getElementById('dataTablesBody');
+                tableBody.innerHTML = ''; // Clear previous data
+
+                if (!response || response.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: red;">No records found.</td></tr>`;
+                    return;
+                }
+
+                response.forEach(wo => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${wo.woId ?? '-'}</td>
+                        <td>${wo.vendorId ?? '-'}</td>
+                        <td>${wo.orderDate ?? '-'}</td>
+ <td style="text-align: right;">${wo.totalQty ? wo.totalQty.toFixed(2) : '-'}</td>
+                        <td style="text-align: right;">${wo.totalAmount ? wo.totalAmount.toFixed(2) : '-'}</td>
+                        <td style="text-align: center;">
+                            <button data-wid="${wo.woId}" onclick="sales_Invoice(event)"
+                                style="border: 2px solid #007BFF; color: #007BFF; background-color: white; padding: 5px 10px; border-radius: 5px;">
+                                Print
+                            </button>
+                        </td>
+                        <td style="text-align: center;">
+                            <input type="radio" name="PIradio" data-wid="${wo.woId}" onclick="history_view(this)">
+                        </td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: ", error);
+                alert("Error: " + error);
+            }
+        });
+    }
+
+    function adddirectinvoice(event) {
+        event.preventDefault();
+       	location.href='./new_wo_list1?formmode=add';
+    }
+
+
+    
+    </script>
+    
+    <script>
+
+    function vendorchange() {
+        var empid = document.getElementById('employee_id').value;
+        if (!empid) {
+            alert("Employee ID is empty!");
+            return;
+        }
+      
+        var empidname = empid.split("-"); // ✅ Fix variable name
+      
+        var vendorname = document.getElementById('resource_name');
+        var PHONE_NO = document.getElementById('PHONE_NO');
+        var saletype = document.getElementById('saletype');
+        var bill_address = document.getElementById('bill_address');
+        var bill_street = document.getElementById('bill_street');
+        var bill_dis = document.getElementById('bill_dis');
+        var bill_pincode = document.getElementById('bill_pincode');
+        var bill_phno = document.getElementById('bill_phno');
+        var bill_email = document.getElementById('bill_email');
+        var bill_gstno = document.getElementById('bill_gstno');
+
+        const ship_companyname = document.getElementById('ship_companyname');
+        const ship_address = document.getElementById('ship_address');
+        const ship_street = document.getElementById('ship_street');
+        const ship_dis = document.getElementById('ship_dis');
+        const ship_pincode = document.getElementById('ship_pincode');
+        const ship_phno = document.getElementById('ship_phno');
+        const ship_email = document.getElementById('ship_email');
+        const ship_gstno = document.getElementById('ship_gstno');
+
+        vendorname.value = empidname[1];
+
+        console.log("Calling API for Employee ID:", empidname[0]); // ✅ Debugging
+
+        $.ajax({
+            url: "./getEmployee?empid=" + encodeURIComponent(empidname[0]),
+            type: 'GET',
+            success: function(res) {
+                console.log("Response:", res); // ✅ Debugging
+
+                if (!res) {
+                    alert("No data found for Employee ID: " + empidname[0]);
+                    return;
+                }
+
+                PHONE_NO.value = res.mobile;
+                saletype.value = res.salecategory;
+                bill_address.value = res.addr1;
+                bill_street.value = res.state;
+                bill_dis.value = res.buyerDistrict;
+                bill_pincode.value = res.postal_code;
+                bill_phno.value = res.cont_person_no;
+                bill_email.value = res.email;
+                bill_gstno.value = res.gstNo;
+
+                ship_companyname.value = "";
+                ship_address.value = "";
+                ship_street.value = "";
+                ship_dis.value = "";
+                ship_pincode.value = "";
+                ship_phno.value = "";
+                ship_email.value = "";
+                ship_gstno.value = "";
+
+                document.getElementById("shippedToCheckbox").checked = false;
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", error);
+                alert("Failed to fetch employee data. Check console for details.");
+            }
+        });
+    }
+
+
+
+
+
+
+function checkboxfindaddress(){
+	
+	let checkbox = document.getElementById("shippedToCheckbox");
+  
+    const bill_companyname = document.getElementById('bill_companyname')?.value || '';
+    const bill_address = document.getElementById('bill_address')?.value || '';
+    const bill_street = document.getElementById('bill_street')?.value || '';
+    const bill_dis = document.getElementById('bill_dis')?.value || '';
+    const bill_pincode = document.getElementById('bill_pincode')?.value || '';
+    const bill_phno = document.getElementById('bill_phno')?.value || '';
+    const bill_email = document.getElementById('bill_email')?.value || '';
+    const bill_gstno = document.getElementById('bill_gstno')?.value || '';
+   
+    const ship_companyname = document.getElementById('ship_companyname');
+    const ship_address = document.getElementById('ship_address');
+    const ship_street = document.getElementById('ship_street');
+    const ship_dis = document.getElementById('ship_dis');
+    const ship_pincode = document.getElementById('ship_pincode');
+    const ship_phno = document.getElementById('ship_phno');
+    const ship_email = document.getElementById('ship_email');
+    const ship_gstno = document.getElementById('ship_gstno');
+    
+    
+
+
+    if (checkbox.checked) {
+    	ship_companyname.value=bill_companyname ;
+    	ship_address.value=bill_address;
+    	ship_street.value=bill_street;
+    	ship_dis.value=bill_dis;
+    	ship_pincode.value=bill_pincode;
+    	ship_phno.value=bill_phno;
+    	ship_email.value=bill_email;
+    	ship_gstno.value=bill_gstno;        	       	        	
+    }
+    else{
+    	ship_companyname.value="" ;
+    	ship_address.value="";
+    	ship_street.value="";
+    	ship_dis.value="";
+    	ship_pincode.value="";
+    	ship_phno.value="";
+    	ship_email.value="";
+    	ship_gstno.value=""; 
+    
+    }
+    
+	}
+
+</script>
+    
+
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+
+
+
+
+				<!-------------------------------------------- edit start ----------------------------------------------->
+
+					<div class="container-fluid content" th:if="${formmode=='historyview'}" >
+
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class="fas fa-box-open"></i>Sale Out<span th:text="${'('+getlist[0].woId+')'}"></span>
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="registrationlist(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+
+							<!-- Form Body -->
+							<div class="card-body">
+
+								<div class="form-row mb-2">
+								
+									<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-auto">
+											<div class="form-floating">
+												<input class="form-control" id="branchId" name="branchId"
+													 readonly
+													th:value="${getlist[0]?.branchId}" /> <label for="branchId"
+													class="form-legend">Branch Id</label>
+											</div>
+										</div>
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="vendorId" th:value="${getlist[0].vendorId}"
+												id="vendorId" list="wolist" onchange="readMakelistOptions()" readonly>
+											<datalist id="wolist">
+												<!-- Dynamic Vendor Options -->
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.vendorId +'-'+ woList.vendorName}" th:text="${woList.vendorId +'-'+ woList.vendorName}"></option>
+											</datalist>
+											<label for="woid" class="form-legend">Employee</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="vendorname" th:value="${getlist[0].vendor_name}"
+												id="vendorname" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Employee Name</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="PHONE_NO" th:value="${getlist[0].phoneno}"
+												id="PHONE_NO" placeholder="Phone No."readonly> 
+												<input type="hidden" class="form-control" name="woId" th:value="${getlist[0].woId}"
+												id="woId" placeholder="Phone No."> 
+												<label
+												for="orderNo" class="form-legend">Phone No.</label>
+										</div>
+									</div>
+
+								<!-- <div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="saletype" th:value="${getlist[0].saletype}"  
+												id="saletype" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Sale Type</label>
+										</div>
+									</div> -->
+									
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="orderDate"th:value="${#dates.format(getlist[0].orderDate, 'dd-MM-yyyy')}"
+												id="orderDate" readonly > <label
+												for="orderDate" class="form-legend">Order Date</label>
+										</div>
+									</div>
+								
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" th:value="${getlist[0].orderNo}"  name="orderNo"
+												id="orderNo" placeholder="Order No." readonly > <label
+												for="orderNo" class="form-legend">Order No.</label>
+										</div>
+									</div>
+								</div>
+
+
+
+
+								
+								
+								
+								
+
+							<!-- <fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Address</legend>	
+							<table class="table table-bordered table-striped text-center"
+								id="address">
+								<thead style="background-color: #F5F5F5;">
+									<tr>
+										<th style="width: 9%;text-align:left;">Type</th>
+										<th style="width: 12%;">Company Name</th>
+										<th style="width: 10%;">Address</th>
+										<th style="width: 10%;">State</th>
+										<th style="width: 10%;">District</th>
+										<th style="width: 10%;">Pin Code</th>
+										<th style="width: 10%;">Tel No</th>
+										<th style="width: 10%;">Email</th>
+										<th style="width: 10%;">Gst No</th>
+										
+										
+									</tr>
+									
+								</thead>
+								<tbody>
+									<tr>
+										<th style=" text-align:left">Billed To</th>
+										<td><input type="text" id="bill_companyname" name="bill_companyname" th:value="${getlist[0].bill_companyname}" class="form-control" readonly/></td>
+										<td><input type="text" id="bill_address" name="bill_address" th:value="${getlist[0].bill_address}" class="form-control" readonly/></td>
+										<td><input type="text" id="bill_street" name="bill_street" th:value="${getlist[0].bill_street}"class="form-control" readonly/></td>
+										<td><input type="text" id="bill_dis" name="bill_dis" th:value="${getlist[0].bill_street}"class="form-control" readonly/></td>
+										<td><input type="text" id="bill_pincode" name="bill_pincode" th:value="${getlist[0].bill_pincode}" class="form-control" readonly /></td>
+										<td><input type="text" id="bill_phno" name="bill_phno" th:value="${getlist[0].bill_phno}" class="form-control" readonly/></td>
+										<td><input type="text" id="bill_email" name="bill_email" th:value="${getlist[0].bill_email}" class="form-control" readonly/></td>
+										<td><input type="text" id="bill_gstno" name="bill_gstno" th:value="${getlist[0].bill_gstno}" class="form-control" readonly/></td>		
+										
+										
+										
+									</tr>
+									
+								<tr>
+										<th style=" text-align:left;background-color: #F5F5F5;">Shipped To</th>
+										<td><input type="text" id="ship_companyname" th:value="${getlist[0].ship_companyname}" name="ship_companyname" class="form-control" readonly /></td>
+										<td><input type="text" id="ship_address"name="ship_address"th:value="${getlist[0].ship_address}"  class="form-control" readonly/></td>
+										<td><input type="text" id="ship_street"name="ship_street" th:value="${getlist[0].ship_street}" class="form-control" readonly/></td>
+										<td><input type="text" id="ship_dis"name="ship_dis" th:value="${getlist[0].ship_dis}" class="form-control" readonly/></td>
+										<td><input type="text" id="ship_pincode"name="ship_pincode" th:value="${getlist[0].ship_pincode}" class="form-control" readonly/></td>
+										<td><input type="text" id="ship_phno"name="ship_phno" th:value="${getlist[0].ship_phno}" class="form-control" readonly/></td>
+										<td><input type="text" id="ship_email"name="ship_email" th:value="${getlist[0].ship_email}" class="form-control" readonly/></td>
+										<td><input type="text" id="ship_gstno"name="ship_gstno" th:value="${getlist[0].ship_gstno}" class="form-control" readonly/></td>	
+										
+										
+										
+									</tr>
+									
+									
+								</tbody>
+							
+
+							</table>
+							</fieldset> -->
+						
+
+
+
+
+							<!-- Table -->
+								<fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Product</legend>
+								<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size:15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th style="width: 7%;">Srl No</th>
+											<th style="width: 10%;">Code</th>
+											<th style="width: 12%;">Item</th>
+											<th style="width: 10%;">Batch</th>
+											<th style="width: 8%;">Stock</th>
+											<th style="width: 9%;">Qty</th>
+											<th style="width: 14%;">Unit</th>
+											<!-- <th style="width: 7%;">Price/Unit</th>
+											<th colspan="2">Tax</th> 
+											<th style="width: 10%;">Amount</th>-->
+											
+										</tr>
+        <!-- <tr>
+            <th colspan="6"></th>
+             <th>
+                <select class="form-control form-control-sm mt-1" id="priceHeader" name="priceHeader" onchange="toggleTaxPercentage()" disabled style="background-color: #F5F5F5 !important;">
+                    <option value="">Select</option>
+                    <option value="withtax" th:selected="${getlist[0].priceHeader}=='withtax'">With Tax</option>
+                    <option value="withouttax" th:selected="${getlist[0].priceHeader}=='withouttax'">Without Tax</option>
+                    
+                </select>
+             </th>
+             <th ></th>
+            <th style="width: 12%;">%</th>
+            <th colspan="1" style="width: 8%;">Amount</th>
+            <th></th>
+          
+        </tr> -->
+    </thead>
+								<tbody>
+									<tr th:each="list,itr :${getlist}">
+										<td th:text="${itr.index+1}">1</td>
+										<td><input type="text" class="form-control" th:value="${list.itemcode}" id="itemcode"
+											name="itemcode" placeholder="Code" 
+											onchange="product_name_typeFunction1(this)" readonly> <datalist
+												id="itemList">
+												<option th:each="itemList : ${ItemList}"
+													th:value="${itemList.itemCode +'-'+itemList.itemName}"
+													th:text="${itemList.itemCode +'-'+itemList.itemName}"></option>
+											</datalist></td>
+										<td><input type="text" class="form-control" name="item"  th:value="${list.item}"
+											id="item" placeholder="Item" readonly>
+											<input type="hidden" class="form-control" name="id"  th:value="${list.id}"
+											id="id" readonly>
+											</td>
+										
+										
+										<td><input type="text" class="form-control"  name="batch" id="batch" th:value="${list.batch}" readonly  ></td>
+										<!--<td><input type="text" class="form-control" name="HSN_code"  th:value="${list.hsncode}" id="hsncode" placeholder="HSN_code" ></td>-->
+										
+										<td><input type="text" class="form-control" name="stock" th:value="${list.stock}"   id="stock" readonly></td>
+										
+										<td><input type="text" class="form-control" name="qty" th:value="${list.qty}" oninput="updateAmount(this)"
+											id="qty" placeholder=" Qty"readonly></td>
+										<td><input class="form-control" name="unit" id="unit" th:value="${list.unit}" readonly></td>
+										
+										<!--  <td><select class="form-control" name="unit" id="unit" disabled>
+												<option th:value="${list.unit}" th:text="${list.unit}">NONE</option>
+												<option value="BAGS">BAGS</option>
+												<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+												<option value="BOX">BOX</option>
+												<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+												<option value="CANS">CANS (CAN)</option>
+												<option value="CARTONS">CARTONS (CTN)</option>
+												<option value="DOZENS">DOZENS (DZN)</option>
+												<option value="GRAMMES">GRAMMES (GM)</option>
+												<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+												<option value="LITRES">LITRES (LTR)</option>
+												<option value="METERS">METERS (MTR)</option>
+												<option value="MILILITRE">MILILITRE (ML)</option>
+												<option value="NUMBERS">NUMBERS (NOS)</option>
+												<option value="PACKS">PACKS (PAC)</option>
+												<option value="PAIRS">PAIRS (PRS)</option>
+												<option value="PIECES">PIECES (PCS)</option>
+												<option value="QUINTAL">QUINTAL (QTL)</option>
+												<option value="ROLLS">ROLLS (ROL)</option>
+												<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+												<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+												<option value="TABLETS">TABLETS (TBS)</option>
+										</select></td>-->
+										<!-- <td><input type="text" class="form-control"
+											name="price" id="price" placeholder="Price" th:value="${list.price}"
+											oninput="calculateTax(this)" readonly></td>
+										<td><input class="form-control form-control-sm mt-1" id="taxPercentage" name="taxPercentage" th:value="${list.taxPercentage}" readonly></td>
+										<td><select class="form-control form-control-sm mt-1" disabled
+											id="taxPercentage" name="taxPercentage"
+											onchange="calculateTax(this)">
+												<option th:value="${list.taxPercentage}" th:text="${list.taxPercentage}" >NONE</option>
+												<option value="IGST@0%">IGST@0%</option>
+												<option value="CGST@0%">CGST@0%</option>
+												<option value="SGST@0%">SGST@0%</option>
+												<option value="IGST@0.25%">IGST@0.25%</option>
+												<option value="CGST@0.25%">CGST@0.25%</option>
+												<option value="SGST@0.25%">SGST@0.25%</option>
+												<option value="IGST@3%">IGST@3%</option>
+												<option value="CGST@3%">CGST@3%</option>
+												<option value="SGST@3%">SGST@3%</option>
+												<option value="IGST@5%">IGST@5%</option>
+												<option value="CGST@5%">CGST@5%</option>
+												<option value="SGST@5%">SGST@5%</option>
+												<option value="IGST@12%">IGST@12%</option>
+												<option value="CGST@12%">CGST@12%</option>
+												<option value="SGST@12%">SGST@12%</option>
+												<option value="IGST@18%">IGST@18%</option>
+												<option value="CGST@18%">CGST@18%</option>
+												<option value="SGST@18%">SGST@18%</option>
+												<option value="IGST@28%">IGST@28%</option>
+												<option value="CGST@28%">CGST@28%</option>
+												<option value="SGST@28%">SGST@28%</option>
+												<option value="EXEMPT">EXEMPT</option>
+										</select></td>
+										<td><input type="text" class="form-control" th:value="${list.taxAmount}"
+											name="taxAmount" id="taxAmount" placeholder="Tax Amount"
+											readonly></td>
+										<td><input type="text" class="form-control" th:value="${#numbers.formatDecimal(list.amountPerItem, 2, 2)}"
+											name="amountPerItem" id="amountPerItem" placeholder="Amount" readonly>
+										</td> -->
+										
+									</tr>
+								</tbody>
+								<tfoot>
+    <tr>
+        <th colspan="5" class="text-right">Total</th>
+        <th id="qtyTotalCell" style="font-weight: bold;">
+          <input type="text" class="form-control" name="totalQty" id="totalQty"  placeholder=" Qty" readonly>
+      </th>
+        <!-- <th colspan="3" class="text-right">Total Tax Amount</th>
+         <th  class="text-right"><input type="number" class="form-control" name="totaltaxAmount" id="totaltaxAmount" placeholder=" Total" readonly></th>
+        <th colspan="1">
+            <input type="text" class="form-control" name="totalAmount" id="totalAmount" placeholder=" Total" readonly>
+        </th> -->
+    </tr>
+</tfoot>
+
+							</table>
+
+							<!-- Add Row Button -->
+							<!--<button class="btn btn-primary" id="addRowBtn">+</button>-->
+							</fieldset>
+							<div></div>
+							<br>
+							
+							
+							<!-- Payment Section -->
+							<div class="row align-items-start">
+								<!-- Payment Type Dropdown -->
+								<!-- <div class="col-md-3">
+									<label for="paymentType"><strong>Payment Type</strong></label>
+									<select class="form-control" id="paymentType" disabled
+										name="paymentType">
+										<option value="" selected disabled>-- Select Payment
+											Type --</option>
+										<option value="cash" th:selected="${getlist[0].paymentType}=='cash'">CASH</option>
+										<option value="cheque" th:selected="${getlist[0].paymentType}=='cheque'">CHEQUE</option>
+										<option value="Rtgs" th:selected="${getlist[0].paymentType}=='Rtgs'">RTGS</option>
+									</select>
+									<div id="chequeField" style="display: none; margin-top: 10px;">
+										<label for="referenceNumber"><strong>Reference
+												Number</strong></label> <input type="text" th:value="${getlist[0].referenceNumber}" class="form-control"
+											id="referenceNumber" name="referenceNumber"
+											placeholder=" Reference Number" readonly>
+									</div>
+								</div>
+ -->
+								<!-- Amount and Reference Number (Dynamic Fields) -->
+								<div class="col-md-2" id="dynamicFields">
+									<div id="cashField" style="display: none;">
+										<label for="amount"><strong>Amount</strong></label> <input
+											type="number" class="form-control" id="paidAmount" th:value="${getlist[0].paidAmount}"
+											name="paidAmount" placeholder="Enter Amount" readonly>
+									</div>
+
+								</div>
+
+								<!-- Total, Advance, and Balance Fields -->
+								<!-- <div class="col-md-3 offset-md-4">
+									<div class="form-group">
+										<label for="total"><strong>Total</strong></label> <input
+											type="number" class="form-control" th:value="${getlist[0].totalAmount}" name="totalAmounts"
+											id="totalAmounts" placeholder="Total" readonly>
+									</div>
+									<div class="form-group mt-2">
+										<label for="advanceAmount"><strong>Advance
+												Amount</strong></label> <input type="number" th:value="${getlist[0].advanceAmount}" class="form-control"
+											id="advanceAmount" name="advanceAmount"
+											placeholder="Enter Advance Amount" readonly>
+									</div>
+									<div class="form-group mt-2">
+										<label for="balance"><strong>Balance</strong></label> <input
+											type="number" class="form-control" id="balanceAmount" th:value="${getlist[0].balanceAmount}"
+											name="balanceAmount" placeholder="Balance" readonly>
+									</div>
+								</div> -->
+							</div>
+
+
+							<br>
+
+							<div class="card-footer text-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+								<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+									onclick="Home()">Home</button>
+								<button type="button" class="btn btn-xs btn-dark" id="btnSubmit"
+									onclick="saleordermodify(event);" th:if="${formmode =='view'}" style="width: 120px">Submit</button>
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+									onclick="back(event)">Back</button>
+							</div>
+					</div>
+					</form>
+				</div>
+			</div>
+			<!--------------------------------------------- edit -->
+				
+					<div class="container-fluid content" th:if="${formmode =='view'}" >
+
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class="fas fa-box-open"></i> Convert To Sale-<span th:text="${'('+getlist[0].woId+')'}"></span>
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="registrationlist(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+
+							<!-- Form Body -->
+							<div class="table-responsive"
+										style="overflow-y: auto; height: 85vh; ">
+							<div class="card-body">
+
+								<div class="form-row mb-2">
+
+
+										<div class="form-group col-md-auto">
+											<div class="form-floating">
+												<input class="form-control" id="branchId" name="branchId"
+													th:if="${formmode=='view'}" readonly
+													th:value="${getlist[0]?.branchId}" /> <label for="branchId"
+													class="form-legend">Branch Id</label>
+											</div>
+										</div>
+										<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="vendorId" th:value="${getlist[0].vendorId}"
+												id="vendorId" list="wolist" onchange="readMakelistOptions()" readonly>
+											<datalist id="wolist">
+												<!-- Dynamic Vendor Options -->
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.vendorId +'-'+ woList.vendorName}" th:text="${woList.vendorId +'-'+ woList.vendorName}"></option>
+											</datalist>
+											<label for="woid" class="form-legend">Vendor</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="vendorname"
+												id="vendorname" th:value="${getlist[0].vendor_name}" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Vendor Name.</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="PHONE_NO" th:value="${getlist[0].phone_no}"
+												id="PHONE_NO" placeholder="Phone No." readonly> 
+												<input type="hidden" class="form-control" name="woId" th:value="${getlist[0].woId}"
+												id="woId" placeholder="Phone No."> 
+												<label
+												for="orderNo" class="form-legend">Phone No.</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="saletype" th:value="${getlist[0].saletype}" 
+												id="saletype" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Sale Type</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="orderDate"th:value="${#dates.format(getlist[0].orderDate, 'dd-MM-yyyy')}"
+												id="orderDate" readonly > <label
+												for="orderDate" class="form-legend">Order Date</label>
+										</div>
+									</div>
+
+									
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" th:value="${getlist[0].orderNo}"  name="orderNo"
+												id="orderNo" placeholder="Order No." readonly  > <label
+												for="orderNo" class="form-legend">Order No.</label>
+										</div>
+									</div>
+								</div>
+
+
+
+								
+
+								
+								
+								
+								
+
+								<fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Address</legend>
+							<table class="table table-bordered table-striped text-center"
+								id="address">
+								<thead style="background-color: #F5F5F5;">
+									<tr>
+										<th style="width: 9%;text-align:left;">Type</th>
+										<th style="width: 12%;">Company Name</th>
+										<th style="width: 10%;">Address</th>
+										<th style="width: 10%;">State</th>
+										<th style="width: 10%;">District</th>
+										<th style="width: 10%;">Pin Code</th>
+										<th style="width: 10%;">Tel No</th>
+										<th style="width: 10%;">Email</th>
+										<th style="width: 10%;">Gst No</th>
+										
+										
+									</tr>
+									
+								</thead>
+								<tbody>
+									<tr>
+										<th style=" text-align:left">Billed To</th>
+										<td><input type="text" id="bill_companyname" name="bill_companyname" th:value="${getlist[0].bill_companyname}" class="form-control" /></td>
+										<td><input type="text" id="bill_address" name="bill_address" th:value="${getlist[0].bill_address}" class="form-control" /></td>
+										<td><input type="text" id="bill_street" name="bill_street" th:value="${getlist[0].bill_street}"class="form-control" /></td>
+										<td><input type="text" id="bill_dis" name="bill_dis" th:value="${getlist[0].bill_street}"class="form-control" /></td>
+										<td><input type="text" id="bill_pincode" name="bill_pincode" th:value="${getlist[0].bill_pincode}" class="form-control"  /></td>
+										<td><input type="text" id="bill_phno" name="bill_phno" th:value="${getlist[0].bill_phno}" class="form-control" /></td>
+										<td><input type="text" id="bill_email" name="bill_email" th:value="${getlist[0].bill_email}" class="form-control" /></td>
+										<td><input type="text" id="bill_gstno" name="bill_gstno" th:value="${getlist[0].bill_gstno}" class="form-control" /></td>		
+										
+										
+										
+									</tr>
+									
+								<tr>
+										<th style=" text-align:left;background-color: #F5F5F5;">Shipped To</th>
+										<td><input type="text" id="ship_companyname" th:value="${getlist[0].ship_companyname}" name="ship_companyname" class="form-control"  /></td>
+										<td><input type="text" id="ship_address"name="ship_address"th:value="${getlist[0].ship_address}"  class="form-control" /></td>
+										<td><input type="text" id="ship_street"name="ship_street" th:value="${getlist[0].ship_street}" class="form-control" /></td>
+										<td><input type="text" id="ship_dis"name="ship_dis" th:value="${getlist[0].ship_dis}" class="form-control" /></td>
+										<td><input type="text" id="ship_pincode"name="ship_pincode" th:value="${getlist[0].ship_pincode}" class="form-control" /></td>
+										<td><input type="text" id="ship_phno"name="ship_phno" th:value="${getlist[0].ship_phno}" class="form-control" /></td>
+										<td><input type="text" id="ship_email"name="ship_email" th:value="${getlist[0].ship_email}" class="form-control" /></td>
+										<td><input type="text" id="ship_gstno"name="ship_gstno" th:value="${getlist[0].ship_gstno}" class="form-control" /></td>	
+										
+										
+										
+									</tr>
+									
+									
+								</tbody>
+							
+
+							</table>
+							</fieldset>
+
+
+
+				
+							<!-- Table -->
+							<fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Product</legend>
+							<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size:15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th style="width: 7%;">Srl No</th>
+											<th style="width: 9%;">Code</th>
+											<th style="width: 10%;">Item</th>
+											<th style="width: 10%;">Batch</th>
+											<th style="width: 8%;">Stock</th>
+											<th style="width: 9%;">Qty</th>
+											<th style="width: 14%;">Unit</th>
+											<th style="width: 7%;">Price/Unit</th>
+											<th colspan="2">Tax</th>
+											<th style="width: 10%;">Amount</th>
+											<th>Action</th>
+											
+										</tr>
+										
+        <tr>
+            <th colspan="6"></th>
+             <th>
+                <select class="form-control form-control-sm mt-1" id="priceHeader" name="priceHeader" onchange="toggleTaxPercentage(this)" style="background-color: #F5F5F5 !important;">
+                    <option value="">Select</option>
+                    <option value="withtax" th:selected="${getlist[0].priceHeader}=='withtax'">With Tax</option>
+                    <option value="withouttax" th:selected="${getlist[0].priceHeader}=='withouttax'">Without Tax</option>
+                </select>
+             </th>
+             <th ></th>
+            <th style="width: 12%;">%</th>
+            <th colspan="1">Amount</th>
+            <th></th>
+            <th></th>
+           
+        </tr>
+    </thead>
+							
+								<tbody>
+									<tr th:each="list,itr :${getlist}">
+										<td th:text="${itr.index+1}">1</td>
+										<td><input type="text" class="form-control" th:value="${list.itemcode}" id="itemcode"
+											name="itemcode" placeholder="Code" list="itemList"
+											onchange="product_name_typeFunction1(this)" > <datalist
+												id="itemList">
+												<option th:each="itemList : ${ItemList}"
+													th:value="${itemList.itemCode +'-'+itemList.itemName}"
+													th:text="${itemList.itemCode +'-'+itemList.itemName}"></option>
+											</datalist></td>
+										<td><input type="text" class="form-control" name="item"  th:value="${list.item}"
+											id="item" placeholder="Item" >
+											<input type="hidden" class="form-control" name="id"  th:value="${list.id}"
+											id="id" >
+											</td>
+										<td><select class="form-control" name="batch" id="batch" onchange="stockchange(this)"><option value="">select</option></select>
+										<input type="hidden" class="form-control" name="HSN_code"  th:value="${list.hsncode}" id="hsncode" placeholder="HSN_code" ></td>	
+										<!--<td><input type="text" class="form-control" name="HSN_code"  th:value="${list.hsncode}" id="hsncode" placeholder="HSN_code" ></td>-->
+										
+										<td><input type="text" class="form-control" name="stock"   id="stock" ></td>
+										
+										
+										<td><input type="number" class="form-control" name="qty" th:value="${list.qty}" oninput="updateAmount(this)"
+											id="qty" placeholder=" Qty"></td>
+										<td><select class="form-control" name="unit" id="unit" >
+												<option th:value="${list.unit}" th:text="${list.unit}">NONE</option>
+												<option value="BAGS">BAGS</option>
+												<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+												<option value="BOX">BOX</option>
+												<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+												<option value="CANS">CANS (CAN)</option>
+												<option value="CARTONS">CARTONS (CTN)</option>
+												<option value="DOZENS">DOZENS (DZN)</option>
+												<option value="GRAMMES">GRAMMES (GM)</option>
+												<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+												<option value="LITRES">LITRES (LTR)</option>
+												<option value="METERS">METERS (MTR)</option>
+												<option value="MILILITRE">MILILITRE (ML)</option>
+												<option value="NUMBERS">NUMBERS (NOS)</option>
+												<option value="PACKS">PACKS (PAC)</option>
+												<option value="PAIRS">PAIRS (PRS)</option>
+												<option value="PIECES">PIECES (PCS)</option>
+												<option value="QUINTAL">QUINTAL (QTL)</option>
+												<option value="ROLLS">ROLLS (ROL)</option>
+												<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+												<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+												<option value="TABLETS">TABLETS (TBS)</option>
+										</select></td>
+										<td><input type="number" class="form-control"
+											name="price" id="price" placeholder="Price" th:value="${list.price}"
+											oninput="calculateTax(this)" ></td>
+										<td><select class="form-control form-control-sm mt-1" 
+											id="taxPercentage" name="taxPercentage"
+											onchange="calculateTax(this)">
+												<option value="NONE">NONE</option>
+												<option value="IGST@0%" th:selected="${list.taxPercentage == 'IGST@0%'}">IGST@0%</option>
+												<option value="CGST@0%" th:selected="${list.taxPercentage == 'CGST@0%'}">CGST@0%</option>
+												<option value="SGST@0%" th:selected="${list.taxPercentage == 'SGST@0%'}">SGST@0%</option>
+												<option value="IGST@0.25%" th:selected="${list.taxPercentage == 'IGST@0.25%'}">IGST@0.25%</option>
+												<option value="CGST@0.25%" th:selected="${list.taxPercentage == 'CGST@0.25%'}">CGST@0.25%</option>
+												<option value="SGST@0.25%" th:selected="${list.taxPercentage == 'SGST@0.25%'}">SGST@0.25%</option>
+												<option value="IGST@3%" th:selected="${list.taxPercentage == 'IGST@3%'}">IGST@3%</option>
+												<option value="CGST@3%" th:selected="${list.taxPercentage == 'CGST@3%'}">CGST@3%</option>
+												<option value="SGST@3%" th:selected="${list.taxPercentage == 'SGST@3%'}">SGST@3%</option>
+												<option value="IGST@5%" th:selected="${list.taxPercentage == 'IGST@5%'}">IGST@5%</option>
+												<option value="CGST@5%" th:selected="${list.taxPercentage == 'CGST@5%'}">CGST@5%</option>
+												<option value="SGST@5%" th:selected="${list.taxPercentage == 'SGST@5%'}">SGST@5%</option>
+												<option value="IGST@12%" th:selected="${list.taxPercentage == 'IGST@12%'}">IGST@12%</option>
+												<option value="CGST@12%" th:selected="${list.taxPercentage == 'CGST@12%'}">CGST@12%</option>
+												<option value="SGST@12%" th:selected="${list.taxPercentage == 'SGST@12%'}">SGST@12%</option>
+												<option value="IGST@18%" th:selected="${list.taxPercentage == 'IGST@18%'}">IGST@18%</option>
+												<option value="CGST@18%" th:selected="${list.taxPercentage == 'CGST@18%'}">CGST@18%</option>
+												<option value="SGST@18%" th:selected="${list.taxPercentage == 'SGST@18%'}">SGST@18%</option>
+												<option value="IGST@28%" th:selected="${list.taxPercentage == 'IGST@28%'}">IGST@28%</option>
+												<option value="CGST@28%" th:selected="${list.taxPercentage == 'CGST@28%'}">CGST@28%</option>
+												<option value="SGST@28%" th:selected="${list.taxPercentage == 'SGST@28%'}">SGST@28%</option>
+												<option value="EXEMPT" th:selected="${list.taxPercentage == 'EXEMPT'}">EXEMPT</option>
+																								
+										</select></td>
+										<td><input type="text" class="form-control" th:value="${list.taxAmount}"
+											name="taxAmount" id="taxAmount" placeholder="Tax Amount"
+											></td>
+										<td><input type="number" class="form-control" th:value="${list.amountPerItem}"
+											name="amountPerItem" id="amountPerItem" placeholder="Amount" >
+										</td>
+										<td>
+											<button class="btn btn-danger btn-sm remove-row">-</button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+    <tr>
+        <th colspan="5" class="text-right">Total</th>
+        <th id="qtyTotalCell" style="font-weight: bold;">
+          <input type="text" class="form-control" name="totalQty" id="totalQty"  placeholder=" Qty" readonly >
+      </th>
+        <th colspan="3" class="text-right">Total Tax Amount</th>
+         <th  class="text-right"><input type="number" class="form-control" name="totaltaxAmount" id="totaltaxAmount" placeholder=" Total" ></th>
+        <th colspan="1">
+            <input type="number" class="form-control" name="totalAmount" id="totalAmount" placeholder=" Total" >
+        </th>
+    </tr>
+</tfoot>
+
+							</table>
+
+							<!-- Add Row Button -->
+							<button class="btn btn-primary" id="addRowBtn">+</button>
+							</fieldset>
+							<div></div>
+							<br>
+											<!-- -----ENABLE/DISABLED-- -->
+								<div class="row align-items-start">
+									<!-- Payment Type Dropdown -->
+									<div class="col-md-3">
+										<label for="Automatictransaction"><strong>Transaction Posting</strong></label>
+										<select class="form-control" id="automatictran" onchange="automatictransaction();"
+											name="">
+											
+											<option value="Yes">Yes</option>
+											<option value="No" selected>No</option>
+											
+
+										</select>
+										
+									</div>
+									</div>
+							
+							
+							<!-- Payment Section -->
+							<div class="row align-items-start">
+								<!-- Payment Type Dropdown -->
+								<div class="col-md-3">
+									<label for="paymentType"><strong>Payment Type</strong></label>
+									<select class="form-control" id="paymentType" 
+										name="paymentType">
+										<option value="" selected disabled>-- Select Payment
+											Type --</option>
+										<option value="cash">CASH</option>
+										<option value="cheque">CHEQUE</option>
+										<option value="Rtgs">RTGS</option>
+									</select>
+									<div id="chequeField" style="display: none; margin-top: 10px;">
+										<label for="referenceNumber"><strong>Reference
+												Number</strong></label> <input type="text" class="form-control"
+											id="referenceNumber" name="referenceNumber"
+											placeholder=" Reference Number" >
+									</div>
+								</div>
+
+								<!-- Amount and Reference Number (Dynamic Fields) -->
+								<div class="col-md-2" id="dynamicFields">
+									<div id="cashField" style="display: none;">
+										<label for="amount"><strong>Amount</strong></label> <input
+											type="number" class="form-control" id="paidAmount" value="0.00"
+											name="paidAmount" placeholder="Enter Amount" >
+									</div>
+
+								</div>
+
+								<!-- Total, Advance, and Balance Fields -->
+								<div class="col-md-3 offset-md-4">
+									<div class="form-group">
+										<label for="total"><strong>Total</strong></label> <input
+											type="number" class="form-control" th:value="${getlist[0].totalAmount}" name="totalAmounts"
+											id="totalAmounts" placeholder="Total" readonly >
+									</div>
+									<div class="form-group mt-2">
+										<label for="advanceAmount"><strong>Advance
+												Amount</strong></label> <input type="number" th:value="${getlist[0].advanceAmount}" class="form-control"
+											id="advanceAmount" name="advanceAmount"
+											placeholder="Enter Advance Amount"  readonly>
+									</div>
+									<div class="form-group mt-2">
+										<label for="balance"><strong>Balance</strong></label> <input
+											type="number" class="form-control" id="balanceAmount" th:value="${getlist[0].balanceAmount}"
+											name="balanceAmount" placeholder="Balance" readonly >
+										
+										<br>
+											
+										<label for="balance"><strong>Delivery Type</strong></label>
+										 <select class="form-control" id="DeliveryType" name="DeliveryType">
+												<option value="" selected disabled>-- Select Delivery Type --</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+										</select>
+												
+										<br>
+										<br>	
+											<button class="btn btn-dark w-100" onclick="follow_up(event);">
+    <i class="bi bi-calendar-check"></i> Follow-Up
+</button>
+
+
+										</div>
+								</div>
+							</div>
+
+
+							<br>
+							</div>
+							</div>
+
+							<div class="card-footer text-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+								<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+									onclick="Home()">Home</button>
+								<button type="button" class="btn btn-xs btn-dark" id="btnSubmit"
+									onclick="saleordermodify(event);" th:if="${formmode =='view'}" >Submit</button>
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+									onclick="back(event)">Back</button>
+							</div>
+					
+					</form>
+				</div>
+			</div>
+			
+			
+			
+			<!---------------------------------------------------------------- add------------------------------------------->
+			<div class="container-fluid content" th:if="${formmode}=='add'">
+
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+
+							<!-- Form Header -->
+							<div
+								class="card-header d-flex justify-content-between align-items-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+								<div>
+									<i class="fas fa-box-open"></i>Direct Sale Invoice
+								</div>
+								<div>
+									<button class="btn btn-light btn-sm"
+										style="color: black; font-weight: bold; border-color: black;"
+										onclick="registrationlist(event);">
+										<i class="fas fa-list mr-1"></i> List
+									</button>
+								</div>
+							</div>
+
+
+
+
+							<div class="table-responsive"
+										style="overflow-y: auto;overflow-x: hidden; max-height: 85vh;" >
+							<!-- Form Body -->
+							<div class="card-body">
+								
+								
+
+								<div class="form-row mb-2">
+								
+								<div class="form-group col-md-auto">
+										<div class="form-floating">
+											<select class="form-control" id="branchId" name="branchId">
+												<option value="">Select Branch</option>
+												<!-- Populate options dynamically using Thymeleaf -->
+												<option th:each="branchId : ${branchIds}"
+													th:value="${branchId}" th:text="${branchId}"></option>
+											</select>
+											 <label for="branchId" class="form-legend">Branch Id</label>
+										</div>
+									</div>
+								
+									<!-- Vendor Selection on the Left -->
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<!-- <input type="text" class="form-control" name="vendorId"
+												id="vendorId" list="wolist" onchange="vendorchange();" placeholder=""> -->
+												
+												<select class="form-control" name="employee_id"
+												id="employee_id"  onchange="vendorchange();">
+												<option>select Employee</option>
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.employee_id +'-'+ woList.resource_name}" 
+													th:text="${woList.employee_id +'-'+ woList.resource_name}"></option>
+												
+												
+												</select>
+												
+											<datalist id="wolist">
+												<!-- Dynamic Vendor Options -->
+												<option th:each="woList : ${getvendor}"
+													th:value="${woList.employee_id +'-'+ woList.resource_name}" th:text="${woList.employee_id +'-'+ woList.resource_name}"></option>
+											</datalist>
+											<label for="woid" class="form-legend">Employee</label>
+										</div>
+									</div>
+									
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="resource_name"
+												id="resource_name" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Employee Name.</label>
+										</div>
+									</div>
+									
+									<div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="PHONE_NO"
+												id="PHONE_NO" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Phone No.</label>
+										</div>
+									</div>
+									
+									<!-- <div class="form-group col-md-2">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="saletype"
+												id="saletype" placeholder="" readonly> <label
+												for="orderNo" class="form-legend">Sale Type</label>
+										</div>
+									</div>
+ -->									
+									
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" name="orderDate"
+												id="orderDate" th:value="${currentdatee}" readonly> <label
+												for="orderDate" class="form-legend">Order Date</label>
+										</div>
+									</div>
+									
+
+									<!-- Order No. on the Right -->
+									<div class="form-group col-md-1">
+										<div class="form-floating">
+											<input type="text" class="form-control" th:value="${wocount}" name="orderNo"
+												id="orderNo" placeholder="Order No." readonly> <label
+												for="orderNo" class="form-legend">Order No.</label>
+										</div>
+									</div>
+									
+									
+									
+								</div>
+
+
+
+								
+
+								
+								
+								
+								
+
+								<!-- <fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Address</legend>
+							<table class="table table-bordered table-striped text-center"
+								id="address">
+								<thead style="background-color: #F5F5F5;">
+									<tr>
+										<th style="width: 10%;text-align:left;">Type</th>
+										<th style="width: 12%;">Company Name</th>
+										<th style="width: 10%;">Address</th>
+										<th style="width: 10%;">State</th>
+										<th style="width: 10%;">District</th>
+										<th style="width: 10%;">Pin Code</th>
+										<th style="width: 10%;">Tel No</th>
+										<th style="width: 10%;">Email</th>
+										<th style="width: 10%;">Gst No</th>
+										
+										
+									</tr>
+									
+								</thead>
+								<tbody>
+									<tr>
+										<th style=" text-align:left">Billed To</th>
+										<td><input type="text" id="bill_companyname" name="bill_companyname"class="form-control" oninput="capitalizeInput(this)" /></td>
+										<td><input type="text" id="bill_address" name="bill_address" class="form-control" oninput="capitalizeInput(this)" /></td>
+										<td><input type="text" id="bill_street" name="bill_street"class="form-control" oninput="capitalizeInput(this)" /></td>
+										<td><input type="text" id="bill_dis" name="bill_dis"class="form-control" oninput="capitalizeInput(this)" /></td>
+										<td><input type="text" id="bill_pincode" name="bill_pincode"class="form-control"
+										oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);validateMobileNumberpinbill(this);" />
+										 <small id="pincodeill" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									  Valid 6-digit Pin</small></td>
+										<td><input type="text" id="bill_phno" name="bill_phno"class="form-control"
+										oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);" />
+										 <small id="mobileHelp" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									  Valid 10-digit </small></td>
+										<td><input type="text" id="bill_email" name="bill_email"class="form-control" 
+										
+										oninput="emailvalidations();"/>
+										<span id="emailError" style="color: red; font-size: 14px; display: none;">Invalid Email</span></td>
+										<td><input type="text" id="bill_gstno" name="bill_gstno"class="form-control" /></td>		
+										
+										
+										
+									</tr>
+									
+								<tr>
+										<th style="text-align: left; background-color: #F5F5F5; white-space: nowrap;">Shipped To <input type="checkbox" onclick="checkboxfindaddress()"  id="shippedToCheckbox"style="margin-left: 5px; vertical-align: middle;" title="Click For Same Address "></th>
+										<td><input type="text" id="ship_companyname"name="ship_companyname" class="form-control"  oninput="capitalizeInput(this)"/></td>
+										<td><input type="text" id="ship_address"name="ship_address" class="form-control"  oninput="capitalizeInput(this)"/></td>
+										<td><input type="text" id="ship_street"name="ship_street" class="form-control" oninput="capitalizeInput(this)" /></td>
+										<td><input type="text" id="ship_dis"name="ship_dis" class="form-control"  oninput="capitalizeInput(this)"/></td>
+										<td><input type="text" id="ship_pincode"name="ship_pincode" class="form-control" 
+										oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);validateMobileNumbershippin(this);" />
+										 <small id="pincodeship" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									  Valid 6-digit Pin</small></td>
+										<td><input type="text" id="ship_phno"name="ship_phno" class="form-control" 
+										oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumbership(this);"/>
+										 <small id="mobileHelpship" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									Valid 10-digit</small></td>
+										<td><input type="text" id="ship_email"name="ship_email" class="form-control"
+										oninput="emailvalidationsship();" />
+										<span id="emailErrorship" style="color: red; font-size: 14px; display: none;">Invalid Email </span></td>
+										<td><input type="text" id="ship_gstno"name="ship_gstno" class="form-control" />
+										</td>	
+										
+										
+										
+									</tr>
+									
+									
+								</tbody>
+							
+
+							</table>
+							
+							</fieldset> -->
+								<fieldset class="scheduler-boder">
+								<legend class="scheduler-boder" >Product</legend>
+							<table class="table table-bordered table-striped text-center"
+									id="itemTable" style="font-size:15px;">
+									<thead style="background-color: #F5F5F5;">
+										<tr>
+											<th style="width: 7%;">Srl No</th>
+											<th style="width: 9%;">Code</th>
+											<th style="width: 10%;">Item</th>
+											<th style="width: 10%;">Batch</th>
+											<th style="width: 8%;">Stock</th>
+											<th style="width: 9%;">Qty</th>
+											<th style="width: 14%;">Unit</th>
+<!-- <th style="width: 7%;">Price/Unit</th>
+											<th colspan="2">Tax</th>
+											<th style="width: 10%;">Amount</th> -->
+											<th style="width:15%;">Action</th>
+											
+										</tr>
+										
+        <!--<tr>
+            <th colspan="6"></th>
+             <th>
+                <select class="form-control form-control-sm mt-1" id="priceHeader" name="priceHeader" onchange="toggleTaxPercentage(this)" style="background-color: #F5F5F5 !important;">
+                    <option value="">Select</option>
+                    <option value="with--tax" >With Tax</option>
+                    <option value="withouttax">Without Tax</option>
+                </select>
+             </th>
+             <th ></th>
+            <th style="width: 12%;">%</th>
+            <th colspan="1">Amount</th>
+            <th></th>
+            <th></th>
+           
+        </tr>-->
+    </thead>
+							
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td><input type="text" class="form-control" id="itemcode"
+											name="itemcode" placeholder="Code" list="itemList"
+											onchange="product_name_typeFunction1(this)" > <datalist
+												id="itemList">
+												<option th:each="itemList : ${ItemList}"
+													th:value="${itemList.itemCode +'-'+itemList.itemName}"
+													th:text="${itemList.itemCode +'-'+itemList.itemName}"></option>
+											</datalist></td>
+										<td><input type="text" class="form-control" name="item" 
+											id="item" placeholder="Item" >
+											<input type="hidden" class="form-control" name="id" 
+											id="id" >
+											</td>
+										<td><select class="form-control" name="batch" id="batch" onchange="stockchange(this)"><option value="">select</option></select>
+										<input type="hidden" class="form-control" name="HSN_code"  id="hsncode" placeholder="HSN_code" ></td>	
+										<!--<td><input type="text" class="form-control" name="HSN_code"  th:value="${list.hsncode}" id="hsncode" placeholder="HSN_code" ></td>-->
+										
+										<td><input type="text" class="form-control" name="stock"   id="stock" ></td>
+										
+										
+										<td><input type="number" class="form-control" name="qty"  oninput="updateAmount(this)"
+											id="qty" placeholder=" Qty"></td>
+										<td><select class="form-control" name="unit" id="unit" >
+												<option >NONE</option>
+												<option value="BAGS">BAGS</option>
+												<option value="BOTTLES_BTL">BOTTLES (BTL)</option>
+												<option value="BOX">BOX</option>
+												<option value="BUNDLES_BDL">BUNDLES (BDL)</option>
+												<option value="CANS">CANS (CAN)</option>
+												<option value="CARTONS">CARTONS (CTN)</option>
+												<option value="DOZENS">DOZENS (DZN)</option>
+												<option value="GRAMMES">GRAMMES (GM)</option>
+												<option value="KILOGRAMS">KILOGRAMS (KG)</option>
+												<option value="LITRES">LITRES (LTR)</option>
+												<option value="METERS">METERS (MTR)</option>
+												<option value="MILILITRE">MILILITRE (ML)</option>
+												<option value="NUMBERS">NUMBERS (NOS)</option>
+												<option value="PACKS">PACKS (PAC)</option>
+												<option value="PAIRS">PAIRS (PRS)</option>
+												<option value="PIECES">PIECES (PCS)</option>
+												<option value="QUINTAL">QUINTAL (QTL)</option>
+												<option value="ROLLS">ROLLS (ROL)</option>
+												<option value="SQUARE_FEET">SQUARE FEET (SQF)</option>
+												<option value="SQUARE_METERS">SQUARE METERS (SQM)</option>
+												<option value="TABLETS">TABLETS (TBS)</option>
+										</select></td>
+										<!--<td><input type="number" class="form-control"
+											name="price" id="price" placeholder="Price" 
+											oninput="calculateTax(this)" ></td>-->
+										<!-- <td><select class="form-control form-control-sm mt-1" 
+											id="taxPercentage" name="taxPercentage"
+											onchange="calculateTax(this)">
+												<option value="NONE">NONE</option>
+												<option value="IGST@0%">IGST@0%</option>
+												<option value="CGST@0%">CGST@0%</option>
+												<option value="SGST@0%">SGST@0%</option>
+												<option value="IGST@0.25%">IGST@0.25%</option>
+												<option value="CGST@0.25%">CGST@0.25%</option>
+												<option value="SGST@0.25%">SGST@0.25%</option>
+												<option value="IGST@3%">IGST@3%</option>
+												<option value="CGST@3%">CGST@3%</option>
+												<option value="SGST@3%">SGST@3%</option>
+												<option value="IGST@5%">IGST@5%</option>
+												<option value="CGST@5%">CGST@5%</option>
+												<option value="SGST@5%">SGST@5%</option>
+												<option value="IGST@12%">IGST@12%</option>
+												<option value="CGST@12%">CGST@12%</option>
+												<option value="SGST@12%">SGST@12%</option>
+												<option value="IGST@18%">IGST@18%</option>
+												<option value="CGST@18%">CGST@18%</option>
+												<option value="SGST@18%">SGST@18%</option>
+												<option value="IGST@28%">IGST@28%</option>
+												<option value="CGST@28%">CGST@28%</option>
+												<option value="SGST@28%">SGST@28%</option>
+												<option value="EXEMPT">EXEMPT</option>
+																								
+										</select></td>
+										<td><input type="text" class="form-control"
+											name="taxAmount" id="taxAmount" placeholder="Tax Amount"
+											></td>
+										<td><input type="number" class="form-control" 
+											name="amountPerItem" id="amountPerItem" placeholder="Amount" >
+										</td> -->
+										<td>
+											<button class="btn btn-danger btn-sm remove-row">-</button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+    <tr>
+        <th colspan="5" class="text-right">Total</th>
+        <th id="qtyTotalCell" style="font-weight: bold;">
+          <input type="text" class="form-control" name="totalQty" id="totalQty"  placeholder=" Qty" readonly >
+      </th>
+       <!--  <th colspan="3" class="text-right">Total Tax Amount</th>
+         <th  class="text-right"><input type="number" class="form-control" name="totaltaxAmount" id="totaltaxAmount" placeholder=" Total" ></th>
+        <th colspan="1">
+            <input type="number" class="form-control" name="totalAmount" id="totalAmount" placeholder=" Total" >
+        </th> -->
+    </tr>
+</tfoot>
+
+							</table>
+
+							<!-- Add Row Button -->
+							<button class="btn btn-primary" id="addRowBtn">+</button>
+							</fieldset>
+
+
+							
+							<div></div>
+							<br>
+							
+							<!-- -----ENABLE/DISABLED-- -->
+								<div class="row align-items-start">
+									<!-- Payment Type Dropdown -->
+									<div class="col-md-3">
+										<!-- <label for="Automatictransaction"><strong>Transaction Posting</strong></label>
+										<select class="form-control" id="automatictran" onchange="automatictransaction();"
+											name="">
+											
+											<option value="Yes">Yes</option>
+											<option value="No" selected>No</option>
+											
+
+										</select> -->
+										
+									</div>
+									</div>
+							
+							
+							<!-- Payment Section -->
+							<div class="row align-items-start">
+								<!-- Payment Type Dropdown -->
+								<div class="col-md-3">
+									<!-- <label for="paymentType"><strong>Payment Type</strong></label>
+									<select class="form-control" id="paymentType"
+										name="paymentType">
+										<option value="" selected disabled>-- Select Payment
+											Type --</option>
+										<option value="cash">Cash</option>
+										<option value="cheque">Cheque</option>
+										<option value="Rtgs">RTGS</option>
+									</select> -->
+									<div id="chequeField" style="display: none; margin-top: 10px;">
+										<label for="referenceNumber"><strong>Reference
+												Number</strong></label> <input type="text" class="form-control"
+											id="referenceNumber" name="referenceNumber"
+											placeholder=" Reference Number">
+									</div>
+								</div>
+
+								<!-- Amount and Reference Number (Dynamic Fields) -->
+								<div class="col-md-2" id="dynamicFields">
+									<div id="cashField" style="display: none;">
+										<label for="amount"><strong>Amount</strong></label> <input
+											type="number" class="form-control" id="paidAmount"
+											name="paidAmount" placeholder="Enter Amount">
+									</div>
+
+								</div>
+
+								<!-- Total, Advance, and Balance Fields -->
+								<div class="col-md-3 offset-md-4">
+									<!-- <div class="form-group">
+										<label for="total"><strong>Total</strong></label> <input
+											type="number" class="form-control" name="totalAmounts"
+											id="totalAmounts" placeholder="Total" readonly>
+									</div>
+									<div class="form-group mt-2">
+										<label for="advanceAmount"><strong>Advance
+												Amount</strong></label> <input type="number" class="form-control"
+											id="advanceAmount" name="advanceAmount"
+											placeholder="Enter Advance Amount" readonly>
+									</div>
+									<div class="form-group mt-2">
+										<label for="balance"><strong>Balance</strong></label> <input
+											type="number" class="form-control" id="balanceAmount"
+											name="balanceAmount" placeholder="Balance" readonly>
+									</div>
+									<div class="form-group mt-2">
+									<label for="balance"><strong>Delivery Type</strong></label>
+										 <select class="form-control" id="DeliveryType" name="DeliveryType">
+												<option value="" selected disabled>-- Select Delivery Type --</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+										</select>
+										</div> -->
+								</div>
+							</div>
+
+
+							<br>
+
+							<div class="card-footer text-center"
+								style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+								<button class="btn btn-xs btn-dark" type="button" id="Dashboard"
+									onclick="Home()">Home</button>
+								<button type="button" class="btn btn-xs btn-dark" id="btnSubmit"
+									onclick="directsaleorder(event);" >Submit</button>
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+									onclick="back(event)">Back</button>
+							</div>
+					</div>
+					</div>
+					</form>
+				</div>
+			</div>
+
+				
+
+
+
+
+
+				<!-------------------------------------------- List start ----------------------------------------------->
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i> Sale out - List
+									</div>
+									<div>
+										<button class="btn btn-light btn-sm"
+											style="color: black; font-weight: bold; border-color: black;"
+											onclick="historys(event);">
+											<i class="fas fa-history mr-2"></i> History
+										</button>
+									</div>
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+									<!-- 	<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')"
+													class="form-control" />
+											</div>
+										</div> -->
+
+										<!-- Table for displaying journal entries -->
+										<div class="table-responsive"
+										style="overflow-y: auto;overflow-x: hidden; height: 85vh; margin-top:-20px">
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left;font-weight:bold;">WO Id</th>
+													<th style="text-align: left;font-weight:bold;">Vendor Id</th>
+													<th style="text-align: left;font-weight:bold;">Item</th>
+													<th style="text-align: left;font-weight:bold;">Order Date</th>
+													<th style="text-align: right;font-weight:bold;">Qty</th>
+													<th style="text-align: left;font-weight:bold;">Units</th>
+													<th style="text-align: right;font-weight:bold;">Total Amount</th>
+													<th style="text-align: center;font-weight:bold;">Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:if="${#lists.isEmpty(getitemlist)}">
+													<td colspan="8" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="vendor : ${getitemlist}">
+													<td th:text="${vendor.woId}" style="text-align: left;"></td>
+													<td th:text="${vendor.vendorId}"
+														style="text-align: left;"></td>
+													<td th:text="${vendor.item}" style="text-align: left;">
+													</td>
+													<td style="text-align: left;"
+														th:text="${#dates.format(vendor.orderDate, 'dd/MM/yyyy')}"></td>
+													<td th:text="${vendor.qty}" style="text-align: right;"></td>
+													<td th:text="${vendor.unit}" style="text-align: left;"></td>
+													<td th:text="${#numbers.formatDecimal(vendor.totalAmount,1,2)}"
+														style="text-align: right;"></td>
+													<td style="text-align: center;"><input type="radio"
+														name="PIradio" id="PIradio"
+														th:attr="data-wid=${vendor.woId}"
+														onclick="sales_Invoice(event)" value="yourValue">
+												</tr>
+											</tbody>
+										</table>
+										</div>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+				<!-------------------------------------- history --------------------------------------------------------->
+					
+					<div class="container-fluid content" th:if="${formmode}=='history'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div
+									class="card-header d-flex justify-content-between align-items-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+									<div>
+										<i class="fas fa-list mr-1"></i> Sale Out - list
+										
+									</div>
+								 	<div>
+								
+									<!--<input style="float:right;border-radius:8px;margin:2px;" type="button" class="btn btn-primary" onclick="flashprice(event);" value="Flash sale"/>-->
+									<select class="btn btn-light btn-sm" onchange="select_branch();"
+									        style="color: black; font-weight: bold; border: 2px solid black; height: 32px; margin-left: -10px;" 
+									        id="branchId" name="branchId">
+									        <option value="">Select Branch</option>
+									        <!-- Populate options dynamically using Thymeleaf -->
+									        <option th:each="branchId : ${branchIds}" th:value="${branchId}" th:text="${branchId}"></option>
+									    </select>
+									
+									<button class="btn btn-light btn-sm ms-2"
+									        style="color: black; font-weight: bold; border-color: black;"
+									        onclick="adddirectinvoice(event);">
+									        <i class="fas fa-user-plus mr-2"></i> Add
+									    </button>
+									
+									</div> 
+									
+									
+									
+								</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+									<!-- 	<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')"
+													class="form-control" />
+											</div>
+										</div> -->
+
+										<!-- Table for displaying journal entries -->
+										<div class="table-responsive"
+										style="overflow-y: auto;overflow-x: hidden; height: 85vh; margin-top:-20px">
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left;font-weight:bold;">WO Id</th>
+													<th style="text-align: left;font-weight:bold;">Employee Id</th>
+													<!--<th style="text-align: left;font-weight:bold;">Item</th>-->
+													<th style="text-align: left;font-weight:bold;">Order Date</th>
+													<th style="text-align: right;font-weight:bold;">Total Qty</th>
+													<!--<th style="text-align: left;font-weight:bold;">Units</th>
+													<th style="text-align: right;font-weight:bold;">Total Amount</th>
+													<th style="text-align: center;font-weight:bold;">Print</th>-->
+													<th style="text-align: center;font-weight:bold;">Action</th>
+												</tr>
+											</thead>
+											<tbody id="dataTablesBody">
+												<tr th:if="${#lists.isEmpty(getitemlist)}">
+													<td colspan="9" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="vendor : ${getitemlist}">
+													<td th:text="${vendor.woId}" style="text-align:left;"></td>
+													<td th:text="${vendor.vendorId}"
+														style="text-align: left;"></td>
+													<!--<td th:text="${vendor.item}" style="text-align:left ;">
+													</td>-->
+													<td style="text-align: left;"
+														th:text="${#dates.format(vendor.orderDate, 'dd-MM-yyyy')}"></td>
+													<!--<td th:text="${#numbers.formatDecimal(vendor.qty,1,2)}" style="text-align: right;"></td>-->
+													<td th:text="${#numbers.formatDecimal(vendor.totalQty,1,2)}" style="text-align: right;"></td>
+													<!--<td th:text="${vendor.unit}" style="text-align: left;"></td>
+													<td th:text="${#numbers.formatDecimal(vendor.totalAmount,1,2)}"
+														style="text-align: right;"></td>
+													<td style="text-align: center;"><button th:attr="data-wid=${vendor.woId}" onclick="sales_Invoice(event)" text="Print"  style="border: 2px solid #007BFF; color: #007BFF; background-color: white; padding: 5px 10px; border-radius: 5px;">print</button>	</td>											
+													-->
+													
+													<td style="text-align: center;"><input type="radio"
+														name="PIradio" id="PIradio"
+														th:attr="data-wid=${vendor.woId}"
+														onclick="history_view(this)" value="yourValue">
+												</tr>
+											</tbody>
+										</table>
+										</div>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+					<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn " data-dismiss="modal" style="background-color: #343a40; color:white"
+						onclick="registrationlist(event);">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+					
+					
+			</div>
+		</div>
+	</div>
+	
+	<!-- Confirmation Modal -->
+	<div class="modal fade" id="confirmationModal" tabindex="-1"
+		role="dialog" aria-labelledby="confirmationModalLabel"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="confirmationModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">Confirm
+						Deletion</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p>Are you sure you want to delete this Item?</p>
+					<button type="button" class="btn btn-primary" th:if="${formmode}=='deleteview'" id="confirmDeleteBtn"
+						onclick="deletebtnwithmodel();">Yes</button>
+					<button type="button" class="btn btn-primary" th:if="${formmode}=='first'" id="confirmDeleteBtn"
+						onclick="deletebyidtog();">Yes</button>	
+						
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal -->
+<div class="modal" id="followUpModal" tabindex="-1" aria-labelledby="followUpModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+				<div class="modal-header">
+					<div>
+						<h5 class="modal-title" id="followUpModalLabel"
+							style="font-size: large; font-weight: 700;">FOLLOW-UP</h5>
+					</div>
+					<div>
+						<input type="text" id="Woid" name="Woid" style=" transform: translateX(-60px);"
+							class="form-control form-control-sm" th:value="${getlist[0].woId}"  readonly>
+							
+					</div>
+					<div>
+<!-- 					<button th:value="${getlist[0].woId}"  class="btn btn-secondary" style="background-color:#377486; color:white;" onclick="follow_list();"> History </button>
+ -->					</div>
+				</div>
+				<div class="modal-body">
+				 <label for="invoice_date">Vendor Id:</label>
+				   <input type="text" id="ven_id" name="ven_id" 
+               class="form-control" 
+               th:value="${getvendor[0].vendorId}" readonly 
+               placeholder="Vendor ID">
+        <label for="invoice_date">Invoice Date:</label>
+        <input type="date" id="invoice_date" name="invoice_date" class="form-control" readonly />
+				
+        <label for="balanceAmount">Balance Amount:</label> 
+        <input type="number" id="balanceAmount" name="balanceAmount" 
+       class="form-control" 
+       th:value="${#numbers.formatDecimal(getlist[0].balanceAmount, 1, 2)}" readonly />
+
+        <label for="DueDate">Due Date:</label>
+        <input type="date" id="DueDate" name="DueDate" class="form-control"  />
+
+
+      </div>
+      <div class="modal-footer">
+<!--         <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+ -->      <button style="background-color: #343a40;color:white" type="button" class="btn " onclick="submitFollowUp();">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<div class=" modal fade" id="alert11">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg11"></p>
+					<button type="button" class="btn" data-dismiss="modal" style="background-color: #343a40; color:white"
+        onclick="closetab()">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

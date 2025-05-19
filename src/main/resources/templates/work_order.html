@@ -1,0 +1,1425 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	function back(event) {
+
+		event.preventDefault();
+		window.history.back();
+	}
+
+	function submitadd() {
+
+		if ($("#WorkOrder_add").valid()) {
+
+			$.ajax({
+				url : './AddWO',
+				type : 'POST',
+				data : $('#WorkOrder_add').serialize(),
+				success : function(response) {
+					$("#alertmsg").text(response);
+					$("#alert").modal("toggle");
+				}
+			});
+		}
+	}
+</script>
+
+<script>
+	function wolist() {
+		location.href = './work_order?formmode=list';
+
+	}
+
+	function Inquirescreen(a) {
+
+		var woid = a.getAttribute('data-workId');
+
+		location.href = './work_order?formmode=inquiry&workId=' + woid;
+	}
+
+	function modifyscreen(a) {
+
+		var woid = a.getAttribute('data-workId');
+
+		location.href = './work_order?formmode=modify&workId=' + woid;
+	}
+
+	function openverifywo(a) {
+
+		var woid = a.getAttribute('data-workId');
+		location.href = './work_order?formmode=verify&workId=' + woid;
+	}
+
+	function deleterecord(a) {
+		var woid = a.getAttribute('data-workId');
+
+		$.ajax({
+			url : './deletewo',
+			type : 'DELETE',
+			data : {
+				workId : woid
+			},
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+			},
+			error : function(xhr, status, error) {
+				console.error("Error deleting record:", error);
+				$("#alertmsg").text(
+						"An error occurred while deleting the record.");
+				$("#alert").modal("toggle");
+			}
+		});
+	}
+
+	function addWork(event) {
+		event.preventDefault();
+
+		location.href = './work_order?formmode=add';
+	}
+
+	function VerifyWo(a) {
+		//var woid = a.getAttribute('data-workId');
+
+		var woid = document.getElementById('woidd').value;
+
+		if (!woid) {
+			alert("Work ID not found.");
+			return;
+		}
+
+		$
+				.ajax({
+					url : './verifyWO',
+					type : 'POST',
+					data : {
+						workId : woid
+					},
+					success : function(response) {
+						$("#alertmsg").text(response);
+						$("#alert").modal("toggle");
+					},
+					error : function(xhr, status, error) {
+						console.error("Error in verifyWO:", status, error);
+						alert("There was an error processing the request. Please try again.");
+					}
+				});
+	}
+
+	function MOD_submitwo() {
+
+		//var po_id=document.getElementById('poId').value;
+
+		$.ajax({
+			url : './modifywo',
+			type : 'POST',
+			data : $('#wo_modify').serialize(),
+			success : function(response) {
+				$("#alertmsg").text(response);
+				$("#alert").modal("toggle");
+
+				//alert(response);
+				//location.reload();
+			}
+
+		});
+
+	}
+</script>
+
+
+<script>
+	function listt1(event) {
+		event.preventDefault();
+
+		var selectedvelue = document.getElementById('chooseorder').value;
+
+		if (selectedvelue === 'purchaseoredr') {
+			location.href = './purchaseOrder?formmode=list';
+
+		} else if (selectedvelue === 'workorder') {
+
+			location.href = './work_order';
+
+		}
+
+	}
+</script>
+
+<script>
+function vendardetails() {
+
+    
+    var vendorid = document.getElementById('vendorid').value;
+ 
+ 
+    $.ajax({
+        url: './getvendordetails?vendor_id=' + vendorid,
+        type: 'GET',  
+        success: function(response) {
+            if (response && response.length > 0) {
+             
+                var vendor = response[0];  
+
+            
+                document.getElementById('address').value = vendor.addressDetail1 || '';
+                document.getElementById('vendorname').value = vendor.vendorName || '';
+                document.getElementById('tax').value = vendor.faxNo || '';
+            } else {
+               
+                document.getElementById('address').value = '';
+                document.getElementById('tax').value = '';
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error: " + status + " - " + error);
+            alert("Error fetching vendor details.");
+        }
+    });
+}
+
+</script>
+
+
+<script>
+function wopdfdownload(event,a){
+	
+	event.preventDefault();
+	
+	var woid=a.getAttribute('data-workId');
+	
+
+	
+	location.href='./downloadWorkOrder?workId=' + woid;
+}
+
+</script>
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" th:object="${WorkOrder_add}" method="post"
+							class="w-100" id="WorkOrder_add" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Work Order</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<!-- <button class="btn btn-primary" onclick="add(event);">Add</button> -->
+										<button class="btn btn-primary" onclick="wolist();">list</button>
+
+									</div>
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										
+										<div class="row formline" style="margin-top: 20px;">
+											
+											
+											<div class="col-sm-2">
+												<label for="from">Vendor ID</label>
+											</div>
+											<div class="col-sm-3">
+
+												<input type="text" id="vendorid" list="makelist"
+													name="VendorId" required
+													class="form-control form-control-sm"
+													onchange="vendardetails();" autocomplete="off" />
+												<datalist id="makelist">
+													<option th:each="operator : ${vendordetails}"
+														th:value="${operator}" th:text="${operator}"></option>
+												</datalist>
+
+
+											</div>
+											
+											<div class="col-sm-1"></div>
+											
+											<div class="col-sm-2">
+												<label for="from">Vendor Name</label>
+											</div>
+											<div class="col-sm-3">
+
+												<input type="text" id="vendorname" list="makelist"
+													name="vendorName" required
+													class="form-control form-control-sm"
+													autocomplete="off" />
+												
+
+											</div>
+
+											</div>
+										
+										<div class="row formline" style="margin-top: 20px;">
+										
+											<div class="col-sm-2">
+												<label for="to">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="address" name="Address" required
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+											
+											<div class="col-sm-1"></div>
+												
+											<div class="col-sm-2">
+												<label for="fromAcctype">Item</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="item" name="item" required
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+										</div>
+
+										
+										
+											
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="toAcctype">Qty</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="quantity" name="qty" required
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="expirydate">Rate</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="rate" name="rate" required
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="tax">Tax</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="tax" name="tax" required
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="categoryName">Freight</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="freight" id="freight"
+													class="form-control form-control-sm" autocomplete="off"
+													required>
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="to">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="date" id="date" name="date" required
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="entrydate">HSN/Sac Code</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="hsnSacCode" name="hsnSacCode"
+													required class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+											
+
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+
+											<div class="col-sm-2">
+												<label for="payment">Payment type</label>
+											</div>
+											<div class="col-sm-3">
+												<select id="paymenttype" class="form-control form-control-sm" name="Paymenttype" required>
+												<option value="">-select-</option>
+												<option VALUE="CASH">CASH</option>
+												<option VALUE="CARD">CARD</option>
+												<option VALUE="CASH AT BANK">CASH AT BANK</option>
+												</select>
+
+											</div>																						
+											
+										</div>
+										
+
+									</div>
+								</div>
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Terms</h6>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Payment Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="payment_terms" name="paymentTerms"
+													required class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="from">Freight</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="freight_terms" name="freightTerms"
+													required class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+
+
+
+											<div class="col-sm-2">
+												<label for="from">Delivery Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="delivery_terms" name="deliveryTerms"
+													required class="form-control form-control-sm"
+													autocomplete="off" />
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-primary" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-primary"
+										id="btnSubmit" onclick="submitadd();" style="width: 120px">Submit</button>
+
+									<button class="btn btn-xs btn-primary" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+				<!-- ---------WORK ORDER LIST----- -->
+
+
+				<div class="container-fluid content" th:if="${formmode}=='list'">
+					<div class="row">
+						<div class="col-sm-12">
+							<form autocomplete="off" id="generalpatient" method="POST">
+								<div class="card" id="DayBillingList" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<div class="float-left" style="padding: 5px;">
+											<div class="spur-card-title">List Of Work Order</div>
+										</div>
+										<div class="float-right" style="padding: 5px;">
+											<button class="btn btn-primary" onclick="addWork(event);">Add</button>
+
+										</div>
+
+									</div>
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div class="row w-50">
+												<div class="col-sm-5">
+													<select id="chooseorder" onchange="listt1(event);"
+														class="form-control">
+														<option value="">Select Order Type</option>
+														<option value="purchaseoredr">Purchase Order</option>
+														<option value="workorder">WorkOrder</option>
+													</select>
+												</div>
+
+												<div class="col-sm-4"></div>
+											</div>
+											<!-- Input moved outside the row and aligned to the right -->
+											<div class="d-flex justify-content-end">
+												<input style="padding-right: 50px;" type="text"
+													id="searchInput" placeholder="Search..."
+													onkeyup="searchTable()" class="form-control row-formline" />
+											</div>
+										</div>
+
+
+										<div></div>
+
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: center;">ID</th>
+													<th style="text-align: center;">Vendor Name</th>
+													<th style="text-align: center;">Date</th>
+													<th style="text-align: center;">Item</th>
+													<th style="text-align: center;">Qty</th>
+													<th style="text-align: center;">HSN/Sac Code</th>
+													<th style="text-align: center;">Rate</th>
+													<th style="text-align: center;">Tax</th>
+													<th style="text-align: center;">Freight</th>
+													<th style="text-align: center;">Status</th>
+													<th style="text-align: center;">Action</th>
+													<th style="text-align: center;"></th>
+
+												</tr>
+											</thead>
+											<tbody id="table-body" th:if="${#lists.isEmpty(poList)}">
+												<tr>
+													<td colspan="10" style="text-align: center; color: red;">No
+														records found.</td>
+												</tr>
+											</tbody>
+											<tbody id="table-body" th:each="GetList :${poList}">
+												<tr style="text-align: center;">
+													<td th:text="${GetList.workId}"></td>
+													<td th:text="${GetList.vendorName}"></td>
+													<td th:text="${#dates.format(GetList.date, 'dd-MM-yyyy')}"></td>
+													<td th:text="${GetList.item}"></td>
+													<td th:text="${GetList.qty}"></td>
+													<td th:text="${GetList.hsnSacCode}"></td>
+													<td th:text="${GetList.rate}"></td>
+													<td th:text="${GetList.tax}"></td>
+													<td th:text="${GetList.freight}"></td>
+													<td
+														th:text="${GetList.verifyFlg.toString() == 'N' ? 'unverified' : 'verified'}"
+														th:style="${GetList.verifyFlg.toString() == 'N' ? 'color:red' : 'color:green'}">
+													</td>
+
+
+
+
+
+
+
+													<td>
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title=" Modify"
+																	th:attr="data-workId=${GetList.workId}"
+																	style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+																<a class="dropdown-item" title="Inquire"
+																	th:attr="data-workId=${GetList.workId}"
+																	style="cursor: pointer;" onclick="Inquirescreen(this)">Inquiry</a>
+
+																<a class="dropdown-item" title="verify"
+																	th:attr="data-workId=${GetList.workId}"
+																	style="cursor: pointer;" onclick="openverifywo(this)">Verify</a>
+
+																<a class="dropdown-item" title="Delete"
+																	th:attr="data-workId=${GetList.workId}"
+																	style="cursor: pointer;" onclick="deleterecord(this)">Delete</a>
+															</div>
+														</div>
+
+													</td>
+													
+													
+													<td><button class="btn btn-primary" th:attr="data-workId=${GetList.workId}"
+													 onclick="wopdfdownload(event, this);">Dowload</button></td>
+												</tr>
+
+											</tbody>
+											<tfoot>
+												<!-- 	<tr>
+													<th colspan="4"></th>
+													Empty columns to align totals under Debit and Credit
+													<th id="desc" >Total:-</th>
+													<th id="debitTotal" >Total Debit: 0</th>
+													<th id="creditTotal">Total Credit: 0</th>
+													<th colspan="2"></th>
+												</tr> -->
+											</tfoot>
+										</table>
+
+
+										<div id="pagination-controls"></div>
+
+
+									</div>
+									<div class=" col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button class="btn btn-xs btn-primary mr-2" type="button"
+												id="Dashboard" onclick="Home()">Home</button>
+											<button class="btn btn-xs btn-primary mr-2" id="btnback"
+												onclick="back(event)">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- -----WORKING ORDER END---- -->
+
+
+				<!-- -------inquiry start---- -->
+
+				<div class="container-fluid content" th:if="${formmode}=='inquiry'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" th:object="${inquiry}" method="post"
+							class="w-100" id="purchase_add" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">
+											WO-Inquiry- <span> <input class=" form-control-sm"
+												style="width: 133px; border-radius: 8px; text-align: center;"
+												type="text" th:value="${inquiry.workId}" readonly /></span>
+										</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<!-- //<button class="btn btn-primary" onclick="addpo(event);" th:if="${formmode=='list'}">Add</button> -->
+										<button class="btn btn-primary" onclick="listt(event);">list</button>
+
+									</div>
+
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Vendor Name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="vendorname" name="vendorName"
+													th:value="${inquiry.vendorName}" required
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="Address" name="date" required
+													th:value="${inquiry.Address}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="fromAcctype">Item</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="item" name="item"
+													th:value="${inquiry.item}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="poDate" name="date" required
+													th:value="${#dates.format(inquiry.date, 'dd-MM-yyyy')}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="entrydate">HSN/Sac Code</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="hsn_code" name="hsnSacCode"
+													th:value="${inquiry.hsnSacCode}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="expirydate">Rate</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="rate" name="rate"
+													th:value="${inquiry.rate}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="productName">Tax</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="tax" name="tax"
+													th:value="${inquiry.tax}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="toAcctype">Qty</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="quantity" name="qty"
+													th:value="${inquiry.qty}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+
+										<div class="row formline" style="margin-top: 20px;">
+
+
+
+
+											<div class="col-sm-2">
+												<label for="categoryName">Freight</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="freight" id="freight"
+													th:value="${inquiry.freight}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Terms</h6>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Payment Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="payment_terms" name="paymentTerms"
+													th:value="${inquiry.paymentTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="from">Freight</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="freight_terms" name="freightTerms"
+													th:value="${inquiry.freightTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+
+											<div class="col-sm-2">
+												<label for="from">Delivery Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="delivery_terms" name="deliveryTerms"
+													th:value="${inquiry.deliveryTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-primary" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<!-- <button type="button" class="btn btn-xs btn-primary"
+										id="btnSubmit" onclick="po_submit();" style="width: 120px">Submit</button> -->
+
+									<button class="btn btn-xs btn-primary" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+				<!-- -------verifywo start---- -->
+
+				<div class="container-fluid content" th:if="${formmode}=='verify'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" th:object="${inquiry}" method="post"
+							class="w-100" id="purchase_add" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">
+											WO-verify- <span> <input class=" form-control-sm"
+												id="woidd"
+												style="width: 133px; border-radius: 8px; text-align: center;"
+												type="text" th:value="${inquiry.workId}" readonly /></span>
+										</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<!-- //<button class="btn btn-primary" onclick="addpo(event);" th:if="${formmode=='list'}">Add</button> -->
+										<button class="btn btn-primary" onclick="listt(event);">list</button>
+
+									</div>
+
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Vendor Name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="vendorname" name="vendorName"
+													th:value="${inquiry.vendorName}" required
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="Address" name="date" required
+													th:value="${inquiry.Address}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="fromAcctype">Item</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="item" name="item"
+													th:value="${inquiry.item}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="poDate" name="date" required
+													th:value="${#dates.format(inquiry.date, 'dd-MM-yyyy')}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="entrydate">HSN/Sac Code</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="hsn_code" name="hsnSacCode"
+													th:value="${inquiry.hsnSacCode}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="expirydate">Rate</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="rate" name="rate"
+													th:value="${inquiry.rate}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="productName">Tax</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="tax" name="tax"
+													th:value="${inquiry.tax}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="toAcctype">Qty</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="quantity" name="qty"
+													th:value="${inquiry.qty}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly />
+											</div>
+										</div>
+
+
+										<div class="row formline" style="margin-top: 20px;">
+
+
+
+
+											<div class="col-sm-2">
+												<label for="categoryName">Freight</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="freight" id="freight"
+													th:value="${inquiry.freight}"
+													class="form-control form-control-sm" autocomplete="off"
+													readonly>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Terms</h6>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Payment Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="payment_terms" name="paymentTerms"
+													th:value="${inquiry.paymentTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="from">Freight</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="freight_terms" name="freightTerms"
+													th:value="${inquiry.freightTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+
+											<div class="col-sm-2">
+												<label for="from">Delivery Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="delivery_terms" name="deliveryTerms"
+													th:value="${inquiry.deliveryTerms}" readonly
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-primary" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-primary"
+										id="btnSubmit" onclick="VerifyWo(event);" style="width: 120px">verify</button>
+
+									<button class="btn btn-xs btn-primary" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<!-- -----modify--- -->
+
+				<div class="container-fluid content" th:if="${formmode}=='modify'">
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" th:object="${inquiry}" method="post"
+							class="w-100" id="wo_modify" autocomplete="off">
+							<div class="card">
+								<!-- Form Header -->
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">
+											WO-Modify- <span> <input class=" form-control-sm"
+												id="woidd"
+												style="width: 133px; border-radius: 8px; text-align: center;"
+												type="text" th:value="${inquiry.workId}" readonly /></span>
+										</h6>
+									</div>
+									<div class="float-right" style="padding: 5px;">
+										<!-- //<button class="btn btn-primary" onclick="addpo(event);" th:if="${formmode=='list'}">Add</button> -->
+										<button class="btn btn-primary" onclick="listt(event);">list</button>
+
+									</div>
+
+
+								</div>
+
+								<!-- Form Body -->
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Vendor Name</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="vendorname" name="vendorName"
+													th:value="${inquiry.vendorName}" required
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Address</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="Address" name="address" required
+													th:value="${inquiry.address}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+										</div>
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="fromAcctype">Item</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="item" name="item"
+													th:value="${inquiry.item}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="to">Date</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="poDate" name="date" required
+													th:value="${#dates.format(inquiry.date, 'yyyy-MM-dd')}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="entrydate">HSN/Sac Code</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="hsn_code" name="hsnSacCode"
+													th:value="${inquiry.hsnSacCode}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="expirydate">Rate</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="rate" name="rate"
+													th:value="${inquiry.rate}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="productName">Tax</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="tax" name="tax"
+													th:value="${inquiry.tax}"
+													class="form-control form-control-sm" autocomplete="off" />
+
+
+											</div>
+
+											<div class="col-sm-1"></div>
+
+											<div class="col-sm-2">
+												<label for="toAcctype">Qty</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="quantity" name="qty"
+													th:value="${inquiry.qty}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+
+										<div class="row formline" style="margin-top: 20px;">
+
+
+
+
+											<div class="col-sm-2">
+												<label for="categoryName">Freight</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" name="freight" id="freight"
+													th:value="${inquiry.freight}"
+													class="form-control form-control-sm" autocomplete="off">
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="card-header"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<div class="float-left">
+										<h6 style="font-size: 1.5rem; color: black;">Terms</h6>
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="form-group">
+										<div class="row formline" style="margin-top: 20px;">
+											<div class="col-sm-2">
+												<label for="from">Payment Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="payment_terms" name="paymentTerms"
+													th:value="${inquiry.paymentTerms}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+											<div class="col-sm-2">
+												<label for="from">Freight</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="freight_terms" name="freightTerms"
+													th:value="${inquiry.freightTerms}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+											<div class="col-sm-2">
+												<input type="hidden" id="poId" name="workId"
+													th:value="${inquiry.workId}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+
+
+
+											<div class="col-sm-2">
+												<label for="from">Delivery Term</label>
+											</div>
+											<div class="col-sm-2">
+												<input type="text" id="delivery_terms" name="deliveryTerms"
+													th:value="${inquiry.deliveryTerms}"
+													class="form-control form-control-sm" autocomplete="off" />
+											</div>
+										</div>
+
+
+									</div>
+								</div>
+
+								<!-- Form Footer -->
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+									<button class="btn btn-xs btn-primary" type="button"
+										id="Dashboard" onclick="Home()">Home</button>
+									<button type="button" class="btn btn-xs btn-primary"
+										id="btnSubmit" onclick="MOD_submitwo(event);"
+										style="width: 120px">modify</button>
+
+									<button class="btn btn-xs btn-primary" id="btnback"
+										onclick="back(event)">Back</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERPS</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="wolist();">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+
+</html>

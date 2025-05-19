@@ -1,0 +1,1948 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css" href="http://localhost:8083/ERP/css/spur.css">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.dash-app {
+	margin-left: 380px ! important;
+	margin-top: 110px;
+	margin-right: 110px;
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.stats-secondary {
+	color: #fff;
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: bold;
+}
+
+thead th {
+	text-align: center;
+	color: black !important;
+	border-bottom-width: 2px;
+	font-size: medium ! important;
+}
+</style>
+
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top: 1px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+</head>
+
+
+<script th:inline="javascript">
+	$(function() {
+
+		$("#dataTables").DataTable({
+			"destroy" : true,
+			"scrollY" : 400,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"pageLength" : 100,
+			"lengthChange" : false,
+
+		});
+	});
+	$(document).ready(function() {
+
+		$("#Upload").on("click", function() {
+
+			$.ajax({
+				url : './fileimport',
+				type : 'POST',
+				data : new FormData($("#fileuploadd")[0]),
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				success : function(res) {
+					window.alert(res);
+					//location.href = './stockHistory'
+
+				}
+			});
+			e.preventDefault();
+
+		});
+	});
+	
+	var checkff=true;
+
+	function checkFields(){
+		var fields = $('input.required');
+		for (var i = 0; i < fields.length; i++) {
+			if ($(fields[i]).val() != '') {
+				window.alert("Enter all required fields");
+				checkff=true;
+			}else{
+				checkff=false;
+			}
+		}
+		
+	}
+	function singleStockHistory() {
+		
+		alert("Added Successfully!!!")
+
+
+
+	};
+
+	function singleStockCurrent() {
+		const inputs = document.querySelectorAll('#addStockHistory input');
+		for (var i = 0; i < inputs.length; i++) {
+			if ($(inputs[i]).val() == '') {
+				alert("Enter all required fields");
+				break;
+			}
+		}
+		if ($(inputs[i]).val() != '') {
+		var expdate = document.getElementById('EXPIRY_DATEs').value;
+		$.ajax({
+			url : "./singleStockCurrent?expdate=" + expdate,
+			dataType : "text",
+			type : 'POST',
+			aync : true,
+			data : $('#addStockHistory').serialize(),
+			success : function(res) {
+
+				alert(res);
+				location.href = './stockHistory'
+
+			}
+		});
+		};
+	};
+
+	
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+
+	function back() {
+		window.history.back();
+	}
+	function finaltotal(total){
+		alert(total)
+
+	}
+	
+	function totalcal(selectElement){
+		const row = selectElement.closest('tr');
+		const cost = row.querySelector('input[name="cost[]"]').value;
+		const qnt = row.querySelector('input[name="KGS[]"]').value;
+		const total = row.querySelector('input[name="total[]"]');
+		total.value=qnt*cost;
+		 finaltotal(total.value)
+
+	}
+	
+	function getcurrentstock(selectElement) {
+	    // Find the closest row (tr) to the changed select element
+	    const row = selectElement.closest('tr');
+
+	    // Get the product name from the input field in the same row
+	    const pro_name = row.querySelector('input[name="product_name[]"]').value;
+
+	    // Fetch the selected batch value
+	    const batch = selectElement.value;
+
+	    // Proceed with the AJAX requests
+	    $.ajax({
+	        url: "./getpkgtypeList?product_id=" + pro_name + "&batch=" + batch,
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	            $.each(res, function(index, data) {
+	                var i = Object.values(data);
+	                // Update the corresponding fields in the same row
+	                row.querySelector('input[name="EXPIRY_DATEs[]"]').value = i[1];
+	                // Update other fields as needed using similar methods
+	            });
+	        }
+	    });
+
+	    $.ajax({
+	        url: "./getCurrentStockfn?product_id=" + pro_name + "&batch=" + batch,
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	            $.each(res, function(index, data) {
+	                var i = Object.values(data);
+	                // Update the corresponding fields in the same row
+	                //row.querySelector('input[name="PKG[]"]').value = i[0];
+	                row.querySelector('input[name="UNITS[]"]').value = i[1];
+	                row.querySelector('input[name="cost[]"]').value = i[3];
+	                row.querySelector('input[name="GSTIN[]"]').value = i[4];
+	                row.querySelector('input[name="MRP[]"]').value = i[2];
+	            });
+	        }
+	    });
+	}
+
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    const table = document.getElementById('dynamicFieldsTableex').querySelector('tbody');
+
+	    // Function to add a new row
+	    function addRow() {
+	        const newRow = document.createElement('tr');
+	        newRow.innerHTML = `
+	        	<td><input type="text" name="ExpensesType"
+				id="ExpensesType" list="Expenseslist"
+				style="width: 100%; "> <datalist
+					id="Expenseslist">
+					<option>Labour cost</option>
+					<option>Machinary cost</option>
+					<option>Electricity cost</option>
+					<option>Overhead cost</option>
+				</datalist></td>
+
+
+			<td><input type="number" name="per_Amount"
+				id="per_Amount"
+				style="width: 100%; "></td>
+
+			<td><input type="number" name="totalexpcost"
+				id="totalexpcost"
+				style="width: 100%;"></td>
+
+				<td style="text-align: center;"><button class="btn btn-danger btn-sm remove-btn">-</button></td>
+	           
+	        `;
+	        table.appendChild(newRow);
+	    }
+
+	    // Add event listener for the "Add" button
+	    document.querySelector('.add-btn').addEventListener('click', function(event) {
+	    	event.preventDefault();
+	        addRow();
+	    });
+
+	    // Add event listener for removing a row
+	    table.addEventListener('click', function(event) {
+	        if (event.target.classList.contains('remove-btn')) {
+	            event.target.closest('tr').remove();
+	        }
+	    });
+	}); 
+
+
+
+</script>
+
+
+
+
+<script type="text/javascript">
+function add_process(event) {
+    event.preventDefault();
+    let validationtest=true;
+    var productlist = [];
+	 const branchId = document.getElementById('branchId').value || "";
+    var bomid = document.getElementById('bomid').value.trim();
+    var kilograms = document.getElementById('kilograms').value.trim();
+    var units = document.getElementById('units').value.trim();
+    var makingproductName = document.getElementById('makingproductName').value.trim();
+    var grantTotal = document.getElementById('grantTotal').value.trim();
+
+    // Reset borders to normal color before validation
+    $('#bomid, #kilograms, #units, #makingproductName, #grantTotal').css("border-color", "");
+
+    // Validation for mandatory fields
+    var isValid = true;
+    var mandatoryMessage = "Please fill the required field(s)";
+    if (!branchId) {
+        $('#branchId').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+    if (!bomid) {
+        $('#bomid').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+    if (!kilograms) {
+        $('#kilograms').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+    if (!units) {
+        $('#units').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+    if (!makingproductName) {
+        $('#makingproductName').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+    if (!grantTotal) {
+        $('#grantTotal').css("border-color", "red").attr("title", mandatoryMessage);
+        isValid = false;
+    }
+
+    if (!isValid) {
+        alert(mandatoryMessage);
+        return;
+    }
+	
+   
+    // Table 1 data processing
+    $('#dynamicFieldsTable1 tbody tr').each(function () {
+        var row = $(this);
+
+        var itemCode = row.find('input[name="itemCode"]').val();
+        var itemname = row.find('input[name="itemname"]').val();
+        var category_name1 = row.find('input[name="category_name1"]').val();
+        var baseunit = row.find('input[name="baseunit"]').val();
+        var qty = row.find('input[name="Quantity"]').val();
+        var batch = row.find('select[name="batch"]').val();
+        var stock_qty = row.find('input[name="stock_qty"]').val();
+        var price = row.find('input[name="price"]').val();
+        var reqqnt = row.find('input[name="reqqnt"]').val();
+        var totalprice = row.find('input[name="totalprice"]').val();
+
+        if(batch){
+        productlist.push({
+        	branchId:branchId,
+            bomid: bomid,
+            kilograms: kilograms,
+            units: units,
+            makingproductName: makingproductName,
+            grantTotal: grantTotal,
+            itemCode: itemCode,
+            itemname: itemname,
+            category_name1: category_name1,
+            baseunit: baseunit,
+            batch: batch,
+            stock_qty: stock_qty,
+            price: price,
+            reqqnt: reqqnt,
+            totalprice: totalprice,
+            quantity: qty
+        });
+        }else{
+        	validationtest=false;
+        	
+        }
+        
+    });
+
+    // Table 2 data processing
+    $('#dynamicFieldsTableex tbody tr').each(function () {
+        var row = $(this);
+
+        var ExpensesType = row.find('input[name="ExpensesType"]').val();
+        var per_Amount = row.find('input[name="per_Amount"]').val();
+        var totalexpcost = row.find('input[name="totalexpcost"]').val();
+
+        productlist.push({
+        	branchId:branchId,
+            per_Amount: per_Amount,
+            totalexpcost: totalexpcost,
+            expensestype: ExpensesType
+        });
+    });
+    
+    
+
+    // AJAX request
+    if (productlist.length > 0 & validationtest==true) {
+        $.ajax({
+            type: 'POST',
+            url: './add_process_tsk?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productlist),
+            success: function (response) {
+                $("#alertmsg").text(response);
+                $("#alert").modal("toggle");
+                //window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+
+// Reset border color on user input
+$(document).ready(function () {
+    $('#bomid, #kilograms, #units, #makingproductName, #grantTotal').on('input', function () {
+        $(this).css("border-color", "");
+    });
+});
+</script>
+
+
+
+<style>
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Get raw materials from server-side rendering (Thymeleaf)
+    const rawmet = /*[[${rawmaterial}]]*/ []; // Ensure Thymeleaf renders this correctly.
+   
+    // Table 1
+    const tableBody1 = document.getElementById('dynamicFieldsTable1').querySelector('tbody');
+
+    // Function to add a new row for Table 1
+    function addRowToTable1() {
+    	 console.log(rawmet)
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td style="width: 110px;">
+                <input type="text" name="itemCode" id="itemCode" list="rawlist" onchange="getitemm(this)"
+                    style="width: 100%;">
+                
+            </td>
+            <td><input type="text" name="itemname" id="itemname"
+                style="width: 100%; text-align: center; "></td>
+            <td><input type="text" name="category_name1" id="category_name1"
+                style="width: 100%; text-align: center; " readonly></td>
+            <td><input type="text" name="baseunit" id="baseunit"
+                style="width: 100%; text-align: center; "></td>
+            <td><input type="number" name="Quantity" id="Quantity" value="1"
+                style="width: 100%; text-align: center; " readonly></td>
+            <td><select name="batch" id="batch" onchange="get_two(this);"
+                style="width: 100%; text-align: center; ">
+                <option value=""></option>
+            </select></td>
+            <td><input type="number" name="stock_qty" id="stock_qty"
+                style="width: 100%; text-align: center; "></td>
+            <td><input type="number" name="price" id="price"
+                style="width: 100%; text-align: center; "></td>
+            <td><input type="number" name="reqqnt" id="reqqnt"
+                style="width: 100%; text-align: center; "></td>
+            <td><input type="number" name="totalprice" id="totalprice"
+                style="width: 100%; text-align: center; "></td>
+           
+                <td style="text-align: center;"><button class="btn btn-danger btn-sm remove-btnn">-</button></td>
+            
+        `;
+        tableBody1.appendChild(newRow);
+       // updateSerialNumbers(tableBody1); // Update SRL No. for all rows
+       
+    }
+
+    // Function to update serial numbers
+    function updateSerialNumbers(tableBody) {
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            const serialCell = row.querySelector('.srl-no');
+            if (serialCell) serialCell.textContent = index + 1; // Update SRL No.
+        });
+    }
+
+    // Add event listener for the "Add" button
+    document.querySelector('.add-btnn').addEventListener('click', function (event) {
+    	event.preventDefault();
+    	addRowToTable1();
+        
+    });
+
+    // Add event listener for removing rows
+    tableBody1.addEventListener('click', function (event) {
+        if (event.target.classList.contains('remove-btnn')) {
+            event.target.closest('tr').remove(); // Remove the row
+            updateSerialNumbers(tableBody1); // Update SRL No. after removal
+        }
+    });
+
+    // Initial setup for serial numbers
+    updateSerialNumbers(tableBody1);
+});
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+
+function dr(event){
+	event.preventDefault();
+	}
+
+function addnewproduct(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    var productlist = [];
+    var mfgProductName = document.getElementById('makingproductName').value; // Get the manufacturing product name
+
+    // Ensure the make name is not empty
+    if (!mfgProductName) {
+        alert("Please enter the Manufacturing Product Name.");
+        return;
+    }
+
+    // Loop through each row in the dynamic table
+    $('#dynamicFieldsTable1 tbody tr').each(function(index) {
+        var row = $(this);
+
+        var itemCode = row.find('input[name="itemCode"]').val();
+        var itemName = row.find('input[name="itemname"]').val();
+        alert(itemName);
+        var hsnCode = row.find('input[name="hsncode"]').val();
+       
+        var categoryName = row.find('input[name="category_name1"]').val();
+        var baseUnit = row.find('input[name="baseunit"]').val();
+        var qty = row.find('input[name="Quantity"]').val();
+        
+    
+      
+        
+        console.log({
+        	itemCode: itemCode,
+        	itemName: itemName,
+        	hsnCode: hsnCode,
+        	categoryName: categoryName,
+        	baseUnit: baseUnit,
+        	qty: qty,
+        	mfgProductName: mfgProductName
+        });
+        
+     
+        // Ensure all fields are filled before adding the product to the list
+        if (itemCode && itemName && hsnCode && categoryName && baseUnit && qty && mfgProductName ) {
+            var lists = {
+            		itemCode: itemCode,
+            		itemName: itemName,
+            		hsnCode: hsnCode,
+            		categoryName: categoryName,
+            		baseUnit: baseUnit,
+            		qty: qty,
+            		mfgProductName: mfgProductName
+               
+            };
+            productlist.push(lists);
+        } else {
+            console.warn("Row " + (index + 1) + " is missing data and will be skipped.");
+        }
+    });
+    
+    
+    $('#dynamicFieldsTableex tbody tr').each(function (index) {
+	    var row = $(this);
+
+	    var expensesType = row.find('input[name="ExpensesType"]').val();
+	    var amount =parseFloat(row.find('input[name="per_Amount"]').val()).toFixed(2);
+		var list1={
+				mfgProductName: mfgProductName,
+				expensesType: expensesType,
+				expensesCost: amount
+		}
+		
+		productlist.push(list1);
+	    console.log({
+	    	makeProductName: mfgProductName,
+	    	expensesType: expensesType,
+	    	expensesCost: amount,
+	    });
+	    
+	});
+    
+
+    
+    console.log("finall list" +productlist);
+    // If product list is not empty, send the data via AJAX
+    
+      if (productlist.length > 0) {
+    	
+    	console.log(productlist);
+        $.ajax({
+            type: 'POST',
+            url: './add_new_bom?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productlist),
+            success: function(response) {
+                alert(response); // Notify success
+                window.location.reload(); // Reload the page to reflect changes
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("Product name already Exists or An error occurred while sending the data");
+            }
+        });
+    } else {
+        alert("No valid data to send. Please fill out the form correctly.");
+    }  
+}
+</script>
+<script>
+function deleteProduct(a) {
+    var makeproductname = a.getAttribute('data-makename'); // Get the data-id attribute value
+    alert(makeproductname); // Optional: Show the ID for debugging
+
+    $.ajax({
+        type: 'POST',
+        url: './delete_product?makeproductname=' + makeproductname, // Pass the product ID to the delete URL
+        contentType: 'application/json',
+        success: function(response) {
+            alert(response); // Notify success
+            window.location.reload(); // Reload the page to reflect changes
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", status, error);
+            alert("An error occurred while deleting the product. Please try again.");
+        }
+    });
+}
+
+function get_two(input){
+	   const row = input.closest('tr');
+	   
+	    const batch = input.value;
+	  alert(batch)
+	    $.ajax({
+	        url: "./get_two?batch=" + encodeURIComponent(batch),
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(response) {
+	        	
+	        	console.log("myresponseeee" +response);
+	        	
+
+	        	row.querySelector('input[name="price"]').value= response.price || '';
+	        	row.querySelector('input[name="stock_qty"]').value= response.useingqty || '';
+
+	        	
+	      
+	        }
+	    });
+}
+
+</script>
+<script>
+
+
+
+let batchlist =[];
+
+function getprice(input){
+	
+	
+
+	 const row = input.closest('tr');
+	 
+	var batch= row.querySelector('select[name="batch"]').value;
+	
+
+	 
+	 batchlist.forEach(function(mufun) {
+		 
+	
+		
+		 
+		 if(batch == mufun.batch){
+			 
+		
+			 
+			 row.querySelector('input[name="price"]').value= mufun.price || '';
+			 row.querySelector('input[name="stock_qty"]').value= mufun.useingqty || '';
+			 
+			 
+		 }
+		 
+	 });
+	 
+		 
+}
+
+function product_name_typeFunction1(input) {
+    const row = input.closest('tr');
+   
+    const productName = input.value;
+  
+    
+    var itemsplit =productName.split('-');
+    var splitfinal=itemsplit[0];
+    const tableRows = document.querySelectorAll('#dynamicFieldsTable1 tbody tr');
+    
+  
+
+    $.ajax({
+        url: "./getbatch_price?itemCode=" + encodeURIComponent(splitfinal),
+        type: 'GET',
+        dataType: "json",
+        success: function(response) {
+        	
+        	console.log("myresponseeee" +response);
+        	
+        	  var selectElement = row.querySelector('select[name="batch"]'); // Reference the select element
+              selectElement.innerHTML = ''; // Clear existing options
+              var defaultOption = document.createElement('option');
+              defaultOption.value = '';
+              defaultOption.text = 'Select a batch';
+              selectElement.appendChild(defaultOption);        	
+        	  if (response && response.length > 0) {
+                  
+        		
+                  
+                  
+        		  const batchSet = new Set(); 
+
+        		  response.forEach(function(batch) {
+        		      const values = Object.values(batch);
+        		      console.log(values);
+
+        		      for (let p = 0; p < tableRows.length; p++) {
+        		          const rows = tableRows[p];
+        		          var batchrow = rows.querySelector('select[name="batch"]').value;
+        		          var itemCoderow = rows.querySelector('input[name="itemCode"]').value;
+        		          batchSet.add(batchrow); 
+        		          
+        		      }
+        		      if (batch.batch !== null && batch.useingqty > 0) {
+		                  if (!batchSet.has(batch.batch)) {         		                      
+		                      batchlist.push(batch);        		                      
+		                      var option = document.createElement('option');
+		                      option.value = batch.batch || ''; 
+		                      option.text = batch.batch || '-'; 
+		                      selectElement.appendChild(option); 
+		                  }
+		              }
+        		  });
+
+                  
+                  console.log("patchlist" +batchlist);
+                  
+                 
+                  } 
+      
+        }
+    });
+}
+
+function makelist_fn(){
+	
+	 var bomid = document.getElementById("bomid").value;
+	 var finalbomid=bomid.split('-')
+/* 	 alert(finalbomid[0]); */
+
+	    const rawmet = /*[[${rawmaterial}]]*/ []; // Ensure Thymeleaf renders this correctly.
+
+	 //alert(makesname)
+	    $.ajax({
+	        url: "./getbomproduct?BOMID=" + encodeURIComponent(finalbomid[0]),
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	        	const table = document.getElementById('dynamicFieldsTable1').querySelector('tbody');
+	        	const table1 = document.getElementById('dynamicFieldsTableex').querySelector('tbody');
+
+	        	// Clear the table before adding new rows
+	            table.innerHTML = '';
+	            table1.innerHTML='';
+	            
+	            // Loop through the response to add rows dynamically
+	            $.each(res, function(index, data) {
+	                const values = Object.values(data);
+					
+	                // Create a new row
+	                
+	                //alert(values[0]);
+	                if (values[1]!=null){
+	                const newRow = document.createElement('tr');
+	                newRow.innerHTML = `
+	                	 <td style="width: 110px;">
+	                     <input type="text" name="itemCode" value="${values[1]}" id="itemCode" list="rawlist" onchange="getitemm(this)"
+	                         style="width: 100%; ">
+	                     <datalist id="rawlist">
+	                         ${rawmet.map(raw => `
+	                             <option value="${raw}">
+	                                 ${raw}
+	                             </option>`).join('')}
+	                     </datalist>
+	                 </td>
+
+						<td>
+						<input type="text" name="itemname" id="itemname" value="${values[2]}" style="width: 100%; text-align: center; " readonly>
+						</td>
+					
+	                    <td>
+	                    <input type="text" name="category_name1" id="category_name1" value="${values[4]}" style="width: 100%; text-align: center; " readonly>
+	                    </td>
+
+						<td>
+							<input type="text" name="baseunit" id="baseunit" value="${values[5]}" style="width: 100%; text-align: center; " readonly>
+						</td>
+						
+						<td><input type="number" name="Quantity" id="Quantity" value="${values[6]}" style="width: 100%; text-align: center; " readonly></td>
+
+						<td><select name="batch" id="batch" style="width: 100%; text-align: center;" onchange="getprice(this);"><option></option></select> </td>
+						
+						<td><input type="number" name="stock_qty" id="stock_qty"  style="width: 100%; text-align: center;" readonly></td>
+
+						<td><input type="number" name="price" id="price" style="width: 100%; text-align: center; " readonly></td>	
+						<td><input type="number" name="reqqnt"
+							id="reqqnt"
+							style="width: 100%; text-align: center;" readonly ></td>		
+							
+						<td><input type="number" name="totalprice"
+							id="totalprice"
+							style="width: 100%; text-align: center;" readonly></td>						
+						
+	                    
+	                `;
+	                
+	                // Append the new row to the table
+	                
+	                table.appendChild(newRow);
+	                const itemCodeInput = newRow.querySelector('#itemCode');
+                    product_name_typeFunction1(itemCodeInput);
+	                }
+	                else{
+	                	const newRow = document.createElement('tr');
+	                	newRow.innerHTML =`	
+	                	<td>
+	                    <input type="text" name="ExpensesType" id="ExpensesType" value="${values[7]}" style="width: 100%;">
+	                    
+	                </td>
+	                <td><input type="number" name="per_Amount" id="per_Amount" value="${values[8]}" style="width: 100%;" readonly> </td>
+	                <td><input type="number" name="totalexpcost" id="totalexpcost" style="width: 100%;" readonly></td>
+	                
+	                `;
+	                table1.appendChild(newRow)
+	                }
+	                
+	                //<td style="text-align: center;"><button class="btn btn-danger btn-sm remove-btnn">-</button></td>
+
+	        		 document.getElementById('makingproductName').value=values[9];
+
+	            });
+
+	        }
+	    });
+
+	  /*  const addButton = document.getElementById('addButton');
+	    if (addButton) {
+	        addButton.style.display = 'none'; // Completely removes the button from layout
+	        // Or use: addButton.style.visibility = 'hidden'; // Hides the button but keeps its space
+	    }*/
+}
+//alert(item)
+/*  var itemsplit = productName.split('-');
+var splitfinal = itemsplit[0];
+var item = itemsplit[1];
+alert(item)
+
+// First AJAX request to get item details
+$.ajax({
+    url: "./getitemdetails1?itemCode=" + encodeURIComponent(splitfinal),
+    type: 'GET',
+    dataType: "json",
+    success: function(response) {
+        if (response && response.length > 0) {
+            var item = response[0];
+            row.querySelector('input[name="itemname"]').value = item.itemName || '';
+            row.querySelector('input[name="category_name1"]').value = item.category || '';
+            row.querySelector('input[name="baseunit"]').value = item.baseUnit || '';
+        } else {
+            row.querySelector('input[name="itemname"]').value = '';
+            row.querySelector('input[name="category_name1"]').value = '';
+            row.querySelector('input[name="baseunit"]').value = '';
+        }
+    }
+});*/
+function getitemm(input) {
+    const row = input.closest('tr');
+    const item = input.value;
+   
+
+    // Second AJAX request to get batch details
+    $.ajax({
+        url: "./getbatchonly?item=" + encodeURIComponent(item),
+        type: 'GET',
+        dataType: "json",
+        success: function(response) {
+            //alert("myresponseeee" + response.length);
+            var selectElement = row.querySelector('select[name="batch"]');
+            selectElement.innerHTML = ''; // Clear existing options
+            var defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = 'Select a batch';
+            selectElement.appendChild(defaultOption);
+            row.querySelector('input[name="itemname"]').value = response[0].item || '';
+            row.querySelector('input[name="category_name1"]').value = response[0].assetCategory || 'NA';
+            row.querySelector('input[name="baseunit"]').value = response[0].unit || '';
+            if (response && response.length > 0) {
+                let batchlist = []; // Declare batchlist array
+                response.forEach(function(batch) {
+                    const values = Object.values(batch);
+                    console.log(values);
+
+                    if (batch.batch !== null && batch.useingqty > 0) {
+                        batchlist.push(batch);
+
+                        var option = document.createElement('option');
+                        option.value = batch.batch || '';
+                        option.text = batch.batch || '-';
+                        selectElement.appendChild(option);
+                    }
+                });
+
+                console.log("batchlist", batchlist);
+            }
+        }
+    });
+}
+
+
+
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let previousValue = 0;
+    let delayTimer; // Declare the timer variable
+
+    // Add event listener after the DOM has fully loaded
+    document.getElementById('kilograms').addEventListener('input', function () {
+        clearTimeout(delayTimer); // Clear previous timer if exists
+
+        delayTimer = setTimeout(() => {
+            const getNumericValue = (input) => parseFloat(input?.value) || 0;
+            
+            // Get all rows in the tables
+            const tableRows = document.querySelectorAll('#dynamicFieldsTable1 tbody tr');
+            const tableRows1 = document.querySelectorAll('#dynamicFieldsTableex tbody tr');
+            let grandTotal = 0; // Initialize grand total
+            const orderKgs = getNumericValue(this); // Get the entered kilograms value
+
+            if (orderKgs <= 0 || orderKgs < previousValue) {
+                previousValue = orderKgs; // Update previous value
+                
+                for (let m = 0; m < tableRows.length; m++) {
+                    const rows = tableRows[m];
+                    var itemcode = rows.querySelector('input[name="itemCode"]').value;
+
+                    for (let n = m + 1; n < tableRows.length; n++) {
+                        const rowss = tableRows[n];
+                        var itemcodes = rowss.querySelector('input[name="itemCode"]').value;
+
+                        if (itemcode == itemcodes) {
+                            rowss.remove();
+                        }
+                    }
+                }
+
+                previousValue = orderKgs;
+                //return; // Exit function
+            }
+
+            previousValue = orderKgs;
+            const tableRowss = document.querySelectorAll('#dynamicFieldsTable1 tbody tr');
+
+            for (let i = 0; i < tableRowss.length; i++) {
+                const row = tableRowss[i];
+                const batch = row.querySelector('[name="batch"]')?.value || '';
+
+                if (!batch) {
+                    alert("Please select batch's of all rows...");
+                    document.getElementById('kilograms').value = "";
+                    return; // Stop further processing
+                }
+
+                const kgsValue = getNumericValue(row.querySelector('[name="Quantity"]'));
+                const price = getNumericValue(row.querySelector('[name="price"]'));
+                const stockQty = getNumericValue(row.querySelector('[name="stock_qty"]'));
+                let reqqntInput = row.querySelector('[name="reqqnt"]');
+                let totalPriceInput = row.querySelector('[name="totalprice"]');
+
+                var itemcode = row.querySelector('input[name="itemCode"]');
+                var itemname = row.querySelector('input[name="itemname"]');
+                var category_name1 = row.querySelector('input[name="category_name1"]');
+                var baseunit = row.querySelector('input[name="baseunit"]');
+                var qty = row.querySelector('input[name="Quantity"]');
+
+                if (orderKgs > stockQty) {
+                    var lesqnt = orderKgs - stockQty;
+                    reqqntInput.value = stockQty.toFixed(2);
+                    var listpass = [itemcode, itemname, category_name1, baseunit, qty, lesqnt];
+                    addRowToTable4(listpass);
+                } else {
+                    const calculatedQty = orderKgs * kgsValue;
+                    reqqntInput.value = calculatedQty.toFixed(2);
+                }
+
+                const reqqnt = getNumericValue(reqqntInput);
+                const totalPrice = price * reqqnt;
+                totalPriceInput.value = totalPrice.toFixed(2);
+                grandTotal += totalPrice;
+            }
+
+            for (let i = 0; i < tableRows1.length; i++) {
+                const row = tableRows1[i];
+                const perAmount = getNumericValue(row.querySelector('[name="per_Amount"]'));
+                const totalExpCostInput = row.querySelector('[name="totalexpcost"]');
+
+                const totalPrice = orderKgs * perAmount;
+                totalExpCostInput.value = totalPrice.toFixed(2);
+                grandTotal += totalPrice;
+            }
+
+            document.getElementById('grantTotal').value = grandTotal.toFixed(2);
+        }, 500); // Delay of 500ms
+    });
+});
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Attach the event listener to the table (event delegation)
+    document.getElementById('dynamicFieldsTable1').addEventListener('input', function (event) {
+        // Check if the event originated from a "reqqnt" input
+        if (event.target && event.target.name === 'reqqnt') {
+            // Get all rows in the tables
+            var tableRows = document.querySelectorAll('#dynamicFieldsTable1 tbody tr');
+            var tableRows1 = document.querySelectorAll('#dynamicFieldsTableex tbody tr');
+
+            let grantTotal = 0; // Initialize the grand total
+
+            // Iterate over the rows of the first table
+            tableRows.forEach(function (row) {
+                var reqqntInput = row.querySelector('[name="reqqnt"]');
+                var stockQtyInput = row.querySelector('[name="stock_qty"]');
+                var priceInput = row.querySelector('[name="price"]');
+                var totalPriceInput = row.querySelector('[name="totalprice"]');
+
+                // Parse values to float, defaulting to 0 if invalid
+                var reqqnt = parseFloat(reqqntInput.value) || 0;
+                var stock_qty = parseFloat(stockQtyInput.value) || 0;
+                var price = parseFloat(priceInput.value) || 0;
+
+                // Adjust reqqnt if it exceeds stock_qty
+                if (reqqnt > stock_qty) {
+                    reqqnt = stock_qty;
+                    reqqntInput.value = reqqnt.toFixed(2); // Update input
+                }
+
+                // Calculate the total price for the row
+                var rowTotal = reqqnt * price;
+                totalPriceInput.value = rowTotal.toFixed(2); // Update total price field
+
+                // Add to grand total
+                grantTotal += rowTotal;
+            });
+
+            // Iterate over the rows of the second table
+          tableRows1.forEach(function (rows) {
+    console.log("Processing row:", rows); // Check if rows are found
+
+    var orderKgsInput = rows.querySelector('[name="orderKgs"]');
+    var perAmountInput = rows.querySelector('[name="per_Amount"]');
+
+    if (!orderKgsInput) {
+        console.error("Missing input: [name='orderKgs'] in row", rows);
+    }
+    if (!perAmountInput) {
+        console.error("Missing input: [name='per_Amount'] in row", rows);
+    }
+
+    var orderKgs = parseFloat(orderKgsInput?.value) || 0;
+    var perAmount = parseFloat(perAmountInput?.value) || 0;
+
+    var totalPrice = orderKgs * perAmount;
+   // rows.querySelector('[name="totalexpcost"]').value = totalPrice.toFixed(2);
+});
+
+
+            const grantTotalField = document.getElementById('grantTotal');
+            if (grantTotalField) {
+                grantTotalField.value = grantTotal.toFixed(2);
+            } else {
+                console.error("Grant Total field not found!");
+            }
+
+        }
+    });
+});
+
+
+
+
+
+
+
+function addRowToTable4(listpass) {
+	var itemCode=listpass[0].value;
+	var itemname =listpass[1].value;
+	var category_name1=listpass[2].value;
+	var baseunit =listpass[3].value;
+	var qty =listpass[4].value;
+	var reqqnts= listpass[5];
+	//alert(reqqnts)
+	
+    const tableBody1 = document.getElementById('dynamicFieldsTable1').querySelector('tbody');
+    
+    // Create a new table row
+    const newRow = document.createElement('tr');
+
+    // Set the inner HTML for the row
+    newRow.innerHTML = `
+        <td style="width: 110px;">
+            <input type="text" name="itemCode" id="itemCode" value="${itemCode}" list="rawlist" onchange="getitemm(this)"
+                style="width: 100%; ">
+        </td>
+        <td>
+            <input type="text" name="itemname" value="${itemname}"
+                style="width: 100%; text-align: center; ">
+        </td>
+        <td>
+            <input type="text" name="category_name1" value="${category_name1}"
+                style="width: 100%; text-align: center; " readonly>
+        </td>
+        <td>
+            <input type="text" name="baseunit" value="${baseunit}"
+                style="width: 100%; text-align: center; ">
+        </td>
+        <td>
+            <input type="number" name="Quantity" value="1" value="${qty}"
+                style="width: 100%; text-align: center; " readonly>
+        </td>
+        <td>
+            <select name="batch" id="batch" onchange="getprice(this); setTimeout(batchange, 2000);"
+                style="width: 100%; text-align: center;">
+                <option value=""></option>
+            </select>
+        </td>
+        <td>
+            <input type="number" name="stock_qty"
+                style="width: 100%; text-align: center;">
+        </td>
+        <td>
+            <input type="number" name="price"
+                style="width: 100%; text-align: center;">
+        </td>
+        <td>
+            <input type="number" name="reqqnt" value="${reqqnts}"
+                style="width: 100%; text-align: center; ">
+        </td>
+        <td>
+            <input type="number" name="totalprice"
+                style="width: 100%; text-align: center;">
+        </td>
+       
+    `;
+    
+    const itemCodeInput = newRow.querySelector('#itemCode');
+  	//alert(itemCodeInput)
+    product_name_typeFunction1(itemCodeInput);
+
+    // Append the new row to the table body
+    tableBody1.appendChild(newRow);
+    
+
+    // Add event listener to the "Remove" button
+    const removeButton = newRow.querySelector('.remove-btnn');
+    removeButton.addEventListener('click', function () {
+        newRow.remove();
+    });
+}
+
+
+
+function n(){
+	var orderNos = document.getElementById('kilograms').value;
+	var tableRows = document.querySelectorAll('#dynamicFieldsTable tbody tr');
+
+    tableRows.forEach(function(row) {
+        // Get the "kgs" value for each row using the name attribute selector
+        var kgsValue = parseFloat(row.querySelector('[name="PKG[]"]').value);
+        var unit =parseFloat(row.querySelector('[name="UNITS[]"]').value);
+        var product_name =row.querySelector('[name="product_name[]"]').value;
+        //alert(product_name);
+
+        // If the kgsValue is a valid number, multiply it with the orderKgs and update the quantity field
+        if (!isNaN(kgsValue)) {
+            var calculatedQty = orderNos * kgsValue;
+            if(calculatedQty>unit){
+            	alert("please check current stock of "+product_name);
+            }
+            else{
+
+            // Set the value of the quantity field in the same row
+            row.querySelector('[name="qty[]"]').value = calculatedQty.toFixed(2); // Fixed to 2 decimal places
+            }
+        }
+        
+    });
+
+	
+}
+
+</script>
+<script>
+function batchange() {
+  
+    const getNumericValue = (input) => parseFloat(input?.value) || 0;
+
+    // Get all rows in the tables
+    const tableRows = document.querySelectorAll('#dynamicFieldsTable1 tbody tr');
+    const tableRows1 = document.querySelectorAll('#dynamicFieldsTableex tbody tr');
+
+    let grandTotal = 0; // Initialize grand total
+    const orderKgsInput = document.getElementById('kilograms'); // Fetch kilograms input
+    const orderKgs = getNumericValue(orderKgsInput); // Get the entered kilograms value
+
+    // Exit if invalid input
+    if (isNaN(orderKgs) || orderKgs <= 0) {
+        alert("Please enter a valid kilograms value.");
+        return;
+    }
+
+    // Process rows in the first table
+    tableRows.forEach(row => {
+        const batch = row.querySelector('[name="batch"]')?.value || '';
+
+        // Check if batch is missing
+      /*   if (!batch) {
+            alert("Please select batch's of all rows...");
+            orderKgsInput.value = 0; // Reset the kilograms input
+            return; // Stop further processing
+        } */
+
+        const kgsValue = getNumericValue(row.querySelector('[name="Quantity"]'));
+        const price = getNumericValue(row.querySelector('[name="price"]'));
+        const stockQty = getNumericValue(row.querySelector('[name="stock_qty"]'));
+        let reqqntInput = row.querySelector('[name="reqqnt"]');
+        
+        var reqruantity=parseFloat(reqqntInput.value);
+        
+        
+       
+        let totalPriceInput = row.querySelector('[name="totalprice"]');
+
+        const itemcode = row.querySelector('input[name="itemCode"]');
+        const itemname = row.querySelector('input[name="itemname"]');
+        const category_name1 = row.querySelector('input[name="category_name1"]');
+        const baseunit = row.querySelector('input[name="baseunit"]');
+        const qty = row.querySelector('input[name="Quantity"]');
+        
+          if (reqruantity > stockQty && stockQty>0 ) {
+        	
+      
+        	
+         const lesqnt = reqruantity - stockQty;
+
+            reqqntInput.value = stockQty.toFixed(2); // Assign stockQty to reqqnt
+            const listpass = [itemcode, itemname, category_name1, baseunit, qty, lesqnt];
+            addRowToTable4(listpass); // Add excess data to another table
+        } else {
+        	
+         //const calculatedQty = reqqntInput * kgsValue;
+            //reqqntInput.value = calculatedQty.toFixed(2);
+            
+            const calculatedQty = reqruantity ;
+            reqqntInput.value = calculatedQty.toFixed(2);
+        }
+        
+
+        const reqqnt = getNumericValue(reqqntInput);
+        const totalPrice = price * reqqnt;
+        totalPriceInput.value = totalPrice.toFixed(2);
+        grandTotal += totalPrice; // Add to grand total
+    });
+
+    // Process rows in the second table
+    tableRows1.forEach(row => {
+        const perAmount = getNumericValue(row.querySelector('[name="per_Amount"]'));
+        const totalExpCostInput = row.querySelector('[name="totalexpcost"]');
+
+        const totalPrice = orderKgs * perAmount;
+        totalExpCostInput.value = totalPrice.toFixed(2);
+        grandTotal += totalPrice; // Add to grand total
+    });
+
+    // Update the grand total in the UI
+    document.getElementById('grantTotal').value = grandTotal.toFixed(2);
+}
+
+</script>
+
+<script type="text/javascript">
+
+function addTaxData(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var productlist = [];
+    var makename = document.getElementById('makingproductName').value;
+    var orderNos = document.getElementById('kilograms').value;
+    var woid = document.getElementById('woid').value;
+    //alert(makename); 
+    //alert(orderNos); 
+    $('#dynamicFieldsTable tbody tr').each(function(index) {
+        var row = $(this);
+        console.log("Processing row " + index);
+        console.log(row.html());  // Log the HTML of the current row to check its structure
+
+        var productName = row.find('input[name="product_name[]"]').val();
+        var batchs = row.find('select[name="batch[]"]').val();
+        var units = row.find('input[name="UNITS[]"]').val();
+        var categoryName = row.find('input[name="category_name1[]"]').val();
+        var pkg = row.find('input[name="PKG[]"]').val();
+        var quantity = row.find('input[name="qty[]"]').val();
+        console.log({
+            productName: productName,
+            batch: batchs,
+            units: units,
+            categoryName: categoryName,
+            pkg: pkg,
+            qty:quantity
+        });
+
+        if (productName && batchs && units && categoryName && pkg && makename && orderNos && quantity) {
+            var lists = {
+                pname: productName,
+                batch: batchs,
+                unitinkg: units,
+                catname: categoryName,
+                pkgs: pkg,
+                qty: quantity,
+                kilograms: orderNos,
+                make_product_name:makename
+            };
+            productlist.push(lists);
+        } else {
+            console.warn("Row " + index + " is missing data and will be skipped.");
+        }
+    });
+
+    if (productlist.length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: './add_processes?formmode=add&woid='+woid,
+            contentType: 'application/json',
+            data: JSON.stringify(productlist),
+            success: function(response) {
+                alert(response);
+                 window.location.reload();
+                // $("#alertmsg").text(response);
+                // $('#alert').modal("toggle");
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+//Function to read the options from the 'makelist' datalist
+function readMakelistOptions() {
+    const datalist = document.getElementById('makelist'); // Get the datalist element
+    const options = datalist.querySelectorAll('option');// Get all options inside the datalist
+    const woid =document.getElementById('woid').value;
+    const makesname =document.getElementById('makesname');
+    const kilograms=document.getElementById('kilograms');
+    
+    //alert(woid);
+ // Create an array to store the option values
+    const makelistValues = [];
+    var makename="";
+    $.ajax({
+        type: 'GET',
+        url: './getWO?woid='+woid,
+        success: function(response) {
+            //alert(response.item);
+            options.forEach(option => {
+                makelistValues.push(option.value);// You can also use option.text if you want the text
+                if(response.item==option.value){
+                	makename=option.value;
+                	//alert(makename);	
+                }   
+            });
+            if (makename!=""){
+            makesname.value=makename;
+        	makelist_fn();
+        	kilograms.value=response.qty;
+        	setTimeout(n,3000);
+            }
+            else{
+            	alert("please Add New product");
+            	location.reload();
+            }
+           
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", status, error);
+            alert("An error occurred while sending the data.");
+        }
+    });
+    
+        
+    // Loop through the options and add their values to the array
+    
+    
+    console.log(makelistValues); // Output the array to the console or process further
+}
+
+function totalcl(){
+	var peramount=document.getElementById('per_Amount').value;
+	var qnt=document.getElementById('Quantity').value;
+	var qnt=document.getElementById('TotalAmount');
+	alert(peramount);
+}
+
+</script>
+<body>
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<!-- sideMenu -->
+
+			<div class="col-lg-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+						
+			
+			<!-----------------------------------------Add screen  -----------------------------  -->
+
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					<datalist id="rawlist">
+						<option th:each="rawmaterial : ${rawmaterial}" th:value="${rawmaterial}" th:text="${rawmaterial}"></option>
+					</datalist>
+				<datalist id="Expenseslist">
+					<option>Labour cost</option>
+					<option>Machinary cost</option>
+					<option>Electricity cost</option>
+					<option>Overhead cost</option>
+				</datalist>
+					<div class="card ">
+					
+						
+						<div class="card-header d-flex justify-content-between align-items-center" style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        						<div><i class="fas fa-cogs mr-1"></i> Process</div>
+        					<div>
+				            	<div class="float-right">
+								<!-- 								<button class="btn btn-xs btn-dark"
+									onclick="location.href='./BillOfMaterial?formmode=history';">History</button> -->
+								</div>
+				            	
+        					</div>
+   					 	</div>
+					
+					<br>
+
+					<!-- Table -->
+					<div class="">
+						<div class="col-lg-12" style="margin-top:-15px;">
+							
+								<div class="table-responsive"
+										style="overflow-y: auto; overflow-x: hidden; height: 85vh; border: 1px solid #dee2e6;">
+							
+								<br>
+								<div class="row">
+								<div class="form-group col-md-auto"></div>
+								<div class="form-group col-md-auto">
+								<label for="branchId" class="form-legend"> Branch Id:</label></div>
+                                  <div class="form-group col-md-2">
+										<div class="form-floating">
+											<select class="form-control" id="branchId" name="branchId">
+												<option value="">Select Branch</option>
+												<!-- Populate options dynamically using Thymeleaf -->
+												<option th:each="branchId : ${branchIds}"
+													th:value="${branchId}" th:text="${branchId}"></option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-md-auto">
+										<label style="margin-left: 36px; font-weight: bolder;"
+											for="productName">Select BOMID:</label>
+									</div>
+									<div class="form-group col-md-2">
+										<input type="text" name="bomid" id="bomid" list="bomlist"
+											onchange="makelist_fn()" style="width: 100%;">
+										<datalist id="bomlist">
+											<option th:each="bomdetails : ${bomdetails}"
+												th:value="${bomdetails.bomId+'-'+bomdetails.mfgProductName}"
+												th:text="${bomdetails.bomId+'-'+bomdetails.mfgProductName}"></option>
+										</datalist>
+									</div>
+
+
+									<div class="form-group col-md-auto">
+										<label style="margin-left: 36px; font-weight: bolder;"
+											for="productName">Required Qty:</label>
+									</div>
+									<div class="form-group col-md-2">
+										<input type="number" name="kilograms" id="kilograms"
+											style="width: 100%;" required >
+
+									</div>
+                                  <div class="form-group col-md-2">
+										<select name="units" id="units" style="width: 60%;height: 29px;" required>
+											<option value="">Select Units</option>
+											<option value="kg">kg</option>
+											<!--<option value="g">g</option>-->
+											<option value="ltr">ltr</option>
+											<option value="ml">ml</option>
+										</select>
+
+
+									</div>
+
+
+								</div>
+
+
+								
+									
+									
+																					
+												<form method="post" autocomplete="off" id="addStockHistory"
+													th:fragment="finuserapply">
+
+													<div class="card-body" >
+														<table id="dynamicFieldsTable1"
+															class="table table-bordered">
+															<thead>
+																<tr>
+																	<th>Item Code</th>
+																	<th>Item Name</th>
+																	<th>Category</th>
+																	<th>Base Unit</th>
+																	<th>Qty/Unit</th>
+																	<th style="width: 8%;">Batch</th>
+																	<th>Stock Qty</th>
+																	<th>Price/Unit</th>
+																	<th>Req/Qty</th>
+																	<th>Total</th>
+																	<!--<th >Action</th>-->
+
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+
+																	<td style="width: 110px;"><input type="text"
+																		name="itemCode" id="itemCode" list="rawlist"
+																		onchange="getitemm(this)"
+																		style="width: 100%; "> </td>
+
+																	<td><input type="text" name="itemname"
+																		id="itemname"
+																		style="width: 100%; text-align: center; ">
+																	</td>
+
+																	<td><input type="text" name="category_name1"
+																		id="category_name1"
+																		style="width: 100%; text-align: center; "
+																		readonly></td>
+
+																	<td><input type="text" name="baseunit"
+																		id="baseunit"
+																		style="width: 100%; text-align: center; ">
+																	</td>
+
+																	<td><input type="number" name="Quantity"
+																		id="Quantity" 
+																		style="width: 100%; text-align: center; "
+																		readonly></td>
+
+																	<td><select name="batch" id="batch"
+																		style="width: 100%; text-align: center; "
+																		onchange="get_two(this);"><option></option></select>
+																	</td>
+
+																	<td><input type="number" name="stock_qty"
+																		id="stock_qty"
+																		style="width: 100%; text-align: center; "></td>
+
+																	<td><input type="number" name="price" id="price"
+																		style="width: 100%; text-align: center;"></td>
+																	<td><input type="number" name="reqqnt" id="reqqnt"
+																		style="width: 100%; text-align: center; "></td>
+
+																	<td><input type="number" name="totalprice"
+																		id="totalprice"
+																		style="width: 100%; text-align: center; "></td>
+
+
+
+																	<!--<td style="text-align: center"><button
+																			type="button" class="btn btn-danger remove-btnn">Remove</button></td>-->
+																			
+																	<!--<td style="text-align: center;"><button class="btn btn-danger btn-sm remove-btnn">-</button></td>-->
+																	<!--<td style="text-align: center;">
+																	    <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
+																	       
+																	        <span class="add-btnn" style="cursor: pointer; font-size: 20px; color: green;">
+																	            <i class="fas fa-plus add-btnn"></i>
+																	        </span>
+																	        
+																	        
+																	        <span class="remove-btnn" style="cursor: pointer; font-size: 20px; color: red;">
+																	            <i class="fas fa-trash remove-btnn"></i>
+																	        </span>
+																	    </div>
+																	</td>-->
+																			
+																</tr>
+															</tbody>
+														</table>
+														<!--<button style ="width:35px; margin-top:-24px"  class="btn btn-dark add-btnn">+</button>
+<div></div>
+<br>-->
+														
+														<!--  <div class="button-container">
+															<button type="button" class="btn btn-success add-btnn" id="addButton">Add</button>
+														</div>-->
+
+														<div class="card-header"
+															style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; padding: 1.7rem;">
+
+															<div class="float-left">
+																<h6 style="font-size: 1.5rem; color: black;">Other
+																	Expenses</h6>
+															</div>
+
+
+														</div>
+
+
+
+														<table id="dynamicFieldsTableex"
+															class="table table-bordered">
+															<thead>
+																<tr>
+																	<th>Expenses Type</th>
+																	<th>Expenses cost</th>
+																	<th>Total cost</th>
+																	<!--<th>Actions</th>-->
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td><input type="text" name="ExpensesType"
+																		id="ExpensesType" list="Expenseslist"
+																		style="width: 100%;"></td>
+
+
+																	<td><input type="number" name="per_Amount"
+																		id="per_Amount"
+																		style="width: 100%; "></td>
+
+																	<td><input type="number" name="totalexpcost"
+																		id="totalexpcost"
+																		style="width: 100%; "></td>
+	                                             <!--<td style="text-align:center;"><button type="button" class="btn btn-danger remove-btn" >Remove</button></td>-->
+	                                             <!--<td style="text-align: center;"><button class="btn btn-danger btn-sm remove-btn">-</button></td>-->	
+
+																</tr>
+															</tbody>
+														</table>
+														<!--<button style ="width:35px; margin-top:-24px"  class="btn btn-dark add-btn">+</button>
+<div></div>
+<br>-->
+														
+														<!--<div class="button-container">
+															<button type="button" class="btn btn-success add-btn">Add</button>
+														</div>-->
+
+
+														<div class="form-row align-items-center">
+															<div class="form-group col-md-2">
+																<label for="productName">Mfg Product Name:</label>
+															</div>
+															<div class="form-group col-md-2">
+																<input type="text" class="form-control"
+																	id="makingproductName" placeholder="Enter product name"
+																	style="border-color: #333333; "
+																	required>
+															</div>
+
+															<div class="form-group col-md-2"></div>
+
+															<div class="form-group col-md-2">
+																<label for="productName">Grant Total:</label>
+															</div>
+															<div class="form-group col-md-2">
+																<input type="number" class="form-control" id="grantTotal"
+																	placeholder="Total" name="grantTotal" readonly
+																	style="border-color: #333333;  margin-left: -5.1rem;">
+															</div>
+
+														</div>
+
+													</div>
+												</form>
+										
+									
+
+								</div>
+								
+								<br>
+
+
+								<div class="card-footer text-center"
+									style="font-family: 'Nunito', sans-serif; font-size: 23px; margin-top:-10px; font-weight: 600;">
+
+									<button class="btn btn-xs btn-dark" type="button"
+										id="Dashboard" onclick="contentLoad(this)">Home</button>
+									<button class="btn btn-xs btn-dark" id="btnSubmit"
+										onclick="add_process(event);">Submit</button>
+									<button class="btn btn-xs btn-dark" type="button" id="btnBack"
+										onclick="back();">Back</button>
+
+								</div>
+
+
+
+
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			</div>
+		</div>
+		<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.reload();">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+</body>
+
+</html>

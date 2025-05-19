@@ -1,0 +1,31 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[BOM]    Script Date: 22-04-2025 11:47:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BOM](
+	[BOM_ID] [varchar](100) NULL,
+	[Item_code] [varchar](100) NULL,
+	[Item_name] [varchar](100) NULL,
+	[Hsn_code] [varchar](100) NULL,
+	[Category_name] [varchar](100) NULL,
+	[Base_unit] [varchar](100) NULL,
+	[Qty] [decimal](18, 2) NULL,
+	[Expenses_type] [varchar](100) NULL,
+	[Expenses_cost] [decimal](18, 2) NULL,
+	[Mfg_productname] [varchar](100) NULL,
+	[entity_flg] [varchar](1) NULL,
+	[del_flg] [varchar](1) NULL,
+	[verify_flg] [varchar](1) NULL,
+	[create_date] [date] NULL,
+	[Id] [bigint] NULL,
+	[price] [decimal](18, 2) NULL
+) ON [PRIMARY]
+GO
+
+

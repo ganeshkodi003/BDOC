@@ -1,0 +1,356 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+td{
+   background-color: #f8f7ff;
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 10px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 10px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+	$(function() {
+
+		$("#dataTables").DataTable({
+			"destroy" : true,
+			"scrollY" : 400,
+			"scrollCollapse" : true,
+			"paging" : false,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"pageLength" : 5000,
+			"lengthChange" : false,
+
+		});
+		
+		$("#dataTables tbody").on('click', 'tr', function() {
+
+			var tableData = $(this).children("td").map(function() {
+				return $(this).text();
+			}).get();
+			
+			alert(tableData[0]);
+			location.href = "./saleReportDet?sid="+tableData[0]
+			//location.href = "/CounterData/"+tableData[0];
+			//location.href = "./TokenList?data=" + tableData[0];
+
+		});
+	});
+	$(document).ready(function() {
+		
+		
+updateSubTotal();
+		
+		function updateSubTotal() {
+			  var table = document.getElementById("dataTables");
+			  let subTotal = Array.from(table.rows).slice(1).reduce((total, row) => {
+			    return total + parseFloat(row.cells[3].innerHTML);
+			  }, 0);
+			  
+			  document.getElementById("val").innerHTML = "Total = Rs." + subTotal.toFixed(0);
+			
+			}
+		
+		
+		
+	
+	
+	});
+function btnsaleSearchbt() {
+		
+		var saleDate=document.getElementById('saleDate').value;
+		
+		location.href = "./saleReport?date_of_sale="+saleDate;
+	}
+	function addMedicine() {
+		location.href = './addMedicine'
+	}
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+	
+	
+	function totalofprice(saleList){
+		
+		console.log("hi");
+	}
+	
+	/*]]>*/
+	function back() {
+		window.history.back();
+	}
+
+</script>
+
+<body>
+
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+	<div class=" container content" >
+
+		<form th:if="${mode}=='check'" autocomplete="off" id="generalpatient"
+			method="POST">
+
+			<div class="card ">
+
+				<div style="background:linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%);    background-color: #377486; color: white;padding: 1rem 1.3rem;
+    margin-bottom: 0;
+    height: 50px;
+    border-bottom: 1px solid #17a2b852;">
+					<div class="spur-card-title">Sale Report</div>
+				</div>
+
+				<div class="card-body" style="padding: 1rem;">
+
+					<div class="form-row">
+
+						<label class="col-md-1 "><h6>Date of Sale</h6></label> <input
+							type="date" id="saleDate" class="col-md-2" /> <label
+							class="  col-md-1 "></label><label class="  col-md-1 "></label>
+
+
+
+
+						<button type="button"
+							style="background-color: #428bca; border-color: #357ebd; color: white;"
+							class="col-md-1" id="btnsaleSearch"
+							onclick="btnsaleSearchbt();totalofprice();">Search</button>
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="card " id="saleList">
+
+				<div class="card-body">
+					<table class="table table-striped " id="dataTables">
+						<thead class="stats-secondary">
+							<tr>
+								<th style="font-size: 20px">Invoice ID</th>
+								<th style="font-size: 20px">Customer Name</th>
+								<th style="font-size: 20px">Date Of Sale</th>
+								<th style="font-size: 20px">Total Price</th>
+
+							</tr>
+						</thead>
+						<tbody id="saleTableBody">
+							<tr th:each="listItem : ${saleList}" th:id="${listItem.sale_id}"
+								class="userlist">
+								<td style="width: 100px" th:text="${listItem.sale_id}"></td>
+								<td style="width: 150px" th:text="${listItem.cust_name}"></td>
+								<td style="width: 130px"
+									th:text="${#dates.format(listItem.date_of_sale, 'dd-MM-yyyy')}"></td>
+								<td style="width: 100px;"
+									th:text="${listItem.total}"></td>
+								
+							</tr>
+
+
+						</tbody>
+					</table>
+					
+					
+
+					<span id="val"></span>
+					</div>
+<div class=" col-sm-13 text-center">
+			<div style="background:linear-gradient(to bottom, #17a2b885 4%, hsl(192, 75%, 29%) 50%);    background-color: #377486; color: white;padding: 1rem 1.3rem;
+    margin-bottom: 0;
+    height: 50px;
+    border-bottom: 1px solid #17a2b852;">
+					<button Style="width: 100px;background: #386276;color: white;" type="button"  id="Dashboard" onclick="contentLoad(this)"
+						>Home</button>
+<button Style="width: 100px;background: #386276;color: white;" id="btnback" onclick="back();">Back</button>
+</div>
+		</div>
+					
+					
+					
+					
+
+				</div>
+			
+		
+		</form>
+		
+					
+	</div>
+</body>
+
+</html>

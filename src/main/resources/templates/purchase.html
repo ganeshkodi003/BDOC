@@ -1,0 +1,761 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="/path-to-your-favicon/favicon.ico" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.dash-app {
+	margin-left: 380px ! important;
+	margin-top: 110px;
+	margin-right: 110px;
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+<style>
+.custom-input {
+	height: 30px; /* Adjust the height as needed */
+	padding: 5px; /* Adjust padding as needed */
+}
+</style>
+<style>
+input, select {
+	height: 30px; /* Adjust height */
+	padding: 5px; /* Adjust padding */
+	border-radius: 5px; /* Rounded corners */
+	border: 1px solid #ccc; /* Light gray border */
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Inner shadow for 3D effect */
+	outline: none; /* Remove outline on focus */
+	transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	/* Smooth transition */
+}
+
+/* Add a hover effect for better UI */
+input:hover, select {
+	border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add focus effect for interaction feedback */
+input:focus, select {
+	border-color: #007bff; /* Change border color on focus */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* Light blue shadow on focus */
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	$(function() {
+
+		$("#dataTables").DataTable({
+			"destroy" : true,
+			"scrollY" : 400,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"pageLength" : 100,
+			"lengthChange" : false,
+
+		});
+	});
+		$(document).ready(function() {
+
+	 $("#Upload").on("click", function() {
+
+	 $.ajax({
+	 url : './fileimport',
+	 type : 'POST',
+	 data : new FormData($("#fileuploadd")[0]),
+	 enctype : 'multipart/form-data',
+	 processData : false,
+	 contentType : false,
+	 success : function(res) {
+	 window.alert(res);
+	 //location.href = './stockHistory'
+
+	 }
+	 });
+	 e.preventDefault();
+
+	 });
+	 });
+	 
+	var checkff = true;
+
+	function checkFields() {
+		var fields = $('input.required');
+		for (var i = 0; i < fields.length; i++) {
+			if ($(fields[i]).val() != '') {
+				window.alert("Enter all required fields");
+				checkff = true;
+			} else {
+				checkff = false;
+			}
+		}
+
+	}
+	 /* function singleStockHistory() {
+
+		var expdate = document.getElementById('EXPIRY_DATEs').value;
+
+		var purdate = document.getElementById('PURCHASE_DATEs').value;
+
+		$.ajax({
+			url : "./singleStockHistory?expdate=" + expdate + "&purdate="
+					+ purdate,
+			dataType : "text",
+			type : 'POST',
+			aync : true,
+			data : $('#addStockHistory').serialize(),
+			success : function(res) {
+				if (res != '') {
+					window.alert(res);
+					location.href = './stockHistory'
+				}
+			}
+		});
+
+	};  */
+	
+	/* function singleStockHistory() {
+	    var expdate = document.getElementById('EXPIRY_DATEs').value;
+	    var purdate = document.getElementById('PURCHASE_DATEs').value;
+
+	    // Create a FormData object to hold the form data including the file
+	    var formData = new FormData(document.getElementById('addStockHistory'));
+	    formData.append('expdate', expdate);
+	    formData.append('purdate', purdate);
+
+	    $.ajax({
+	        url: "./singleStockHistory",
+	        type: 'POST',
+	        data: formData,
+	        processData: false, // Don't process the files
+	        contentType: false, // Set content type to false as jQuery will tell the server it's a query string request
+	        success: function(res) {
+	            if (res != '') {
+	                window.alert(res);
+	                location.href = './stockHistory';
+	            }
+	        }
+	    });
+	} */
+
+
+	/* function singleStockCurrent() {
+		const inputs = document.querySelectorAll('#addStockHistory input');
+		
+		if ($(inputs[i]).val() != '') {
+			var expdate = document.getElementById('EXPIRY_DATEs').value;
+			$.ajax({
+				url : "./singleStockCurrentMod?expdate=" + expdate,
+				dataType : "text",
+				type : 'POST',
+				aync : true,
+				data : $('#addStockHistory').serialize(),
+				success : function(res) {
+
+					alert(res);
+					location.href = './stockHistory'
+
+				}
+			});
+		};
+	}; */
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+
+	function back() {
+		window.history.back();
+	}
+</script>
+<script type="text/javascript">
+	function toggleFileUpload(show) {
+		const fileUploadField = document.getElementById('fileUploadField');
+		if (show) {
+			fileUploadField.style.display = 'flex';
+		} else {
+			fileUploadField.style.display = 'none';
+		}
+	}
+	
+	$(document).ready(function() {
+	    $('#btnSubmit').click(function(event) {
+	        event.preventDefault(); // Prevent default form submission
+	        
+	        var formData = new FormData();
+	        var fileInput = document.getElementById('filedatas');
+	        
+	        if (fileInput.files.length > 0) {
+	            formData.append('filedatas', fileInput.files[0]);
+	        }
+	        
+	        var expdate = document.getElementById('EXPIRY_DATEs').value;
+	        var purdate = document.getElementById('PURCHASE_DATEs').value;
+
+	        formData.append('expdate', expdate);
+	        formData.append('purdate', purdate);
+	        
+	        var formElement = document.getElementById('addStockHistory');
+	        var formFields = new FormData(formElement);
+	        formFields.forEach(function(value, key) {
+	            formData.append(key, value);
+	        });
+
+	        $.ajax({
+	            url: './fileuploadInventory',
+	            type: 'POST',
+	            data: formData,
+	            processData: false,
+	            contentType: false,
+	            success: function(response) {
+	                alert(response);
+	            },
+	            error: function(xhr) {
+	                alert(xhr.responseText);
+	            }
+	        });
+	        
+				$.ajax({
+					url : "./deepstorecurrent?expdate=" + expdate,
+					dataType : "text",
+					type : 'POST',
+					aync : true,
+					data : $('#addStockHistory').serialize(),
+					success : function(res) {
+
+						alert(res);
+						location.href = './stockHistory'
+
+					}
+				});
+	        
+	        
+	    });
+	});
+
+
+
+
+</script>
+<body>
+
+	<!-- sideMenu -->
+
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+
+
+	<!-- Menu -->
+	<div class="dash-app"  >
+	<div class="card ">
+
+		<div class="card-header border-bottom-0"
+			style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+			<div class="spur-card-title">Purchase Product</div>
+		</div>
+		<br>
+		<!--  	<div class="container-fluid">
+			  <div class="col-lg-12  " style="background: #727F94; color: #fff">
+				<div>Stock History(Upload)</div>
+			</div>-->
+
+		<!-- Table -->
+		<div class="row">
+			<div class="col-lg-12">
+				
+
+
+					<!--  	<div class="col-lg-12   " style="background: #0096a6; font-size: 15px; color: #fff">
+							<div>Stock History(Manual)</div>
+						</div> -->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-12"></div>
+						</div>
+						<!-- Table -->
+						<div class="row">
+							<div class="col-lg-12">
+
+								<div class="card " style="margin-top: 40px">
+
+									<form method="post" autocomplete="off" id="addStockHistory"
+										th:fragment="finuserapply">
+
+										<!--  	<div class="card-header" style="color: #727F94">  -->
+										<div class="card-header"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<div class="spur-card-title">ADD STOCK</div>
+										</div>
+
+										<div class="card-body" style="padding: 10px;">
+											<div class="form-row">
+
+												<!--  <label class="col-md-2 ">Product ID</label> <input
+													type="text" class="  col-md-2" id="IDs" name="IDs"
+													th:value=${ce_id} readonly />-->
+												<label class="  col-md-2 ">MFR</label> <input type="text"
+													class="col-md-2" id="MFR" name="MFR" required /> <label
+													class="  col-md-2 ">BATCH</label> <input type="text"
+													class="col-md-2" id="BATCH" name="BATCH" required /> <label
+													class="  col-md-2 ">GSTIN</label><input type="text"
+													class="col-md-2" id="GSTIN" name="GSTIN" required />
+
+
+
+
+											</div>
+											<div class="form-row">
+
+												<label class="  col-md-2 ">Expiry Date</label> <input
+													type="date" class="col-md-2" id="EXPIRY_DATEs"
+													name="EXPIRY_DATEs" required /> <label class="  col-md-2 ">HSN
+													Code</label> <input type="text" class="col-md-2" id="HSN_CODE"
+													name="HSN_CODE" required /> <label class="  col-md-2 ">Product
+													Name</label> <input type="text" class="col-md-2" id="PRODUCT_NAME"
+													name="PRODUCT_NAME" required />
+
+											</div>
+											<div class="form-row">
+
+												<label class="  col-md-2 ">Category Name</label> <input
+													type="text" class="col-md-2" id="CATEGORY_NAME"
+													name="CATEGORY_NAME" required /> <label
+													class="  col-md-2 ">PKG</label> <input type="text"
+													class="col-md-2" id="PKG" name="PKG" required /> <label
+													class="  col-md-2 ">Units in Kgs</label> <input
+													type="number" class="col-md-2" id="UNITS" name="UNITS"
+													required />
+
+											</div>
+											<div class="form-row">
+
+
+												<label class="  col-md-2 ">MRP</label><input type="number"
+													class="col-md-2" id="MRP" name="MRP" required /> <label
+													class="  col-md-2 ">Sub Units</label><input type="number"
+													class="col-md-2" id="SUB_UNITS" name="SUB_UNITS" required />
+												<label class="  col-md-2 ">Sub Units Cost</label><input
+													type="number" class="col-md-2" id="SUB_UNITS_COST"
+													name="SUB_UNITS_COST" required />
+
+											</div>
+											<div class="form-row">
+
+												<label class="  col-md-2 ">No of Units</label><input
+													type="number" class="col-md-2" id="NO_OF_UNITS"
+													name="NO_OF_UNITS" required /> <label class="  col-md-2 ">Rate</label><input
+													type="number" class="col-md-2" id="RATE" name="RATE"
+													required /> <label class="  col-md-2 ">Discount
+													Percent</label><input type="number" class="col-md-2"
+													id="DISCOUNT_PERCENT" name="DISCOUNT_PERCENT" required />
+
+											</div>
+											<div class="form-row">
+
+												<label class="  col-md-2 ">Discount Amount</label><input
+													type="number" class="col-md-2" id="DISCOUNT_AMOUNT"
+													name="DISCOUNT_AMOUNT" required /> <label
+													class="  col-md-2 ">GST Percent</label><input type="number"
+													class="col-md-2" id="GST_PERCENT" name="GST_PERCENT"
+													required /> <label class="  col-md-2 ">Amount</label><input
+													type="number" class="col-md-2" id="AMOUNT" name="AMOUNT"
+													required />
+											</div>
+
+											<div class="form-row">
+												<label class="  col-md-2 ">Purchased From</label><input
+													type="text" class="col-md-2" id="PURCHASED_FROM_NAME"
+													name="PURCHASED_FROM_NAME" required /> <label
+													class="  col-md-2 ">Purchase Date</label> <input
+													type="date" class="col-md-2" id="PURCHASE_DATEs"
+													name="PURCHASE_DATEs" required />
+													
+													
+													<label
+													class="  col-md-2 ">File Upload Flg</label>
+												<div class="col-md-2 d-flex align-items-center">
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															id="fileuploadYes" name="fileupload" value="yes"
+															onclick="toggleFileUpload(true)"> <label
+															class="form-check-label" for="fileuploadYes">Yes</label>
+													</div>
+													<div class="form-check form-check-inline">
+														<input class="form-check-input" type="radio"
+															id="fileuploadNo" name="fileupload" value="no"
+															onclick="toggleFileUpload(false)"> <label
+															class="form-check-label" for="fileuploadNo">No</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="form-row" id="fileUploadField"
+												style="display: none;">
+												<label class="col-md-2">Select File</label>
+												<div class="col-md-4">
+													<input type="file" name="filedatas"
+														class="form-control form-control-sm" id="filedatas"
+														 style="height: 36px; width: 50%;" /> <small>(Max.
+														20MB)</small>
+												</div>
+											</div>
+											<div class="form-row">
+
+												<label class="  col-md-3 "></label> <label
+													class="  col-md-2 "></label>
+
+												<button class="btn btn-xs btn-primary btns" id="btnSubmit"
+													style=" margin-top:30px; color: #ffffff;"
+												>Add Stock</button>
+
+
+											</div>
+
+
+										</div>
+
+									</form>
+								</div>
+
+
+							</div>
+						</div>
+						
+						
+					</div>
+					<div class="container-fluid">
+					<div class="row">
+							<div class="col-lg-12">
+
+								<div class="card " style="margin-top: 40px">
+
+									<form method="POST" id="fileuploadd"
+								enctype="multipart/form-data">
+
+										<!--  	<div class="card-header" style="color: #727F94">  -->
+										<div class="card-header"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<div class="spur-card-title">UPLOAD STOCK</div>
+										</div>
+
+										<div class="card-body" style="padding: 10px;">
+												<div class="form-row">
+
+												<label class="  col-md-2 "> uploadedFile</label>
+												<input type="file" name="file" style="width:200px; height:42px" id="uploadedFile">
+												
+													
+													
+											</div>
+
+												<div class="form-row">
+
+												<label class="  col-md-3 "></label> <label
+													class="  col-md-2 "></label>
+												<button type="submit" class="btn btn-xs btn-primary btns"
+											 id="Upload" 
+											name="Upload" value="Upload">Add Stock</button>
+												
+
+
+											</div>
+
+
+										</div>
+
+									</form>
+								</div>
+
+
+							</div>
+						</div>
+						</div>
+					
+					<br>
+					<div class="card " style="margin:15px;">
+					<div class="card-header"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<div>Stock History List</div>
+					</div>
+					<div class="card-body" style="width:100%;">
+						<table class="table table-striped " id="dataTables" style="width:240%">
+							<thead class="stats-secondary">
+								<tr>
+									<th style="font-size: 15px">Product ID</th>
+									<th style="font-size: 15px">MFR</th>
+									<th style="font-size: 15px">Batch</th>
+									<th style="font-size: 15px">Expiry Date</th>
+									<th style="font-size: 15px">HSN_CODE</th>
+									<th style="font-size: 15px">Product Name</th>
+									<th style="font-size: 15px">Category Name</th>
+
+
+									<th style="font-size: 15px">PKG</th>
+									<th style="font-size: 15px">Units</th>
+
+
+									<th style="font-size: 15px">MRP</th>
+									<th style="font-size: 15px">Sub Units</th>
+									<th style="font-size: 15px">Sub Units Cost</th>
+									<th style="font-size: 15px">Rate</th>
+									<th style="font-size: 15px">Discount %</th>
+									<th style="font-size: 15px">Discount Amount</th>
+									<th style="font-size: 15px">GST %</th>
+									<th style="font-size: 15px">Amount</th>
+									<th style="font-size: 15px">GSTIN</th>
+									<th style="font-size: 15px">Purchased From</th>
+									<th style="font-size: 15px">Purchase Date</th>
+									<th style="font-size: 15px">Status</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="listItem : ${stockList}" th:id="${listItem[0]}"
+									class="userlist">
+									<td style="width: 100px" th:text="${listItem[0]}"></td>
+									<td style="width: 100px" th:text="${listItem[1]}"></td>
+									<td style="width: 100px" th:text="${listItem[2]}"></td>
+									<td style="width: 100px" th:text="${listItem[3]}"></td>
+									<td style="width: 100px" th:text="${listItem[4]}"></td>
+									<td style="width: 100px" th:text="${listItem[5]}"></td>
+									<td style="width: 100px" th:text="${listItem[8]}"></td>
+									<td style="width: 100px" th:text="${listItem[6]}"></td>
+									<td style="width: 100px" th:text="${listItem[7]}"></td>
+
+
+
+									<td style="width: 100px" th:text="${listItem[12]}"></td>
+									<td style="width: 100px" th:text="${listItem[9]}"></td>
+									<td style="width: 100px" th:text="${listItem[11]}"></td>
+									<!--  <td style="width: 100px" th:text="${listItem[10]}"></td>-->
+
+									<td style="width: 100px" th:text="${listItem[13]}"></td>
+									<td style="width: 100px" th:text="${listItem[14]}"></td>
+									<td style="width: 130px" th:text="${listItem[15]}"></td>
+									<td style="width: 100px" th:text="${listItem[16]}"></td>
+									<td style="width: 100px" th:text="${listItem[17]}"></td>
+									<td style="width: 100px" th:text="${listItem[18]}"></td>
+									<td style="width: 100px" th:text="${listItem[19]}"></td>
+									<td style="width: 100px" th:text="${listItem[20]}"></td>
+									<td style="width: 100px">PURCHASE</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!------------------------------ Report Details pagination - shown if paginated -------------------------------------------------->
+						<!-- <div class="float-right" th:if="${patientList.totalPages} gt 1">
+								<a href="#"><i class="fas fa-caret-left"
+									th:onclick="|getPatientlist('prevpage',${patientList.number},${patientList.totalPages});|"></i></a>
+								<input type="text" id="pageno"
+									style="width: 30px; font-size: 12px"
+									th:value="${patientList.number+1}"
+									th:onchange="|getPatientlist('givenpage',${patientList.number},${patientList.totalPages});|"></input>
+								<span style="font-size: 14px">Of</span> <font
+									th:text="${patientList.totalPages}" style="font-size: 12px"></font>
+								<a href="#"><i class="fas fa-caret-right"
+									th:onclick="|getPatientlist('nextpage',${patientList.number},${patientList.totalPages});|"></i></a>
+							</div> -->
+
+
+					</div>
+					</div>
+
+					<div class=" col-sm-13 text-center">
+						<div
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+							<button class="btn btn-xs btn-primary btns"
+								type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+							<button class="btn btn-xs btn-primary btns"
+								type="button" id="btnBack" onclick="back();">Back</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

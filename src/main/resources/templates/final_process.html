@@ -1,0 +1,777 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.stats-secondary {
+	color: black;
+	font-weight:bold;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.dash-app {
+	margin-left: 380px ! important;
+	margin-top: 110px;
+	margin-right: 110px;
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: bold;
+}
+
+thead th {
+	text-align: center;
+	color: black !important;
+	border-bottom-width: 2px;
+	font-size: medium ! important;
+}
+
+
+
+</style>
+<style>
+.custom-input {
+	height: 30px; /* Adjust the height as needed */
+	padding: 5px; /* Adjust padding as needed */
+}
+</style>
+<style>
+input, select {
+	height: 30px; /* Adjust height */
+	padding: 5px; /* Adjust padding */
+	border-radius: 5px; /* Rounded corners */
+	border: 1px solid #ccc; /* Light gray border */
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Inner shadow for 3D effect */
+	outline: none; /* Remove outline on focus */
+	transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	/* Smooth transition */
+}
+
+/* Add a hover effect for better UI */
+input:hover, select {
+	border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add focus effect for interaction feedback */
+input:focus, select {
+	border-color: #007bff; /* Change border color on focus */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* Light blue shadow on focus */
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+$(function() {
+
+    // Apply DataTables to three tables with the same configuration
+    $('#dataTables1, #dataTables2, #dataTables3').DataTable({
+        "destroy": true,
+        "scrollY": 400,
+        "scrollCollapse": true,
+        "paging": true,
+        "autoWidth": false,
+        "ordering": false,
+        "searching": true,
+        "scrollX": true,
+        "pageLength": 10,
+        "lengthChange": false
+    });
+
+});
+
+	$(document).ready(function() {
+
+		$("#Upload").on("click", function() {
+
+			$.ajax({
+				url : './fileimport',
+				type : 'POST',
+				data : new FormData($("#fileuploadd")[0]),
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				success : function(res) {
+					window.alert(res);
+					//location.href = './stockHistory'
+
+				}
+			});
+			e.preventDefault();
+
+		});
+	});
+	
+	var checkff=true;
+
+	function checkFields(){
+		var fields = $('input.required');
+		for (var i = 0; i < fields.length; i++) {
+			if ($(fields[i]).val() != '') {
+				window.alert("Enter all required fields");
+				checkff=true;
+			}else{
+				checkff=false;
+			}
+		}
+		
+	}
+	function singleStockHistory() {
+		
+		alert("Added Successfully!!!")
+
+	/* 	var expdate = document.getElementById('EXPIRY_DATEs').value;
+
+		var purdate = document.getElementById('PURCHASE_DATEs').value;
+
+		$.ajax({
+			url : "./singleStockHistory?expdate=" + expdate + "&purdate="
+					+ purdate,
+			dataType : "text",
+			type : 'POST',
+			aync : true,
+			data : $('#addStockHistory').serialize(),
+			success : function(res) {
+				if(res != ''){
+				window.alert(res);
+				location.href = './stockHistory'
+				}
+			}
+		}); */
+
+	};
+
+	function singleStockCurrent() {
+		const inputs = document.querySelectorAll('#addStockHistory input');
+		for (var i = 0; i < inputs.length; i++) {
+			if ($(inputs[i]).val() == '') {
+				alert("Enter all required fields");
+				break;
+			}
+		}
+		if ($(inputs[i]).val() != '') {
+		var expdate = document.getElementById('EXPIRY_DATEs').value;
+		$.ajax({
+			url : "./singleStockCurrent?expdate=" + expdate,
+			dataType : "text",
+			type : 'POST',
+			aync : true,
+			data : $('#addStockHistory').serialize(),
+			success : function(res) {
+
+				alert(res);
+				location.href = './stockHistory'
+
+			}
+		});
+		};
+	};
+
+	function product_name_typeFunction1(input) {
+	    const row = input.closest('tr');
+	    const productName = input.value;
+	    const batchSelect = row.querySelector('select[name="batch[]"]');
+	    const categoryNameInput = row.querySelector('input[name="category_name1[]"]');
+
+	    $.ajax({
+	        url: "./getStocksList?product_id=" + encodeURIComponent(productName),
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	            let options = '<option>SELECT</option>';
+	            $.each(res, function(index, data) {
+	                const values = Object.values(data);
+	                categoryNameInput.value = values[1]; // Update category name
+	                options += `<option value="${values[0]}">${values[0]}</option>`;
+	            });
+
+	            // Update the batch select field in the current row
+	            batchSelect.innerHTML = options;
+
+	            // Remove duplicate options if any
+	            const uniqueOptions = [];
+	            batchSelect.querySelectorAll('option').forEach(option => {
+	                if (uniqueOptions.includes(option.value)) {
+	                    option.remove();
+	                } else {
+	                    uniqueOptions.push(option.value);
+	                }
+	            });
+	        }
+	    });
+	}
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+
+	function back() {
+		window.history.back();
+	}
+	
+	function getcurrentstock(selectElement) {
+	    // Find the closest row (tr) to the changed select element
+	    const row = selectElement.closest('tr');
+
+	    // Get the product name from the input field in the same row
+	    const pro_name = row.querySelector('input[name="product_name[]"]').value;
+
+	    // Fetch the selected batch value
+	    const batch = selectElement.value;
+
+	    // Proceed with the AJAX requests
+	    $.ajax({
+	        url: "./getpkgtypeList?product_id=" + pro_name + "&batch=" + batch,
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	            $.each(res, function(index, data) {
+	                var i = Object.values(data);
+	                // Update the corresponding fields in the same row
+	                row.querySelector('input[name="EXPIRY_DATEs[]"]').value = i[1];
+	                // Update other fields as needed using similar methods
+	            });
+	        }
+	    });
+
+	    $.ajax({
+	        url: "./getCurrentStockfn?product_id=" + pro_name + "&batch=" + batch,
+	        type: 'GET',
+	        dataType: "json",
+	        success: function(res) {
+	            $.each(res, function(index, data) {
+	                var i = Object.values(data);
+	                // Update the corresponding fields in the same row
+	                row.querySelector('input[name="PKG[]"]').value = i[0];
+	                row.querySelector('input[name="UNITS[]"]').value = i[1];
+	                row.querySelector('input[name="GSTIN[]"]').value = i[4];
+	                row.querySelector('input[name="MRP[]"]').value = i[2];
+	            });
+	        }
+	    });
+	}
+
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    const table = document.getElementById('dynamicFieldsTable').querySelector('tbody');
+
+	    // Function to add a new row
+	    function addRow() {
+	        const newRow = document.createElement('tr');
+	        newRow.innerHTML = `
+	            <td>
+	                <input type="text" name="product_name[]" list="pronameList" onchange="product_name_typeFunction1(this)" style="width: 100%;">
+	                <datalist id="pronameList">
+	                    <option th:each="operator : \${productList}" th:value="\${operator.PRODUCT_NAME}" th:text="\${operator.PRODUCT_NAME}"></option>
+	                </datalist>
+	            </td>
+	            <td><select id="BATCH" name="batch[]" onchange="getcurrentstock(this)" style="width: 100%;">
+                <option>SELECT</option>
+	            </select></td>
+	            <td><input type="text" name="GSTIN[]" style="width: 100%;"></td>
+	            <td><input type="text" name="EXPIRY_DATEs[]" style="width: 100%;"></td>
+	            <td><input type="text" name="MRP[]" style="width: 100%;"></td>
+	            <td><input type="text" name="UNITS[]" style="width: 100%;"></td>
+	            <td><input type="text" name="category_name1[]" style="width: 100%;"></td>
+	            <td><input type="text" name="PKG[]" style="width: 100%;"></td>
+	            <td><button type="button" class="btn btn-danger remove-btn">Remove</button></td>
+	        `;
+	        table.appendChild(newRow);
+	    }
+
+	    // Add event listener for the "Add" button
+	    document.querySelector('.add-btn').addEventListener('click', function() {
+	        addRow();
+	    });
+
+	    // Add event listener for removing a row
+	    table.addEventListener('click', function(event) {
+	        if (event.target.classList.contains('remove-btn')) {
+	            event.target.closest('tr').remove();
+	        }
+	    });
+	});
+
+
+
+</script>
+
+<script type="text/javascript">
+function addTaxData(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var productlist = [];
+
+    $('#dynamicFieldsTable tbody tr').each(function(index) {
+        var row = $(this);
+        console.log("Processing row " + index);
+        console.log(row.html());  // Log the HTML of the current row to check its structure
+
+        var productName = row.find('input[name="product_name[]"]').val();
+        var batchs = row.find('select[name="batch[]"]').val();
+        var gstin = row.find('input[name="GSTIN[]"]').val();
+        var expdate = row.find('input[name="EXPIRY_DATEs[]"]').val();
+        var mrp = row.find('input[name="MRP[]"]').val();
+        var units = row.find('input[name="UNITS[]"]').val();
+        var categoryName = row.find('input[name="category_name1[]"]').val();
+        var pkg = row.find('input[name="PKG[]"]').val();
+        console.log({
+            productName: productName,
+            batch: batchs,
+            gstin: gstin,
+            expdate: expdate,
+            mrp: mrp,
+            units: units,
+            categoryName: categoryName,
+            pkg: pkg
+        });
+
+        if (productName && batchs && gstin && expdate && mrp && units && categoryName && pkg) {
+            var lists = {
+                pname: productName,
+                batch: batchs,
+                gstin: gstin,
+                expdate: expdate,
+                mrp: mrp,
+                unitinkg: units,
+                catname: categoryName,
+                pkgs: pkg
+            };
+            productlist.push(lists);
+        } else {
+            console.warn("Row " + index + " is missing data and will be skipped.");
+        }
+    });
+
+    if (productlist.length > 0) {
+        $.ajax({
+            type: 'POST',
+            url: './add_processes?formmode=add',
+            contentType: 'application/json',
+            data: JSON.stringify(productlist),
+            success: function(response) {
+                alert(response);
+                 window.location.reload();
+                // $("#alertmsg").text(response);
+                // $('#alert').modal("toggle");
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX error:", status, error);
+                alert("An error occurred while sending the data.");
+            }
+        });
+    } else {
+        alert("No data to send.");
+    }
+}
+
+function completion(button){
+	const row = button.closest('tr');
+
+    // Get the product name (quantity) from the input field using class or name
+    const qty = row.querySelector('.quantity-input').value; // or use [name="quantity[]"]
+    
+	if(!qty){
+		alert("Please give produced numbers...")
+	}else{
+	
+	  var id = button.getAttribute("ref_id");
+	alert(id)
+	 $.ajax({
+         type: 'GET',
+         url: './completion?id='+ id + '&qty=' + qty,
+         success: function(response) {
+             alert(response);
+              window.location.reload();
+             // $("#alertmsg").text(response);
+             // $('#alert').modal("toggle");
+         },
+         error: function(xhr, status, error) {
+             console.error("AJAX error:", status, error);
+             alert("An error occurred while sending the data.");
+         }
+     }); 
+	}
+}
+function Reject(button){
+	 var id = button.getAttribute("ref_id");
+	alert(id)
+	 $.ajax({
+        type: 'GET',
+        url: './Rejection?id='+ id,
+        success: function(response) {
+            alert(response);
+             window.location.reload();
+            // $("#alertmsg").text(response);
+            // $('#alert').modal("toggle");
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", status, error);
+            alert("An error occurred while sending the data.");
+        }
+    });
+}
+</script>
+
+
+<body>
+
+	<!-- sideMenu -->
+
+	<div th:insert="BTMHeaderMenu :: header"></div>
+
+
+
+	<!-- Menu -->
+	<div class="dash-app">
+	<div class="card ">
+
+		<div class="card-header"
+			style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+			<div >Final Process</div>
+		</div>
+		<br>
+		<!--  	<div class="container-fluid">
+			  <div class="col-lg-12  " style="background: #727F94; color: #fff">
+				<div>Stock History(Upload)</div>
+			</div>-->
+
+		<!-- Table -->
+		<div class="row">
+			<div class="col-lg-12">
+				
+
+					
+					<br>
+					<div class="card " style="margin:15px;">
+					<div class="card-header"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<div>Under Process List</div>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped " id="dataTables1">
+							<thead class="stats-secondary">
+								<tr>
+									<th style="text-align: center; font-size: 15px">REF.No.</th>
+									<th style="text-align: center; font-size: 15px">Product
+										</th>
+									<th style="text-align: center; font-size: 15px">Batch</th>
+									<th style="text-align: center; font-size: 15px">Category</th>
+									<th style="text-align: center; font-size: 15px">Order No's</th>
+									<th style="text-align: center; font-size: 15px">Status</th>
+									<th style="text-align: center; font-size: 15px;">Make</th>
+									<th style="text-align: center; font-size: 15px;">Produced</th>
+									<th style="text-align: center; font-size: 15px">Confirm</th>
+									<th style="text-align: center; font-size: 15px">Dismiss</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="listItem : ${stockLists}" class="userlist">
+									<td style="text-align: center; width: 50px"
+										th:text="${listItem[10]}"></td>
+									<td style="text-align: center; width: 150px"
+										th:text="${listItem[1]}"></td>
+									<td style="text-align: center; width: 50px"
+										th:text="${listItem[2]}"></td>
+									
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[7]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[12]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[9]}"></td>
+									<td style="text-align: center; width: 70px"
+										th:text="${listItem[11]}"></td>
+										<td style="text-align: center; width: 50px"><input style="  width: 113px;" type="number" name="quantityyy[]" class="quantity-input" /></td>
+									<td style="text-align: center; width: 100px"><button onclick="completion(this);" th:attr="ref_id=${listItem[10]}"
+											style="background-color: lightseagreen;">complete</button></td>
+										
+									<td style="text-align: center; width: 100px">	<button onclick="Reject(this);" th:attr="ref_id=${listItem[10]}"
+											style="background-color: lightseagreen;">Reject</button></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</div>
+					<div class="card " style="margin:15px;">
+					<div class="card-header"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<div>Process Completion List</div>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped " id="dataTables2">
+							<thead class="stats-secondary">
+								<tr>
+									<th style="text-align: center; font-size: 15px">REF.No.</th>
+									<th style="text-align: center; font-size: 15px">Product
+										</th>
+									<th style="text-align: center; font-size: 15px">Batch</th>
+									<th style="text-align: center; font-size: 15px">Category
+										</th>
+									<th style="text-align: center; font-size: 15px">Order No's</th>
+									<th style="text-align: center; font-size: 15px">Produced No's</th>
+									<th style="text-align: center; font-size: 15px;">Make</th>
+									<th style="text-align: center; font-size: 15px">Status</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="listItem : ${comlist}" class="userlist">
+									<td style="text-align: center; width: 50px"
+										th:text="${listItem[10]}"></td>
+									<td style="text-align: center; width: 150px"
+										th:text="${listItem[1]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[2]}"></td>
+									
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[7]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[12]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[6]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[11]}"></td>
+									<td style="text-align: center; width: 50px"
+										th:text="${listItem[9]}"></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</div>
+					<div class="card " style="margin:15px;">
+					<div class="card-header"
+						style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+						<div>Process Rejection List</div>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped " id="dataTables3">
+							<thead class="stats-secondary">
+								<tr>
+									<th style="text-align: center; font-size: 15px">REF.No.</th>
+									<th style="text-align: center; font-size: 15px">Product
+										Name</th>
+									<th style="text-align: center; font-size: 15px">Batch</th>
+									<th style="text-align: center; font-size: 15px">Category
+										Name</th>
+									<th style="text-align: center; font-size: 15px">Order No's</th>
+									<th style="text-align: center; font-size: 15px;">Make</th>
+									<th style="text-align: center; font-size: 15px">Status</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="listItem : ${rejlist}" class="userlist">
+									<td style="text-align: center; width: 50px"
+										th:text="${listItem[10]}"></td>
+									<td style="text-align: center; width: 150px"
+										th:text="${listItem[1]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[2]}"></td>
+									
+									<td style="text-align: center; width: 150px"
+										th:text="${listItem[7]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[12]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[11]}"></td>
+									<td style="text-align: center; width: 100px"
+										th:text="${listItem[9]}"></td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					</div>
+					<div class=" col-sm-13 text-center">
+						<div
+							style="font-family: 'Nunito', sans-serif; font-size: 23px; padding:10px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+							<button  class="btn btn-xs btn-primary btns"
+								type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+							<button  class="btn btn-xs btn-primary btns"
+								type="button" id="btnBack" onclick="back();">Back</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+	</div>
+
+
+
+</body>
+
+</html>

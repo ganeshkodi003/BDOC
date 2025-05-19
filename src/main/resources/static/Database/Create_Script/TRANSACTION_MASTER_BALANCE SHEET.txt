@@ -1,0 +1,18 @@
+CREATE TABLE [dbo].[erp_chartOfAccounts](
+	[account_type] [varchar](100) NULL,
+	[account_number] [varchar](100) NULL,
+	[account_name] [varchar](100) NULL,
+	[entry_date] [date] NULL,
+	[remarks] [varchar](100) NULL,
+	[total_credit_balance] [decimal](18, 2) NULL,
+	[total_debit_balance] [decimal](18, 2) NULL,
+	[account_balance] [decimal](18, 2) NULL,
+	[parentaccount] [varchar](100) NULL,
+	[childaccountcode] [varchar](100) NULL,
+	[ownership] [varchar](100) NULL,
+	[ownershipid] [varchar](100) NULL,
+	[OpeningBalance] [decimal](18, 2) NULL
+) ON [PRIMARY]
+GO
+
+

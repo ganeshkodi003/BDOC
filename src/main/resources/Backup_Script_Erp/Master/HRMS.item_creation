@@ -1,0 +1,64 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [HRMS].[item_creation]    Script Date: 12/6/2024 12:45:38 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [HRMS].[item_creation](
+	[item_name] [varchar](100) NULL,
+	[hsn_code] [varchar](100) NULL,
+	[category] [varchar](100) NULL,
+	[base_unit] [varchar](100) NULL,
+	[item_code] [varchar](100) NULL,
+	[uploadeimage] [varbinary](max) NULL,
+	[saleprice] [bigint] NULL,
+	[saletaxtype] [varchar](100) NULL,
+	[discounttype] [varchar](100) NULL,
+	[discountprice] [bigint] NULL,
+	[wholesaleprice] [bigint] NULL,
+	[wholesaletax] [varchar](100) NULL,
+	[minimumwholesaleqty] [bigint] NULL,
+	[purchaseprice] [bigint] NULL,
+	[purchasetaxtype] [varchar](100) NULL,
+	[openingquantity] [bigint] NULL,
+	[atprice] [bigint] NULL,
+	[asofdate] [date] NULL,
+	[minstocktomaintain] [bigint] NULL,
+	[location] [varchar](100) NULL,
+	[entity_flg] [varchar](100) NULL,
+	[modify_flg] [varchar](100) NULL,
+	[verify_flg] [varchar](50) NULL,
+	[entry_user] [varchar](50) NULL,
+	[del_flg] [varchar](50) NULL,
+	[gstpercentage] [varchar](100) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+--sequence
+
+USE [HRMS]
+GO
+
+USE [HRMS]
+GO
+
+/****** Object:  Sequence [HRMS].[itemcode]    Script Date: 12/6/2024 12:46:55 PM ******/
+CREATE SEQUENCE [HRMS].[itemcode] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 999
+ CACHE 
+GO
+
+
+
+
+

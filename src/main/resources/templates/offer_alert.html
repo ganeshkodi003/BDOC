@@ -1,0 +1,1469 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ERP</title>
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.css}">
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- Popper.js (required for Bootstrap dropdowns) -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- jQuery and jQuery UI (Include if not already added) -->
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- Add this before closing </body> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+<style>
+.custom-input {
+	height: 30px; /* Adjust the height as needed */
+	padding: 5px; /* Adjust padding as needed */
+}
+</style>
+<style>
+input, select {
+	height: 30px; /* Adjust height */
+	padding: 5px; /* Adjust padding */
+	border-radius: 5px; /* Rounded corners */
+	border: 1px solid #ccc; /* Light gray border */
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+	/* Inner shadow for 3D effect */
+	outline: none; /* Remove outline on focus */
+	transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	/* Smooth transition */
+}
+
+/* Add a hover effect for better UI */
+input:hover, select {
+	border-color: #007bff; /* Change border color on hover */
+}
+
+/* Add focus effect for interaction feedback */
+input:focus, select {
+	border-color: #007bff; /* Change border color on focus */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* Light blue shadow on focus */
+}
+</style>
+
+<style>
+.spacer {
+	margin-bottom: 20px;
+	/* Adjust the value (20px) to control the spacing */
+}
+/*or*/
+.form-row {
+	margin-bottom: 10px;
+}
+
+ul.l {
+	list-style-type: square;
+}
+
+ul.li {
+	list-style-type: inherit;
+}
+
+.card-header {
+	display: flex;
+	float: left;
+}
+
+label {
+	font-size: 1px;
+}
+
+#exampleModalLabel {
+	color: white;
+}
+
+#menulist {
+	margin-top: 10px;
+}
+
+#page {
+	position: absolute;
+	right: 0;
+	margin-right: 20px;
+}
+
+.table {
+	text-align: center;
+}
+
+label {
+	font-size: 16px;
+}
+</style>
+
+
+<style>
+/* Style for the loading modal */
+#loadingModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: none; /* Semi-transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999; /* Make sure it's on top */
+	backdrop-filter: blur(5px); /* Apply background blur */
+}
+
+#loadingContent {
+	text-align: center;
+	background-color: none; /* White background for loading content */
+	z-index: 10000; /* Ensure loading content stays above blur */
+}
+
+#loadingContent img {
+	width: 100px; /* Adjust size as needed */
+	height: 100px; /* Adjust size as needed */
+	margin-bottom: 10px;
+}
+</style>
+
+
+
+<style type="text/css">
+.navbar {
+	margin-left: -5px;
+	position: fixed; /* Keep it fixed */
+	top: 0;
+	width: 100%;
+	z-index: 1000; /* Ensure it's above other elements */
+}
+
+.content {
+	margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+
+.container-fluid {
+	width: 100%;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container-manager1 {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+
+.row {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-right: -8px;
+	margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+
+<script th:inline="javascript">
+	var checkboxes = document.querySelectorAll("input[type='checkbox']");
+	function check(mycheck) {
+		if (mycheck == true) {
+			checkboxes.forEach(function(checkbox) {
+				checkbox.checked = true;
+			});
+		} else {
+			checkboxes.forEach(function(checkbox) {
+				checkbox.checked = false;
+			});
+		}
+	}
+	function adduser() {
+		document.getElementById('loadingModal').style.display = 'flex';
+		location.href = 'offer_alert?formmode=add'
+	}
+
+	function list() {
+		document.getElementById('loadingModal').style.display = 'flex';
+		location.href = 'offer_alert?formmode=list';
+	}
+	function home() {
+		document.getElementById('loadingModal').style.display = 'flex';
+		location.href = 'Dashboard'
+	}
+
+	function getvalue() {
+		/* $('#log').empty(); */
+		//$( "#log" ).load(window.location.href + " #log" );
+		var data = "";
+		$('#exampleModal :checkbox:checked').each(function() {
+			var status = (this.checked ? $(this).val() : "");
+			var id = $(this).attr("id");
+			$('#log').show();
+
+			$('#menucontent').hide();
+
+			data += "<p>" + id + "</p>";
+
+		});
+
+		$('#log').append(data);
+		/*  $('#log').append("<h3>" + id + " : " + status + "</h3>"); */
+	}
+
+	function menulist() {
+		var name = document.getElementById("role_desc").value;
+
+		if (name == "Admin") {
+			document.getElementById("admin").checked = true;
+			document.getElementById("Maintenance").checked = true;
+			document.getElementById("Operations").checked = true;
+			document.getElementById("Placement").checked = true;
+			document.getElementById("Inquiries").checked = true;
+			document.getElementById("Reports").checked = true;
+
+		} else if (name == "General") {
+			document.getElementById("admin").checked = false;
+			document.getElementById("Maintenance").checked = false;
+			document.getElementById("Operations").checked = true;
+			document.getElementById("Placement").checked = true;
+			document.getElementById("Inquiries").checked = true;
+			document.getElementById("Reports").checked = true;
+
+		} else if (name == "Audit") {
+			document.getElementById("admin").checked = false;
+			document.getElementById("Maintenance").checked = true;
+			document.getElementById("Operations").checked = true;
+			document.getElementById("Placement").checked = true;
+			document.getElementById("Inquiries").checked = true;
+			document.getElementById("Reports").checked = true;
+
+		} else if (name == "Inquiry") {
+			document.getElementById("Admin").checked = false;
+			document.getElementById("Maintenance").checked = true;
+			document.getElementById("Operations").checked = true;
+			document.getElementById("Placement").checked = true;
+			document.getElementById("Inquiries").checked = true;
+			document.getElementById("Reports").checked = true;
+
+		} else if (name == "MIS") {
+			document.getElementById("Admin").checked = false;
+			document.getElementById("Maintenance").checked = false;
+			document.getElementById("Operations").checked = false;
+			document.getElementById("Placement").checked = false;
+			document.getElementById("Inquiries").checked = true;
+			document.getElementById("Reports").checked = true;
+
+		}
+	}
+
+	function submitform(a) {
+
+		var role_id = $("#role_id").val();
+		alert(role_id)
+
+		if ($("#formdata").valid()) {
+
+			if (role_id != ' ') {
+				var checkBoxAdminValue, adminValue, cbAudit, auditValue, cbIPSOperations, IPSOperationsValue, CBMonitoring, monitoringValue, cbmy_tregistration, my_tregistrationValue;
+				var finalVar = [];
+
+				checkBoxAdminValue = document.querySelector("#Admin:checked");
+				adminValue = (checkBoxAdminValue) ? 'Y' : 'N';
+				if (adminValue === "Y") {
+					finalVar.push("Admin");
+				}
+
+				ipsparameter = document.querySelector("#Maintenance:checked");
+				ipsparavalue = (ipsparameter) ? 'Y' : 'N';
+
+				if (ipsparavalue === "Y") {
+					finalVar.push("Maintenance");
+				}
+
+				cbAudit = document.querySelector("#Operations:checked");
+				auditValue = (cbAudit) ? 'Y' : 'N';
+
+				if (auditValue === "Y") {
+					finalVar.push("Operations");
+				}
+				cbIPSOperations = document.querySelector("#Placement:checked");
+				IPSOperationsValue = (cbIPSOperations) ? 'Y' : 'N';
+				if (IPSOperationsValue === "Y") {
+					finalVar.push("Placement");
+				}
+				CBMonitoring = document.querySelector("#Inquires:checked");
+				monitoringValue = (CBMonitoring) ? 'Y' : 'N';
+				if (monitoringValue === "Y") {
+					finalVar.push("Inquires");
+				}
+
+				cbmy_tregistration = document.querySelector("#Report:checked");
+				my_tregistrationValue = (cbmy_tregistration) ? 'Y' : 'N';
+				if (my_tregistrationValue === "Y") {
+					finalVar.push("Report");
+				}
+
+				var finalString = finalVar.join(',');
+				if (finalString == "") {
+					$("#alertmsg1").text("Please Select Menu List");
+
+					$('#alert1').modal("toggle");
+				} else {
+					var url = "./addAccessRole?" + '&adminValue=' + adminValue
+							+ '&auditValue=' + auditValue
+							+ '&IPSOperationsValue=' + IPSOperationsValue
+							+ '&monitoringValue=' + monitoringValue
+							+ '&my_tregistrationValue=' + my_tregistrationValue
+							+ '&finalString=' + finalString;
+					$("#formdata").attr('action', url);
+
+					var options = {
+						success : showResponse
+					};
+
+					$("#formdata").ajaxSubmit(options);
+
+					function showResponse(responseText, statusText, xhr, $form) {
+
+						$("#alertmsg").text(responseText);
+
+						$('#alert').modal("toggle");
+
+					}
+					;
+				}
+
+			} else {
+				$("#alertmsg1").text("Please fill the Role ID");
+
+				$('#alert1').modal("toggle");
+			}
+		}
+
+	};
+	function getvalue() {
+		/* $('#log').empty(); */
+		//$( "#log" ).load(window.location.href + " #log" );
+		var data = "";
+		var n1 = document.getElementById('log').innerText;
+		document.getElementById('log').innerHTML = "";
+
+		$('#finusers :checkbox:checked').each(function() {
+
+			var status = (this.checked ? $(this).val() : "");
+			var id = $(this).attr("id");
+			$('#log').show();
+
+			$('#menucontent').hide();
+
+			data += "<p>" + id + "</p>";
+
+		});
+
+		$('#log').append(data);
+		/*  $('#log').append("<h3>" + id + " : " + status + "</h3>"); */
+	}
+</script>
+
+<script>
+	function back() {
+		document.getElementById('loadingModal').style.display = 'flex';
+		event.preventDefault();
+		window.history.back();
+	}
+</script>
+<script>
+
+function register_add(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('notification');
+    const formData = new FormData(form);
+
+    let isValid = true;
+    const requiredFields = ['branchId', 'alert', 'email', 'password'];
+
+    requiredFields.forEach(fieldName => {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+            if (!field.value.trim()) {
+                field.style.border = '2px solid red';
+                isValid = false;
+            } else {
+                field.style.border = '';
+            }
+        }
+    });
+
+    if (!isValid) {
+        return;
+    }
+
+    // Logging to see the form data
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);  // Check if file is included
+    }
+
+    $.ajax({
+        url: './offer_add?formmode=add',
+        data: formData,
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            $("#alertmsg2").text(data);
+            $('#alert2').modal("toggle");
+        },
+        error: function (xhr, status, error) {
+            alert("An error occurred: " + xhr.responseText);
+        }
+    });
+}
+
+
+</script>
+
+<style>
+input:invalid, select:invalid {
+    border: 2px solid red;
+}
+
+input, select {
+    transition: border-color 0.3s ease;
+}
+</style>
+
+<style>
+.formline {
+	padding-bottom: 0px;
+	padding: 0px;
+}
+
+.modal-footer {
+	float: center;
+	text-align: center;
+}
+</style>
+
+
+
+
+<script>
+	function validateMobileNumber(input) {
+		const mobileHelp = document.getElementById('mobileHelp');
+		if (input.value.length === 10) {
+			mobileHelp.style.display = 'none';
+		} else {
+			mobileHelp.style.display = 'block';
+		}
+	}
+</script>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+
+		document.getElementById("emailid").addEventListener("input",
+				function() {
+					const emailField = this;
+					const emailValue = emailField.value.trim();
+					const emailError = document.getElementById("emailError");
+
+					// Regular expression for email validation
+					const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+					// Check if the email matches the regex
+					if (emailValue == "" || emailRegex.test(emailValue)) {
+						emailError.style.display = "none"; // Hide the error message
+						emailField.classList.remove("is-invalid");
+						emailField.classList.add("is-valid");
+						emailval = true;
+						//alert(emailval);
+					} else {
+						emailError.style.display = "block"; // Show the error message
+						emailField.classList.remove("is-valid");
+						emailField.classList.add("is-invalid");
+						emailval = false;
+					}
+				});
+	});
+</script>
+
+<script>
+	function viewuser(a) {
+		 // document.getElementById('loadingModal').style.display = 'flex';
+		var id = a.getAttribute('data-userId');
+		//alert("ID :" + id);
+
+		location.href = './offer_alert?formmode=view&id=' + id;
+
+	}
+
+	function verifyuser(a) {
+		 
+       // document.getElementById('loadingModal').style.display = 'flex';
+		var id = a.getAttribute('data-userId');
+		//alert("USER ID :" + userid);
+
+		location.href = './offer_alert?formmode=verify&id=' + id;
+
+	}
+
+	function Modifyuserscreen(a) {
+		  
+       // document.getElementById('loadingModal').style.display = 'flex';
+
+		var id = a.getAttribute('data-userId');
+		//alert("USER ID :" + userid);
+		location.href = './offer_alert?formmode=modify&id=' + id;
+	}
+
+	function deleteuser(a) {
+		
+       // document.getElementById('loadingModal').style.display = 'flex';
+
+		var id = a.getAttribute('data-userId');
+		//alert("USER ID :" + userid);
+		location.href = './offer_alert?formmode=delete&id=' + id;
+	}
+</script>
+
+
+<script>
+function deleteusersubmit(event) {
+    event.preventDefault();
+
+    // Get the user ID from the button's data-userId attribute
+    var id = event.target.getAttribute('data-userId');
+
+    if (!id) {
+        console.error("No ID found!");
+        return;
+    }
+
+    $.ajax({
+        url: './deleteOffer?id=' + encodeURIComponent(id),
+        type: 'POST',
+        beforeSend: function () { // ✅ Correct usage
+            document.getElementById('loadingModal').style.display = 'flex';
+        },
+        success: function(data) {
+            $("#alertmsg2").text(data);
+            $('#alert2').modal("toggle");
+            document.getElementById('loadingModal').style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            console.error("Error occurred: " + error);
+            $("#alertmsg2").text("User verification failed. Please try again.");
+            $('#alert2').modal("toggle");
+            document.getElementById('loadingModal').style.display = 'none';
+
+        }
+    });
+}
+
+</script>
+<script>
+function Modifyusersubmit(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('notifymodify');
+    const formData = new FormData(form);
+    const id = document.getElementById('id').value; // Assuming you have an input field with id="id"
+
+
+    let isValid = true;
+    const requiredFields = ['branchId', 'email', 'password', 'vendor'];
+    const alertField = form.querySelector('input[name="alert"]:checked');
+
+    requiredFields.forEach(fieldName => {
+        const field = form.querySelector(`[name="${fieldName}"]`);
+        if (field) {
+            if (!field.value.trim()) {
+                field.classList.add('error-border');
+                isValid = false;
+            } else {
+                field.classList.remove('error-border');
+            }
+        }
+    });
+
+    // Email validation
+    const emailField = form.querySelector('[name="email"]');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailField.value.trim())) {
+        emailField.classList.add('error-border');
+        alert("Please enter a valid email address!");
+        isValid = false;
+    } else {
+        emailField.classList.remove('error-border');
+    }
+
+    // Alert (radio button) validation
+    if (!alertField) {
+        alert("Please select an alert type!");
+        isValid = false;
+    }
+
+    if (!isValid) {
+        alert("Please fill all required fields correctly!");
+        return;
+    }
+
+    // Optional: Log formData to verify
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+
+    // AJAX Submit
+    $.ajax({
+        url: './offer_add?formmode=modify', // No need to append the ID to URL; it's in the FormData now
+        data: formData,
+        type: 'POST',
+        processData: false,
+        contentType: false,
+        beforeSend: function () { // ✅ Correct usage
+            document.getElementById('loadingModal').style.display = 'flex';
+        },
+        success: function (data) {
+            $("#alertmsg2").text(data);
+            $('#alert2').modal("toggle");
+	        document.getElementById('loadingModal').style.display = 'none';
+
+        },
+        error: function () {
+            $("#alertmsg2").text("Modification failed. Please try again.");
+            $('#alert2').modal("toggle");
+	        document.getElementById('loadingModal').style.display = 'none';
+
+        }
+    });
+}
+
+</script>
+
+<script>
+	function forname(event) {
+		event.preventDefault();
+		var resourceId = document.getElementById('userid').value;
+		var splitfun = resourceId.split('-');
+		var resourceidd = splitfun[0];
+		var resourcename = splitfun[1];
+	
+		document.getElementById('userNames').value = resourcename;
+		document.getElementById('employeeid').value=resourceidd;
+		document.getElementById('employeename').value=resourcename;
+		
+		
+		  $.ajax({
+		        url: './getuserdetailsresource',
+		        type: 'GET', // Fixed case sensitivity
+		        data: { resource_id: resourceidd },
+		        dataType: 'json',
+		        success: function(response) {
+		        	
+		        	   var userDetails = response[0];
+		    
+		                document.getElementById('designation').value = userDetails.design;
+		                document.getElementById('emailid').value = userDetails.email;
+		                document.getElementById('mobileno').value = userDetails.mobile;
+		          
+		        }
+		    });
+
+	}
+</script>
+
+<script>
+
+function capitalizeInput(input) {
+	let value = input.value;
+	// Only change the first letter to uppercase if it's lowercase
+	value = value.replace(/\b[a-z]/g, function (char) {
+		return char.toUpperCase();
+	});
+	input.value = value;
+}
+</script>
+
+
+<script>
+
+
+function select_branch() {
+    const branchId = document.getElementById('branchId').value;
+
+    $.ajax({
+        url: './getnotifybranchlist?branchId=' + branchId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            const tableBody = document.getElementById('dataTablesBody');
+            tableBody.innerHTML = ''; // Clear existing data
+
+            if (response.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">No records found.</td></tr>`;
+            } else {
+                response.forEach(notification => {
+                    let row = `<tr>
+                        <td style="text-align: center;">${notification.id}</td>
+                        <td style="text-align: left;">${notification.branchId}</td>
+                        <td style="text-align: left;">${notification.alert}</td>
+                        <td style="text-align: left;">${notification.email}</td>
+                        <td style="text-align: center;">
+                            <div class="dropdown" style="text-align: center;">
+                                <button class="btn btn-secondary dropdown-toggle"
+                                    type="button" title="Action"
+                                    style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
+                                <div class="dropdown-menu" style="background-color: #e3e3e4; color: #3a4550;">
+                                    <a class="dropdown-item" title="View" data-userId="${notification.id}" style="cursor: pointer;" onclick="viewuser(this)">View</a>
+                                    <a class="dropdown-item" title="Modify" data-userId="${notification.id}" style="cursor: pointer;" onclick="Modifyuserscreen(this)">Modify</a>
+                                    <a class="dropdown-item" title="Delete" data-userId="${notification.id}" style="cursor: pointer;" onclick="deleteuser(this)">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>`;
+                    tableBody.insertAdjacentHTML('beforeend', row);
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            alert("Error: " + error);
+        }
+    });
+}
+
+
+</script>
+
+<script>
+function openImageModal(imageSrc) {
+    let modalImage = document.getElementById("modalImage");
+    modalImage.src = imageSrc;
+
+    let modal = document.getElementById("imageModal");
+    modal.style.display = "flex";  // flex makes centering easier
+}
+
+function closeImageModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+
+
+							<div th:if="${formmode}=='list'">
+								<div>
+									<div class="container-manager"
+										style="background-color: #f5f5f5; padding: 10px; height: 50px;">
+
+										<div class="float-left">
+											<div STYLE="font-size: 1.3rem; font-weight: bold;">
+												<i class="fas fa-list mr-1"></i> NOTIFICATIONS - LIST
+											</div>
+										</div>
+
+										<div
+											class="d-flex justify-content-end align-items-center mb-3">
+
+											<!-- Branch Selection Dropdown -->
+											<select onchange="select_branch();" class="form-select me-2"
+												style="transform: translateX(-5px); height: 40px; background-color: black; color: white; width: auto;"
+												id="branchId" name="branchId">
+												<option value="">Select Branch</option>
+												<!-- Dynamically populate options using Thymeleaf -->
+												<option th:each="branchId : ${branchIds}"
+													th:value="${branchId}" th:text="${branchId}"></option>
+											</select>
+
+											<!-- Create User Button -->
+											<button class="btn btn-dark" type="button" id="btnAdd"
+												onclick="adduser();">Add</button>
+
+										</div>
+
+
+									</div>
+									<!-- <div class="card-body"> -->
+									<div class="table-responsive"
+										style="overflow-y: auto; max-height: 85vh; border: 1px solid #dee2e6;">
+
+
+										<table class="table  table-bordered  table-hover "
+											style="margin-bottom: 0px; margin-top: 10px;" id="usertable">
+											<thead
+												style="position: sticky; top: 0; background-color: #f8f9fa; z-index: 1;">
+
+												<tr>
+													<!-- <th></th> -->
+													<th style="text-align: center;">ID</th>
+													<th style="text-align: left;">Branch Id</th>
+													<th style="text-align: left;">Alert</th>
+													<th style="text-align: left;">E-mail</th>
+													<th style="text-align: center;">Action</th>
+
+
+
+												</tr>
+											</thead>
+
+
+											<tbody id="dataTablesBody">
+												<!-- Display message when the list is empty -->
+												<tr th:if="${#lists.isEmpty(UserProfilelist)}">
+													<td colspan="7"
+														style="color: red; font-size: 20px; text-align: center;">No
+														data found</td>
+												</tr>
+
+												<!-- Iterate over the NOTIFICATIONS list -->
+												<tr th:each="userlist : ${UserProfilelist}">
+
+													<!-- User details columns -->
+													<td style="text-align: center;" th:text="${userlist.id}"></td>
+
+													<td style="text-align: left;"
+														th:text="${userlist.branchId}"></td>
+													
+													<td style="text-align: left;" th:text="${userlist.alert}"></td>
+													<td style="text-align: left;" th:text="${userlist.email}"></td>
+
+
+													<!-- Action dropdown -->
+													<td style="text-align: center;">
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+																<a class="dropdown-item" title="view"
+																	th:attr="data-userId=${userlist.id}"
+																	style="cursor: pointer;" onclick="viewuser(this)">View</a>
+																<a class="dropdown-item" title="Modify"
+																	th:attr="data-userId=${userlist.id}"
+																	style="cursor: pointer;"
+																	onclick="Modifyuserscreen(this)">Modify</a> <a
+																	class="dropdown-item" title="Delete"
+																	th:attr="data-userId=${userlist.id}"
+																	style="cursor: pointer;" onclick="deleteuser(this)">Delete</a>
+
+
+															</div>
+														</div>
+
+													</td>
+												</tr>
+											</tbody>
+
+										</table>
+									</div>
+
+
+									<!-- </div> -->
+
+
+
+									<div class=" col-sm-13 text-center ">
+										<div style="background: #f5f5f5; color: white; padding: 10px">
+											<button class="btn btn-xs btn-dark"
+												Style="width: 100px; background: black; color: white;"
+												type="button" id="Dashboard" onclick="contentLoad(this)">Home</button>
+											<button class="btn btn-xs btn-dark"
+												Style="width: 100px; background: black; color: white;"
+												id="btnback" onclick="back();">Back</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- --------list end----- -->
+
+
+							<!-- Notification Add Form -->
+							<div th:if="${formmode}=='add'" class="container-manager"
+								style="margin-top: auto; margin-left: auto;">
+								<div class="transparent-shadow">
+									<div class="row">
+										<div class="col-sm-12">
+											<form action="#" method="post" autocomplete="off"
+												id="notification" th:fragment="finuserapply"
+												enctype="multipart/form-data">
+
+												<div
+													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
+													<div class="float-left">
+														<div style="font-size: 1.3rem; font-weight: bold;">
+															<i class="fas fa-user-plus mr-2"></i>NOTIFICATION - ADD
+														</div>
+													</div>
+													<div class="btn-group nav-buttons float-right">
+														<button type="button"
+															class="btn btn-xs btn-primary btns active btn-dark"
+															id="btnInq" onclick="list()"
+															style="border-color: #66dbe0; font-size: 16px; width: 70px;">List</button>
+													</div>
+												</div>
+
+												<div class="card-body">
+													<input autocomplete="false" name="hidden" type="text"
+														style="display: none;"> <input type="hidden"
+														th:value="${formmode}" id="formmode1"
+														style="display: none;">
+
+													<div class="form-group" style="line-height: 2;">
+														<div class="form-row">
+															<div class="col-auto"></div>
+															<label class="col-md-2">Branch Id</label> <select
+																class="col-md-2 form-control"
+																onchange="select_branch();" id="branchId"
+																name="branchId">
+																<option value="">Select Branch</option>
+																<option th:each="branchId : ${branchIds}"
+																	th:value="${branchId}" th:text="${branchId}"></option>
+															</select>
+															<div class="col-sm-1"></div>
+
+															<label class="col-md-2">File</label> <input type="file"
+																id="file" class="col-md-2 form-control" name="file" />
+														</div>
+													</div>
+
+													<div class="form-row">
+														<div class="col-auto"></div>
+														<label class="col-md-2">Vendor</label> <select
+															class="col-md-2 form-control" id="vendor" name="vendor">
+															<option value="">Select Vendor</option>
+															<option value="purchase_vendor">Purchase Vendor</option>
+															<option value="sale_vendor">Sale Vendor</option>
+														</select>
+
+														<div class="col-sm-1"></div>
+														<label class="col-md-2">Alert</label>
+														<div class="col-md-3">
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="alert" id="alert_sms" value="sms"> <label
+																	class="form-check-label" for="alert_sms">SMS</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="alert" id="alert_email" value="email"> <label
+																	class="form-check-label" for="alert_email">Email</label>
+															</div>
+															<div class="form-check form-check-inline">
+																<input class="form-check-input" type="radio"
+																	name="alert" id="alert_whatsapp" value="whatsapp">
+																<label class="form-check-label" for="alert_whatsapp">WhatsApp</label>
+															</div>
+														</div>
+
+
+													</div>
+
+													<div class="form-row">
+														<div class="col-auto"></div>
+														<label class="col-md-2">Sender E-Mail</label> <input
+															type="email" id="email" class="col-md-2 form-control"
+															name="email" />
+														<div class="col-sm-1"></div>
+														<label class="col-md-2">Password</label> <input
+															type="text" id="password" class="col-md-2 form-control"
+															name="password" />
+													</div>
+												</div>
+											</form>
+
+											<div class="card-footer text-center"
+												style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; display: flex; justify-content: center; gap: 20px; width: 100%;">
+												<button class="btn btn-primary btn-dark"
+													style="width: 150px; color: white;" type="button"
+													id="Dashboard" onclick="contentLoad(this)">Home</button>
+												<button class="btn btn-primary btn-dark"
+													style="width: 150px; color: white;" type="button"
+													id="register" onclick="register_add(event)">Add</button>
+												<button class="btn btn-primary btn-dark"
+													style="width: 150px; color: white;" id="btnback"
+													onclick="list()">Back</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<!-- 	-------view----- -->
+
+
+
+							<div th:if="${formmode}=='view'" class="container-manager"
+								style="margin-top: auto; margin-left: auto;">
+								<div class="transparent-shadow">
+									<div class="row">
+										<div class="col-sm-12 ">
+											<form action="#" th:object="${UserProfilelist}" method="post"
+												autocomplete="off" id="hrmsuserProfileadd"
+												th:fragment="finuserapply">
+
+
+												<div
+													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
+													<div class="float-left" th:if="${forms=='view'}">
+														<div STYLE="font-size: 1.3rem; font-weight: bold;">NOTIFICATIONS
+															- VIEW</div>
+													</div>
+
+													<div class="float-left" th:if="${forms=='delete'}">
+														<div STYLE="font-size: 1.3rem; font-weight: bold;">NOTIFICATIONS
+															- DELETE</div>
+													</div>
+
+													<div class="btn-group nav-buttons float-right">
+
+														<button type="button"
+															class="btn btn-xs btn-primary btns active btn-dark"
+															id="btnInq" onclick="list()"
+															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
+													</div>
+												</div>
+												<div class="card-body">
+
+													<div class="form-group" style="line-height: 1.9;">
+
+														<div class="form-row">
+															<div class="col-auto"></div>
+
+															<label class="col-md-2">Branch Id</label> <select
+																class="col-md-2 form-control" id="branchId"
+																name="branchId" disabled>
+
+																<option th:value="${UserProfilelist.branchId}"
+																	th:text="${UserProfilelist.branchId}"></option>
+															</select>
+															<div class="col-sm-1"></div>
+															<label class="col-md-2">File</label> 
+															<th:block th:if="${UserProfilelist.file != null}" >
+															<img th:src="@{'/notification/file/' + ${UserProfilelist.id}}"
+																alt="Image" onclick="openImageModal(this.src)"
+																style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" />
+															</th:block>
+														</div>
+														<div class="form-row">
+															<div class="col-auto"></div>
+															<label class="col-md-2">Vendor</label> <select
+																class="col-md-2 form-control" id="vendor" name="vendor"
+																disabled>
+																<option
+																	th:selected="${purchase_vendor == UserProfilelist.vendor}">Purchase
+																	Vendor</option>
+																<option
+																	th:selected="${sale_vendor == UserProfilelist.vendor}">
+																	Sale Vendor</option>
+															</select>
+
+
+															<div class="col-sm-1"></div>
+															<label class="col-md-2">Alert</label>
+															<div class="col-md-3">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="sms"
+																		th:checked="${UserProfilelist.alert == 'sms'}"
+																		disabled> <label class="form-check-label">SMS</label>
+																</div>
+
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="email"
+																		th:checked="${UserProfilelist.alert == 'email'}"
+																		disabled> <label class="form-check-label">Email</label>
+																</div>
+
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="whatsapp"
+																		th:checked="${UserProfilelist.alert == 'whatsapp'}"
+																		disabled> <label class="form-check-label">WhatsApp</label>
+																</div>
+															</div>
+
+
+														</div>
+
+														<div class="form-row">
+															<div class="col-auto"></div>
+															<label class="col-md-2">Sender E-Mail</label> <input
+																readonly type="email" id="email"
+																class="col-md-2 form-control" name="email"
+																th:value="${UserProfilelist.email}" />
+															<div class="col-sm-1"></div>
+															<label class="col-md-2">Password</label> <input readonly
+																type="text" id="password" class="col-md-2 form-control"
+																name="password" th:value="${UserProfilelist.password}" />
+														</div>
+													</div>
+
+
+
+												</div>
+											</form>
+										</div>
+
+
+
+
+										<div
+											class="col-sm-12 d-flex justify-content-center card-footer"
+											style="padding-top: 10px;">
+											<button class="btn btn-primary mx-2 btn-dark"
+												style="width: 150px; color: white;" type="button"
+												id="Dashboard" onclick="contentLoad(this)">Home</button>
+											<!-- Uncomment the Register button if needed -->
+
+											<button th:if="${forms=='delete'}"
+												class="btn btn-primary mx-2 btn-dark"
+												th:attr="data-userId=${UserProfilelist.id}"
+												style="width: 150px; color: white;" type="button"
+												id="register" onclick="deleteusersubmit(event)">Delete</button>
+
+											<button class="btn btn-primary mx-2 btn-dark"
+												style="width: 150px; color: white;" id="btnback"
+												onclick="list()">Back</button>
+										</div>
+
+
+
+
+										<div></div>
+									</div>
+
+								</div>
+
+							</div>
+
+
+
+							<!-- -----modify------- -->
+
+							<div th:if="${formmode}=='modify'" class="container-manager"
+								style="margin-top: auto; margin-left: auto;">
+								<div class="transparent-shadow">
+									<div class="row">
+										<div class="col-sm-12 ">
+											<form action="#" th:object="${UserProfilelist}" method="post"
+												autocomplete="off" id="notifymodify"
+												th:fragment="finuserapply" enctype="multipart/form-data">
+
+
+												<div
+													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
+													<div class="float-left">
+														<div STYLE="font-size: 1.3rem; font-weight: bold;">USER
+															PROFILE - MODIFY</div>
+													</div>
+
+													<div class="btn-group nav-buttons float-right">
+
+														<button type="button"
+															class="btn btn-xs btn-primary btns active btn-dark"
+															id="btnInq" onclick="list()"
+															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
+													</div>
+												</div>
+												<div class="card-body">
+													<input type="text" id="id" class="col-md-2 form-control"
+														name="id" th:value="${UserProfilelist.id}" hidden />
+													<div class="form-group" style="line-height: 1.9;">
+
+														<div class="form-row">
+															<div class="col-auto"></div>
+
+															<label class="col-md-2">Branch Id</label> <select
+																class="col-md-2 form-control" id="branchId"
+																name="branchId">
+
+																<option th:value="${UserProfilelist.branchId}"
+																	th:text="${UserProfilelist.branchId}"></option>
+															</select>
+									                	<div class="col-sm-1"></div>
+															<label class="col-md-2">File</label> 
+															<th:block th:if="${UserProfilelist.file != null}" >
+															<img th:src="@{'/notification/file/' + ${UserProfilelist.id}}"
+																alt="Image" onclick="openImageModal(this.src)"
+																style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" />
+															</th:block>
+															<!-- Always show file input for editing -->
+															 <input type="file"
+																id="file" class="col-md-2 form-control" name="file" />
+														</div>
+
+
+														<div class="form-row">
+															<div class="col-auto"></div>
+															<label class="col-md-2">Vendor</label>
+ 															<select class="col-md-2 form-control" id="vendor" name="vendor">
+																<option
+																	th:selected="${purchase_vendor == UserProfilelist.vendor}">Purchase
+																	Vendor</option>
+																<option
+																	th:selected="${sale_vendor == UserProfilelist.vendor}">
+																	Sale Vendor</option>
+															</select>
+
+
+															<div class="col-sm-1"></div>
+															<label class="col-md-2">Alert</label>
+															<div class="col-md-3">
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="sms"
+																		th:checked="${UserProfilelist.alert == 'sms'}">
+																	<label class="form-check-label">SMS</label>
+																</div>
+
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="email"
+																		th:checked="${UserProfilelist.alert == 'email'}">
+																	<label class="form-check-label">Email</label>
+																</div>
+
+																<div class="form-check form-check-inline">
+																	<input class="form-check-input" type="radio"
+																		name="alert" value="whatsapp"
+																		th:checked="${UserProfilelist.alert == 'whatsapp'}">
+																	<label class="form-check-label">WhatsApp</label>
+																</div>
+															</div>
+
+
+														</div>
+
+														<div class="form-row">
+															<div class="col-auto"></div>
+															<label class="col-md-2">Sender E-Mail</label> <input
+																type="email" id="email" class="col-md-2 form-control"
+																name="email" th:value="${UserProfilelist.email}" />
+															<div class="col-sm-1"></div>
+															<label class="col-md-2">Password</label> <input
+																type="text" id="password" class="col-md-2 form-control"
+																name="password" th:value="${UserProfilelist.password}" />
+														</div>
+													</div>
+
+
+
+												</div>
+											</form>
+										</div>
+
+
+
+
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; display: flex; justify-content: center; gap: 20px; width: 100%;">
+											<button class="btn btn-primary mx-2 btn-dark"
+												style="width: 150px; color: white;" type="button"
+												id="Dashboard" onclick="contentLoad(this)">Home</button>
+											<!-- Uncomment the Register button if needed -->
+
+											<button class="btn btn-primary mx-2 btn-dark"
+												style="width: 150px; color: white;" type="button"
+												id="register" onclick="Modifyusersubmit(event)">Modify</button>
+
+											<button class="btn btn-primary mx-2 btn-dark"
+												style="width: 150px; color: white;" id="btnback"
+												onclick="list()">Back</button>
+										</div>
+
+
+
+
+										<div></div>
+									</div>
+
+								</div>
+
+							</div>
+
+
+
+
+
+
+
+
+
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+		</div>
+		<div class="modal fade" id="formmsg" data-backdrop="static"
+			data-keyboard="false">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: white;">CIM FINANCE</div>
+					</div>
+					<div class="modal-body"
+						style="margin-top: 8px; text-align: center; background-color: #c6ccd2">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<a th:value="${msg}"></a>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							onclick="submitformdelete(this);" th:attr="data-formmode=delete">Submit</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="alert">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: rgb(0, 0, 0);">NOTIFICATIONS</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsg" style="font-size: 16px;">Added Successfully</p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							onclick="back();">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Loading Modal -->
+		<div id="loadingModal" style="display: none;">
+			<div id="loadingContent">
+				<img th:src=@{/images/infins.gif} alt="Loading...">
+			</div>
+		</div>
+		
+		<div class="modal fade" id="alert2">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: rgb(0, 0, 0);">NOTIFICATIONS</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsg2" style="font-size: 16px;">Added Successfully</p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							onclick="back();">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<!-- Image Modal -->
+<div id="imageModal" style="display: none; position: fixed; top: 0; left: 0;
+     width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000;
+     align-items: center; justify-content: center;">
+  
+    <div style="position: relative;">
+        <!-- Close button over the image -->
+        <span onclick="closeImageModal()" 
+              style="position: absolute; top: 10px; right: 10px; 
+                     color: white; font-size: 24px; font-weight: bold; 
+                     background: rgba(0,0,0,0.5); border-radius: 50%; 
+                     width: 30px; height: 30px; display: flex; 
+                     align-items: center; justify-content: center; 
+                     cursor: pointer;">&times;</span>
+
+        <img id="modalImage" src="" 
+             style="max-height: 90vh; max-width: 90vw; border-radius: 8px; box-shadow: 0 0 20px #000;" />
+    </div>
+</div>
+
+		
+</body>
+
+</html>

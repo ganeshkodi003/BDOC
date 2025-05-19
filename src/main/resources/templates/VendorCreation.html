@@ -1,0 +1,3195 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+<style>
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            transition: border-color 0.3s ease, padding-top 0.3s ease;
+        }
+        .error {
+    		color: red;
+    		padding-top: 15px;
+			}
+        
+        
+
+        .form-control:focus {
+            border-color: #007bff;
+        }
+
+        .form-legend {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #aaa;
+            background: white;
+            padding: 0 5px;
+            pointer-events: none;
+            transition: 0.3s ease;
+        }
+
+        /* When input or select is focused or has a value, move the label up */
+        .form-control:focus ~ .form-legend,
+        .form-control:not(:placeholder-shown) ~ .form-legend {
+            top: -8px;
+            font-size: 1rem;
+            color: #007bff;
+        }
+
+        /* Hover effect when the input/select is focused */
+        .form-control:focus:hover ~ .form-legend {
+            color: #0056b3; /* Darker shade of blue on hover */
+        }
+
+        /* Ensure the label returns to the normal color after focus or hover is removed */
+        .form-control:not(:focus) ~ .form-legend {
+            color: #aaa; /* Normal label color */
+        }
+    </style>
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: center;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: bold;
+}
+
+.btn-secondary.active {
+	background-color: blue !important;
+	/* Darker shade to indicate active state */
+	color: white;
+	text-decoration: underline;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.dataTables_filter {
+	float: left;
+    text-align: right;
+}
+.select-container select {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+</style>
+
+<style>
+    /* Style for the loading modal */
+    #loadingModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: none; /* Semi-transparent background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Make sure it's on top */
+        backdrop-filter: blur(5px); /* Apply background blur */
+    }
+
+    #loadingContent {
+        text-align: center;
+        background-color:none; /* White background for loading content */
+        z-index: 10000; /* Ensure loading content stays above blur */
+    }
+
+    #loadingContent img {
+        width: 100px; /* Adjust size as needed */
+        height: 100px; /* Adjust size as needed */
+        margin-bottom: 10px;
+    }
+    
+    table, th, td {
+    border: 1px solid #ccc;
+}
+
+</style>
+
+
+
+
+
+<style type="text/css">
+.navbar {
+    margin-left: -5px;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+.content {
+    margin-top: 151px ! important; /* Push content down to avoid overlap */
+}
+.container-fluid {
+    width: 100%;
+    padding-top:5px;
+    padding-right: 0px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.container-manager {
+	padding-right: 47px;
+	padding-left: 132px;
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -22px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.dropdown, .dropdown-submenu').hover(function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function () {
+        $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+});
+</script>
+
+
+
+<script>
+
+var AndraPradesh = ["Anantapur","Chittoor","East Godavari","Guntur","Kadapa","Krishna","Kurnool","Prakasam","Nellore","Srikakulam","Visakhapatnam","Vizianagaram","West Godavari"];
+var ArunachalPradesh = ["Anjaw","Changlang","Dibang Valley","East Kameng","East Siang","Kra Daadi","Kurung Kumey","Lohit","Longding","Lower Dibang Valley","Lower Subansiri","Namsai","Papum Pare","Siang","Tawang","Tirap","Upper Siang","Upper Subansiri","West Kameng","West Siang","Itanagar"];
+var Assam = ["Baksa","Barpeta","Biswanath","Bongaigaon","Cachar","Charaideo","Chirang","Darrang","Dhemaji","Dhubri","Dibrugarh","Goalpara","Golaghat","Hailakandi","Hojai","Jorhat","Kamrup Metropolitan","Kamrup (Rural)","Karbi Anglong","Karimganj","Kokrajhar","Lakhimpur","Majuli","Morigaon","Nagaon","Nalbari","Dima Hasao","Sivasagar","Sonitpur","South Salmara Mankachar","Tinsukia","Udalguri","West Karbi Anglong"];
+var Bihar = ["Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur","Nalanda","Nawada","Patna","Purnia","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"];
+var Chhattisgarh = ["Balod","Baloda Bazar","Balrampur","Bastar","Bemetara","Bijapur","Bilaspur","Dantewada","Dhamtari","Durg","Gariaband","Janjgir Champa","Jashpur","Kabirdham","Kanker","Kondagaon","Korba","Koriya","Mahasamund","Mungeli","Narayanpur","Raigarh","Raipur","Rajnandgaon","Sukma","Surajpur","Surguja"];
+var Goa = ["North Goa","South Goa"];
+var Gujarat = ["Ahmedabad","Amreli","Anand","Aravalli","Banaskantha","Bharuch","Bhavnagar","Botad","Chhota Udaipur","Dahod","Dang","Devbhoomi Dwarka","Gandhinagar","Gir Somnath","Jamnagar","Junagadh","Kheda","Kutch","Mahisagar","Mehsana","Morbi","Narmada","Navsari","Panchmahal","Patan","Porbandar","Rajkot","Sabarkantha","Surat","Surendranagar","Tapi","Vadodara","Valsad"];
+var Haryana = ["Ambala","Bhiwani","Charkhi Dadri","Faridabad","Fatehabad","Gurugram","Hisar","Jhajjar","Jind","Kaithal","Karnal","Kurukshetra","Mahendragarh","Mewat","Palwal","Panchkula","Panipat","Rewari","Rohtak","Sirsa","Sonipat","Yamunanagar"];
+var HimachalPradesh = ["Bilaspur","Chamba","Hamirpur","Kangra","Kinnaur","Kullu","Lahaul Spiti","Mandi","Shimla","Sirmaur","Solan","Una"];
+var JammuKashmir = ["Anantnag","Bandipora","Baramulla","Budgam","Doda","Ganderbal","Jammu","Kargil","Kathua","Kishtwar","Kulgam","Kupwara","Leh","Poonch","Pulwama","Rajouri","Ramban","Reasi","Samba","Shopian","Srinagar","Udhampur"];
+var Jharkhand = ["Bokaro","Chatra","Deoghar","Dhanbad","Dumka","East Singhbhum","Garhwa","Giridih","Godda","Gumla","Hazaribagh","Jamtara","Khunti","Koderma","Latehar","Lohardaga","Pakur","Palamu","Ramgarh","Ranchi","Sahebganj","Seraikela Kharsawan","Simdega","West Singhbhum"];
+var Karnataka = ["Bagalkot","Bangalore Rural","Bangalore Urban","Belgaum","Bellary","Bidar","Vijayapura","Chamarajanagar","Chikkaballapur","Chikkamagaluru","Chitradurga","Dakshina Kannada","Davanagere","Dharwad","Gadag","Gulbarga","Hassan","Haveri","Kodagu","Kolar","Koppal","Mandya","Mysore","Raichur","Ramanagara","Shimoga","Tumkur","Udupi","Uttara Kannada","Yadgir"];
+var Kerala = ["Alappuzha","Ernakulam","Idukki","Kannur","Kasaragod","Kollam","Kottayam","Kozhikode","Malappuram","Palakkad","Pathanamthitta","Thiruvananthapuram","Thrissur","Wayanad"];
+var MadhyaPradesh = ["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat","Barwani","Betul","Bhind","Bhopal","Burhanpur","Chhatarpur","Chhindwara","Damoh","Datia","Dewas","Dhar","Dindori","Guna","Gwalior","Harda","Hoshangabad","Indore","Jabalpur","Jhabua","Katni","Khandwa","Khargone","Mandla","Mandsaur","Morena","Narsinghpur","Neemuch","Panna","Raisen","Rajgarh","Ratlam","Rewa","Sagar","Satna",
+"Sehore","Seoni","Shahdol","Shajapur","Sheopur","Shivpuri","Sidhi","Singrauli","Tikamgarh","Ujjain","Umaria","Vidisha"];
+var Maharashtra = ["Ahmednagar","Akola","Amravati","Aurangabad","Beed","Bhandara","Buldhana","Chandrapur","Dhule","Gadchiroli","Gondia","Hingoli","Jalgaon","Jalna","Kolhapur","Latur","Mumbai City","Mumbai Suburban","Nagpur","Nanded","Nandurbar","Nashik","Osmanabad","Palghar","Parbhani","Pune","Raigad","Ratnagiri","Sangli","Satara","Sindhudurg","Solapur","Thane","Wardha","Washim","Yavatmal"];
+var Manipur = ["Bishnupur","Chandel","Churachandpur","Imphal East","Imphal West","Jiribam","Kakching","Kamjong","Kangpokpi","Noney","Pherzawl","Senapati","Tamenglong","Tengnoupal","Thoubal","Ukhrul"];
+var Meghalaya = ["East Garo Hills","East Jaintia Hills","East Khasi Hills","North Garo Hills","Ri Bhoi","South Garo Hills","South West Garo Hills","South West Khasi Hills","West Garo Hills","West Jaintia Hills","West Khasi Hills"];
+var Mizoram = ["Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip","Aizawl","Champhai","Kolasib","Lawngtlai","Lunglei","Mamit","Saiha","Serchhip"];
+var Nagaland = ["Dimapur","Kiphire","Kohima","Longleng","Mokokchung","Mon","Peren","Phek","Tuensang","Wokha","Zunheboto"];
+var Odisha = ["Angul","Balangir","Balasore","Bargarh","Bhadrak","Boudh","Cuttack","Debagarh","Dhenkanal","Gajapati","Ganjam","Jagatsinghpur","Jajpur","Jharsuguda","Kalahandi","Kandhamal","Kendrapara","Kendujhar","Khordha","Koraput","Malkangiri","Mayurbhanj","Nabarangpur","Nayagarh","Nuapada","Puri","Rayagada","Sambalpur","Subarnapur","Sundergarh"];
+var Punjab = ["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib","Fazilka","Firozpur","Gurdaspur","Hoshiarpur","Jalandhar","Kapurthala","Ludhiana","Mansa","Moga","Mohali","Muktsar","Pathankot","Patiala","Rupnagar","Sangrur","Shaheed Bhagat Singh Nagar","Tarn Taran"];
+var Rajasthan = ["Ajmer","Alwar","Banswara","Baran","Barmer","Bharatpur","Bhilwara","Bikaner","Bundi","Chittorgarh","Churu","Dausa","Dholpur","Dungarpur","Ganganagar","Hanumangarh","Jaipur","Jaisalmer","Jalore","Jhalawar","Jhunjhunu","Jodhpur","Karauli","Kota","Nagaur","Pali","Pratapgarh","Rajsamand","Sawai Madhopur","Sikar","Sirohi","Tonk","Udaipur"];
+var Sikkim = ["East Sikkim","North Sikkim","South Sikkim","West Sikkim"];
+var TamilNadu = ["Ariyalur","Chennai","Coimbatore","Cuddalore","Dharmapuri","Dindigul","Erode","Kanchipuram","Kanyakumari","Karur","Krishnagiri","Madurai","Nagapattinam","Namakkal","Nilgiris","Perambalur","Pudukkottai","Ramanathapuram","Salem","Sivaganga","Thanjavur","Theni","Thoothukudi","Tiruchirappalli","Tirunelveli","Tiruppur","Tiruvallur","Tiruvannamalai","Tiruvarur","Vellore","Viluppuram","Virudhunagar"];
+var Telangana = ["Adilabad","Bhadradri Kothagudem","Hyderabad","Jagtial","Jangaon","Jayashankar","Jogulamba","Kamareddy","Karimnagar","Khammam","Komaram Bheem","Mahabubabad","Mahbubnagar","Mancherial","Medak","Medchal","Nagarkurnool","Nalgonda","Nirmal","Nizamabad","Peddapalli","Rajanna Sircilla","Ranga Reddy","Sangareddy","Siddipet","Suryapet","Vikarabad","Wanaparthy","Warangal Rural","Warangal Urban","Yadadri Bhuvanagiri"];
+var Tripura = ["Dhalai","Gomati","Khowai","North Tripura","Sepahijala","South Tripura","Unakoti","West Tripura"];
+var UttarPradesh = ["Agra","Aligarh","Allahabad","Ambedkar Nagar","Amethi","Amroha","Auraiya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Faizabad","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kheri","Kushinagar","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Raebareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"];
+var Uttarakhand  = ["Almora","Bageshwar","Chamoli","Champawat","Dehradun","Haridwar","Nainital","Pauri","Pithoragarh","Rudraprayag","Tehri","Udham Singh Nagar","Uttarkashi"];
+var WestBengal = ["Alipurduar","Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling","Hooghly","Howrah","Jalpaiguri","Jhargram","Kalimpong","Kolkata","Malda","Murshidabad","Nadia","North 24 Parganas","Paschim Bardhaman","Paschim Medinipur","Purba Bardhaman","Purba Medinipur","Purulia","South 24 Parganas","Uttar Dinajpur"];
+var AndamanNicobar = ["Nicobar","North Middle Andaman","South Andaman"];
+var Chandigarh = ["Chandigarh"];
+var DadraHaveli = ["Dadra Nagar Haveli"];
+var DamanDiu = ["Daman","Diu"];
+var Delhi = ["Central Delhi","East Delhi","New Delhi","North Delhi","North East Delhi","North West Delhi","Shahdara","South Delhi","South East Delhi","South West Delhi","West Delhi"];
+var Lakshadweep = ["Lakshadweep"];
+var Puducherry = ["Karaikal","Mahe","Puducherry","Yanam"];
+
+function state(){
+	  var StateSelected = document.getElementById('inputState').value;;
+	  var optionsList;
+	  var htmlString = ""
+	  
+
+	  switch (StateSelected) {
+	    case "Andra Pradesh":
+	        optionsList = AndraPradesh;
+	        break;
+	    case "Arunachal Pradesh":
+	        optionsList = ArunachalPradesh;
+	        break;
+	    case "Assam":
+	        optionsList = Assam;
+	        break;
+	    case "Bihar":
+	        optionsList = Bihar;
+	        break;
+	    case "Chhattisgarh":
+	        optionsList = Chhattisgarh;
+	        break;
+	    case "Goa":
+	        optionsList = Goa;
+	        break;
+	    case  "Gujarat":
+	        optionsList = Gujarat;
+	        break;
+	    case "Haryana":
+	        optionsList = Haryana;
+	        break;
+	    case "Himachal Pradesh":
+	        optionsList = HimachalPradesh;
+	        break;
+	    case "Jammu and Kashmir":
+	        optionsList = JammuKashmir;
+	        break;
+	    case "Jharkhand":
+	        optionsList = Jharkhand;
+	        break;
+	    case  "Karnataka":
+	        optionsList = Karnataka;
+	        break;
+	    case "Kerala":
+	        optionsList = Kerala;
+	        break;
+	    case  "Madya Pradesh":
+	        optionsList = MadhyaPradesh;
+	        break;
+	    case "Maharashtra":
+	        optionsList = Maharashtra;
+	        break;
+	    case  "Manipur":
+	        optionsList = Manipur;
+	        break;
+	    case "Meghalaya":
+	        optionsList = Meghalaya ;
+	        break;
+	    case  "Mizoram":
+	        optionsList = Mizoram;
+	        break;
+	    case "Nagaland":
+	        optionsList = Nagaland;
+	        break;
+	    case  "Orissa":
+	        optionsList = Orissa;
+	        break;
+	    case "Punjab":
+	        optionsList = Punjab;
+	        break;
+	    case  "Rajasthan":
+	        optionsList = Rajasthan;
+	        break;
+	    case "Sikkim":
+	        optionsList = Sikkim;
+	        break;
+	    case  "Tamil Nadu":
+	        optionsList = TamilNadu;
+	        break;
+	    case  "Telangana":
+	        optionsList = Telangana;
+	        break;
+	    case "Tripura":
+	        optionsList = Tripura ;
+	        break;
+	    case  "Uttaranchal":
+	        optionsList = Uttaranchal;
+	        break;
+	    case  "Uttar Pradesh":
+	        optionsList = UttarPradesh;
+	        break;
+	    case "West Bengal":
+	        optionsList = WestBengal;
+	        break;
+	    case  "Andaman and Nicobar Islands":
+	        optionsList = AndamanNicobar;
+	        break;
+	    case "Chandigarh":
+	        optionsList = Chandigarh;
+	        break;
+	    case  "Dadar and Nagar Haveli":
+	        optionsList = DadraHaveli;
+	        break;
+	    case "Daman and Diu":
+	        optionsList = DamanDiu;
+	        break;
+	    case  "Delhi":
+	        optionsList = Delhi;
+	        break;
+	    case "Lakshadeep":
+	        optionsList = Lakshadeep ;
+	        break;
+	    case  "Pondicherry":
+	        optionsList = Pondicherry;
+	        break;
+	}
+
+	  htmlString = htmlString+"<option value=''>"+ 'select District' +"</option>";
+	  for(var i = 0; i < optionsList.length; i++){
+	    htmlString = htmlString+"<option value='"+ optionsList[i] +"'>"+ optionsList[i] +"</option>";
+	  }
+	  $("#inputDistrict").html(htmlString);
+
+	};
+
+	
+	
+	function state1(){
+		  var StateSelected1 = document.getElementById('inputState1').value;
+		  var optionsList;
+		  var htmlString = ""
+		  
+
+		  switch (StateSelected1) {
+		    case "Andra Pradesh":
+		        optionsList = AndraPradesh;
+		        break;
+		    case "Arunachal Pradesh":
+		        optionsList = ArunachalPradesh;
+		        break;
+		    case "Assam":
+		        optionsList = Assam;
+		        break;
+		    case "Bihar":
+		        optionsList = Bihar;
+		        break;
+		    case "Chhattisgarh":
+		        optionsList = Chhattisgarh;
+		        break;
+		    case "Goa":
+		        optionsList = Goa;
+		        break;
+		    case  "Gujarat":
+		        optionsList = Gujarat;
+		        break;
+		    case "Haryana":
+		        optionsList = Haryana;
+		        break;
+		    case "Himachal Pradesh":
+		        optionsList = HimachalPradesh;
+		        break;
+		    case "Jammu and Kashmir":
+		        optionsList = JammuKashmir;
+		        break;
+		    case "Jharkhand":
+		        optionsList = Jharkhand;
+		        break;
+		    case  "Karnataka":
+		        optionsList = Karnataka;
+		        break;
+		    case "Kerala":
+		        optionsList = Kerala;
+		        break;
+		    case  "Madya Pradesh":
+		        optionsList = MadhyaPradesh;
+		        break;
+		    case "Maharashtra":
+		        optionsList = Maharashtra;
+		        break;
+		    case  "Manipur":
+		        optionsList = Manipur;
+		        break;
+		    case "Meghalaya":
+		        optionsList = Meghalaya ;
+		        break;
+		    case  "Mizoram":
+		        optionsList = Mizoram;
+		        break;
+		    case "Nagaland":
+		        optionsList = Nagaland;
+		        break;
+		    case  "Orissa":
+		        optionsList = Orissa;
+		        break;
+		    case "Punjab":
+		        optionsList = Punjab;
+		        break;
+		    case  "Rajasthan":
+		        optionsList = Rajasthan;
+		        break;
+		    case "Sikkim":
+		        optionsList = Sikkim;
+		        break;
+		    case  "Tamil Nadu":
+		        optionsList = TamilNadu;
+		        break;
+		    case  "Telangana":
+		        optionsList = Telangana;
+		        break;
+		    case "Tripura":
+		        optionsList = Tripura ;
+		        break;
+		    case  "Uttaranchal":
+		        optionsList = Uttaranchal;
+		        break;
+		    case  "Uttar Pradesh":
+		        optionsList = UttarPradesh;
+		        break;
+		    case "West Bengal":
+		        optionsList = WestBengal;
+		        break;
+		    case  "Andaman and Nicobar Islands":
+		        optionsList = AndamanNicobar;
+		        break;
+		    case "Chandigarh":
+		        optionsList = Chandigarh;
+		        break;
+		    case  "Dadar and Nagar Haveli":
+		        optionsList = DadraHaveli;
+		        break;
+		    case "Daman and Diu":
+		        optionsList = DamanDiu;
+		        break;
+		    case  "Delhi":
+		        optionsList = Delhi;
+		        break;
+		    case "Lakshadeep":
+		        optionsList = Lakshadeep ;
+		        break;
+		    case  "Pondicherry":
+		        optionsList = Pondicherry;
+		        break;
+		}
+
+		  htmlString = htmlString+"<option value=''>"+ 'select District' +"</option>";
+		  for(var i = 0; i < optionsList.length; i++){
+		    htmlString = htmlString+"<option value='"+ optionsList[i] +"'>"+ optionsList[i] +"</option>";
+		  }
+		  $("#inputDistrict1").html(htmlString);
+
+		};
+
+	
+	
+	
+	
+	
+
+function gst(){
+	var gstty=document.getElementById('gsttype').value
+	 const extraInputContainer = document.getElementById("extra-input-container");
+	
+	if (gstty === "Registered Business-Regular" ||gstty === "Registered Business-Composition" ) {
+        extraInputContainer.style.display = "block";  // Show the input
+    } else {
+        extraInputContainer.style.display = "none";   // Hide the input
+    }
+}
+function msmes(){
+	var msme=document.getElementById('msme').value;
+	var msmsen=document.getElementById('msmen');
+	if(msme=='yes'){
+		msmsen.style.display="block";
+	}
+	else{
+		msmsen.style.display="none";
+	}
+}
+
+function convert(){
+	var shippingaddress =document.getElementById('shippingaddress');
+	shippingaddress.style.display="block";
+	var plus =document.getElementById('plus');
+	plus.style.display='none';
+	var removeplus =document.getElementById('removeplus');
+	removeplus.style.display="block";
+	
+}
+function remove(){
+	var shippingaddress =document.getElementById('shippingaddress');
+	shippingaddress.style.display="none";
+	var removeplus =document.getElementById('removeplus');
+	removeplus.style.display="none";
+	var plus =document.getElementById('plus');
+	plus.style.display='block';
+}
+function bankhide(a){
+	//alert(a.id)
+	var clicks=document.getElementById(a.id);
+	//button
+	var bank =document.getElementById('bank');
+	var adder=document.getElementById('adds');
+	var Creditbalance=document.getElementById('Creditbalance');
+	var coas=document.getElementById('coas');
+	
+	//content
+	var bankdetails=document.getElementById('bankdetails');
+	var addresshide =document.getElementById('addresshide');
+	var creditandbalance =document.getElementById('creditandbalance');
+	var COA =document.getElementById('COA');
+	
+	if(a.id=='adds'){
+		COA.style.display="none";
+		coas.style.backgroundColor ="#e5e5e5";
+		coas.style.color="black";
+
+		bank.style.display="none";
+		addresshide.style.display="block";
+		clicks.style.backgroundColor ="black";
+		clicks.style.color="white";
+		bankdetails.style.backgroundColor ="#e5e5e5";
+		bankdetails.style.color="black";
+		creditandbalance.style.display="none";
+		Creditbalance.style.backgroundColor ="#e5e5e5";
+		Creditbalance.style.color="black";
+
+	}
+	else if(a.id=='bankdetails'){
+		COA.style.display="none";
+		coas.style.backgroundColor ="#e5e5e5";
+		coas.style.color="black";
+
+
+		addresshide.style.display="none";
+		bank.style.display="block";
+		clicks.style.backgroundColor ="black";
+		clicks.style.color="white";		
+		adder.style.backgroundColor ="#e5e5e5";
+		adder.style.color="black";
+		creditandbalance.style.display="none";
+		Creditbalance.style.backgroundColor ="#e5e5e5";
+		Creditbalance.style.color="black";
+	}
+	else if(a.id=='Creditbalance'){
+		COA.style.display="none";
+		coas.style.backgroundColor ="#e5e5e5";
+		coas.style.color="black";
+
+
+		addresshide.style.display="none";
+		bank.style.display="none";
+		creditandbalance.style.display="block";
+		Creditbalance.style.backgroundColor ="black";
+		Creditbalance.style.color="white";
+		bankdetails.style.backgroundColor ="#e5e5e5";
+		bankdetails.style.color="black";
+		adder.style.backgroundColor ="#e5e5e5";
+		adder.style.color="black";
+	}
+	else if(a.id=='coas'){
+		
+		COA.style.display="block";
+		coas.style.backgroundColor ="black";
+		coas.style.color="white";
+
+
+		addresshide.style.display="none";
+		bank.style.display="none";
+		creditandbalance.style.display="none";
+		Creditbalance.style.backgroundColor ="#e5e5e5";
+		Creditbalance.style.color="black";
+		bankdetails.style.backgroundColor ="#e5e5e5";
+		bankdetails.style.color="black";
+		adder.style.backgroundColor ="#e5e5e5";
+		adder.style.color="black";
+	}
+	
+	
+	
+	
+	
+	
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	gst();
+	msmes();
+	cla();
+	var clicks=document.getElementById('adds');
+	clicks.style.backgroundColor ="black";
+	clicks.style.color="white";
+	var shippingaddress =document.getElementById('shippingaddress');
+	shippingaddress.style.display="none";
+	var removeplus =document.getElementById('removeplus');
+	removeplus.style.display="none";
+	var bank =document.getElementById('bank');
+	bank.style.display="none";
+	var creditandbalance =document.getElementById('creditandbalance');
+	creditandbalance.style.display="none";
+	var COA =document.getElementById('COA');
+	COA.style.display="none";
+	var AsOfDate =document.getElementById('AsOfDate');
+	const currentDate = new Date();
+	const formattedDate = currentDate.toISOString().split('T')[0];
+	AsOfDate.value=formattedDate;
+	
+})
+
+function cla(){
+	var Creditlimit=document.getElementById('Creditlimit').value;
+	var Creditlimitid=document.getElementById('claid');
+	if(Creditlimit=='yes'){
+		Creditlimitid.style.display="block";
+	}
+	else{
+		Creditlimitid.style.display="none";
+	}
+	
+}
+
+/* function VendorRegistration() {
+	const emailError = document.getElementById("emailError");
+    emailError.style.display = "none";
+    // Function to validate the form and return whether it's valid
+    function validateForm() {
+        let isValid = true;
+        console.log("Form valid status 1:", isValid);
+
+        // Remove existing error messages
+        $(".error-message").remove();
+
+        // Check each required field
+        $("#VendorRegistrationadd").find(":input[required]").each(function () {
+            const $input = $(this);
+            const trimmedValue = $.trim($input.val()); // Trim spaces
+            
+       
+            
+           console.log("trim value :", trimmedValue);
+
+            // Validate if the field is empty
+            if (!trimmedValue) {
+            	
+                console.log("Form valid status 2:", isValid);
+               
+                if ($input.next(".error-message").length === 0) {
+                	 isValid = false; // Mark form as invalid
+                    $input.after('<span class="error-message" style="color: red; font-size: 15px;">This field is required</span>');
+                }
+            }
+        });
+        console.log("Form valid status 3:", isValid);
+        return isValid;
+    }
+
+    // Attach dynamic event handlers to validate fields on input
+    $("#VendorRegistrationadd").find(":input[required]").off("input").on("input", function () {
+        const $input = $(this);
+        const trimmedValue = $.trim($input.val());
+        const $errorMsg = $input.next(".error-message");
+
+        if (trimmedValue) {
+            $errorMsg.remove(); // Remove the error message when field is valid
+        } else {
+            if ($errorMsg.length === 0) {
+                $input.after('<span class="error-message" style="color: red; font-size: 15px;">This field is required</span>');
+            }
+        }
+    });
+
+    // Perform initial form validation
+    let isFormValid = validateForm();
+
+    console.log("Form valid status:", isFormValid); // Debug log
+
+    // If form is valid, proceed with AJAX call
+    if (isFormValid  && emailval) {
+        $.ajax({
+            url: './Addvendor', // Endpoint for form submission
+            type: 'POST',
+            data: $('#VendorRegistrationadd').serialize(), // Serialize the form data
+            success: function (response) {
+                // Show success message in modal
+                $("#alertmsg").text("Vendor " + response + " Added Successfully");
+                $("#alert").modal("toggle");
+            },
+            error: function (xhr, status, error) {
+                // Handle errors
+                alert("Error: " + error);
+            }
+        });
+    } else {
+        alert("Please fill all required fields.");
+    }
+}
+
+ */
+
+/* myfunction---- */
+ 
+
+function VendorRegistration() {
+	 emailvalidations();
+
+    // Retrieve form and field values
+    var name=document.getElementById('name').value.trim();
+    
+	 var mobileNo=document.getElementById('mobileNo').value.trim();
+	 var vendorType=document.getElementById('vendorType').value.trim();
+	
+	 //var emailid=document.getElementById('emailid').value.trim();
+	 var gsttype=document.getElementById('gsttype').value.trim();
+	 var msme=document.getElementById('msme').value.trim();
+	 var buyerAddress=document.getElementById('buyerAddress').value.trim();
+	 var inputState=document.getElementById('inputState').value.trim();
+	 var inputDistrict=document.getElementById('inputDistrict').value.trim();
+	 var Pincodes=document.getElementById('Pincode').value.trim();
+	 var classifyElement = document.getElementById('classify');
+	 var branch_id=document.getElementById('branchId').value.trim();
+
+	    if (classifyElement.disabled) {
+	        classifyElement.disabled = false; // Enable the dropdown if it was disabled
+	    }
+	 var classify=document.getElementById('classify').value.trim();
+    //var form = $('#VendorRegistrationadd'); // Form element
+	
+    
+    var isValid = true;
+    var mandatoryMessage = "Please fill the required field(s)";
+
+    // Validate each field and highlight if empty
+    function validateField(field, errorMessage) {
+        if (!field.val().trim()) {
+            field.css("border-color", "red").attr("title", errorMessage);
+            isValid = false;
+        } else {
+            field.css("border-color", "").attr("title", ""); // Reset styles
+        }
+    }
+
+    validateField($('#name'), mandatoryMessage);
+    validateField($('#mobileNo'), mandatoryMessage);
+    validateField($('#vendorType'), mandatoryMessage);
+    //validateField($('#emailid'), mandatoryMessage);
+    validateField($('#gsttype'), mandatoryMessage);
+    validateField($('#msme'), mandatoryMessage);
+    validateField($('#buyerAddress'), mandatoryMessage);
+    validateField($('#inputState'), mandatoryMessage);
+    validateField($('#inputDistrict'), mandatoryMessage);
+    validateField($('#Pincode'), mandatoryMessage);
+    validateField($('#classify'), mandatoryMessage);
+    
+    
+    
+    
+    /* --gst */
+	
+	if (gsttype === "Registered Business-Regular" ||gsttype === "Registered Business-Composition" ) {
+		validateField($('#gstNo'), mandatoryMessage);
+      } 
+       if(msme=='yes'){
+		validateField($('#msmenum'), mandatoryMessage);
+	   }
+       
+       
+       
+       if(vendorType=='SaleVendor'){
+    	  
+    	   validateField($('#SaleCategory'), mandatoryMessage);
+   	}
+    
+    
+
+    // If validation fails, show alert and stop form submission
+    if (!isValid) {
+        alert(mandatoryMessage);
+        return;
+    }
+    
+    
+    else if(isValid && emailval ){
+    // Proceed with AJAX call if validation passes
+    $.ajax({
+        url: './Addvendor', // Endpoint for form submission
+        type: 'POST',
+        data:$('#VendorRegistrationadd').serialize(), // Serialize the form data
+        
+        // Show the loading modal before sending the request
+        beforeSend: function() {
+            document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+        },
+        success: function (response) {
+            // Show success message in modal
+            $("#alertmsg").text(response);
+            $("#alert").modal("toggle");
+            // Hide the loading modal after the response is received
+	        document.getElementById('loadingModal').style.display = 'none';
+        },
+        error: function (xhr, status, error) {
+            // Handle errors
+            alert("Error: " + error);
+        }
+    });
+    }
+
+   
+  
+}
+ 
+ // Reset border color on user input
+ 
+ $(document).ready(function () {
+
+     $('#name, #mobileNo, #vendorType, #emailid, #gsttype,#msme, #buyerAddress, #inputState, #inputDistrict, #Pincode, #classify,#gstNo,#msmenum,#SaleCategory')
+         .on('input', function () {
+             $(this).css("border-color", "");
+         });
+ });
+
+
+
+function emailvalidations() {
+	
+
+	 
+
+	
+    const emailField =  document.getElementById("emailid");
+    const emailValue = emailField.value.trim();
+    const emailError = document.getElementById("emailError");
+    
+
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the email matches the regex
+    if (emailValue == "" || emailRegex.test(emailValue)) {
+        emailError.style.display = "none"; // Hide the error message
+        emailField.classList.remove("is-invalid");
+        emailField.classList.add("is-valid");
+        emailval=true;
+        //alert(emailval);
+    } else {
+        emailError.style.display = "block"; // Show the error message
+        emailField.classList.remove("is-valid");
+        emailField.classList.add("is-invalid");
+        emailval=false;
+    }
+	
+	
+}
+ 
+ 
+
+
+ document.addEventListener("DOMContentLoaded", function () {
+	 vandorchange()
+ 	
+     document.getElementById("emailid").addEventListener("input", function () {
+         const emailField = this;
+         const emailValue = emailField.value.trim();
+         const emailError = document.getElementById("emailError");
+         
+
+         // Regular expression for email validation
+         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+         // Check if the email matches the regex
+         if ( emailValue == "" || emailRegex.test(emailValue)) {
+             emailError.style.display = "none"; // Hide the error message
+             emailField.classList.remove("is-invalid");
+             emailField.classList.add("is-valid");
+             emailval=true;
+             //alert(emailval);
+         } else {
+             emailError.style.display = "block"; // Show the error message
+             emailField.classList.remove("is-valid");
+             emailField.classList.add("is-invalid");
+             emailval=false;
+         }
+     });
+ });
+
+ let emailval=true;
+ 
+function modify() {
+	
+	emailvalidations();
+	
+
+
+	
+	const vendorId = document.getElementById('vandor_id').value.trim();
+	
+	
+	 // Retrieve form and field values
+    var name=document.getElementById('name').value.trim();
+    
+	 var mobileNo=document.getElementById('mobileNo').value.trim();
+	 var vendorType=document.getElementById('vendorType').value.trim();
+	
+	 var emailid=document.getElementById('emailid').value.trim();
+	 var gsttype=document.getElementById('gsttype').value;
+	 
+	 var msme=document.getElementById('msme').value.trim();
+	 var gstNo=document.getElementById('gstNo').value.trim();
+	 var msmenum=document.getElementById('msmenum').value.trim();
+	 var buyerAddress=document.getElementById('buyerAddress').value.trim();
+	 var inputState=document.getElementById('inputState').value.trim(); 
+	 var inputDistrict=document.getElementById('inputDistrict').value.trim();
+	 var Pincode=document.getElementById('Pincode').value.trim();
+	 var classify=document.getElementById('classify').value.trim();
+    //var form = $('#VendorRegistrationadd'); // Form element
+    
+  
+
+    
+   
+    
+
+    var isValid = true;
+    var mandatoryMessage = "Please fill the required field(s)";
+
+    // Validate each field and highlight if empty
+    function validateField(field, errorMessage) {
+        if (!field.val().trim()) {
+            field.css("border-color", "red").attr("title", errorMessage);
+            isValid = false;
+        } else {
+            field.css("border-color", "").attr("title", ""); // Reset styles
+        }
+    }
+
+    validateField($('#name'), mandatoryMessage);
+    validateField($('#mobileNo'), mandatoryMessage);
+    validateField($('#vendorType'), mandatoryMessage);
+    validateField($('#gsttype'), mandatoryMessage);
+    validateField($('#msme'), mandatoryMessage);
+    validateField($('#buyerAddress'), mandatoryMessage);
+    validateField($('#inputState'), mandatoryMessage);
+    validateField($('#inputDistrict'), mandatoryMessage);
+    validateField($('#Pincode'), mandatoryMessage);
+    validateField($('#classify'), mandatoryMessage);
+    
+    
+  /* --gst */
+    	
+    
+    	
+    	
+    	if (gsttype === "Registered Business-Regular" ||gsttype === "Registered Business-Composition" ) {
+    		
+    	validateField($('#gstNo'), mandatoryMessage);
+          } 
+           if(msme=='yes'){
+    		
+    	validateField($('#msmenum'), mandatoryMessage);
+    	   }
+           
+           var saletype =document.getElementById('SaleCategory');
+           
+           if(vendorType=='SaleVendor'){
+        	   validateField($('#SaleCategory'), mandatoryMessage);
+       	}
+       	
+    	
+    
+    
+    
+    
+  
+
+    // If validation fails, show alert and stop form submission
+    if (!isValid   ) {
+        alert(mandatoryMessage);
+        return;
+    }
+    
+
+	
+	
+	
+    else if(isValid && emailval){
+	
+    
+        $.ajax({
+            url: `./modifyvendor?vandor_id=${vendorId}`,
+            type: 'POST',
+            data: $('#VendorRegistrationadd').serialize(),
+            
+            // Show the loading modal before sending the request
+            beforeSend: function() {
+                document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
+            },
+            success: function(response) {
+              
+                $("#alertmsg").text(response);
+                $("#alert").modal("toggle");
+                
+                document.getElementById('loadingModal').style.display = 'none';
+            },
+            error: function(xhr, status, error) {
+                console.error("Error in modifyvendor:", error);
+                alert("Failed to modify vendor. Please try again.");
+            }
+        });
+    }
+    
+}
+
+
+
+function back(event) {
+	document.getElementById('loadingModal').style.display = 'flex';
+	event.preventDefault();
+	window.history.back();
+}
+
+function Home() {
+	document.getElementById('loadingModal').style.display = 'flex';
+
+	location.href = 'Dashboard';
+}
+
+function add(event){
+event.preventDefault();
+
+document.getElementById('loadingModal').style.display = 'flex';
+	
+	location.href='./VendorCreation?formmode=add';
+
+}
+function registrationlist(event){
+	document.getElementById('loadingModal').style.display = 'flex';
+	location.href='./VendorCreation';
+}
+
+function modifyscreen(a) {
+	document.getElementById('loadingModal').style.display = 'flex';
+    var vandor_id = a.getAttribute('data-Venid');
+    
+    if (!vandor_id) {
+        alert('Missing account number or vendor ID.');
+        return;
+    }
+
+    location.href = './VendorCreation?formmode=modify&vandor_id=' + vandor_id;
+}
+
+
+
+function viewscreen(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+    var vandor_id = a.getAttribute('data-Venid');
+    
+    if (!vandor_id) {
+        alert('Missing account number or vendor ID.');
+        return;
+    }
+
+    location.href = './VendorCreation?formmode=view&vandor_id=' + vandor_id ;
+}
+
+function deletescreen(a){
+	document.getElementById('loadingModal').style.display = 'flex';
+
+    var vandor_id = a.getAttribute('data-Venid');
+    
+    if (!vandor_id) {
+        alert('Missing account number or vendor ID.');
+        return;
+    }
+
+    location.href = './VendorCreation?formmode=delete&vandor_id=' + vandor_id;
+}
+
+function deletebtn(a) {
+    var vendorId = a.getAttribute('data-Venid');
+    // Show the confirmation modal
+    $('#confirmationModal').modal('show');
+
+    // When the user clicks the "Yes, Delete" button
+    $('#confirmDeleteBtn').on('click', function() {
+        $.ajax({
+            url: './deletevendor?vandorid=' + vendorId,
+            type: 'POST',
+            success: function(response) {
+                $("#alertmsg").text(response); // Display response in alertmsg
+                $("#alert").modal("toggle"); // Show success alert modal
+                $('#confirmationModal').modal('hide'); // Close the confirmation modal
+            },
+            error: function(xhr, status, error) {
+                alert("Error: " + error); // Handle error
+                $('#confirmationModal').modal('hide'); // Close the confirmation modal on error
+            }
+        });
+    });
+}
+
+
+
+</script>
+
+<script>
+    function searchTable(tableId, searchInputId) {
+    var input = $('#' + searchInputId).val().toUpperCase();
+    var $table = $('#' + tableId + ' tbody');
+    var rows = $table.find('tr');
+
+    rows.each(function () {
+        var cells = $(this).find('td');
+        var found = false;
+
+        cells.each(function () {
+            if ($(this).text().toUpperCase().indexOf(input) > -1) {
+                found = true;
+                return false; // Exit loop early
+            }
+        });
+
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+    
+    function validateMobileNumber(input) {
+        const mobileHelp = document.getElementById('mobileHelp');
+        if (input.value.length === 10) {
+            mobileHelp.style.display = 'none';
+        } else {
+            mobileHelp.style.display = 'block';
+        }
+    }
+    
+    function validateMobileNumbergst(input) {
+        const mobileHelp = document.getElementById('gstvalidation');
+        if (input.value.length === 15) {
+            mobileHelp.style.display = 'none';
+        } else {
+            mobileHelp.style.display = 'block';
+        }
+    }
+    
+    
+    function validateMobileNumbermsme(input) {
+        const mobileHelp = document.getElementById('masevalidation');
+        if (input.value.length === 12) {
+            mobileHelp.style.display = 'none';
+        } else {
+            mobileHelp.style.display = 'block';
+        }
+    }
+    
+    
+    $(document).ready(function () {
+        $('#dataTables').DataTable({
+            "pageLength": 20,        // Set the number of rows per page
+            "lengthChange": false,   // Hide the dropdown for changing rows per page
+            "ordering": false,       // Disable column sorting
+            "searching": true,       // Enable global search
+            "info": true,            // Show table information
+            "pagingType": "simple_numbers", // Pagination with only numbers
+
+            // Customizing DOM structure to place search box at the top left
+
+            "dom": '<"top"f>rt<"bottom"ip><"clear">'
+        });
+
+        // Remove the "Search:" label and add a placeholder to the search input
+        $('.dataTables_filter label').contents().filter(function () {
+            return this.nodeType === Node.TEXT_NODE;
+        }).remove(); // Remove the text node containing "Search:"
+
+        // Add a placeholder to the input field
+        $('.dataTables_filter input')
+            .attr('placeholder', 'Search...')
+            .css('margin-left', '0'); // Adjust margin since the label is removed
+
+        // Align the search box to the left corner
+        $('.dataTables_filter').css({
+            "float": "left",
+            "text-align": "left"
+        });
+    });
+
+    
+    function vandorchange() {
+        var vandortype = document.getElementById('vendorType').value;
+        var classify = document.getElementById('classify');
+        var saletype = document.getElementById('saletype');
+        var group = document.getElementById('group');
+        
+        // Enable the "classify" select when changing the vendor type
+       
+
+        if (vandortype == 'SaleVendor') {
+            classify.innerHTML = `
+                <option value="Income" selected>Income</option>
+            `;
+            saletype.style.display="block"
+            
+            	$.ajax({
+        			url : './getGroupaccount?vendor_type='+vandortype,
+        			type : 'GET',
+        			success : function(response) {
+        				group.innerHTML =""
+        					var newOption = document.createElement("option");
+        					newOption.value = "";
+        					newOption.text = "Select Group";
+        					group.appendChild(newOption);
+        					response.forEach(res =>{
+        						var newOptions = document.createElement("option");
+        						newOptions.value = res.accountNumber;
+        						newOptions.text = res.accountNumber+"-"+res.accountName;
+            					group.appendChild(newOptions);
+
+        					})
+        					}
+        			
+        			})
+        } else if (vandortype == 'PurchaseVendor') {
+            classify.innerHTML = `
+                <option value="Asset" selected>Asset</option>
+            `;
+            saletype.style.display="none";
+            $.ajax({
+    			url : './getGroupaccount?vendor_type='+vandortype,
+    			type : 'GET',
+    			success : function(response) {
+    				group.innerHTML =""
+    					var newOption = document.createElement("option");
+    					newOption.value = "";
+    					newOption.text = "Select Group";
+    					group.appendChild(newOption);
+    					response.forEach(res =>{
+    						var newOptions = document.createElement("option");
+    						newOptions.value = res.accountNumber;
+    						newOptions.text = res.accountNumber+"-"+res.accountName;
+        					group.appendChild(newOptions);
+
+    					})
+    					}
+    			
+    			})
+        } else {
+            // Reset to default if no valid selection
+             saletype.style.display="none";
+            classify.innerHTML = `
+                <option value="">Select</option>
+            `;
+            classify.disabled = true;
+        }
+    }
+   
+
+</script>
+
+
+
+
+
+
+<script>
+		function capitalizeInput(input) {
+			let value = input.value;
+			// Only change the first letter to uppercase if it's lowercase
+			value = value.replace(/\b[a-z]/g, function (char) {
+				return char.toUpperCase();
+			});
+			input.value = value;
+		}
+	</script>
+
+
+
+
+
+<script>
+
+function validateMobileNumbershippin11(input) {
+	
+
+    const mobileHelp = document.getElementById('pincodeship');
+    if (input.value.length === 6) {
+        mobileHelp.style.display = 'none';
+    } else {
+        mobileHelp.style.display = 'block';
+    }
+}
+
+function validateMobileNumbershippin(input) {
+	
+
+    const mobileHelp = document.getElementById('pincodebilled');
+    if (input.value.length === 6) {
+        mobileHelp.style.display = 'none';
+    } else {
+        mobileHelp.style.display = 'block';
+    }
+}
+
+function togglre(){
+	$('#addcat').modal('show'); 	
+}
+
+function togglclose(event){
+	event.preventDefault();
+	$('#addcat').modal('hide');
+}
+     
+</script>
+<script>
+
+function  addGroupCreation(){
+	
+
+	var vendorTypes=document.getElementById('vendorTypes').value;
+	var groupname=document.getElementById('groupname').value;
+	
+		if(vendorTypes&&groupname){
+		$.ajax({
+			url : './addGroupCreation?groupname='+groupname+"&vendor_type="+vendorTypes,
+			type : 'POST',
+			success : function(response) {
+				alert(response);
+				$('#addcat').modal('hide');
+				var group = document.getElementById('group');
+            	
+				$.ajax({
+        			url : './getGroupaccount?vendor_type='+vendorTypes,
+        			type : 'GET',
+        			success : function(response) {
+        				group.innerHTML =""
+        					var newOption = document.createElement("option");
+        					newOption.value = "";
+        					newOption.text = "Select Group";
+        					group.appendChild(newOption);
+        					response.forEach(res =>{
+        						var newOptions = document.createElement("option");
+        						newOptions.value = res.accountNumber;
+        						newOptions.text = res.accountNumber+"-"+res.accountName;
+            					group.appendChild(newOptions);
+
+        					})
+        					}
+        			
+        			})
+			}
+		});	
+		}else{
+			alert("Please Enter both Vendor Type and Group name")
+		}
+}
+
+</script>
+    
+    <script type="text/javascript">
+    function select_org() {
+        const org_id = document.getElementById('org_id').value;
+
+        $.ajax({
+            url: './getorglist?org_id=' + org_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                const branchSelect = document.getElementById('branchId');
+                branchSelect.innerHTML = '<option value="">Select Branch</option>';
+
+                response.forEach(function(branchId) {
+                    const option = document.createElement('option');
+                    option.value = branchId;
+                    option.text = branchId;
+                    branchSelect.appendChild(option);
+                });
+            },
+
+            error: function(xhr, status, error) {
+                alert("Error: " + error);
+            }
+        });
+    }
+
+
+    function select_branch() {
+        const org_id = document.getElementById('org_id').value;
+        const branchId = document.getElementById('branchId').value;
+        if (!org_id || !branchId) {
+            alert("Please select both Organization and Branch.");
+            return;
+        }
+
+        $.ajax({
+            url: './getbranchlist?branchId=' + branchId + '&org_id=' + org_id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                const tableBody = document.getElementById('dataTablesBody');
+                tableBody.innerHTML = ''; // Clear existing data
+
+                if (response.length === 0) {
+                    tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: red;">No records found.</td></tr>`;
+                } else {
+                	response.forEach(vendor => {
+                        let row = `<tr>
+                            <td>${vendor.vendorId}</td>
+                            <td>${vendor.vendorName}</td>
+                            <td>${vendor.buyerAddress}</td>
+                            <td>${vendor.mobileNo}</td>
+                            <td>${vendor.vendorType}</td>
+                            <td style="text-align:center;">
+                                <div class="dropdown" style="text-align: center;">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            title="Action" style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" title="Modify" data-Venid="${vendor.vendorId}" 
+                                           style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+                                        <a class="dropdown-item" title="View" data-Venid="${vendor.vendorId}" 
+                                           style="cursor: pointer;" onclick="viewscreen(this)">View</a>
+                                        <a class="dropdown-item" title="Delete" data-Venid="${vendor.vendorId}" 
+                                           style="cursor: pointer;" onclick="deletescreen(this)">Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error: " + error);
+            }
+        });
+    }
+
+    
+    </script>
+    
+    
+    
+    
+</head>
+
+<body>
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-12">
+				<div class="container-fluid content" th:if="${formmode}=='add'">
+					
+									<div class=" modal fade" id="addcat">
+									<div
+										class="modal-dialog modal-dialog-centered modal-lg">
+										<div class="modal-content fullscreen-modal">
+											<form action="#" method="post" class="w-100"
+												id="HeadCodeCreation" autocomplete="off">
+												<div
+													class="card-header d-flex justify-content-between align-items-center"
+													style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+													<div>
+														<i class="fas fa-user-plus mr-2"></i>Group Creation
+													</div>
+													<div>
+												</div>
+												</div>
+												<div class="modal-body">
+													<div class="form-row mt-2 ">
+													
+																							
+													
+													
+														<div class="form-group col-md-6">
+															<select class="form-control" id="vendorTypes"  name="vendorTypes" required>
+													                <option value=""  selected>--Select Vendor--</option>
+													                <option value="PurchaseVendor">Purchase Vendor</option>
+													                <option value="SaleVendor">Sale Vendor</option>
+													            </select>
+				            								<label for="vendorType" class="form-legend">Vendor Type</label>
+														</div>	
+														
+														<div class="form-group col-md-6">
+															<div class="form-floating">
+																<input type="text" class="form-control" id="groupname"
+																	name="groupname" placeholder="" required> <label for="name"
+																	class="form-legend">Group name</label>
+															</div>
+														</div>										
+				
+													</div>
+													<div class="card-footer text-center"
+														style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+														<button class="btn btn-xs btn-dark" type="button"
+															id="Dashboard" onclick="addGroupCreation();">Submit</button>
+				
+				
+														<button class="btn btn-xs btn-dark" id="btnback"
+															onclick="togglclose(event);">Close</button>
+													</div>
+				
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+				
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+        style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        <div>
+            <i class="fas fa-user-plus mr-2"></i> Vendor Registration
+        </div>
+        <div>
+            <button class="btn btn-light btn-sm"
+                style="color: black; font-weight: bold; border-color: black;"
+                onclick="registrationlist(event);">
+                <i class="fas fa-list mr-1"></i> List
+            </button>
+        </div>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+        
+            <div class="form-row mb-2">
+                <!-- Name Field -->
+                <div class="form-group col-md-4">
+            <input type="text" id="name" class="form-control" name="vendorName" placeholder=" " oninput="capitalizeInput(this)" required>
+            <label for="name" class="form-legend">Name</label>
+        </div>   
+                
+                <!-- Phone Number Field -->
+                <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="mobileNo" name="mobileNo" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);" placeholder="" required>
+                        <label for="name" class="form-legend">Phone Number</label>
+                        <small id="mobileHelp" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 10-digit mobile number.</small>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-4">
+        		<div class="form-floating">
+            <select class="form-control" id="vendorType" onchange="vandorchange()" name="vendorType" required>
+                <option value=""  selected>--Select Vendor--</option>
+                <option value="PurchaseVendor">Purchase Vendor</option>
+                <option value="SaleVendor">Sale Vendor</option>
+            </select>
+            <label for="vendorType" class="form-legend">Vendor Type</label>
+        </div>
+    	</div>
+              
+              
+                
+                
+            </div>
+            <div class="form-row g-3">
+            	<div class="form-group col-md-4" id="saletype" style="display:none">
+        		<div class="form-floating">
+            <select class="form-control" id="SaleCategory"  name="salecategory" required>
+                <option value=""  selected>--Sale Category--</option>
+                <option value="Distributor">Distributor</option>
+                <option value="Retailer">Retailer</option>
+                <option value="Customer">Customer</option>
+                <option value="SS">SS(Sub-Stockist)</option>
+                
+                
+            </select>
+            <label for="vendorType" class="form-legend">SaleCategory</label>
+        </div>
+    	</div>  
+            
+            <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="emailid" name="emailid"  placeholder="">
+                        <label for="name" class="form-legend">Email Address</label>
+                         <span id="emailError" style="color: red; font-size: 14px; display: none;">Invalid email address</span>
+                        
+                    </div>
+                </div>
+            
+            	
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="gsttype" name="gstType" onchange="gst()" required>
+                <option value=""  selected>--Select Gst Type--</option>
+                <option value="Unregister/Consumer">Unregister/Consumer</option>
+                <option value="Registered Business-Regular">Registered Business-Regular</option>
+                <option value="Registered Business-Composition">Registered Business-Composition</option>
+            </select>
+            <label for="phone" class="form-legend">Gst Type</label>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-4" id="extra-input-container">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="gstNo" name="gstNo" maxlength=15 oninput="validateMobileNumbergst(this);" placeholder="" >
+                        <!-- this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15) -->
+                        <label for="name" class="form-legend">Gst Number</label>
+                          <small id="gstvalidation" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 15-digit GST NO</small>
+                    </div>
+                </div>
+                
+        <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="msme" name="msmeType" onchange="msmes()" >
+                <option value=""  selected>--Select Msme Type--</option>
+                <option value="yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+            <label for="phone" class="form-legend">Msme Type</label>
+        </div>
+    </div>
+                
+                <div class="form-group col-md-4" id="msmen">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="msmenum" name="msmeNumber"   
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12);validateMobileNumbermsme(this);" placeholder="" >
+                        <label for="name" class="form-legend">Msme Number</label>
+                          <small id="masevalidation" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 12-digit MSME No</small>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        
+            			<div class="form-floating flex-grow-1 d-flex">
+                    	<div class="select-container flex-grow-1 position-relative">
+            			<select name="group_account" id="group" class="form-control" required>
+            					<option value="">Please Select</option>
+      					</select>
+       					   <label for="name" class="form-legend">Groups</label>
+       					 </div>
+       					 <!-- Plus Icon -->
+							<button type="button" class="btn btn-dark btn-primary btn-sm ms-1 d-flex align-items-center" onclick="togglre();" id="addCategory"> <i class="fas fa-plus"></i></button>
+       				</div>
+            			
+                      
+                          
+                    </div>
+                </div>
+    
+    	
+									<div class="form-group col-md-4">
+										<div class="form-floating">
+											<!-- Organization Selection -->
+                <select class="form-control"  onchange="select_org();"   id="org_id" name="org_id">
+                    <option value="">Select Organization</option>
+                    <!-- Populate options dynamically using Thymeleaf -->
+                    <option th:each="OrgId : ${OrgIds}" th:value="${OrgId}" th:text="${OrgId}"></option>
+                </select>
+											 <label for="branchId" class="form-legend">Organization Id</label>
+										</div>
+									</div>
+										<div class="form-group col-md-4">
+										<div class="form-floating">
+											 <select class="form-control" 
+											 id="branchId" name="branchId">
+                    <option value="">Select Branch</option>
+                    <!-- Populate options dynamically using Thymeleaf -->
+                    <option th:each="branchId : ${branchIds}" th:value="${branchId}" th:text="${branchId}"></option>
+                </select>
+											 <label for="branchId" class="form-legend">Branch Id</label>
+										</div>
+									</div>
+								</div>
+		<div class="card-header" id="tabs" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+			<div class="row formline py-1 ml-1">
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="adds" onclick="bankhide(this);event.preventDefault();">Address</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="bankdetails" onclick="bankhide(this);event.preventDefault();">Bank Details</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black;"  id="Creditbalance" onclick="bankhide(this);event.preventDefault();">Credit & Balance</button>
+			<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="coas" onclick="bankhide(this);event.preventDefault();">Chart Of Accounts</button>
+				
+												
+			</div>
+		</div>
+		
+		
+		<div id="addresshide">
+		<div class="form-row mt-4">
+			
+			<div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" oninput="c apitalizeInput(this)"  id="buyerAddress" name="buyerAddress" placeholder="" required>
+                        <label for="name" class="form-legend">Address</label>
+                    </div>
+                  
+                  
+                </div>
+                 
+	<div class="form-group col-md-4">
+		<div class="form-floating">
+            <select class="form-control" id="inputState" name="buyerState" onchange="state()"required>
+                        <option value="">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                      <label for="phone" class="form-legend">Select State</label>
+  </div>
+  
+ 
+    </div>
+    
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="inputDistrict" name="buyerDistrict"  required>
+                <option value=""  selected>--Select District--</option>
+                
+            </select>
+            <label for="phone" class="form-legend">Select District</label>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" name="buyerPincode"  id="Pincode" placeholder="" required
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);validateMobileNumbershippin(this);">
+                         <small id="pincodebilled" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									  Valid 6-digit PIN</small>
+                        
+                        <label for="name" class="form-legend">Pin code</label>
+                    </div>
+                  
+                  
+                </div>
+                <div class="form-group col-md-4" style="display:none">
+                    <div class="form-floating">
+                        <p Style="color:blue" id="plus" onclick="convert()">+ shipping Address</p>
+                        <p Style="color:blue" id="removeplus" onclick="remove()">- Remove shipping Address</p>
+                    </div>
+                </div>
+    
+    		
+			</div>
+			
+			
+			<div id =shippingaddress>
+			<div class="form-row" >
+			
+			<div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" oninput="capitalizeInput(this)" name="shippingAddress"  id="shippingAddress" placeholder="" >
+                        <label for="name" class="form-legend">Address</label>
+                    </div>
+                  
+                  
+                </div>
+                
+                <div class="form-group col-md-4">
+		<div class="form-floating">
+            <select class="form-control" id="inputState1" name="shippingState" onchange="state1()" >
+                        <option value="SelectState">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                        <label for="name" class="form-legend">Select State</label> 
+                     
+  </div>
+  
+ 
+    </div>
+    
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="inputDistrict1" name="shippingDistrict"  >
+                <option value="" disabled selected>--Select District--</option>
+                
+            </select>
+            <label for="phone" class="form-legend">Select District</label>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control"   id="Pincodes1" name="shippingPincode" placeholder="" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);validateMobileNumbershippin11(this);">
+                        
+                         <small id="pincodeship" class="form-text text-muted"
+									style="color: red !important; display: none;">
+									  Valid 6-digit PIN</small>
+									  
+                        <label for="name" class="form-legend">Pin code</label>
+                    </div>
+                  
+                  
+                </div>
+ 
+                
+                
+                
+                </div>
+                </div>
+                </div>
+                
+                
+                <!-- bank d -->
+					<div id="bank">
+						<div class="form-row mt-4">
+							<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="bankAcNo"   id="Bankaccountnumber" placeholder="" >
+                        			<label for="name" class="form-legend">Bank Account Number.</label>
+                    			</div>
+                			</div>
+                			
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" oninput="capitalizeInput(this)" name="bankAccountHolderName"  id="BankAccountName" placeholder="" >
+                        			<label for="name" class="form-legend">Account Holder Name.</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="bankName" oninput="capitalizeInput(this)" id="Bankname" placeholder="" >
+                        			<label for="name" class="form-legend">Bank Name.</label>
+                    			</div>
+                			</div>
+                			
+                			
+                			</div>
+                			
+                			<div class="form-row">
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control"  name="bankBranchName" oninput="capitalizeInput(this)" id="BankBranchName" placeholder="" >
+                        			<label for="name" class="form-legend">Bank Branch Name.</label>
+                    			</div>
+                			</div>
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="branchCode"   id="BrachCode" placeholder="" >
+                        			<label for="name" class="form-legend">Branch Code.</label>
+                    			</div>
+                			</div>
+                			
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="ifscCode"  id="IFSCCODE" placeholder="" >
+                        			<label for="name" class="form-legend">IFSC Code.</label>
+                    			</div>
+                			</div>
+                			
+							</div>
+					</div>
+					<!-- credit & balance -->
+					<div id="creditandbalance">
+						<div class="form-row mt-4">
+								<div class="form-group col-md-4" >
+        						<div class="form-floating">
+            						<select class="form-control" id="Opening_Balance_Type" name="Opening_Balance_Type"  >
+                						<option value="" disabled selected>--Select Opening Balance Type --</option>
+                						<option value="Credit">Credit</option>
+                						<option value="Debit">Debit</option>
+            						</select>
+            						<label for="phone" class="form-legend">Opening Balance Type</label>
+        						</div>
+   							 </div>
+								
+								<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control"  name="openingBalance" id="OpeningBalance" placeholder="" >
+                        			<label for="name" class="form-legend">Opening Balance</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="date" class="form-control" name="asOfDate"  id="AsOfDate" placeholder="" >
+                        			<label for="name" class="form-legend">As Of Date</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4" style="display:none">
+        						<div class="form-floating">
+            						<select class="form-control" id="Creditlimit" name="creditLimit" onchange="cla()" >
+                						<option value="" disabled selected>--Select Credit limit--</option>
+                						<option value="yes">yes</option>
+                						<option value="No">No</option>
+            						</select>
+            						<label for="phone" class="form-legend">Creditlimit</label>
+        						</div>
+   							 </div>
+   							 
+   							 <div class="form-group col-md-4" id="claid" >
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="creditLimitAmount" id="CreditlimitAmount" placeholder="" >
+                        			<label for="name" class="form-legend">Credit limit Amount</label>
+                    			</div>
+                			</div>
+							</div>
+					</div>
+					
+					
+					
+					<!-- chart of accounts start -->
+								<div id="COA">
+									<div class="form-row mt-4">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+											<select id="classify" name="classify" disabled
+												class="form-control " required>
+												<option value="">Select</option>
+												 <!-- <th:block th:each="code : ${Chart1}">
+													<option th:value="${code}" th:text="${code}"></option>
+												</th:block> --> 
+											</select><label for="name"
+													class="form-legend">Classification</label>
+											
+											
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="crncy" id="crncy"
+													class="form-control " value="INR" readonly/> <label for="name"
+													class="form-legend">Currency</label>
+											</div>
+										</div>
+
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="acctNum" id="acctNum"
+												class="form-control " th:value="${getAccNo}" readonly/> <label for="name"
+													class="form-legend">Account
+											Number</label>
+											</div>
+										</div>
+										
+											
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="crAmt" id="crAmt"
+												class="form-control " value="0.00" readonly/> <label for="name"
+													class="form-legend">Total Credit Balance
+											</label>
+											</div>
+										</div>
+										
+											<div class="form-group col-md-4">
+											<div class="form-floating">
+													<input type="text" name="drAmt" id="drAmt"
+												class="form-control " value="0.00" readonly/> <label for="name"
+													class="form-legend">Total Debit Balance
+											</label>
+											</div>
+										</div>
+										
+										<div class="form-group col-md-4" hidden>
+											<div class="form-floating">
+													<input type="text" name="balanceamount" id="balanceamount" value="0.00" readonly
+												class="form-control" /> <label for="name"
+													class="form-legend">Vendor Balance
+											</label>
+											</div>
+										</div>
+										
+										<div class="form-group col-md-4" hidden>
+											<div class="form-floating">
+													<input type="text" name="advanceamount" id="advanceamount" value="0.00" readonly
+												class="form-control" /> <label for="name"
+													class="form-legend">TSK Balance
+											</label>
+											</div>
+										</div>
+										
+										
+										
+
+									</div>
+								</div>
+
+
+	
+							<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										<button type="button" class="btn btn-xs btn-dark"
+											id="btnSubmit" onclick="VendorRegistration();"
+											>Submit</button>
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+
+							</div>			
+        </form>	
+						<div>
+						</div>
+					
+					
+    </div>
+</div>
+
+<div class="container-fluid content" th:if="${formmode}=='list'" >
+					<div class="row">
+						<!-- Form for Journal Entry -->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+						<div class="card">
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center" 
+         style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        
+        <div><i class="fas fa-list mr-1"></i> Vendor - List</div>
+
+        <div class="d-flex align-items-center gap-4">
+         <!-- Organization Selection -->
+                <select class="btn btn-light btn-sm mx-2"  onchange="select_org();"
+        style="color: black; font-weight: bold; border: 2px solid black; height: 32px;"  id="org_id" name="org_id">
+                    <option value="">Select Organization</option>
+                    <!-- Populate options dynamically using Thymeleaf -->
+                    <option th:each="OrgId : ${OrgIds}" th:value="${OrgId}" th:text="${OrgId}"></option>
+                </select>
+            <!-- Branch Selection -->
+                <select class="btn btn-light btn-sm mx-2"  onchange="select_branch();"
+        style="color: black; font-weight: bold; border: 2px solid black; height: 32px;"  id="branchId" name="branchId">
+                    <option value="">Select Branch</option>
+                    <!-- Populate options dynamically using Thymeleaf -->
+                    <option th:each="branchId : ${branchIds}" th:value="${branchId}" th:text="${branchId}"></option>
+                </select>
+            <!-- Add Button -->
+            <button class="btn btn-light btn-sm mx-2" 
+                    style="color: black; font-weight: bold; border-color: black;"
+                    onclick="add(event);">
+                <i class="fas fa-user-plus mr-2"></i> Add
+            </button>
+        </div>
+    </div>
+</div>
+
+								<div class="card-body">
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+									<!-- 	<div
+											class="mb-3 d-flex justify-content-between align-items-center">
+											<div>
+												<input type="text" id="searchInput" placeholder="Search..."
+													onkeyup="searchTable('dataTables', 'searchInput')" class="form-control" />
+											</div>
+											Date Search (Commented Out)
+											<div class="ms-auto d-flex align-items-center">
+             <input type="date" id="searchDate" class="form-control" style="width: auto;" /> 
+             <button onclick="datesearch(event);" class="me-2">Search Date</button>
+        </div>
+										</div> -->
+										<div class="table-responsive"
+										style="overflow-y: auto;overflow-x: hidden; height: 85vh; margin-top:-20px">
+										<!-- Table for displaying journal entries -->
+										<table id="dataTables" class="table table-striped">
+											<thead>
+												<tr>
+													<th style="text-align: left; font-weight: bold">Vendor Id</th>
+													<th style="text-align: left;  font-weight: bold">Vendor Name</th>
+													<th style="text-align: left; font-weight: bold;width:20px">Address</th>
+													<th style="text-align: left; font-weight: bold">Mobile No</th>
+													<th style="text-align: left; font-weight: bold">Vendor Type</th>
+													<th style="text-align: center; font-weight: bold;">Action</th>
+												</tr>
+											</thead>
+											<tbody id="dataTablesBody">
+												<tr th:if="${#lists.isEmpty(getvendor)}">
+													<td colspan="7" style="text-align: center; color: red;">
+														No records found.</td>
+												</tr>
+												<tr th:each="vendor : ${getvendor}">
+													<td th:text="${vendor.vendorId}"
+														style="text-align: left;"></td>
+													<td th:text="${vendor.vendorName}"
+														style="text-align: left;"></td>
+													<td th:text="${vendor.buyerAddress}"
+														style="text-align: left;"></td>
+													<td th:text="${vendor.mobileNo}"
+														style="text-align: left;"></td>
+													<td th:text="${vendor.vendorType}"
+														style="text-align: left;"></td>
+													<td style="text-align: center;">
+														<div class="dropdown" style="text-align: center;">
+															<button class="btn btn-secondary dropdown-toggle"
+																type="button" id="dropdownMenuButton" title="Action"
+																style="line-height: 0.7; font-size: 13px; color: #3a4550; background: #e3e3e4;"
+																data-toggle="dropdown" aria-haspopup="true"
+																aria-expanded="false">Action</button>
+
+															<div class="dropdown-menu"
+																aria-labelledby="dropdownMenuButton"
+																style="background-color: #e3e3e4; color: #3a4550;">
+
+
+															<a class="dropdown-item" title="Modify"
+																th:attr="data-Venid=${vendor.vendorId}"
+																style="cursor: pointer;" onclick="modifyscreen(this)">Modify</a>
+
+
+
+															<a class="dropdown-item" title=" Modify"
+																th:attr="data-Venid=${vendor.vendorId}"
+																	style="cursor: pointer;" onclick="viewscreen(this)">View</a>
+																
+																<a class="dropdown-item" title=" Modify"
+																th:attr="data-Venid=${vendor.vendorId}"
+																	style="cursor: pointer;" onclick="deletescreen(this)">Delete</a>
+																
+
+															</div>
+														</div>
+
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										</div>
+
+										<div id="pagination-controls"></div>
+									</div>
+
+
+
+
+
+									<!-- Form Footer -->
+									<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; margin_top:-10px">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+
+
+										<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+								</div>
+						</form>
+					</div>
+				</div>
+						
+						
+						
+						
+						
+						
+				<!--modify-->
+				
+				<div class="container-fluid content" th:if="${formmode=='modify' ||  formmode=='view'}">
+					<div class="row">
+						<!-- add-->
+						<form action="#" method="post" class="w-100"
+							id="VendorRegistrationadd" autocomplete="off">
+							
+							<div class="card">
+    <!-- Form Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+        style="font-family: 'Nunito', sans-serif; font-size: 1.5rem; font-weight: bold; color: black;">
+        <div th:if="${formmode=='modify'}">
+            <i class="fas fa-edit mr-2"></i> Vendor Registration - Modify <span th:text="'('+${getvendor.vendorId}+')'"></span>
+        </div>
+         <div th:if="${forms=='view'}">
+            <i class="fas fa-eye mr-2"></i> Vendor Registration - View  <span th:text="'('+${getvendor.vendorId}+')'"></span>
+        </div>
+         <div th:if="${forms=='delete'}">
+            <i class="fas fa-trash-alt mr-2"></i> Vendor Registration - Delete  <span th:text="'('+${getvendor.vendorId}+')'"></span>
+        </div>
+        <div>
+            <button class="btn btn-light btn-sm"
+                style="color: black; font-weight: bold; border-color: black;"
+                onclick="back(event);">
+                <i class="fas fa-list mr-1"></i> List
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- Form Body -->
+    <div class="card-body">
+        
+            <div class="form-row mb-2">
+                <!-- Name Field -->
+                <div class="form-group col-md-4">
+            <input type="text" id="name" class="form-control" th:value="${getvendor.vendorName}" name="vendorName" placeholder=" "oninput="capitalizeInput(this)" required th:if="${formmode=='modify'}">
+<input type="text" id="name" class="form-control" th:value="${getvendor.vendorName}" name="vendorName" placeholder=" " readonly th:if="${formmode=='view'}">
+            
+            <label for="name" class="form-legend">Name</label>
+        </div>   
+                
+                <!-- Phone Number Field -->
+                <div class="form-group col-md-4">
+                    <div class="form-floating">
+<!--                         <input type="text" class="form-control" id="mobileNo" th:value="${getvendor.mobileNo}" name="mobileNo" placeholder="" required th:if="${formmode=='modify'}">
+ -->                          <input th:value="${getvendor.mobileNo}" type="text" class="form-control" id="mobileNo" name="mobileNo" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);" placeholder="" required th:if="${formmode=='modify'}">
+                        <small id="mobileHelp" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 10-digit mobile number.</small>
+                  
+                       
+                        
+                        
+                        
+                        <input type="hidden"  id="vandor_id" th:value="${vandor_id}"  placeholder="" th:if="${formmode=='modify'}">
+                        
+                        
+                        
+                       
+                        <input type="text" class="form-control" id="mobileNo" th:value="${getvendor.mobileNo}" name="mobileNo" placeholder="" required readonly th:if="${formmode=='view'}">
+                        <input type="hidden"  id="vandor_id" th:value="${vandor_id}"  placeholder="" readonly th:if="${formmode=='view'}">
+                         
+                        <label for="name" class="form-legend">Phone Number</label>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-4">
+        		<div class="form-floating">
+            <select class="form-control" id="vendorType" name="vendorType" required th:if="${formmode=='modify'}"  th:value="${getvendor.vendorType}" disabled>
+                <option th:text="${getvendor.vendorType}"  >--Select Vendor--</option>
+                <option value="PurchaseVendor" th:selected="${getvendor.vendorType}=='PurchaseVendor'">Purchase Vendor</option>
+                <option value="SaleVendor"th:selected="${getvendor.vendorType}=='SaleVendor'" >Sale Vendor</option>
+            </select>
+            
+             <select class="form-control" id="vendorType" name="vendorType" required th:if="${formmode=='view'}" disabled>
+                <option value="" disabled selected>--Select Vendor--</option>
+                <option value="PurchaseVendor" th:selected="${getvendor.vendorType}=='PurchaseVendor'">Purchase Vendor</option>
+                <option value="SaleVendor"th:selected="${getvendor.vendorType}=='SaleVendor'" >Sale Vendor</option>
+            </select>
+            <label for="vendorType" class="form-legend">Vendor Type</label>
+        </div>
+    	</div>
+                
+                
+                
+            </div>
+            <div class="form-row g-3">
+            
+            <div class="form-group col-md-4" id="saletype" style="display:none">
+        		<div class="form-floating">
+            <select class="form-control" id="SaleCategory" th:if="${formmode=='modify'}"  name="salecategory" required>
+                <option value=""  selected>--Sale Category--</option>
+                <option value="Distributor" th:selected="${getvendor.salecategory}=='Distributor'">Distributor</option>
+                <option value="Retailer" th:selected="${getvendor.salecategory}=='Retailer'">Retailer</option>
+                <option value="Customer" th:selected="${getvendor.salecategory}=='Customer'">Customer</option>
+                <option value="SS" th:selected="${getvendor.salecategory}=='SS'">SS(Sub-Stockist)</option>
+                
+                
+            </select>
+            
+            <select class="form-control" id="SaleCategory" th:if="${formmode=='view'}"  name="salecategory" disabled required>
+                <option value=""  selected>--Sale Category--</option>
+                <option value="Distributor" th:selected="${getvendor.salecategory}=='Distributor'">Distributor</option>
+                <option value="Retailer" th:selected="${getvendor.salecategory}=='Retailer'">Retailer</option>
+                <option value="Customer" th:selected="${getvendor.salecategory}=='Customer'">Customer</option>
+                <option value="SS" th:selected="${getvendor.salecategory}=='SS'">SS(Sub-Stockist)</option>
+                
+                
+            </select>
+            <label for="vendorType" class="form-legend">SaleCategory</label>
+        </div>
+    	</div>  
+            
+            <div class="form-group col-md-4"> 
+                    <div class="form-floating">
+                        <input type="text" class="form-control" th:value="${getvendor.emailid}" id="emailid" name="emailid" placeholder="" th:if="${formmode=='modify'}">
+                 <input type="email" class="form-control" th:value="${getvendor.emailid}" id="emailid" name="emailid" placeholder="" th:if="${formmode=='view'}" readonly >
+                       
+                        <label for="name" class="form-legend">Email Address</label>
+                        <span id="emailError" style="color: red; font-size: 14px; display: none;">Invalid email address</span>
+                    </div>
+                </div>
+            
+            	
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="gsttype" name="gstType" onchange="gst()" required th:if="${formmode=='modify'}">
+                <option value="">--Select Gst Type--</option>
+                <option value="Unregister/Consumer" th:selected="${getvendor.gstType}=='Unregister/Consumer'">Unregister/Consumer</option>
+                <option value="Registered Business-Regular" th:selected="${getvendor.gstType}=='Registered Business-Regular'">Registered Business-Regular</option>
+                <option value="Registered Business-Composition" th:selected="${getvendor.gstType}=='Registered Business-Composition'">Registered Business-Composition</option>
+            </select>
+            
+            <select class="form-control" id="gsttype" name="gstType" onchange="gst()" required th:if="${formmode=='view'}" disabled>
+                <option value="">--Select Gst Type--</option>
+                <option value="Unregister/Consumer" th:selected="${getvendor.gstType}=='Unregister/Consumer'">Unregister/Consumer</option>
+                <option value="Registered Business-Regular" th:selected="${getvendor.gstType}=='Registered Business-Regular'">Registered Business-Regular</option>
+                <option value="Registered Business-Composition" th:selected="${getvendor.gstType}=='Registered Business-Composition'">Registered Business-Composition</option>
+            </select>
+            <label for="phone" class="form-legend">Gst Type</label>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-4" id="extra-input-container">
+                    <div class="form-floating">
+                  <input type="text" class="form-control" id="gstNo" th:value="${getvendor.gstNo}" name="gstNo" placeholder="" required th:if="${formmode=='modify'}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);validateMobileNumbergst(this);" >
+                 <input type="text" class="form-control" id="gstNo" th:value="${getvendor.gstNo}" name="gstNo" placeholder="" required th:if="${formmode=='view'}" readonly>
+                        
+                        <label for="name" class="form-legend">Gst Number</label>
+                         <small id="gstvalidation" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 15-digit GST NO</small>
+                        
+                    </div>
+                </div>
+                
+        <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="msme" name="msmeType" onchange="msmes()" required th:if="${formmode=='modify'}">
+                <option value="" >--Select Msme Type--</option>
+                <option value="yes" th:selected="${getvendor.msmeType}=='yes'">Yes</option>
+                <option value="No" th:selected="${getvendor.msmeType}=='No'">No</option>
+            </select>
+             <select class="form-control" id="msme" name="msmeType" onchange="msmes()" th:if="${formmode=='view'}" disabled>
+                <option value="" >--Select Msme Type--</option>
+                <option value="yes" th:selected="${getvendor.msmeType}=='yes'">Yes</option>
+                <option value="No" th:selected="${getvendor.msmeType}=='No'">No</option>
+            </select>
+            <label for="phone" class="form-legend">Msme Type</label>
+        </div>
+    </div>
+                
+                <div class="form-group col-md-4" id="msmen">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="msmenum" th:value="${getvendor.msmeNumber}" name="msmeNumber" placeholder="" required  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12);validateMobileNumbermsme(this);" th:if="${formmode=='modify'}">
+                   <input type="text" class="form-control" id="msmenum" th:value="${getvendor.msmeNumber}" name="msmeNumber" placeholder="" th:if="${formmode=='view'}" readonly>
+               
+                        <label for="name" class="form-legend">Msme Number</label>
+                         <small id="masevalidation" class="form-text text-muted"
+									style="color: red !important; display: none;">Please
+									enter a valid 12-digit MSME No</small>
+                    </div>
+                </div>
+
+
+
+									<div class="form-group col-md-4">
+										<div class="form-floating">
+											<!-- Organization Selection -->
+											<select class="form-control" onchange="select_org();"
+												id="org_id" name="org_id" th:if="${formmode=='modify'}">
+												<option value="">Select Organization</option>
+												<option th:each="OrgId : ${OrgIds}" th:value="${OrgId}"
+													th:text="${OrgId}"
+													th:selected="${OrgId== getvendor?.org_id}">
+											</select> 
+											<input class="form-control" id="branchId" name="branchId"
+												th:if="${formmode=='view'}" readonly
+												th:value="${getvendor?.org_id}" /> <label for="org_id" class="form-legend">Organization
+												Id</label>
+										</div>
+									</div>
+
+
+									<div class="form-group col-md-4">
+										<div class="form-floating">
+
+											<!-- Branch Dropdown -->
+											<select class="form-control" id="branchId" name="branchId"
+												th:if="${formmode=='modify'}">
+												<option th:text="${getvendor?.branchId}">Select
+													Branch</option>
+												<!-- default option -->
+												<option th:each="branchId : ${branchIds}"
+													th:value="${branchId}" th:text="${branchId}"
+													th:selected="${branchId == getvendor?.branchId}">
+												</option>
+												<!-- ✅ close properly -->
+											</select> <input class="form-control" id="branchId" name="branchId"
+												th:if="${formmode=='view'}" readonly
+												th:value="${getvendor?.branchId}" /> <label for="branchId"
+												class="form-legend">Branch Id</label>
+										</div>
+									</div>
+
+
+
+								</div>
+		<div class="card-header" id="tabs" style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+			<div class="row formline py-1 ml-1">
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="adds" onclick="bankhide(this);event.preventDefault();">Address</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="bankdetails" onclick="bankhide(this);event.preventDefault();">Bank Details</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black; "  id="Creditbalance" onclick="bankhide(this);event.preventDefault();" >Credit & Balance</button>
+				<button class="btn btn-secondary mx-1" style="background-color:#e5e5e5; border-color:black; color:black" id="coas" onclick="bankhide(this);event.preventDefault();">Chart Of Accounts</button>
+												
+			</div>
+		</div>
+		
+		
+		<div id="addresshide">
+		<div class="form-row mt-4">
+			
+			<div class="form-group col-md-4">
+                    <div class="form-floating">
+             <input type="text" class="form-control" th:value="${getvendor.buyerAddress}"  id="buyerAddress" name="buyerAddress" placeholder="" required oninput="capitalizeInput(this)" th:if="${formmode=='modify'}">
+             <input type="text" class="form-control" th:value="${getvendor.buyerAddress}"  id="buyerAddress" name="buyerAddress" placeholder="" required  th:if="${formmode=='view'}" readonly>
+                        <label for="name" class="form-legend">Address</label>
+                    </div>
+                  
+                  
+                </div>
+                 
+	<div class="form-group col-md-4">
+		<div class="form-floating">
+            <select class="form-control" id="inputState" name="buyerState" onchange="state()"required   th:if="${formmode=='modify'}">
+                        <option th:value="${getvendor.buyerState}"th:text="${getvendor.buyerState}">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                      
+                       <select class="form-control" id="inputState" name="buyerState" onchange="state()"   th:if="${formmode=='view'}" disabled>
+                        <option th:value="${getvendor.buyerState}"th:text="${getvendor.buyerState}">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                      <label for="phone" class="form-legend">Select State</label>
+  </div>
+  
+ 
+    </div>
+    
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="inputDistrict" name="buyerDistrict"  required th:if="${formmode=='modify'}" >
+                <option th:value="${getvendor.buyerDistrict}"th:text="${getvendor.buyerDistrict}">--Select District--</option>
+                
+            </select>
+            
+             <select class="form-control" id="inputDistrict" name="buyerDistrict"  th:if="${formmode=='view'}" disabled>
+                <option th:value="${getvendor.buyerDistrict}"th:text="${getvendor.buyerDistrict}">--Select District--</option>
+                
+            </select>
+            <label for="phone" class="form-legend">Select District</label>
+        </div>
+    </div>
+    <div class="form-group col-md-4">
+                    <div class="form-floating">
+                   <input type="number" class="form-control" th:value="${getvendor.buyerPincode}" name="buyerPincode"  id="Pincode" placeholder="" required th:if="${formmode=='modify'}" >
+                        <input type="number" class="form-control" th:value="${getvendor.buyerPincode}" name="buyerPincode"  id="Pincode" placeholder="" th:if="${formmode=='view'}"  readonly>
+                        <label for="name" class="form-legend">Pin code</label>
+                    </div>
+                  
+                  
+                </div>
+                <div class="form-group col-md-4" style="display:none">
+                    <div class="form-floating">
+                        <p Style="color:blue" id="plus" onclick="convert()">+ shipping Address</p>
+                        <p Style="color:blue" id="removeplus" onclick="remove()">- Remove shipping Address</p>
+                    </div>
+                </div>
+    
+    		
+			</div>
+			
+			
+			<div id =shippingaddress>
+			<div class="form-row" >
+			
+			<div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" th:value="${getvendor.shippingAddress}" name="shippingAddress"  id="shippingAddress" placeholder="" oninput="capitalizeInput(this)" required th:if="${formmode=='modify'}" >
+<input type="text" class="form-control" th:value="${getvendor.shippingAddress}" name="shippingAddress"  id="shippingAddress" placeholder="" th:if="${formmode=='view'}" readonly>
+                        
+                        <label for="name" class="form-legend">Address</label>
+                    </div>
+                  
+                  
+                </div>
+                
+                <div class="form-group col-md-4">
+		<div class="form-floating">
+            <select class="form-control" id="inputState1" name="shippingState" onchange="state1()" required th:if="${formmode=='modify'}">
+                        <option th:value="${getvendor.shippingState}"th:text="${getvendor.shippingState}">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                       <label for="phone" class="form-legend">Select State</label>
+                     
+                      
+                       <select class="form-control" id="inputState1" name="shippingState" onchange="state1()" th:if="${formmode=='view'}" disabled>
+                        <option th:value="${getvendor.shippingState}"th:text="${getvendor.shippingState}">Select State</option>
+                        <option value="Andra Pradesh">Andra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madya Pradesh">Madya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Orissa">Orissa</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttaranchal">Uttaranchal</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option disabled style="background-color:#aaa; color:#fff">UNION Territories</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadeep">Lakshadeep</option>
+                        <option value="Pondicherry">Pondicherry</option>
+                      </select>
+                      <label for="phone" class="form-legend">Select State</label>
+  </div>
+  
+ 
+    </div>
+    
+    <div class="form-group col-md-4">
+        <div class="form-floating">
+            <select class="form-control" id="inputDistrict1" name="shippingDistrict"  required th:if="${formmode=='modify'}" >
+                <option th:value="${getvendor.shippingDistrict}"th:text="${getvendor.shippingDistrict}">--Select District--</option>
+                
+            </select>
+            
+             <select class="form-control" id="inputDistrict1" name="shippingDistrict"  th:if="${formmode=='view'}" disabled>
+                <option th:value="${getvendor.shippingDistrict}"th:text="${getvendor.shippingDistrict}">--Select District--</option>
+                
+            </select>
+            <label for="phone" class="form-legend">Select District</label>
+        </div>
+    </div>
+    
+    <div class="form-group col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control"   id="Pincodes1" th:value="${getvendor.shippingPincode}" name="shippingPincode" placeholder="" required th:if="${formmode=='modify'}" >
+                        <input type="text" class="form-control"   id="Pincodes1" th:value="${getvendor.shippingPincode}" name="shippingPincode" placeholder="" th:if="${formmode=='view'}" readonly>
+                       
+                        <label for="name" class="form-legend">Pin code</label>
+                    </div>
+                  
+                  
+                </div>
+ 
+                
+                
+                
+                </div>
+                </div>
+                </div>
+                
+                
+                <!-- bank d -->
+					<div id="bank">
+						<div class="form-row mt-4">
+							<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="bankAcNo" th:value="${getvendor.bankAcNo}"  id="Bankaccountnumber" placeholder="" oninput="capitalizeInput(this)"  th:if="${formmode=='modify'}">
+                        		<input type="text" class="form-control" name="bankAcNo" th:value="${getvendor.bankAcNo}"  id="Bankaccountnumber" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Bank Account Number.</label>
+                    			</div>
+                			</div>
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="bankAccountHolderName" oninput="capitalizeInput(this)" th:value="${getvendor.bankAccountHolderName}"  id="BankAccountName" placeholder=""  th:if="${formmode=='modify'}">
+                        		    	<input type="text" class="form-control" name="bankAccountHolderName" th:value="${getvendor.bankAccountHolderName}"  id="BankAccountName" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Account Holder Name.</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="bankName" oninput="capitalizeInput(this)" th:value="${getvendor.bankName}"  id="Bankname" placeholder=""  th:if="${formmode=='modify'}">
+                        			 			<input type="text" class="form-control" name="bankName" th:value="${getvendor.bankName}"  id="Bankname" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Bank Name.</label>
+                    			</div>
+                			</div>
+                			
+                			
+                			</div>
+                			
+                			<div class="form-row">
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" th:value="${getvendor.bankBranchName}" oninput="capitalizeInput(this)"  name="bankBranchName" id="BankBranchName" placeholder=""   th:if="${formmode=='modify'}">
+                                               			<input type="text" class="form-control" th:value="${getvendor.bankBranchName}"  name="bankBranchName" id="BankBranchName" placeholder=""  th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Bank Branch Name.</label>
+                    			</div>
+                			</div>
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="branchCode" th:value="${getvendor.branchCode}"  id="BrachCode" placeholder=""  th:if="${formmode=='modify'}">
+                        	                  		<input type="text" class="form-control" name="branchCode" th:value="${getvendor.branchCode}"  id="BrachCode" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Branch Code.</label>
+                    			</div>
+                			</div>
+                			
+                			
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="ifscCode" th:value="${getvendor.ifscCode}" id="IFSCCODE" placeholder=""  th:if="${formmode=='modify'}">
+                                			<input type="text" class="form-control" name="ifscCode" th:value="${getvendor.ifscCode}" id="IFSCCODE" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			
+                        			<label for="name" class="form-legend">IFSC Code.</label>
+                    			</div>
+                			</div>
+                			
+							</div>
+					</div>
+					<!-- credit & balance -->
+					<div id="creditandbalance">
+						<div class="form-row mt-4">
+								
+								<div class="form-group col-md-4" >
+        						<div class="form-floating">
+            						<select class="form-control" id="Opening_Balance_Type" name="Opening_Balance_Type" th:if="${formmode=='modify'}"  >
+                						<option value="" disabled selected>--Select Opening Balance Type --</option>
+                						<option value="Credit" th:selected="${getvendor.Opening_Balance_Type}=='Credit'">Credit</option>
+                						<option value="Debit" th:selected="${getvendor.Opening_Balance_Type}=='Debit'">Debit</option>
+            						</select>
+            						
+            						<select class="form-control" id="Opening_Balance_Type" name="Opening_Balance_Type" th:if="${formmode=='view'}" disabled  >
+                						<option value="" disabled selected>--Select Opening Balance Type --</option>
+                						<option value="Credit" th:selected="${getvendor.Opening_Balance_Type}=='Credit'">Credit</option>
+                						<option value="Debit" th:selected="${getvendor.Opening_Balance_Type}=='Debit'">Debit</option>
+            						</select>
+            						<label for="phone" class="form-legend">Opening Balance Type</label>
+        						</div>
+   							 </div>
+   							 
+								<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control"  name="openingBalance" id="OpeningBalance" th:value="${getvendor.openingBalance}" placeholder=""  th:if="${formmode=='modify'}">
+                        	        		<input type="text" class="form-control"  name="openingBalance" id="OpeningBalance" th:value="${getvendor.openingBalance}" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Opening Balance</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4">
+                    			<div class="form-floating">
+                        			<input type="date" class="form-control" name="asOfDate" th:value="${#dates.format(getvendor.asOfDate, 'yyyy-MM-dd')}"  id="AsOfDate" placeholder=""  th:if="${formmode=='modify'}">
+                        			<input type="date" class="form-control" name="asOfDate" th:value="${#dates.format(getvendor.asOfDate, 'yyyy-MM-dd')}"  id="AsOfDate" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">As Of Date</label>
+                    			</div>
+                			</div>
+                			
+                			<div class="form-group col-md-4" style="display:none">
+        						<div class="form-floating">
+            						<select class="form-control" id="Creditlimit" name="creditLimit" onchange="cla()" 
+            						  th:if="${formmode=='modify'}">
+                						<option value="" disabled selected>--Select Credit limit--</option>
+                						<option value="yes" th:selected="${getvendor.creditLimit}=='yes'">yes</option>
+                						<option value="No" th:selected="${getvendor.creditLimit}=='No'">No</option>
+                					</select>
+                					
+                						<select class="form-control" id="Creditlimit" name="creditLimit" onchange="cla()" 
+                						 th:if="${formmode=='view'}" disabled>
+                						<option value="" disabled selected>--Select Credit limit--</option>
+                						<option value="yes" th:selected="${getvendor.creditLimit}=='yes'">yes</option>
+                						<option value="No" th:selected="${getvendor.creditLimit}=='No'">No</option>
+                					</select>
+            						<label for="phone" class="form-legend">Creditlimit</label>
+        						</div>
+   							 </div>
+   							 
+   							 <div class="form-group col-md-4" id="claid" >
+                    			<div class="form-floating">
+                        			<input type="text" class="form-control" name="creditLimitAmount" th:value="${getvendor.creditLimitAmount}" id="CreditlimitAmount" placeholder="" required th:if="${formmode=='modify'}">
+                        						<input type="text" class="form-control" name="creditLimitAmount" th:value="${getvendor.creditLimitAmount}" id="CreditlimitAmount" placeholder="" th:if="${formmode=='view'}" readonly>
+                        			<label for="name" class="form-legend">Credit limit Amount</label>
+                    			</div>
+                			</div>
+                			
+							</div>
+					
+					
+					</div>
+					
+									
+									
+									
+					<!-- chart of accounts start -->
+								<div id="COA">
+									<div class="form-row mt-4">
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												
+												<input type="text" name="classify" id="classify"
+													class="form-control " th:value="${getvendor.classify}" required readonly/> <label for="name"
+													class="form-legend" >Classification</label>
+											
+											
+											</div>
+										</div>
+
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="crncy" id="crncy"
+													class="form-control " th:value="${getvendor.crncy}"  readonly/> <label for="name"
+													class="form-legend">Currency</label>
+											</div>
+										</div>
+
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="acctNum" id="acctNum"
+												class="form-control " th:value="${getvendor.acctNum}" readonly/> <label for="name"
+													class="form-legend">Account
+											Number</label>
+											</div>
+										</div>
+										
+											
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+												<input type="text" name="crAmt" id="crAmt"
+												class="form-control " th:value="${getvendor.crAmt}" th:if="${formmode=='modify'}"/> 
+												
+												<input type="text" name="crAmt" id="crAmt"
+												class="form-control " th:value="${getvendor.crAmt}" th:if="${formmode=='view'}" readonly/>
+												<label for="name"
+													class="form-legend">Total Credit Balance
+											</label>
+											</div>
+										</div>
+										
+											<div class="form-group col-md-4">
+											<div class="form-floating">
+													<input type="text" name="drAmt" id="drAmt"
+												class="form-control " th:value="${getvendor.drAmt}" th:if="${formmode=='modify'}"/>
+												
+													<input type="text" name="drAmt" id="drAmt"
+												class="form-control " th:value="${getvendor.drAmt}" th:if="${formmode=='view'}" readonly/>
+												 <label for="name"
+													class="form-legend">Total Debit Balance
+											</label>
+											</div>
+										</div>
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+													<input type="text" name="balanceamount" id="balanceamount" th:value="${getvendor.balanceamount}"  
+												class="form-control" th:if="${formmode=='modify'}"/>
+													<input type="text" name="balanceamount" id="balanceamount" th:value="${getvendor.balanceamount}"  
+												class="form-control" th:if="${formmode=='view'}" readonly/>
+												 <label for="name"
+													class="form-legend">Vendor Balance
+											</label>
+											</div>
+										</div>
+										
+										<div class="form-group col-md-4">
+											<div class="form-floating">
+													<input type="text" name="advanceamount" id="advanceamount" th:value="${getvendor.advanceamount}"  
+												class="form-control" th:if="${formmode=='modify'}"/> 
+												<input type="text" name="advanceamount" id="advanceamount" th:value="${getvendor.advanceamount}"  
+												class="form-control"  th:if="${formmode=='view'}" readonly/>
+												<label for="name"
+													class="form-legend">TSK Balance
+											</label>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="card-footer text-center"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600;">
+										<button class="btn btn-xs btn-dark" type="button"
+											id="Dashboard" onclick="Home()">Home</button>
+										
+                                   <button type="button" class="btn btn-xs btn-dark"
+									th:attr="data-Venid=${vandor_id}" id="btnSubmit"
+									onclick="modify();" th:if="${formmode=='modify'}">
+									Submit</button>
+
+								<button type="button" class="btn btn-xs btn-dark"
+									th:attr="data-Venid=${vandor_id}" id="btnSubmit"
+									onclick="deletebtn(this);" th:if="${forms=='delete'}">
+									Submit</button>
+
+								<button class="btn btn-xs btn-dark" id="btnback"
+											onclick="back(event)">Back</button>
+									</div>
+					</div>			
+        </form>	
+					
+					
+    </div>
+</div>
+						
+<div class=" modal fade" id="alert">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: rgb(0, 0, 0);">ERP</div>
+				</div>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="registrationlist(event);">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>				
+	
+	
+	<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="menu-title-header">
+                <div class="modal-title" id="confirmationModalLabel" style="text-align: center; color: rgb(0, 0, 0);">Confirm Deletion</div>
+            </div>
+            <div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+                <p>Are you sure you want to delete this vendor?</p>
+                <button type="button" class="btn btn-primary" id="confirmDeleteBtn">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+						
+						
+</div>
+</div>
+</div>	
+
+
+<!-- Loading Modal -->
+<div id="loadingModal" style="display: none;">
+    <div id="loadingContent">
+        <img th:src=@{/images/infins.gif} alt="Loading...">
+    </div>
+</div>
+
+
+
+</body>
+</html>

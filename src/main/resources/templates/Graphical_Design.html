@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP</title>
+    
+    <!-- jQuery for Dropdown Hover -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { display: flex; flex-wrap: wrap; gap: 20px; }
+        .left-section, .right-section { width: 100%; max-width: 786px; }
+        .chart-container { width: 100%; height: 250px; }
+        .small-charts { display: flex; flex-wrap: wrap; gap: 20px;gap: 80px; }
+        .small-chart { width: 46.5%; height: 250px; }
+        select, input, button { margin: 10px; padding: 5px; }
+        @media (max-width: 768px) {
+            .small-chart { width: 100%; }
+        }
+
+        .navbar {
+            margin-left: -19px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .content {
+            margin-top: 151px !important;
+        }
+
+        .container-fluid {
+            width: 100%;
+            padding-top: 5px;
+            padding-right: 15px;
+            padding-left: 0px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .container-manager {
+            padding-right: 47px;
+            padding-left: 132px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -8px;
+            margin-left: -22px;
+        }
+        
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('.dropdown, .dropdown-submenu').hover(function () {
+                $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+            }, function () {
+                $(this).children('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+            });
+        });
+    </script>
+<style>
+    fieldset {
+        border: 2px solid #343a40;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+    }
+    
+    legend {
+        font-weight: bold;
+        font-size: 16px;
+        color: #343a40;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-search {
+        background-color: #343a40;
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-search:hover {
+        background-color: #23272b;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            flex-direction: column;
+        }
+        .btn-search {
+        
+        
+            width: 100%;
+        }
+    }
+</style>
+<script type="text/javascript">
+    function select_branch() {
+        const vendorTypeSelect = document.getElementById('vendor_type'); // select box
+        const vendorSelect = document.getElementById('vendor'); // select box
+        const fromDate = document.getElementById('fromDate'); // select box
+        const toDate = document.getElementById('toDate'); // select box
+
+        // Clear selected values
+        vendorTypeSelect.value = '';
+        vendorSelect.value = '';
+        fromDate.value = '';
+        toDate.value = '';
+    }
+</script>
+
+
+<script>function vendor_type() {
+    const vendorType = document.getElementById("vendor_type").value;
+    const branchId = document.getElementById("branchId").value;
+    const vendor = document.getElementById("vendor");
+ // Clear vendor dropdown first
+    vendor.innerHTML = '';
+
+
+    if (branchId === '') {
+        alert("Please select the Branch ID.");
+        return; // Stop the function if branch is not selected
+    }
+
+    $.ajax({
+        url: './getvenodrListBR?vendor_type=' + vendorType + '&branchId=' + branchId,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            // Clear existing options
+            vendor.innerHTML = '';
+
+            // Add default option
+            const defaultOption = document.createElement('option');
+            defaultOption.text = 'Select Vendor';
+            defaultOption.value = '';
+            vendor.appendChild(defaultOption);
+
+            // Add vendor options
+            data.forEach(function(item) {
+                const id = item.vendorId || item.id;
+                const name = item.vendorName || item.name;
+
+                const option = document.createElement('option');
+                option.text = `${id} - ${name}`;
+                option.value = id;
+                vendor.appendChild(option);
+            });
+        },
+        error: function(xhr, status, error) {
+            alert('Error occurred while fetching vendor list: ' + error);
+        }
+    });
+}
+
+</script>
+
+<script th:inline="javascript">
+let purchaseChart, salesChart, inventoryChart, expenseChart, combinedChart;
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("searchBtn").addEventListener("click", function (e) {
+        e.preventDefault(); // Prevent default button behavior
+        updateCharts();
+    });
+});
+
+function createChart(canvasId, type, label, data, color) {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+
+    if (Chart.getChart(canvas)) {
+        Chart.getChart(canvas).destroy();
+    }
+
+    return new Chart(ctx, {
+        type: type,
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: label,
+                data: data,
+                backgroundColor: color,
+                borderColor: color,
+                borderWidth: 2,
+                fill: type === 'line' ? false : true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+}
+
+function updateCharts() {
+    const branchId = document.getElementById("branchId").value;
+    const fromDate = document.getElementById("fromDate").value;
+    const toDate = document.getElementById("toDate").value;
+    const vendor_type = document.getElementById("vendor_type").value;
+    const vendor = document.getElementById("vendor").value;
+
+    $.ajax({
+        url: './getalldesign',
+        type: 'GET',
+        data: { branchId, fromDate, toDate, vendor_type, vendor },
+        success: function (data) {
+            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            const processData = (dataArray, valueField, dateField) => {
+                let monthlyTotals = Array(12).fill(0);
+                if (dataArray) {
+                    dataArray.forEach(item => {
+                        try {
+                            const rawDate = item[dateField];
+                            let parsedDate;
+
+                            if (/^\d{2}-\d{2}-\d{4}$/.test(rawDate)) {
+                                // dd-MM-yyyy format
+                                const [day, month, year] = rawDate.split("-");
+                                parsedDate = new Date(`${year}-${month}-${day}`);
+                            } else {
+                                // Try default parsing (works for yyyy-MM-dd and ISO)
+                                parsedDate = new Date(rawDate);
+                            }
+
+                            if (!isNaN(parsedDate)) {
+                                const month = parsedDate.getMonth();
+                                const value = Number(item[valueField]) || 0;
+                                monthlyTotals[month] += value;
+                            }
+                        } catch (e) {
+                            console.warn("⛔ Error processing item:", item, e);
+                        }
+                    });
+                }
+                return monthlyTotals;
+            };
+
+
+
+            const purchaseData = processData(data.po_inv, "totalAmount", "orderDate");
+            const salesData = processData(data.sale_inv, "totalAmount", "orderDate");
+            const inventoryData = processData(data.stock, "useingqty", "orderDate");
+            const expenseData = processData(data.Exp, "totalAmount", "expDate");
+
+            // Purchase Chart
+            purchaseChart = createChart('purchaseChart', 'line', 'Purchases Trend', purchaseData, 'blue');
+
+            // Expense Chart
+            expenseChart = createChart('expenseChart', 'bar', 'Expenses', expenseData, 'red');
+
+            // Sales Chart (Radar) with Full Fix
+            try {
+                console.log("✅ Raw sale_inv:", data.sale_inv);
+                console.log("✅ Processed Sales Data:", salesData);
+
+                const salesCanvas = document.getElementById('salesChart');
+                if (!salesCanvas) {
+                    console.error("❌ salesChart canvas element not found in DOM!");
+                    return;
+                }
+
+                if (Chart.getChart(salesCanvas)) {
+                    Chart.getChart(salesCanvas).destroy();
+                }
+
+                const salesCtx = salesCanvas.getContext('2d');
+                salesChart = new Chart(salesCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Sales Analysis',
+                            backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                            borderColor: 'green',
+                            pointBackgroundColor: 'green',
+                            data: salesData
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: { beginAtZero: true }
+                        },
+                        plugins: {
+                            legend: { position: 'top' }
+                        }
+                    }
+                });
+
+            } catch (err) {
+                console.error("❌ Error creating Sales Chart:", err);
+            }
+
+            // Inventory Chart (Pie)
+            if (Chart.getChart('inventoryChart')) Chart.getChart('inventoryChart').destroy();
+            inventoryChart = new Chart(document.getElementById('inventoryChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Inventory',
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+                            '#9966FF', '#FF9F40', '#8B0000', '#00CED1',
+                            '#FFD700', '#DA70D6', '#7FFF00', '#FF4500'
+                        ],
+                        data: inventoryData
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'right' }
+                    }
+                }
+            });
+
+            // Combined Chart (Bar + Line)
+            if (Chart.getChart('combinedChart')) Chart.getChart('combinedChart').destroy();
+            combinedChart = new Chart(document.getElementById('combinedChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Purchases', type: 'bar', backgroundColor: 'blue', data: purchaseData },
+                        { label: 'Inventory', type: 'bar', backgroundColor: 'orange', data: inventoryData },
+                        { label: 'Sales', type: 'line', borderColor: 'green', backgroundColor: 'rgba(0, 128, 0, 0.2)', fill: false, data: salesData },
+                        { label: 'Expenses', type: 'line', borderColor: 'red', backgroundColor: 'rgba(255, 0, 0, 0.2)', fill: false, data: expenseData }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            alert("Error loading chart data: " + error);
+            console.error("AJAX Error:", error);
+        }
+    });
+}
+
+</script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div th:insert="BTMHeaderMenu :: header"></div>
+
+    <div class="col-sm-12">
+        <div class="container-fluid content">
+       
+<fieldset>
+<!--     <legend>Filter Criteria</legend>
+ -->					<div class="form-row">
+						<div class="form-group col-md-auto">
+							<div class="form-floating">
+								<label for="branchId" class="form-legend">Branch Id</label> <select
+									class="form-control" id="branchId" name="branchId"
+									onchange="select_branch();">
+									<option value="">Select Branch</option>
+									<option th:each="branchId : ${branchIds}"
+										th:value="${branchId}" th:text="${branchId}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group col-md-auto">
+							<div class="form-floating">
+								<label for="vendor_type" class="form-legend">Vendor Type</label> <select
+									class="form-control" id="vendor_type" name="vendor_type"
+									onchange="vendor_type();">
+									<option value="">Select Type</option>
+									<option value="purchase_vendor">Purchase Vendor</option>
+									<option value="sale_vendor">Sale Vendor</option>
+									
+								</select>
+							</div>
+						</div>
+
+
+						<div class="form-group col-md-auto" style="width: 18%;">
+							<div class="form-floating">
+							<label for="vendor">Vendor</label>
+								<select class="form-control" id="vendor" name="vendor">
+									<option value="">Select Vendor</option>
+								</select> 
+							</div>
+						</div>
+
+						<div class="form-group col-md-auto" style="width: 7%;">
+							<div class="form-floating">
+								<label for="fromDate">From Date</label> <input type="date"
+									class="form-control" id="fromDate">
+							</div>
+						</div>
+
+						<div class="form-group col-md-auto" style="width: 7%;">
+							<div class="form-floating">
+								<label for="toDate">To Date</label> <input type="date"
+									class="form-control" id="toDate">
+							</div>
+						</div>
+						<div class="form-group">
+							<button id="searchBtn" class="btn-search"
+								style="transform: translateY(19px);">Search</button>
+						</div>
+					</div>
+				</fieldset>
+			<fieldset>
+			<legend>Analytical Charts</legend>
+
+            <div class="container">
+                <div class="left-section">
+                    <div class="chart-container">
+                        <canvas id="purchaseChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                <div class="right-section">
+                    <canvas id="combinedChart"></canvas>
+                </div>
+            </div>
+
+            <div class="small-charts">
+                <div class="small-chart">
+                    <canvas id="inventoryChart"></canvas>
+                </div>
+                <div class="small-chart">
+                    <canvas id="expenseChart"  ></canvas>
+                </div>
+            </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    window.onload = function () {
+        // Extract Data from Thymeleaf Variables
+        var poData = /*[[${po_inv}]]*/ [];
+        var salesData = /*[[${sale_inv}]]*/ [];
+        var inventoryData = /*[[${stock}]]*/ [];
+        var expensesData = /*[[${Exp}]]*/ [];
+
+        console.log("Inventory Data:", inventoryData); // Debugging
+
+        // Generate Labels (Months)
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        // Function to Process General Data (Purchases, Sales, Expenses)
+        function processData(data, valueField = "totalAmount", dateField = "orderDate") {
+            let monthlyTotals = Array(12).fill(0);
+            data.forEach(item => {
+                if (item[dateField] && item[valueField]) {
+                    let date = new Date(item[dateField]);
+                    let month = date.getMonth();
+                    monthlyTotals[month] += item[valueField] || 0;
+                }
+            });
+            return monthlyTotals;
+        }
+
+        // Function to Process Inventory Data (Using useingqty)
+        function processInventoryData(data) {
+            let monthlyTotals = Array(12).fill(0);
+            data.forEach(item => {
+                if (item.orderDate && item.useingqty) {
+                    let date = new Date(item.orderDate);
+                    let month = date.getMonth();
+                    monthlyTotals[month] += item.useingqty || 0;
+                }
+            });
+            return monthlyTotals;
+        }
+
+        let purchaseData = processData(poData);
+        let salesDataProcessed = processData(salesData);
+        let inventoryDataProcessed = processInventoryData(inventoryData);
+        let expensesDataProcessed = processData(expensesData, "totalAmount", "expDate");
+        console.log("Purchase Data:", purchaseData);
+        console.log("Sales Data:", salesDataProcessed);
+        console.log("Inventory Data:", inventoryDataProcessed);
+        console.log("Expenses Data:", expensesDataProcessed);
+
+
+        // Function to Create Charts
+        function createChart(canvasId, type, label, data, color) {
+            return new Chart(document.getElementById(canvasId).getContext('2d'), {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        backgroundColor: Array.isArray(color) ? color : color,
+                        borderColor: color,
+                        data: data,
+                        fill: type !== 'pie'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        // ✅ Sales Analysis Chart (Radar)
+        new Chart(document.getElementById('salesChart').getContext('2d'), {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sales Analysis',
+                    backgroundColor: 'rgba(0, 128, 0, 0.2)', 
+                    borderColor: 'green',
+                    pointBackgroundColor: 'green',
+                    data: salesDataProcessed
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        pointLabels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // ✅ Inventory Chart as Pie Chart
+new Chart(document.getElementById('inventoryChart').getContext('2d'), {
+    type: 'pie',
+    data: {
+        labels: labels,  // Ensure months are displayed as labels
+        datasets: [{
+            label: 'Inventory Levels',
+            backgroundColor: [
+                'red', 'blue', 'green', 'yellow', 'purple', 'orange', 
+                'pink', 'cyan', 'lime', 'teal', 'brown', 'gray'
+            ],
+            data: inventoryDataProcessed
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,   // Ensure legend is visible
+                position: 'bottom'  // Move the legend to the bottom
+            },
+            title: {
+                display: true,
+                text: 'Inventory Stock Levels'
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        let value = tooltipItem.raw || 0;
+                        return `${tooltipItem.label}: ${value}`;  // Show labels in tooltips
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {   // Ensure X-axis labels (Months) appear
+                display: true,
+                ticks: {
+                    autoSkip: false
+                }
+            }
+        }
+    }
+});
+
+
+        // ✅ Combined Chart (Line + Bar Mixed Chart)
+        new Chart(document.getElementById('combinedChart').getContext('2d'), {
+            type: 'bar',  
+            data: {
+                labels: labels,
+                datasets: [
+                    { 
+                        label: 'Purchases', 
+                        type: 'bar', 
+                        backgroundColor: 'blue', 
+                        data: purchaseData 
+                    },
+                    { 
+                        label: 'Inventory', 
+                        type: 'bar', 
+                        backgroundColor: 'orange', 
+                        data: inventoryDataProcessed 
+                    },
+                    { 
+                        label: 'Sales', 
+                        type: 'line', 
+                        borderColor: 'green', 
+                        backgroundColor: 'rgba(0, 128, 0, 0.2)', 
+                        fill: false, 
+                        data: salesDataProcessed 
+                    },
+                    { 
+                        label: 'Expenses', 
+                        type: 'line', 
+                        borderColor: 'red', 
+                        backgroundColor: 'rgba(255, 0, 0, 0.2)', 
+                        fill: false, 
+                        data: expensesDataProcessed 
+                    }
+                ]
+            },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // ✅ Purchase & Expense Charts (Remain the Same)
+        createChart('purchaseChart', 'line', 'Purchases Trend', purchaseData, 'blue');
+        createChart('expenseChart', 'bar', 'Expenses', expensesDataProcessed, 'red');
+        
+    };
+</script>
+
+
+</body>
+</html>

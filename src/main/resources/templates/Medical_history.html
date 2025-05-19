@@ -1,0 +1,402 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:fragment="header"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/font-awesome/5.9.0/css/all.min.css"
+	th:href="@{/webjars/font-awesome/5.9.0/css/all.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/chartjs/2.8.0/Chart.min.css"
+	th:href="@{webjars/chartjs/2.8.0/Chart.min.css}">
+<script src="webjars/chartjs/2.8.0/Chart.min.js"
+	th:src="@{webjars/chartjs/2.8.0/Chart.min.js}"></script>
+
+<link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon">
+<link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600|Open+Sans:400,600,700"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/spur.css">
+
+
+<title>ERP</title>
+
+<style type="text/css">
+.dash-nav-item {
+	min-height: 20px;
+	padding: 8px 10px 8px 8px;
+	letter-spacing: .01em;
+}
+
+.dash-nav-dropdown-item {
+	min-height: 10px;
+	padding: 8px 10px 8px 10px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dash-toolbar {
+	min-height: 60px;
+	background-color: #FFF;
+}
+
+.dash-nav.dash-nav-dark {
+	background-color: #525252;
+}
+
+.img-container {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle
+}
+
+.card-title {
+	margin-bottom: 0.25rem;
+}
+
+.card-header {
+	padding: 0.25rem 0.25rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	padding: 0px;
+	margin: 20dp
+}
+
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #727F94;
+	color: #fff;
+	font-family: "Nunito", sans-serif;
+}
+
+.spur-card-title {
+	font-family: "Nunito", sans-serif;
+	font-size: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	box-sizing: border-box;
+	display: inline-block;
+	min-width: 1.5em;
+	/* padding: 0.5em 1em; */
+	margin-left: 2px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none !important;
+	cursor: pointer;
+	*cursor: hand;
+	color: #d03535 !important;
+	border-radius: 2px;
+	height: 30px;
+	text-align: center;
+}
+
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate
+	{
+	float: none;
+	font-size: 15px;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+	padding: 10px 10px;
+	font-weight: normal;
+}
+</style>
+</head>
+
+
+<script th:inline="javascript">
+	$(function() {
+
+		$("#dataTables").DataTable({
+			"destroy" : true,
+			"scrollY" : 400,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : false,
+			"searching" : false,
+			"scrollX" : true,
+			"pageLength" : 10,
+			"lengthChange" : false,
+
+		});
+	});
+	$(document).ready(function() {
+
+		$("#Upload").on("click", function() {
+
+			$.ajax({
+				url : './fileimport',
+				type : 'POST',
+				data : new FormData($("#fileuploadd")[0]),
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false
+			});
+			e.preventDefault();
+
+		});
+	});
+
+	function getPatientlist(mode, num, maxpage) {
+
+		var n = parseInt(num);
+		var max = parseInt(maxpage);
+
+		///alert(n+"  "+max);
+		var Callurl = 'Dashboard?formmode=list';
+
+		switch (mode) {
+		case "nextpage":
+			n = n + 1;
+			if (n > max) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "prevpage":
+			n = n - 1;
+			if (n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+			break;
+		case "givenpage":
+			n = parseInt($("#pageno").val()) - 1;
+			if (n > max || n < 0) {
+				break;
+			}
+			Callurl = Callurl + "&page=" + n;
+		}
+
+		//alert(Callurl);
+		location.href = Callurl;
+	}
+
+	function searchTabletStock(a) {
+
+		var pro_name = document.getElementById("product_name1").value;
+		var tyy = '';
+		console.log(pro_name);
+
+		$('#currentStockList').empty();
+
+		$
+				.ajax({
+					url : "./getCurrentStockUsingProductName?product_name="
+							+ pro_name,
+					type : 'GET',
+
+					success : function(response) {
+						var selectedRefCode = response;
+						var trHTML = '';
+
+						$
+								.each(
+										response,
+										function(key, value) {
+
+											var li = Object.entries(value);
+											//window.alert(value.MFR);
+											trHTML += '<tr id='+value['id']+'><td>'
+													+ value['id']
+													+ '</td><td>'
+													+ value['MFR']
+													+ '</td><td>'
+													+ value['BATCH']
+													+ '</td><td>'
+													+ value['PRODUCT_NAME']
+													+ '</td><td>'
+													+ value['CATEGORY_NAME']
+													+ '</td><td>'
+													+ value['PKG']
+													+ '</td><td>'
+													+ value['UNITS']
+													+ '</td><td>'
+													+ value['MRP']
+													+ '</td><td>'
+													+ value['SUB_UNITS']
+													+ '</td><td>'
+													+ value['SUB_UNITS_COST']
+													+ '</td><td>'
+													+ value['GST_PERCENT']
+													+ '</td><td>'
+													+ value['NO_OF_UNITS']
+													+ '</td><td>'
+													+ '</td><td><i style="font-size: 16px; padding: 5px" class="fas fa-edit" onclick="show()"></i></td></tr>';
+										});
+						$('#dataTables').append(trHTML);
+
+					}
+				});
+
+	}
+
+	function showss(event) {
+		// Get the row ID
+		var sid = event.target.closest('tr').id; // Using closest to get the row
+		window.alert(sid); // Displaying row ID
+		location.href = 'saleReportDet?sid=' + sid; // Redirecting to the URL
+	}
+	function back() {
+		location.href = './currentStock'
+		window.history.back();
+	}
+</script>
+<body>
+	<!-- sideMenu -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2">
+				<div th:insert="BTMHeaderMenu :: header"></div>
+			</div>
+			<div class="col-sm-10">
+				<div class="container-fluid content">
+					<div class="row">
+						<div class="col-sm-12">
+							<form th:if="${mode}=='check'" autocomplete="off"
+								id="generalpatient" method="POST">
+								<div class="card " id="DayBillingList" style="margin-top: 10px;">
+									<div class="card-header"
+										style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+										<div class="spur-card-title">History Of Billing</div>
+									</div>
+
+									<div class="card-body" style="padding: 1rem;">
+										<!-- Search Input -->
+										<div class="mb-3">
+											<input type="text" id="searchInput" placeholder="Search..."
+												onkeyup="searchTable()" class="form-control"
+												style="width: 18%; height: 34px;" />
+										</div>
+
+										<table class="table table-striped " id="dataTables">
+											<thead class="stats-secondary">
+												<tr>
+													<th style="font-size: 15px">Srl No</th>
+													<th style="font-size: 15px">Sale ID</th>
+													<th style="font-size: 15px">Customer Name</th>
+													<th style="font-size: 15px">Date Of Sale</th>
+													<th style="font-size: 15px">Product Name</th>
+													<th style="font-size: 15px">Total</th>
+													<th style="font-size: 15px">Payment By</th>
+													<th style="font-size: 15px;text-align:left">Bill</th>
+												</tr>
+											</thead>
+											<tbody id="currentStockList">
+												<tr th:each="LeaveList,iterStat : ${stockList}"
+													th:id="${LeaveList.sale_id}">
+													<td th:text="${iterStat.index + 1}"></td>
+													<td th:text="${LeaveList.sale_id}"></td>
+													<td th:text="${LeaveList.cust_name}"></td>
+													<td
+														th:text="${#dates.format(LeaveList.date_of_sale, 'dd-MM-yyyy')}"></td>
+													<td th:text="${LeaveList.product_name}"></td>
+													<td th:text="${LeaveList.total}"></td>
+													<td th:text="${LeaveList.payment_by}"></td>
+													<td style="width: 100px"><input type="radio"
+														style="transform: scale(1); padding: 5px;"
+														name="selection" onclick="showss(event)"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<div class="col-sm-13 text-center">
+										<div class="card-footer text-center"
+											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.5; text-transform: capitalize; color: #333; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
+											<button class="btn btn-xs btn-primary mr-2" type="button"
+												id="Dashboard" onclick="contentLoad(this)">Home</button>
+											<button class="btn btn-xs btn-primary mr-2" id="btnback"
+												onclick="back()">Back</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function searchTable() {
+			// Get the search input value
+			var input = document.getElementById("searchInput");
+			var filter = input.value.toLowerCase(); // Convert to lowercase for case-insensitive search
+			var table = document.getElementById("dataTables");
+			var tbody = table.getElementsByTagName("tbody")[0];
+			var rows = tbody.getElementsByTagName("tr");
+
+			// Loop through all rows and hide those that don't match the search query
+			for (var i = 0; i < rows.length; i++) {
+				var row = rows[i];
+				var cells = row.getElementsByTagName("td");
+				var found = false;
+
+				// Loop through each cell in the row
+				for (var j = 0; j < cells.length; j++) {
+					if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+						found = true; // If a match is found, set found to true
+						break; // No need to check other cells
+					}
+				}
+
+				// Show or hide the row based on the search result
+				if (found) {
+					row.style.display = ""; // Show row
+				} else {
+					row.style.display = "none"; // Hide row
+				}
+			}
+		}
+	</script>
+</body>
+
+
+</html>

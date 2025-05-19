@@ -1,0 +1,37 @@
+USE [HRMS]
+GO
+
+/****** Object:  Table [dbo].[EMP_ATT_MASTER]    Script Date: 4/22/2025 12:58:29 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[EMP_ATT_MASTER](
+	[EMP_ID] [varchar](8) NULL,
+	[EMP_NAME] [varchar](50) NULL,
+	[LOGIN_TIME] [datetime] NULL,
+	[LOGOUT_TIME] [datetime] NULL,
+	[LEAVE_FLG] [char](1) NULL,
+	[LEAVE_CATEGORY] [varchar](10) NULL,
+	[LEAVE_REMARKS] [varchar](10) NULL,
+	[FIRST_ENTRY_TIME] [datetime] NULL,
+	[LAST_UPDATE_TIME] [datetime] NULL,
+	[DEL_FLG] [char](1) NULL,
+	[EMP_REMARKS] [varchar](50) NULL,
+	[IP_ADDRESS] [varchar](50) NULL,
+	[DEVICE] [varchar](20) NULL,
+	[LOGIN_STATUS] [varchar](20) NULL,
+	[latitude] [decimal](10, 8) NULL,
+	[longitude] [decimal](11, 8) NULL,
+	[LOGIN_TIME1]  AS (CONVERT([varchar](8),[LOGIN_TIME],(108))),
+	[LOGOUT_TIME1]  AS (CONVERT([varchar](8),[LOGOUT_TIME],(108))),
+	[CAL_MONTH]  AS (format([LOGIN_TIME],'MM')),
+	[CAL_YEAR]  AS (CONVERT([varchar](4),datepart(year,[LOGIN_TIME]))),
+	[CAL_DAY]  AS (datename(weekday,[LOGIN_TIME])),
+	[CAL_DATE]  AS (format([LOGIN_TIME],'dd'))
+) ON [PRIMARY]
+GO
+
+
