@@ -48,7 +48,7 @@ public class AttendanceRegisterService {
 	@Autowired
 	AttendanceRegisterGetRep attendanceRegisterGetRep;
 
-	public String Registersubmit(HRMS_USER_PROFILE_ENTITY user, String session_value) {
+	public String Registersubmit(HRMS_USER_PROFILE_ENTITY user, String session_value) throws ParseException {
 		
 		System.out.println("the session" +session_value);
 		// login Time
@@ -66,13 +66,8 @@ public class AttendanceRegisterService {
 		String cal_date = formatdat.format(cal.getTime());
 		String cal_year = formatyear.format(cal.getTime());
 		String str = formatdate.format(cal.getTime());
-		Date dat1 = null;
-		try {
-			dat1 = formatdate.parse(str);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Date dat1= formatdate.parse(str);
+		 
 		Session hs = sessionfactory.getCurrentSession();
 
 		AttendanceRegister attendanceRegisterdata;

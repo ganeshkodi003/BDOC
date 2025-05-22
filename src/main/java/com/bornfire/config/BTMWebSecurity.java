@@ -282,8 +282,14 @@ public class BTMWebSecurity extends WebSecurityConfigurerAdapter {
 				    System.out.println("the checking web secutity" +session_value );
 				 
 				 
-				String Msg = attendanceRegisterService.Registersubmit(user, session_value);
-				// System.out.println(Msg+"123");
+				try {
+					String Msg = attendanceRegisterService.Registersubmit(user, session_value);
+					 System.out.println(Msg+"123");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 
 				/*
 				 * loginServices.SessionLogging("LOGIN", "M1", request.getSession().getId(),
