@@ -2,7 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- BTM VERSION 1.0.1  -->
+<!-- BDOC  VERSION 1.0.1  -->
+<title>BDOC</title>
 <link rel="stylesheet" type="text/css"
 	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
 	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
@@ -518,10 +519,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </style>
 </head>
-<title>ERP</title>
+ 
 <body>
 	<div th:insert="BTMHeaderMenu :: header"></div>
-	<div class="container-manager">
+	<div th:fragment="content" class="container-manager">
   <div class="row">
     <div class="card mt-5 blur-border" >
 

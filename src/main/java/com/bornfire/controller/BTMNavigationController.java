@@ -530,47 +530,32 @@ public class BTMNavigationController {
 	}
 
 	@RequestMapping(value = "Dashboard", method = { RequestMethod.GET, RequestMethod.POST })
-	public String getdashboard(Model md, HttpServletRequest req) {
-		
-		String userid = (String) req.getSession().getAttribute("USERID");
-		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userid));
-		HRMS_USER_PROFILE_ENTITY aa = hrmsrepoo.getrole(userid);
-		System.out.println("the role" + aa.getRole());
-		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userid));
+	public String getdashboard(Model md, HttpServletRequest req, HttpServletResponse response,
+			 @RequestParam(value = "activeMenu", required = false) String activeMenu) {
 
-		// md.addAttribute("RoleMenu", "ADM");
+	    String userid = (String) req.getSession().getAttribute("USERID");
+	    HRMS_USER_PROFILE_ENTITY aa = hrmsrepoo.getrole(userid);
+	    md.addAttribute("activeMenu", activeMenu);
+	    System.out.println("the role: " + aa.getRole());
 
-		System.out.println("the role id for testing" + hrmsrepoo.getrole(userid));
+	    md.addAttribute("RoleMenu", aa);
+	    md.addAttribute("menu", "Dashboard");
+	    md.addAttribute("resetMenu", true);
 
-		md.addAttribute("menu", "BTMHeaderMenu");
+	    int completed = 0;
+	    int uncompleted = 0;
 
-		md.addAttribute("resetMenu", true);
-		// md.addAttribute("menu", "Dashboard");
-		// md.addAttribute("checkpassExpiry", loginServices.checkpassexpirty(userid));
-		// md.addAttribute("checkAcctExpiry", loginServices.checkAcctexpirty(userid));
-		// md.addAttribute("changepassword",
-		// loginServices.checkPasswordChangeReq(userid));
+	    md.addAttribute("reportList", "");
+	    md.addAttribute("completed", completed);
+	    md.addAttribute("uncompleted", uncompleted);
+	    md.addAttribute("formmode", "list");
 
-		int completed = 0;
-		int uncompleted = 0;
-		md.addAttribute("reportList", "");
-		md.addAttribute("completed", completed);
-		md.addAttribute("uncompleted", uncompleted);
-		md.addAttribute("menu", "Dashboard");
-
-		md.addAttribute("formmode", "list");
-		/*
-		 * md.addAttribute("getitemlist", PO_invoice_reps.getpolist());
-		 * md.addAttribute("getitemlist_sale", SALES_invoice_TABLERep.getsalelist());
-		 * md.addAttribute("po_size", PO_invoice_reps.getpolist() != null ?
-		 * PO_invoice_reps.getpolist().size() : 0); md.addAttribute("sale_size",
-		 * SALES_invoice_TABLERep.getsalelist() != null ?
-		 * SALES_invoice_TABLERep.getsalelist().size() : 0);
-		 */
-		return "BTMDashboard";
-
+	    // Check if it's an AJAX request
+	    
+	        return "BTMDashboard"; // Full page
+	    
 	}
- 
+
  
 	@RequestMapping(value = "login?logout", method = RequestMethod.POST)
 	@ResponseBody
@@ -597,11 +582,13 @@ public class BTMNavigationController {
 	
 	@RequestMapping(value = "TSK_organizationMaster", method = { RequestMethod.GET, RequestMethod.POST })
 	public String TSK_organizationMaster(@RequestParam(required = false) String formmode,
-			@RequestParam(required = false) String id, Model md, HttpServletRequest req) throws ParseException {
+			@RequestParam(required = false) String id, Model md, HttpServletRequest req,
+			@RequestParam(value = "activeMenu", required = false) String activeMenu) throws ParseException {
 
 		String userId = (String) req.getSession().getAttribute("USERID");
 		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId));
 		md.addAttribute("menu", "BTMHeaderMenu");
+		md.addAttribute("activeMenu", activeMenu);
 		if(formmode == null) {
 			md.addAttribute("formmode", "list");
 			List<TSK_OrganizationMasterEntity> UserProfilelist=TSK_OrganizationMasterReps.getall();
@@ -747,13 +734,13 @@ public class BTMNavigationController {
 	@RequestMapping(value = "BDOCUserProfile", method = { RequestMethod.GET, RequestMethod.POST })
 	public String BDOCUserProfile(@RequestParam(required = false) String formmode,
 			@RequestParam(required = false) String resId, @RequestParam(required = false) String userId, Model md,
-			HttpServletRequest req) throws ParseException {
+			HttpServletRequest req, 	@RequestParam(value = "activeMenu", required = false) String activeMenu) throws ParseException {
 		String userId1 = (String) req.getSession().getAttribute("USERID");
 		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId1));
 		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId1));
 
 		md.addAttribute("menu", "BTMHeaderMenu");
-
+		md.addAttribute("activeMenu", activeMenu);
 		if (formmode == null || formmode.equals("list")) {
 
 			md.addAttribute("formmode", "list");
@@ -5033,13 +5020,15 @@ public class BTMNavigationController {
 	@RequestMapping(value = "BTMAdminAccessandRole", method = { RequestMethod.GET, RequestMethod.POST })
 
 	public String BTMAdminAccessandRole(@RequestParam(required = false) String formmode,
-			@RequestParam(required = false) String role_id, Model md, HttpServletRequest req)
+			@RequestParam(required = false) String role_id, Model md, HttpServletRequest req,
+			@RequestParam(value = "activeMenu", required = false) String activeMenu)
 			throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException {
 
 		String userId = (String) req.getSession().getAttribute("USERID");
 		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId));
 		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId));
 		md.addAttribute("menu", "BTMHeaderMenu");
+		md.addAttribute("activeMenu", activeMenu);
 
 		if (formmode == null || formmode.equals("list")) {
 
