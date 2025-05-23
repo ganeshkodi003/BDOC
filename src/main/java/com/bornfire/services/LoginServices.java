@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import com.bornfire.config.AES;
-import com.bornfire.config.Emailsent;
+ 
 import com.bornfire.config.PasswordEncryption;
 import com.bornfire.entities.BTMSession;
 import com.bornfire.entities.FinUserProfile;
@@ -39,8 +39,7 @@ import com.bornfire.entities.HRMS_USER_PROFILE_ENTITY;
 import com.bornfire.entities.HRMS_USER_PROFILE_REPOSITORY;
 import com.bornfire.entities.ResourceMaster;
 import com.bornfire.entities.ResourceMasterRepo;
-import com.bornfire.entities.UserProfile;
-import com.bornfire.entities.UserProfileRep;
+ 
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -57,10 +56,7 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 public class LoginServices {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginServices.class);
-
-	@Autowired(required=true)
-	UserProfileRep userProfileRep;
-
+ 
 	@Autowired
 	FinUserProfileRep finUserProfileRep;
 
@@ -113,253 +109,6 @@ public class LoginServices {
 	 * 
 	 */
 
-	public String addUser(UserProfile userProfile, String formmode, String inputUser)
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
-
-		String msg = "";
-		UserProfile up1 = userProfile;
-
-		int test = userProfileRep.getcount(up1.getUserid());
-
-
-		if (test != 0) {
-
-			msg = "User Already Exist";
-
-		} else {
-
-			if (formmode.equals("add")) {
-
-				UserProfile up = userProfile;
-
-				String encryptedPassword = PasswordEncryption.getEncryptedPassword(this.password);
-
-				if (up.getLogin_status().equals("Active")) {
-					up.setUser_locked_flg("N");
-				} else {
-					up.setUser_locked_flg("Y");
-				}
-
-				if (up.getUser_status().equals("Active")) {
-					up.setDisable_flg("N");
-				} else {
-					up.setDisable_flg("Y");
-				}
-
-				
-				up.setEntity_flg("Y");
-
-				up.setEntry_time(new Date());
-				up.setEntry_user(inputUser);
-				up.setDel_flg("N");
-				up.setLogin_flg("N");
-				up.setNo_of_attmp(0);
-				up.setPassword(encryptedPassword);
-                Emailsent emailfun = new Emailsent();
-                try {
-					String message = emailfun.execute( up.getEmail_id());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//userProfileRep.save(up);
-
-				msg = "User Created Successfully";
-
-			}
-		}
-		if (formmode.equals("edit")) {
-
-			UserProfile up = userProfile;
-
-			String encryptedPassword = PasswordEncryption.getEncryptedPassword(this.password);
-
-			if (up.getLogin_status().equals("Active")) {
-				up.setUser_locked_flg("N");
-			} else {
-				up.setUser_locked_flg("Y");
-			}
-
-			if (up.getUser_status().equals("Active")) {
-				up.setDisable_flg("N");
-			} else {
-				up.setDisable_flg("Y");
-			}
-
-			up.setEntity_flg("Y");
-			up.setModify_time(new Date());
-			up.setModify_user(inputUser);
-			up.setModify_flg("Y");
-			up.setDel_flg("N");
-			up.setLogin_flg("N");
-			up.setNo_of_attmp(0);
-			up.setPassword(encryptedPassword);
-			userProfileRep.save(up);
-			msg = "User Edited Successfully";
-
-		}
-
-		return msg;
-
-	}
-
-	public List<FinUserProfile> getFinUsersList() {
-
-		Session hs = sessionFactory.getCurrentSession();
-		return hs.createQuery("from FinUserProfile ", FinUserProfile.class).getResultList();
-
-	}
-
-	public Iterable<UserProfile> getUsersList() {
-
-		Iterable<UserProfile> users = userProfileRep.findAll();
-
-		return users;
-
-	}
-
-	public UserProfile getUser(String id) {
-		logger.info(id);
-		if (userProfileRep.existsById(id)) {
-			UserProfile up = userProfileRep.findById(id).get();
-			logger.info(up.getEntity_flg());
-			return up;
-		} else {
-			return new UserProfile();
-		}
-
-	};
-
-	public UserProfile getFinUser(String id) {
-		logger.info(id);
-		if (finUserProfileRep.existsById(id)) {
-
-			DateFormat dateFormat = new SimpleDateFormat("hh:mm");
-
-			FinUserProfile fup = finUserProfileRep.findById(id).get();
-
-			UserProfile up = new UserProfile();
-
-			up.setUserid(fup.getUserid());
-			up.setUsername(fup.getFinGenEmpTb().getEmp_name());
-			up.setEmpid(fup.getFinGenEmpTb().getEmp_id());
-			up.setEmp_name(fup.getFinGenEmpTb().getEmp_name());
-			up.setBranch_code(fup.getFinSolTb().getSdl_id());
-			up.setBranch_name(fup.getFinSolTb().getSol_desc());
-			up.setBank_code(fup.getFinSolTb().getBank_code());
-			up.setBank_name(fup.getFinSolTb().getAbbr_bank_name());
-			up.setEmail_id(fup.getFinGenEmpTb().getEmp_email_id());
-
-			up.setInactive_time(fup.getUser_max_inactive_time().toString());
-			up.setDisable_start_date(fup.getUser_disabled_from_date());
-			up.setDisable_end_date(fup.getUser_disabled_upto_date());
-			up.setAcc_exp_date(fup.getUser_acct_expy_date());
-			up.setLogin_low(dateFormat.format(fup.getUser_login_time_low()));
-			up.setLogin_high(dateFormat.format(fup.getUser_login_time_high()));
-
-			return up;
-
-		} else {
-
-			return new UserProfile();
-		}
-
-	}
-
-	public String verifyUser(UserProfile userProfile, String inputUser) {
-		String msg = "";
-
-		Optional<UserProfile> up = userProfileRep.findById(userProfile.getUserid());
-
-		try {
-
-			if (up.isPresent()) {
-
-				userProfile.setPassword(up.get().getPassword());
-
-				if (userProfile.getLogin_status().equals("Active")) {
-					userProfile.setUser_locked_flg("N");
-				} else {
-					userProfile.setUser_locked_flg("Y");
-				}
-
-				if (userProfile.getUser_status().equals("Active")) {
-					userProfile.setDisable_flg("N");
-				} else {
-					userProfile.setDisable_flg("Y");
-				}
-
-				userProfile.setNo_of_attmp(0);
-				userProfile.setEntity_flg("Y");
-				userProfile.setLogin_flg("N");
-				userProfile.setAuth_user(inputUser);
-				userProfile.setAuth_time(new Date());
-
-				userProfileRep.save(userProfile);
-			}
-
-			msg = "User Verified Successfully";
-
-		} catch (Exception e) {
-			logger.info(e.getMessage());
-			e.printStackTrace();
-			msg = "Error Occured. Please contact Administrator";
-		}
-
-		return msg;
-	}
-
-	public String passwordReset(UserProfile userprofile, String userid) {
-
-		String msg = "";
-
-		try {
-			String encryptedPassword = PasswordEncryption.getEncryptedPassword(this.password);
-
-			Optional<UserProfile> up = userProfileRep.findById(userprofile.getUserid());
-
-			if (up.isPresent()) {
-
-				UserProfile user = up.get();
-
-				user.setPassword(encryptedPassword);
-
-				user.setNo_of_attmp(0);
-				user.setLogin_flg("N");
-				user.setUser_locked_flg("N");
-				userProfileRep.save(user);
-			}
-
-			msg = "Password Resetted Successfully";
-
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-
-			e.printStackTrace();
-
-			msg = "Error Occured. Please contact Administrator";
-		}
-
-		return msg;
-	}
-
-	/*
-	 * Getting LoginFlg -
-	 * 
-	 * If loginFlg = 'N' - User should be prompted to change password. else thats
-	 * not required.
-	 * 
-	 * Loginflg ='N' will be updated at the time of new user creation and at the
-	 * time of password reset by admin.
-	 * 
-	 */
-
-	public String checkPasswordChangeReq(String userid) {
-
-		Optional<UserProfile> up = userProfileRep.findById(userid);
-		String loginflg = up.get().getLogin_flg();
-
-		return loginflg;
-	}
 
 	public int checkAcctexpirty(String userid) {
 

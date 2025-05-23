@@ -459,7 +459,7 @@ font-weight: 100;
 	function contentLoad(a) {
         document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
 
-		location.href = "/DOC/" + a.id;
+		location.href = "/BDOC/" + a.id;
 	}
 
 	/* LogOut Functionality */
@@ -670,17 +670,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     <ul class="dropdown-menu">
 <!--                         <li><a href="#" onclick="contentLoad(this)" id="organizationMaster" >Organization Master</a></li>
  -->                        <li><a href="#" onclick="contentLoad(this)" id="TSK_organizationMaster" >Organization Master</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="HRMSUserProfile">User Profile</a></li>
+                        <li><a href="#" onclick="contentLoad(this)" id="BDOCUserProfile">User Profile</a></li>
                         <li><a href="#" onclick="contentLoad(this)" id="BTMAdminAccessandRole">Access and Role</a></li>
-                        <li><a  id="CategoryCreation" href="#" onclick="contentLoad(this)">Asset And Liability</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="notificationMaster" >Notifications</a></li>
-                         <!--<li><a  id="adminReferenceMaster" href="#" onclick="contentLoad(this)">Reference Code Master</a></li>-->
+                       
                     </ul>
                 </li>
 
                 <!-- Master Section -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Master</a>
+                    <a href="#" class="dropdown-toggle">Document Manager</a>
                     <ul class="dropdown-menu">
                         <li><a href="#" onclick="contentLoad(this)" id="VendorCreation">Vendor Creation</a></li>
                         <li><a href="#" onclick="contentLoad(this)" id="ItemCreation">Item Creation</a></li>
@@ -699,7 +697,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 
                  <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Orders</a>
+                    <a href="#" class="dropdown-toggle">Operations</a>
                     <ul class="dropdown-menu">
                     	<li class="dropdown-submenu">
                     	<a href="#" class="dropdown-toggle">Purchase</a>
@@ -727,182 +725,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             
                             </ul>
                 </li>
-                
-                
-         <li class="nav-item dropdown">
-            <a  href="#" class="dropdown-toggle"> Production Cycle</a>
-
-            <ul class="dropdown-menu">
-                
-				 <li ><a 
-				id="Boil" href="#" onclick="contentLoad(this)">Boil</a></li>
-				
-				
-				<li ><a 
-				id="tskValidation" href="#" onclick="contentLoad(this)">Validation</a></li>
-				
-				<li ><a 
-				id="TskConvertToFG" href="#" onclick="contentLoad(this)">Convert To FG</a></li>
-				
-				<li ><a 
-				id="FinishedGoods" href="#" onclick="contentLoad(this)">Finished Goods</a></li>
-				
-              </ul>
-        </li>
-        
-        
-        
-        
-        
-       <!--<li class="nav-item dropdown">
-            <a  href="#" class="dropdown-toggle"> Production Cycle</a>
-
-            <ul class="dropdown-menu">
-                <li ><a 
-				id="BillOfMaterial" href="#" onclick="contentLoad(this)">Bill Of Material</a></li>
-				
-				<li ><a 
-				id="erpprocess" href="#" onclick="contentLoad(this)">Process</a></li>
-				
-				<li ><a 
-				id="Validation" href="#" onclick="contentLoad(this)">Validation</a></li>
-								
-				
-				<li ><a 
-				id="ConvertToFG" href="#" onclick="contentLoad(this)">Convert To FG</a></li>
-				
-				<li ><a 
-				id="FinishedGoods" href="#" onclick="contentLoad(this)">Finished Goods</a></li>
-				
-              </ul>
-        </li>-->
-        
-        
-        
-                
-              <!--  <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Orders</a>
-                    <ul class="dropdown-menu">
-                         <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle">Purchase</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="contentLoad(this)" id="purchaseOrder">Purchase Order</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="new_po_list">Purchase Invoice</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="Purchase_Return">Purchase Return</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="Payment_Out">Payment Out</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle">Sale</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="contentLoad(this)" id="SalesOrder" >Sale Order</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="new_wo_list" >Sale Invoice</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="DeliveryCharge" >Delivery Charge</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="sale_Return" >Sale Return</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="paymentin" >Payment In</a></li>
-                            </ul>
-                        </li> 
-                    </ul>
-                </li>-->
-
-                <!-- Production Section -->
-               <!--  <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Production</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onclick="contentLoad(this)" id="BillOfMaterial">Bill Of Material</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="erpprocess">Process</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="Validation">Validation</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="ConvertToFG">Convert To FG</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="FinishedGoods">Finished Goods</a></li>
-                    </ul>
-                </li> -->
-
+             
                 <!-- Inventory Section -->
-                <li class="nav-item"><a href="#" onclick="contentLoad(this)" id="Inventory_po">Inventory</a></li>
+          <!--       <li class="nav-item"><a href="#" onclick="contentLoad(this)" id="Inventory_po">Inventory</a></li> -->
+ 
 
-                <!-- Expenses Section -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Expenses</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" onclick="contentLoad(this)" id="ERPExpenses">Expenses</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="TravelClaim" >Travel Claim</a></li>
-                    </ul>
-                </li>
-
-                <!-- HRMS Section -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">HRMS</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle">Management</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="contentLoad(this)" id="adminAssociateProfile">Associate Profile</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="attendanceRegister">Attendance Register</a></li>
-                                  <!--   <li class="nav-item"><a class="nav-link" id="adminProfileMaster" href="#" onclick="contentLoad(this)">Profile Master</a></li>
-               -->
-                                <li><a href="#" onclick="contentLoad(this)" id="adminLeaveMaster">Leave Master</a></li>
-                                 <!--  <li class="nav-item"><a class="nav-link" id="adminCalendarMaster" href="#" onclick="contentLoad(this)">Calendar Master</a></li>
-                -->
-                                <li><a href="#" onclick="contentLoad(this)" id="adminHolidayMaster">Holiday Master</a></li>
-                                <!--        <li class="nav-item"><a class="nav-link" id="adminDocumentMaster" href="#" onclick="contentLoad(this)">Document Master</a></li>
-                <li class="nav-item"><a class="nav-link" id="adminReferenceMaster" href="#" onclick="contentLoad(this)">Reference Code Master</a></li>
-                <li class="nav-item"><a class="nav-link" id="adminProjectMaster" href="#" onclick="contentLoad(this)">Project Master</a></li> -->
-                                <li><a href="#" onclick="contentLoad(this)"  id="adminTravelMaster">Travel Master</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="adminExpenseReport">Expense Report</a></li>
-                            </ul>
-                        </li>
-                        
-                                
-        <!-- Maintenance -->
-						<li class="dropdown-submenu"><a href="#"
-							class="dropdown-toggle">Maintenance</a>
-							<ul class="dropdown-menu">
-								<li><a id="MtAssociateProfile" href="#"
-									onclick="contentLoad(this)">Associate Profile</a></li>
-								<!--                                  <li class="nav-item"><a class="nav-link" id="MtProjectMaster" href="#" onclick="contentLoad(this)">Project Master</a></li>
- -->
-								<li><a id="MtLeaveMaster" href="#"
-									onclick="contentLoad(this)">Leave Master</a></li>
-								<li><a id="MtTravelMaster" href="#"
-									onclick="contentLoad(this)">Travel Master</a></li>
-								<li><a id="MtExpenseReport" href="#"
-									onclick="contentLoad(this)">Expense Report</a></li>
-							</ul></li>
-
-						<li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle">Operation</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="contentLoad(this)" id="changePassword">Change Password</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="applyLeave">Apply Leave</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="travelMaster">Apply Travel Plan</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="claimExpenses">Claim Expenses</a></li><!-- 
-                <li class="nav-item"><a class="nav-link" id="issueTracker" href="#" onclick="contentLoad(this)">Issue Tracker-Lodge</a></li>
-                <li class="nav-item"><a class="nav-link" id="Performance_Evaluation" href="#" onclick="contentLoad(this)">Performance Evaluation</a></li> -->
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle">Salaries</a>
-                            <ul class="dropdown-menu">
-                             <li class="nav-item"><a class="nav-link" id="salary_parameters_ERP" href="#" onclick="contentLoad(this)">Salary Parameters</a></li>
-                                <li><a href="#" onclick="contentLoad(this)" id="paystructures" >Pay Structure</a></li>
-                                
-                              
-                                           <!--  <li class="nav-item"><a class="nav-link" id="pay_master" href="#" onclick="contentLoad(this)">Pay Master</a></li> -->
-                <!-- <li class="nav-item"><a class="nav-link" id="permas" href="#" onclick="contentLoad(this)">Perdiem Master</a></li>
-                <li class="nav-item"><a class="nav-link" id="batchJob" href="#" onclick="contentLoad(this)">Batch Job</a></li> -->
-                <!--  <li class="nav-item"><a class="nav-link" id="salary_parameters" href="#" onclick="contentLoad(this)">Salary Parameters</a></li> -->
-                <!--  <li class="nav-item"><a class="nav-link" id="Taxation_parameters" href="#" onclick="contentLoad(this)">Taxation Parameters</a></li> --> 
-<!--                 <li class="nav-item"><a class="nav-link" id="Performance_Evaluation" href="#" onclick="contentLoad(this)">Performance Evaluation</a></li>
- --> 
-                         <!--   <li><a href="#" onclick="contentLoad(this)" id="esIERP" >ESI</a></li>
-                           <li><a href="#" onclick="contentLoad(this)" id="spf" >SPF</a></li> -->
-                          
-                           <li class="nav-item"><a class="nav-link" id="employeesalaryslip" href="#" onclick="contentLoad(this)">Employee Salary Slip</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
+               
                 <!-- Reports Section -->
                 <li class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle">Reports</a>
@@ -942,23 +770,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     
                 </li>
 
-                <!-- Transaction Master -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="dropdown-toggle">Transaction Master</a>
-                    <ul class="dropdown-menu">
-                    <li><a href="#"id="erpchartOfAccounts"  onclick="contentLoad(this)">Chart Of Accounts</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="gj">General Journal</a></li>
-                        <li><a href="#" onclick="contentLoad(this)"  id="ledger" >General Ledger</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="trail_balance">Trial Balance</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="balancesheet">Balance Sheet</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="profitloss">Profit Loss</a></li>
-                        <li><a href="#" onclick="contentLoad(this)" id="accountGL" >Transaction List</a></li>
-                          <li>
-                    <a  id="accountledger" href="#" onclick="contentLoad(this)">Account Ledger</a>
-                </li> 
-                    </ul>
-                </li>
-                
+              
                 
                 <li class="nav-item" ><a  href="#" id="logout"
 				onclick="contentLoad(this)"> Logout</a></li>

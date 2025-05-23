@@ -1,0 +1,12 @@
+
+.button-style{
+	 background-color: black;
+     color: white;
+}
+
+.dispayflexpropty{
+	
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+}

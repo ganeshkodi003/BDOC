@@ -570,26 +570,8 @@ public class BTMNavigationController {
 		return "BTMDashboard";
 
 	}
-
-	@RequestMapping(value = "verifyUser", method = RequestMethod.POST)
-	@ResponseBody
-	public String verifyUser(@ModelAttribute UserProfile userprofile, Model md, HttpServletRequest rq) {
-		String userid = (String) rq.getSession().getAttribute("USERID");
-		String msg = loginServices.verifyUser(userprofile, userid);
-
-		return msg;
-
-	}
-
-	@RequestMapping(value = "passwordReset", method = RequestMethod.POST)
-	@ResponseBody
-	public String passwordReset(@ModelAttribute UserProfile userprofile, Model md, HttpServletRequest rq) {
-		String userid = (String) rq.getSession().getAttribute("USERID");
-		String msg = loginServices.passwordReset(userprofile, userid);
-
-		return msg;
-	}
-
+ 
+ 
 	@RequestMapping(value = "login?logout", method = RequestMethod.POST)
 	@ResponseBody
 	public String logoutUpdate(HttpServletRequest req) {
@@ -611,57 +593,6 @@ public class BTMNavigationController {
 	}
 
 //	======================================  Admin Module ====================================================
-
-	@RequestMapping(value = "organizationMaster", method = { RequestMethod.GET, RequestMethod.POST })
-	public String organizationMaster(@RequestParam(required = false) String formmode,
-			@RequestParam(required = false) String id, Model md, HttpServletRequest req) throws ParseException {
-
-		String EmpId = "U72900TN2017PTC115892";
-		String userId = (String) req.getSession().getAttribute("USERID");
-		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId));
-		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId));
-		md.addAttribute("menu", "BTMHeaderMenu");
-		if (formmode == null || formmode.equals("view")) {
-
-			List<LeaveTable> leaves = LeaveTablerep.getAll(); // Fetch your data
-
-			md.addAttribute("leaves", leaves);
-			md.addAttribute("leave_count", leaves.size());
-			long count = LeaveTablerep.count();
-			md.addAttribute("hasRecords", count > 0);
-			md.addAttribute("formmode", "view");
-			md.addAttribute("adminOrganization", adminOperServices.getUser(EmpId));
-			int empcount = btmAdminAssociateProfileRep.getAssociateProfilecount();
-			md.addAttribute("empcount", empcount);
-			Long maxBranchId = Branch_reps.findMaxBranchId();
-			System.out.println("findMaxBranchId: " + maxBranchId);
-
-			if (maxBranchId == null || maxBranchId == 0) {
-				md.addAttribute("Id", "00" + 1);
-			} else {
-				md.addAttribute("Id", String.format("%03d", maxBranchId + 1));
-			}
-			List<Branch_Entity> list = Branch_reps.findAll();
-			md.addAttribute("list", list);
-
-		} else if (formmode.equals("edit")) {
-
-			md.addAttribute("formmode", "edit");
-			md.addAttribute("adminOrganization", adminOperServices.getUser(EmpId));
-			int empcount = btmAdminAssociateProfileRep.getAssociateProfilecount();
-			md.addAttribute("empcount", empcount);
-
-		} else if ("branch_edit".equals(formmode)) {
-			Branch_Entity branch = Branch_reps.find_id(id);
-			md.addAttribute("branch", branch);
-			md.addAttribute("formmode", "branch_edit");
-		} else {
-
-			md.addAttribute("formmode", formmode);
-		}
-
-		return "BTMAdminOrganizationMaster";
-	}
 	
 	
 	@RequestMapping(value = "TSK_organizationMaster", method = { RequestMethod.GET, RequestMethod.POST })
@@ -792,6 +723,7 @@ public class BTMNavigationController {
 
 		return "TSK_organizationMaster";
 	}
+	
 	@RequestMapping(value = "TSK_organizationMasterAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public String TSK_organizationMasterAdd(@RequestParam("formmode") String formmode,
@@ -800,6 +732,7 @@ public class BTMNavigationController {
 		String msg = adminOperServices.TSK_Org(TSK_OrganizationMasterEntity, formmode);
 		return msg;
 	}
+	
 	@RequestMapping(value = "TSK_branchAdd", method = RequestMethod.POST)
 	@ResponseBody
 	public String TSK_branchAdd(@RequestParam("formmode") String formmode,
@@ -810,6 +743,82 @@ public class BTMNavigationController {
 		String msg = adminOperServices.TSK_branch(TSK_branchEntity, formmode,OrgId);
 		return msg;
 	}
+
+	@RequestMapping(value = "BDOCUserProfile", method = { RequestMethod.GET, RequestMethod.POST })
+	public String BDOCUserProfile(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String resId, @RequestParam(required = false) String userId, Model md,
+			HttpServletRequest req) throws ParseException {
+		String userId1 = (String) req.getSession().getAttribute("USERID");
+		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId1));
+		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId1));
+
+		md.addAttribute("menu", "BTMHeaderMenu");
+
+		if (formmode == null || formmode.equals("list")) {
+
+			md.addAttribute("formmode", "list");
+
+			md.addAttribute("UserProfilelist", hrmsrepoo.getAlllist());
+			System.out.println("THE SIZE" + hrmsrepoo.getAlllist().size());
+			/*
+			 * List<String> list = Branch_reps.find_branch_id();
+			 * md.addAttribute("branchIds", list);
+			 */
+			/*--organization--*/
+			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
+			md.addAttribute("OrgIds", OrgIds);
+		}
+
+		else if (formmode.equals("add")) {
+
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("resourceids", resourceMasterRepo.getalist11());
+			/*
+			 * List<String> list = Branch_reps.find_branch_id();
+			 * md.addAttribute("branchIds", list);
+			 */
+			
+			/*--organization--*/
+			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
+			md.addAttribute("OrgIds", OrgIds);
+
+		}
+
+		else if (formmode.equals("view")) {
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("forms", "view");
+
+			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
+
+		} else if (formmode.equals("verify")) {
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
+
+		} else if (formmode.equals("modify")) {
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
+			/*
+			 * List<String> list = Branch_reps.find_branch_id();
+			 * md.addAttribute("branchIds", list);
+			 */
+			
+			/*--organization--*/
+			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
+			md.addAttribute("OrgIds", OrgIds);
+
+		}
+
+		else if (formmode.equals("delete")) {
+			md.addAttribute("formmode", "view");
+			md.addAttribute("forms", "delete");
+
+			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
+
+		}
+
+		return "BDOCUserProfile";
+	}
+	
 	
 	@RequestMapping(value = "deleteorg", method = RequestMethod.POST)
 	@ResponseBody
@@ -1479,60 +1488,9 @@ public class BTMNavigationController {
 		return msg;
 	}
 
-	@RequestMapping(value = "adminUserProfile", method = { RequestMethod.GET, RequestMethod.POST })
-	public String adminUserProfile(@RequestParam(required = false) String formmode,
-			@RequestParam(required = false) String userid, Model md, HttpServletRequest req)
-			throws NoSuchAlgorithmException, InvalidKeySpecException {
+ 
 
-		String loginuserid = (String) req.getSession().getAttribute("USERID");
-		String userId = (String) req.getSession().getAttribute("USERID");
-		md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId));
-		md.addAttribute("menu", "BTMHeaderMenu");
-		loginServices.SessionLogging("USERPROFILE", "M2", req.getSession().getId(), loginuserid, req.getRemoteAddr(),
-				"ACTIVE");
-
-		md.addAttribute("menu", "UserProfile");
-
-		if (formmode == null || formmode.equals("list")) {
-
-			md.addAttribute("formmode", "list");
-			md.addAttribute("userProfiles", loginServices.getUsersList());
-
-		} else if (formmode.equals("edit")) {
-
-			md.addAttribute("formmode", formmode);
-			md.addAttribute("userProfile", loginServices.getUser(userid));
-
-		} else if (formmode.equals("add")) {
-
-			md.addAttribute("formmode", formmode);
-			md.addAttribute("userProfile", loginServices.getUser(""));
-
-		} else if (formmode.equals("view")) {
-
-			md.addAttribute("formmode", formmode);
-			md.addAttribute("userProfile", loginServices.getUser(userid));
-			/*
-			 * md.addAttribute("FinUserProfiles", loginServices.getFinUsersList());
-			 * md.addAttribute("userProfile", loginServices.getUser(userid));
-			 */
-
-		}
-
-		return "BTMUserprofile";
-	}
-
-	@RequestMapping(value = "createUser", method = RequestMethod.POST)
-	@ResponseBody
-	public String createUser(@RequestParam("formmode") String formmode, @ModelAttribute UserProfile userprofile,
-			Model md, HttpServletRequest rq) throws NoSuchAlgorithmException, InvalidKeySpecException {
-
-		String userid = (String) rq.getSession().getAttribute("USERID");
-		String msg = loginServices.addUser(userprofile, formmode, userid);
-
-		return msg;
-	}
-
+ 
 	@RequestMapping(value = "adminProfileMaster", method = { RequestMethod.GET, RequestMethod.POST })
 	public String adminProfileMaster(@RequestParam(required = false) String formmode,
 			@RequestParam(required = false) String resId, @RequestParam(required = false) Optional<Integer> page,

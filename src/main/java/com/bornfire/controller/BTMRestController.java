@@ -85,7 +85,7 @@ import com.bornfire.entities.ResourceMasterRepo;
 import com.bornfire.entities.Salary_Pay_Entity;
 import com.bornfire.entities.TRAN_MAIN_TRM_WRK_ENTITY;
 import com.bornfire.entities.TRAN_MAIN_TRM_WRK_REP;
-import com.bornfire.entities.UserProfile;
+ 
 import com.bornfire.entities.paystructureentity;
 import com.bornfire.entities.paystructurerep;
 import com.bornfire.services.AckReciever;
