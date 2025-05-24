@@ -101,6 +101,7 @@ import com.bornfire.services.PlacementServices;
 import com.bornfire.services.ProjectMasterServices;
 import com.bornfire.services.ReportServices;
 import com.bornfire.services.TimeSheetPdf;
+import com.bornfire.services.UserProfileService;
 import com.bornfire.services.Vendor_Register_Service;
 import com.bornfire.services.WorkAssignmentReportExcel;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -118,6 +119,11 @@ import net.sf.jasperreports.engine.JRException;
 public class BTMNavigationController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BTMNavigationController.class);
+	
+	
+	@Autowired
+	UserProfileService userProfileService ;
+	
 	@Autowired
 	Notification_services notify;
 	@Autowired 
@@ -580,7 +586,7 @@ public class BTMNavigationController {
 //	======================================  Admin Module ====================================================
 	
 	
-	@RequestMapping(value = "TSK_organizationMaster", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "OrganizationMaster", method = { RequestMethod.GET, RequestMethod.POST })
 	public String TSK_organizationMaster(@RequestParam(required = false) String formmode,
 			@RequestParam(required = false) String id, Model md, HttpServletRequest req,
 			@RequestParam(value = "activeMenu", required = false) String activeMenu) throws ParseException {
@@ -708,7 +714,7 @@ public class BTMNavigationController {
 			md.addAttribute("formmode", formmode);
 		}
 
-		return "TSK_organizationMaster";
+		return "BDOCOrganizationMaster";
 	}
 	
 	@RequestMapping(value = "TSK_organizationMasterAdd", method = RequestMethod.POST)
@@ -731,81 +737,63 @@ public class BTMNavigationController {
 		return msg;
 	}
 
+ 
+ 
 	@RequestMapping(value = "BDOCUserProfile", method = { RequestMethod.GET, RequestMethod.POST })
-	public String BDOCUserProfile(@RequestParam(required = false) String formmode,
-			@RequestParam(required = false) String resId, @RequestParam(required = false) String userId, Model md,
-			HttpServletRequest req, 	@RequestParam(value = "activeMenu", required = false) String activeMenu) throws ParseException {
-		String userId1 = (String) req.getSession().getAttribute("USERID");
-		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId1));
-		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId1));
+	public String userprofile(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String userid,
+			@RequestParam(value = "page", required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size, Model md, HttpServletRequest req,
+			@RequestParam(value = "activeMenu", required = false) String activeMenu)
+			throws SQLException {
 
-		md.addAttribute("menu", "BTMHeaderMenu");
+		String userID = (String) req.getSession().getAttribute("USERID");
+	 
+		
 		md.addAttribute("activeMenu", activeMenu);
+		/*
+		 * md.addAttribute("RuleIDType", accessandrolesrepository.roleidtype());
+		 * md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		 */
+		md.addAttribute("PdfViewer", "UserProfile");
+		md.addAttribute("loginuser", userID);
+		
 		if (formmode == null || formmode.equals("list")) {
-
 			md.addAttribute("formmode", "list");
-
-			md.addAttribute("UserProfilelist", hrmsrepoo.getAlllist());
-			System.out.println("THE SIZE" + hrmsrepoo.getAlllist().size());
-			/*
-			 * List<String> list = Branch_reps.find_branch_id();
-			 * md.addAttribute("branchIds", list);
-			 */
-			/*--organization--*/
-			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
-			md.addAttribute("OrgIds", OrgIds);
-		}
-
-		else if (formmode.equals("add")) {
-
+			md.addAttribute("userProfiles", userProfileService.getUsersList());
+		} else if (formmode.equals("add")) {
+			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", formmode);
-			md.addAttribute("resourceids", resourceMasterRepo.getalist11());
-			/*
-			 * List<String> list = Branch_reps.find_branch_id();
-			 * md.addAttribute("branchIds", list);
-			 */
-			
-			/*--organization--*/
-			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
-			md.addAttribute("OrgIds", OrgIds);
-
-		}
-
-		else if (formmode.equals("view")) {
+		 
+		} else if (formmode.equals("edit")) {
+			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", formmode);
-			md.addAttribute("forms", "view");
-
-			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
-
+			md.addAttribute("userProfile", userProfileService.getUser(userid));
+			 
 		} else if (formmode.equals("verify")) {
+			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", formmode);
-			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
-
-		} else if (formmode.equals("modify")) {
-			md.addAttribute("formmode", formmode);
-			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
-			/*
-			 * List<String> list = Branch_reps.find_branch_id();
-			 * md.addAttribute("branchIds", list);
-			 */
-			
-			/*--organization--*/
-			List<String> OrgIds = TSK_OrganizationMasterReps.get_org();
-			md.addAttribute("OrgIds", OrgIds);
-
-		}
-
-		else if (formmode.equals("delete")) {
+			md.addAttribute("userProfile", userProfileService.getUser2(userid));
+		} else if (formmode.equals("view")) {
+			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", "view");
-			md.addAttribute("forms", "delete");
-
-			md.addAttribute("UserProfilelist", hrmsrepoo.getlistuserid(userId));
-
+			md.addAttribute("userProfile", userProfileService.getUser(userid));
+		} else if (formmode.equals("cancel")) {
+			md.addAttribute("user_id", userID);
+			md.addAttribute("formmode", "cancel");
+			md.addAttribute("userProfile", userProfileService.getUser2(userid));
+		} else if (formmode.equals("viewnew")) {
+			md.addAttribute("user_id", userID);
+			md.addAttribute("formmode", "viewnew");
+			md.addAttribute("userProfile", userProfileService.getUser2(userid));
+		} else if (formmode.equals("delete")) {
+			md.addAttribute("user_id", userID);
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("userProfile", userProfileService.getUser(userid));
 		}
-
 		return "BDOCUserProfile";
 	}
-	
+
 	
 	@RequestMapping(value = "deleteorg", method = RequestMethod.POST)
 	@ResponseBody

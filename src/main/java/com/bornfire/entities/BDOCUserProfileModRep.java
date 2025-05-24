@@ -12,9 +12,9 @@ public interface BDOCUserProfileModRep extends CrudRepository<BDOCUserProfileMod
 
 	public Optional<BDOCUserProfileMod> findByusername(String userName);
 
-	@Query(value = "select * from BIPS_USER_PROFILE_MOD_TABLE where USER_ID= ?1", nativeQuery = true)
+	@Query(value = "select * from BDOC_USER_PROFILE_MOD_TABLE where USER_ID= ?1", nativeQuery = true)
 	BDOCUserProfileMod findByIdCustom(String Id);
 
-	@Query(value = "select * from BIPS_USER_PROFILE_MOD_TABLE where NVL(DEL_FLG,1) <> 'Y'", nativeQuery = true)
+	@Query(value = "select * from BDOC_USER_PROFILE_MOD_TABLE where NVL(DEL_FLG,1) <> 'Y'", nativeQuery = true)
 	List<BDOCUserProfileMod> findByAll(String Id);
 }

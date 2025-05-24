@@ -90,15 +90,9 @@ input:focus, select {
 </style>
 
 <style>
-.spacer {
-	margin-bottom: 20px;
-	/* Adjust the value (20px) to control the spacing */
-}
+ 
 /*or*/
-.form-row {
-	margin-bottom: 10px;
-}
-
+ 
 ul.l {
 	list-style-type: square;
 }
@@ -934,7 +928,7 @@ function select_org() {
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2">
+			<div class="col-4 col-sm-2">
 				<div th:insert="BTMHeaderMenu :: header"></div>
 			</div>
 			<div class="col-sm-12">
@@ -1083,202 +1077,547 @@ function select_org() {
 							<!-- -------------- list end ----------->
 							<!--  ------------- add start-------- -->
 
-							<div th:if="${formmode}=='add'" class="container-manager"
+							<div
+								th:if="${formmode}=='view' OR ${formmode}=='add'   OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='verify'  OR ${formmode}=='viewnew'"
+								class="container-manager"
 								style="margin-top: auto; margin-left: auto;">
 								<div class="transparent-shadow">
 									<div class="row">
 										<div class="col-sm-12 ">
 											<div class="card">
-												<div class="card-header dispayflexpropty"
+												<div class="card-header"
 													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
 
-													<div STYLE="font-size: 1.3rem; font-weight: bold;">
-														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - ADD
+													<div class="capword" th:if="${formmode}=='add'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - Add
 													</div>
-
-													<div class="btn-group nav-buttons">
-
-														<button type="button"
-															class="btn btn-xs btn-primary btns active btn-dark"
-															id="btnInq" onclick="list()"
-															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
+													<div class="capword" th:if="${formmode}=='edit'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - Modify
+													</div>
+													<div class="capword" th:if="${formmode}=='view'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - View
+													</div>
+													<div class="capword" th:if="${formmode}=='viewnew'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - View
+													</div>
+													<div class="capword" th:if="${formmode}=='verify'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - View
+													</div>
+													<div class="capword" th:if="${formmode}=='delete'">
+														<i class="fas fa-user-plus mr-2"></i>USER PROFILE - View
 													</div>
 												</div>
 												<div class="card-body">
 													<form action="#" th:object="${userlist}" method="post"
 														autocomplete="off" id="hrmsuserProfileadd"
 														th:fragment="finuserapply">
-														<input autocomplete="false" name="hidden" type="text"
-															style="display: none;"> <input type="hidden"
-															th:value="${formmode}" id="formmode1"
-															style="display: none;">
-														<div class="form-group" style="line-height: 2;">
-															<div class="form-group">
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="col-sm-2">User Id</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-																	<div class="col-sm-1"></div>
-
-																	<label class="  col-sm-3 ">User Name</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-
+														<div class="form-group  ">
+															<div class="form-row mt-2  ">
+																<div class="col-4 col-sm-2">
+																	<label for="userId">User ID <span
+																		th:if="${formmode}=='add'"
+																		 >*</span></label>
 																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="col-sm-2">Bank Code</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-																	<div class="col-sm-1"></div>
-
-																	<label class="  col-sm-3 ">Bank Name</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-
-																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="col-sm-2">Branch  Code</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-																	<div class="col-sm-1"></div>
-
-																	<label class="  col-sm-3 ">Branch  Name</label> <input
-																		type="text" class="  col-sm-2 form-control"
-																		name="userNames" id="userNames" />
-
-																</div>
-
-
-
-
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="  col-sm-2">Employee Id</label> <input
-																		type="text" id="employeeid"
-																		class="  col-sm-2 form-control" name="employeeId"
-																		th:value="${userId}" />
-																	<div class="col-sm-1"></div>
-																	<label class="  col-sm-3 ">Employee Name</label> <input
-																		type="text" id="employeename"
-																		class="  col-sm-2 form-control" name="employeeName"
-																		th:value="${username}" />
-																</div>
-
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="  col-sm-2">Mobile No</label> <input
-																		type="text" id="designation"
-																		class="  col-sm-2 form-control" name="designation"
-																		oninput="capitalizeInput(this)" />
-																	<div class="col-sm-1"></div>
-																	<label class="  col-sm-3 ">Email Id</label> <input
-																		type="email" id="emailid"
-																		class="  col-sm-2 form-control" name="emailId"
-																		onblur="validateEmail(this);" /> <span
-																		id="emailError"
-																		style="color: red; font-size: 14px; display: none; padding-left: 1050px;">Invalid
-																		email address</span>
-																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="col-sm-2">Login Low </label> <input
-																		type="time" name="login_low" id="loginLow1" value=""
-																		class=" col-sm-2 form-control" autocomplete="off"
-																		required />
-																	<div class="col-sm-1"></div>
-																	<label class="col-sm-3">Login High <span
-																		style="color: red; font-size: 20px;">*</span></label>
-
-																	<input type="time" name="login_high" id="loginHigh"
-																		value="" class="col-sm-2 form-control"
+																
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text"
+																		onkeyup="this.value = this.value.toUpperCase();handleInputUserId(this)"
+																		id="userId" name="userid" maxlength="10"
+																		class="form-control form-control-sm autocomplete    "
 																		autocomplete="off" required />
 																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="  col-sm-2">User Disable Date</label> <input
-																		type="text" id="employeeid"
-																		class="  col-sm-2 form-control" name="employeeId"
-																		  />
-																	<div class="col-sm-1"></div>
-																	<label class="  col-sm-3 ">User Disable Till Date</label> <input
-																		type="text" id="employeename"
-																		class="  col-sm-2 form-control" name="employeeName"
-																		  />
+																<div
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify'    OR ${formmode}=='view'  OR ${formmode}=='viewnew' OR ${formmode}=='delete'"
+																	class="col-4 col-sm-2">
+																	<input type="text"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		id="userId" name="userid"
+																		th:value="${userProfile?.userid}"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='verify'  OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='edit'" />
 																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="  col-sm-2">User Status</label> <input
-																		type="text" id="employeeid"
-																		class="  col-sm-2 form-control" name="employeeId"
-																		  />
-																	<div class="col-sm-1"></div>
-																	<label class="  col-sm-3 ">Login Status</label> <input
-																		type="text" id="employeename"
-																		class="  col-sm-2 form-control" name="employeeName"
-																		  />
+																<div class="col-4 col-sm-2"></div>
+																<div class="col-4 col-sm-2">
+																	<label for="userName">User Name <span
+																		 
+																		th:if="${formmode}=='add'">*</span></label>
 																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<label class="  col-sm-2">Account Expiry Date</label> <input
-																		type="text" id="employeeid"
-																		class="  col-sm-2 form-control" name="employeeId"
-																		  />
-																	<div class="col-sm-1"></div>
-																	<label class="  col-sm-3 ">Remarks</label> <input
-																		type="text" id="employeename"
-																		class="  col-sm-2 form-control" name="employeeName"
-																		  />
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" id="userName" name="username"
+																		maxlength="50"
+																		onkeyup="this.value = this.value.toUpperCase(); updateUserName(this.value);handleInUserName(this)"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required />
 																</div>
-																<div class="form-row">
-																	<div class="col-auto"></div>
-
-																	<label class="col-sm-2 ">Role Id</label> <select
-																		class="col-sm-2 form-control" name="role" id="role">
-																		<option value="">SELECT</option>
-																		<option value="ADM">ADM-Administration</option>
-																		<option value="OPR">OPR-Operation</option>
-																		<option value="INQ">INQ-Inquiries</option>
-																		<option value="RPT">RPT-Reports</option>
-																		<option value="SER">SER-Service</option>
-																		<option value="GEN">GEN-General</option>
-																		<option value="RES">RES-Resources</option>
-																		<option value="MGR">MGR-Manager</option>
-																		<option value="SWE">SWE-SoftwareEngineer</option>
-																		<option value="MNT">MNT-Maintenance</option>
-																	</select>
-																	<div class="col-sm-1"></div>
-																	<label class="col-sm-3">Role Description</label> <input
-																		type="text" class="col-sm-2 form-control"
-																		name="passExpDate" id="passExpDate" />
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" th:value="${userProfile?.username}"
+																		id="userName" name="username"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify' OR ${formmode}=='edit'" />
 																</div>
-
-																<div class="form-row">
-																	<div class="col-auto"></div>
-																	<div  
-																		class="col-sm-2">
-																		<label for="mand_account_number">Upload Image</label>
-																	</div>
-																	<input type="file" id="file" name="file"
-																		class="col-sm-2 form-control"
-																		accept="image/png, image/jpeg">
-
-
-																	<div class="col-sm-1"></div>
-																</div>
-
-
-
-
 															</div>
-
-
-															<div class="form-row">
- 
-
+															<div class="form-row mt-2  mt-2 ">
+																<label class="col-4 col-sm-2">Bank Code <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="bank_code"
+																	 
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		id="bankCode" class="form-control form-control-sm  "
+																		autocomplete="off" required  >
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="bank_code"
+																		th:value="${userProfile?.bank_code}" id="bankCode"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='edit'" />
+																</div>
+																 
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Bank Name <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="bank_name"
+																		 
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		id="bankName" class="form-control form-control-sm  "
+																		maxlength="25" autocomplete="off" required   />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="bank_name"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		th:value="${userProfile?.bank_name}" id="bankName"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='edit'" />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Branch Code <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="branch_code"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		  id="branchCode" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" maxlength="4" required   />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="branch_code"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		th:value="${userProfile?.branch_code}" id="branchCode"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view'  OR ${formmode}=='viewnew'  OR ${formmode}=='delete'   OR ${formmode}=='verify'OR ${formmode}=='edit'" />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Branch Name <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="branch_name" id="branchName"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		value="" class="form-control form-control-sm  "
+																		maxlength="25" autocomplete="off" required   />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' ">
+																	<input type="text" name="branch_name"
+																		th:value="${userProfile?.branch_name}" id="branchName"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='edit' OR ${formmode}=='delete'  " />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Employee ID <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="empid" id="empId"  
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		maxlength="10"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="empid"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		th:value="${userProfile?.empid}" id="empId" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew'  OR ${formmode}=='verify'OR ${formmode}=='edit' OR ${formmode}=='delete'  " />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Employee Name <span
+																	 
+																	th:if="${formmode}=='add'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="emp_name" id="empName"
+																		 
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		maxlength="50"
+																		value="" class="form-control form-control-sm  "
+																		required />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew'  OR ${formmode}=='delete'  ">
+																	<input type="text" name="emp_name"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		th:value="${userProfile?.emp_name}" id="empName"
+																		value="" class="form-control form-control-sm  " required
+																		autocomplete="off"
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='edit' OR ${formmode}=='delete'  " />
+																</div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Mobile No <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																 
+																	 
+																		<input type="text" id="mobNo" name="mob_number"
+																			th:if="${formmode}=='add'"
+																			value="" class="form-control form-control-sm  "
+																			maxlength="8"
+																			oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+																			required autocomplete="off">
+																  
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' ">
+																	<div class="input-group"
+																		th:if=" ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' ">
+																	
+																		<input type="number" id="mobNo" name="mob_number"
+																			class="form-control form-control-sm  " maxlength="8"
+																			style="margin-left: -110px"
+																			th:value="${userProfile?.mob_number}"
+																			autocomplete="off" readonly>
+																	</div>
+																	<div class="input-group" th:if=" ${formmode}=='edit'">
+																		 
+																		<input type="number" id="mobNo" name="mob_number"
+																			th:if=" ${formmode}=='edit'"
+																			class="form-control form-control-sm  "
+																			maxlength="8" th:value="${userProfile?.mob_number}"
+																			autocomplete="off">
+																	</div>
+																	<span id="phoneNumber_Error"></span>
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Email ID <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="email" name="email_id" id="emailId"
+																		value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		onkeyup="this.value = this.value.toUpperCase(); " />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input th:if="${formmode}!='edit'" type="email"
+																		name="email_id" th:value="${userProfile?.email_id}"
+																		id="emailId" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required readonly /> <input
+																		th:if="${formmode}=='edit'" type="email"
+																		name="email_id" th:value="${userProfile?.email_id}"
+																		id="emailId" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" required />
+																</div>
+															 
+															</div>
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Login Low <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="time" name="login_low" id="loginLow1"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="time" name="login_low"
+																		th:value="${userProfile?.login_low}" id="loginLow"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'   OR ${formmode}=='verify' " />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Login High <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="time" name="login_high" id="loginHigh"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off" required />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="time" name="login_high"
+																		th:value="${userProfile?.login_high}" id="loginHigh"
+																		value="" class="form-control form-control-sm  "
+																		autocomplete="off"
+																		th:readonly="${userProfile?.entity_flg=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'   OR ${formmode}=='verify' " />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">User Disable Date</label>
+																<!-- <span  
+											th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span> -->
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="disable_start_date"
+																		id="disableDate" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='edit' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="disable_start_date"
+																		th:if="${formmode}=='edit'"
+																		th:value="${#dates.format(userProfile?.disable_start_date, 'dd-MM-yyyy')}"
+																		id="disableDate" class="form-control form-control-sm  "
+																		autocomplete="off" readonly /> <input
+																		type="text" name="disable_start_date"
+																		th:if="${formmode}!='edit'"
+																		th:value="${#dates.format(userProfile?.disable_start_date, 'dd-MM-yyyy')}"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">User Disable Till Date</label>
+																<div class="col-4 col-sm-2" th:if="${formmode}=='add'">
+																	<input type="text" name="disable_end_date"
+																		id="disableenddate" value=""
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='edit' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="disable_end_date"
+																		th:if="${formmode}=='edit'"
+																		th:value="${#dates.format(userProfile?.disable_end_date, 'dd-MM-yyyy')}"
+																		id="disableenddate"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly /> <input
+																		type="text" name="disable_end_date"
+																		th:if="${formmode}!='edit'" autocomplete="off"
+																		th:value="${#dates.format(userProfile?.disable_end_date, 'dd-MM-yyyy')}"
+																		class="form-control form-control-sm  " readonly />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">User Status</label>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">
+																	<input type="text" name="user_status" id="userStatus"
+																		value="ACTIVE" th:if="${formmode}=='add'"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly /> <select
+																		name="user_status" th:if="${formmode}=='edit'"
+																		style="width: 100%" id="userStatus"
+																		class="form-control form-control-sm  ">
+																		<option
+																			th:selected="${userProfile?.user_status}=='ACTIVE'"
+																			value="ACTIVE">ACTIVE</option>
+																		<option
+																			th:selected="${userProfile?.user_status}=='INACTIVE'"
+																			value="INACTIVE">INACTIVE</option>
+																	</select>
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="user_status" id="userStatus"
+																		th:value="${userProfile?.user_status}"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Login Status</label>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">
+																	<input type="text" th:if="${formmode}=='add'"
+																		name="login_status" id="loginStatus" value="ACTIVE"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly /> <select
+																		name="login_status" th:if="${formmode}=='edit'"
+																		style="width: 100%" id="loginStatus"
+																		class="form-control form-control-sm  ">
+																		<option
+																			th:selected="${userProfile?.login_status}=='ACTIVE'"
+																			value="ACTIVE">ACTIVE</option>
+																		<option
+																			th:selected="${userProfile?.login_status}=='INACTIVE'"
+																			value="INACTIVE">INACTIVE</option>
+																	</select>
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'  ">
+																	<input type="text" name="login_status" id="loginStatus"
+																		th:value="${userProfile?.login_status}"
+																		class="form-control form-control-sm  "
+																		autocomplete="off" readonly />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Account Expiry Date <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div class="col-4 col-sm-2" th:if="${formmode}=='add'">
+																	<input type="text" name="acc_exp_date" id="expiryDate"
+																		autocomplete="off" value=""
+																		class="form-control form-control-sm  " required readonly />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='edit' OR ${formmode}=='delete'  ">
+																	<input type="text" name="acc_exp_date"
+																		autocomplete="off"
+																		th:value="${#dates.format(userProfile?.acc_exp_date, 'dd-MM-yyyy')}"
+																		id="expiryDate" th:if="${formmode}=='edit'"
+																		class="form-control form-control-sm  " required readonly />
+																	<input type="text" name="acc_exp_date" readonly
+																		th:if="${formmode}!='edit'" autocomplete="off"
+																		th:value="${#dates.format(userProfile?.acc_exp_date, 'dd-MM-yyyy')}"
+																		class="form-control form-control-sm  " />
+																</div>
+																<input type="hidden" name="new_user_flg"
+																	th:value="${userProfile?.new_user_flg}"
+																	id="new_user_flg">
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Remarks</label>
+																<div class="col-4 col-sm-2" th:if="${formmode}=='add' ">
+																	<input type="text" id="remarks" value="" name="remarks"
+																		maxlength="50" autocomplete="off"
+																		onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																		class="form-control form-control-sm  " />
+																</div>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='view' OR ${formmode}=='edit' OR ${formmode}=='viewnew' OR ${formmode}=='verify'OR ${formmode}=='delete'  ">
+																	<input type="text" name="remarks" readonly
+																		autocomplete="off" th:value="${userProfile?.remarks}"
+																		id="remarks" maxlength="50"
+																		class="form-control form-control-sm  " />
+																	<!--<input type="text" name="remarks" autocomplete="off" th:value="${userProfile?.remarks}" id="remarks" maxlength="50" class="form-control form-control-sm  " />-->
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+										 			 
+															<div class="form-row mt-2 ">
+																<label class="col-4 col-sm-2">Role ID <span
+																	 
+																	th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+																<div class="col-4 col-sm-2"
+																	th:if="${formmode}=='view' OR ${formmode}=='viewnew'  OR ${formmode}=='verify'  OR ${formmode}=='delete'  ">
+																	<input name="role_id"
+																		th:value="${userProfile?.role_id}" autocomplete="off"
+																		id="roleId" class="form-control form-control-sm  "
+																		readonly>
+																</div>
+																<div class="col-4 col-sm-2" th:if="${formmode}=='add'">
+																	<select name="role_id" th:value="${role_id}"
+																		id="roleId" style="width: 100%"
+																		class="form-control form-control-sm  "
+																		onchange="roledesc();" required>
+																		<option value="">SELECT</option>
+																		<option id="role_id"
+																			th:each="monitoringparam : ${RuleIDType}"
+																			th:value="${monitoringparam}"
+																			th:text="${monitoringparam}"></option>
+																	</select>
+																</div>
+																<div class="col-4 col-sm-2" th:if="${formmode}=='edit'">
+																	<select th:field="*{role_id}" name="role_id"
+																		style="width: 100%" th:value="${userProfile?.role_id}"
+																		id="roleId" class="form-control form-control-sm  "
+																		onchange="roledesc1();">
+																		<option value="">SELECT</option>
+																		<option id="role_id"
+																			th:each="monitoringparam : ${RuleIDType}"
+																			th:value="${monitoringparam}"
+																			th:text="${monitoringparam}"></option>
+																	</select>
+																</div>
+																<div class="col-4 col-sm-2"></div>
+																<label class="col-4 col-sm-2">Role Description</label>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="text" name="role_desc"
+																		th:value="${role_desc}" autocomplete="off"
+																		id="roleDesc" value=""
+																		class="form-control form-control-sm  " readonly />
+																</div>
+																<div
+																	th:if=" ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify' OR ${formmode}=='delete'    OR ${formmode}=='edit'"
+																	class="col-4 col-sm-2">
+																	<input type="text" name="role_desc" autocomplete="off"
+																		th:value="${userProfile?.role_desc}" id="roleDesc1"
+																		value="" class="form-control form-control-sm  " readonly />
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
+															<div class="form-row mt-2  ">
+																<div th:if="${formmode}=='add' OR ${formmode}=='edit'"
+																	class="col-4 col-sm-2">
+																	<label for="mand_account_number">Upload Image</label>
+																</div>
+																<div
+																	th:if="(${formmode}=='verify'    OR ${formmode}=='view'  OR ${formmode}=='viewnew' OR ${formmode}=='delete') AND ${userProfile.photo}!=null"
+																	class="col-4 col-sm-2">
+																	<label for="mand_account_number">Upload Image</label>
+																</div>
+																<div th:if="${formmode}=='add'" class="col-4 col-sm-2">
+																	<input type="file" id="file" name="file" class="form-control form-control-sm"
+																		accept="image/png, image/jpeg">
+																</div>
+																<div th:if="${formmode}=='edit'" class="col-4 col-sm-2">
+																	<input type="file" id="file" name="file"
+																		accept="image/png, image/jpeg"> <span
+																		th:if="${userProfile.photo}!=null" class=underline
+																		onclick="clickPhoto(this);"
+																		th:attr="data-userid=${userProfile.userid}"
+																		title="click to view Image" id="openUploadModal">show</span>
+																</div>
+																<div
+																	th:if=" (${formmode}=='verify'    OR ${formmode}=='view'  OR ${formmode}=='viewnew' OR ${formmode}=='delete') AND ${userProfile.photo}!=null"
+																	class="col-4 col-sm-2">
+																	<span class=underline onclick="clickPhoto(this);"
+																		th:attr="data-userid=${userProfile.userid}"
+																		title="click to view Image" id="openUploadModal">show
+																		view</span>
+																</div>
+																<div class="col-4 col-sm-2"></div>
+															</div>
 														</div>
+
 													</form>
 												</div>
 												<div class="card-footer text-center"
@@ -1297,951 +1636,12 @@ function select_org() {
 											</div>
 										</div>
 
-										<div>
-									    </div>
+										<div></div>
 									</div>
 
 								</div>
 
 							</div>
-
-
-
-							<!-- 	-------view----- -->
-
-
-
-							<div th:if="${formmode}=='view'" class="container-manager"
-								style="margin-top: auto; margin-left: auto;">
-								<div class="transparent-shadow">
-									<div class="row">
-										<div class="col-sm-12 ">
-											<form action="#" th:object="${userlist}" method="post"
-												autocomplete="off" id="hrmsuserProfileadd"
-												th:fragment="finuserapply">
-
-
-												<div
-													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
-													<div class="float-left" th:if="${forms=='view'}">
-														<div STYLE="font-size: 1.3rem; font-weight: bold;">USER
-															PROFILE - VIEW</div>
-													</div>
-
-													<div class="float-left" th:if="${forms=='delete'}">
-														<div STYLE="font-size: 1.3rem; font-weight: bold;">USER
-															PROFILE - DELETE</div>
-													</div>
-
-													<div class="btn-group nav-buttons float-right">
-
-														<button type="button"
-															class="btn btn-xs btn-primary btns active btn-dark"
-															id="btnInq" onclick="list()"
-															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
-													</div>
-												</div>
-												<div class="card-body">
-
-													<input autocomplete="false" name="hidden" type="text"
-														style="display: none;"> <input type="hidden"
-														th:value="${formmode}" id="formmode1"
-														style="display: none;">
-													<div class="form-group" style="line-height: 1.9;">
-
-														<div class="form-row">
-
-															<label class="col-sm-3">Organization Id</label>
-
-
-															<!-- Branch Selection -->
-															<input type="text" class="col-sm-2 form-control"
-																id="branchId" th:value="${UserProfilelist.org_id}"
-																name="branchId" readonly />
-
-
-
-
-															<div class="col-sm-1"></div>
-
-
-															<label class="col-sm-3">Branch Id</label>
-
-
-															<!-- Branch Selection -->
-															<select class="col-sm-2 form-control"
-																onchange="select_branch();" id="branchId"
-																name="branchId" readonly>
-
-																<option th:value="${UserProfilelist.branchId}"
-																	th:text="${UserProfilelist.branchId}"></option>
-															</select>
-
-														</div>
-
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">User Id</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userId" id="userid"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">User Name</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userName" id="username"
-																th:value="${UserProfilelist.userNames}" readonly />
-
-														</div>
-
-
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Employee Id</label> <input
-																type="text" id="employeeid"
-																class="  col-sm-2 form-control" name="employeeId"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Employee Name</label> <input
-																type="text" id="employeename"
-																class="  col-sm-2 form-control" name="employeeName"
-																th:value="${UserProfilelist.userNames}" readonly />
-														</div>
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Designation</label> <input
-																type="text" id="designation"
-																class="  col-sm-2 form-control" name="designation"
-																th:value="${UserProfilelist.designation}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Email Id</label> <input
-																type="email" id="emailid"
-																class="  col-sm-2 form-control" name="emailId"
-																onblur="validateEmail(this);"
-																th:value="${UserProfilelist.emailId}" readonly /> <span
-																id="emailError"
-																style="color: red; font-size: 14px; display: none; padding-left: 1050px;">Invalid
-																email address</span>
-															<!--  			<label class="col-sm-3">Nature Of Employment</label>
-												<select class=" col-sm-3  "name="nature_of_employment" id="natureofemployment">
-													
-													<option	class="" value="">SELECT</option>
-													<option class="" value="Permanent">Permanent</option>
-													<option class="" value="Contract">Contract</option>
-													<option class="" value="Part Time">Part Time</option></select>  -->
-
-														</div>
-														<!-- 
-								<div class="form-row">
-									<label class="  col-sm-3 ">Max Inactive Time</label> <input type="text" id="maxinactivetime"class="  col-sm-3" name="max_inactive_time" onkeypress="fnnumber();"/>
-									<span style="color: red;font-size: 10px;display:none" id="inactiveTimeError" class="error"></span>
-									 <label class="  col-sm-3 ">Account Expiry date</label> <input type="text" id="accexpdate" class="  col-sm-3" name="acc_exp_date" required/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">Login Low</label> <input type="text"  id="loginlow" class="  col-sm-3" name="login_low" onkeypress="fnnumber();"/>
-								 	<label class="  col-sm-3 ">Login High</label> <input type="text" id="loginhigh"class="  col-sm-3" name="login_high" onkeypress="fnnumber();"/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">User Disable Date</label> <input type="text" class="  col-sm-3"id="userdisabledate" name="user_disable_date" required/>
-									<label class="  col-sm-3 ">User Disable Till Date</label> <input type="text" class="  col-sm-3" id="userdisabletilldate"name="user_disable_till" required/>
-								</div> -->
-
-														<div class="form-row">
-															<label class="col-sm-3 ">Password</label> <input
-																type="password" class="col-sm-2 form-control"
-																name="password" id="password" readonly
-																value="bornfire123" title="Default password" />
-															<!-- onblur="fnpassword()" -->
-
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Mobile No</label> <input
-																type="text" th:value="${UserProfilelist.mobileNo}"
-																id="mobileno" class="  col-sm-2 form-control"
-																name="mobileNo"
-																oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);"
-																readonly /> <small id="mobileHelp"
-																class="form-text text-muted"
-																style="color: red !important; display: none; float: right; padding-left: 1050px;">Please
-																enter a valid 10-digit mobile number.</small>
-
-
-
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-
-														<div class="form-row">
-
-															<label class="col-sm-3 ">Role Id</label> <input
-																type="text" class="col-sm-2 form-control" name="roleId"
-																id="roleId" th:value="${UserProfilelist.role}" readonly />
-															<!-- <select 
-																class="col-sm-2 form-control" name="roleId" id="roleId">
-																<option value=""  >SELECT</option>
-																<option value="ADM">ADM-Administration</option>
-																<option value="OPR">OPR-Operation</option>
-																<option value="INQ">INQ-Inquiries</option>
-																<option value="RPT">RPT-Reports</option>
-																<option value="SER">SER-Service</option>
-																<option value="GEN">GEN-General</option>
-																<option value="RES">RES-Resources</option>
-																<option value="MGR">MGR-Manager</option>
-																<option value="SWE">SWE-SoftwareEngineer</option>
-																<option value="MNT">MNT-Maintenance</option>
-															</select> -->
-															<div class="col-md-1 "></div>
-															<label class="col-sm-3">Pwd Exp Date</label> <input
-																type="text"
-																th:value="${#dates.format(UserProfilelist.passExpDate, 'dd-MM-yyyy')}"
-																class="col-sm-2 form-control" name="passExpDate"
-																id="passExpDate" readonly />
-															<!-- onblur="fnpassword()" -->
-
-
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-													</div>
-
-
-													<div class="form-row">
-
-
-														<!--  	<label class="col-sm-3">Role Description</label> 
-												<input type="text"class="  col-sm-3" id="roledescription" value="" readonly /> -->
-													</div>
-													<!--  	<div class="form-row">
-											<label class="col-sm-3">Permissions</label> 
-											<select	class=" col-sm-3 " name="permission" id="permission">
-												<option	class="" value="O">SELECT</option>
-												<option value="R">R-Read</option>
-												<option value="W">W-Write</option></select>
-
-										</div>  -->
-
-
-
-
-												</div>
-											</form>
-										</div>
-
-
-
-
-										<div
-											class="col-sm-12 d-flex justify-content-center card-footer"
-											style="padding-top: 10px;">
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="Dashboard" onclick="contentLoad(this)">Home</button>
-											<!-- Uncomment the Register button if needed -->
-
-											<button th:if="${forms=='delete'}"
-												class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="register" onclick="deleteusersubmit(event)">Delete</button>
-
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" id="btnback"
-												onclick="list()">Back</button>
-										</div>
-
-
-
-
-										<div>
-
-
-											<!-- <button th:if="${userProfile.entity_flg}=='N'" type="button"
-												class="btn btn-xs btn-primary"
-												th:attr="data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},data-modify_user=${userProfile.modify_user}"
-												onclick="verify(this);" id="btnModify">Verify</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="passwordReset();">PasswordReset</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												form="userProfile" id="btnSubmit" onclick="submitform();">Submit</button>
-
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnHome" onclick="home();">Home</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnBack" onclick="back();">Back</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="Delete();">Delete</button -->
-
-
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-
-							<!-- -----verify------- -->
-
-							<div th:if="${formmode}=='verify'" class="container-manager"
-								style="margin-top: auto; margin-left: auto;">
-								<div class="transparent-shadow">
-									<div class="row">
-										<div class="col-sm-12 ">
-											<form action="#" th:object="${UserProfilelist}" method="post"
-												autocomplete="off" id="hrmsuserProfileadd"
-												th:fragment="finuserapply">
-
-
-												<div
-													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
-													<div class="float-left">
-														<div STYLE="font-size: 1.3rem; font-weight: bold;">USER
-															PROFILE - VERIFY</div>
-													</div>
-
-													<div class="btn-group nav-buttons float-right">
-
-														<button type="button"
-															class="btn btn-xs btn-primary btns active btn-dark"
-															id="btnInq" onclick="list()"
-															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
-													</div>
-												</div>
-												<div class="card-body">
-
-													<input autocomplete="false" name="hidden" type="text"
-														style="display: none;"> <input type="hidden"
-														th:value="${formmode}" id="formmode1"
-														style="display: none;">
-													<div class="form-group" style="line-height: 1.9;">
-
-
-														<div class="form-row">
-
-															<label class="col-sm-3">Organization Id</label>
-
-
-															<!-- Branch Selection -->
-															<input type="text" class="col-sm-2 form-control"
-																id="branchId" th:value="${UserProfilelist.org_id}"
-																name="branchId" readonly />
-
-
-
-
-															<div class="col-sm-1"></div>
-
-
-															<label class="col-sm-3">Branch Id</label>
-
-
-															<!-- Branch Selection -->
-															<select class="col-sm-2 form-control"
-																onchange="select_branch();" id="branchId"
-																name="branchId" readonly>
-
-																<option th:value="${UserProfilelist.branchId}"
-																	th:text="${UserProfilelist.branchId}"></option>
-															</select>
-
-														</div>
-
-
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">User Id</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userId" id="userid"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">User Name</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userName" id="username"
-																th:value="${UserProfilelist.userNames}" readonly />
-
-														</div>
-
-
-
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Employee Id</label> <input
-																type="text" id="employeeid"
-																class="  col-sm-2 form-control" name="employeeId"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Employee Name</label> <input
-																type="text" id="employeename"
-																class="  col-sm-2 form-control" name="employeeName"
-																th:value="${UserProfilelist.userNames}" readonly />
-														</div>
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Designation</label> <input
-																type="text" id="designation"
-																class="  col-sm-2 form-control" name="designation"
-																th:value="${UserProfilelist.designation}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Email Id</label> <input
-																type="email" id="emailid"
-																class="  col-sm-2 form-control" name="emailId"
-																onblur="validateEmail(this);"
-																th:value="${UserProfilelist.emailId}" readonly /> <span
-																id="emailError"
-																style="color: red; font-size: 14px; display: none; padding-left: 1050px;">Invalid
-																email address</span>
-															<!--  			<label class="col-sm-3">Nature Of Employment</label>
-												<select class=" col-sm-3  "name="nature_of_employment" id="natureofemployment">
-													
-													<option	class="" value="">SELECT</option>
-													<option class="" value="Permanent">Permanent</option>
-													<option class="" value="Contract">Contract</option>
-													<option class="" value="Part Time">Part Time</option></select>  -->
-
-														</div>
-														<!-- 
-								<div class="form-row">
-									<label class="  col-sm-3 ">Max Inactive Time</label> <input type="text" id="maxinactivetime"class="  col-sm-3" name="max_inactive_time" onkeypress="fnnumber();"/>
-									<span style="color: red;font-size: 10px;display:none" id="inactiveTimeError" class="error"></span>
-									 <label class="  col-sm-3 ">Account Expiry date</label> <input type="text" id="accexpdate" class="  col-sm-3" name="acc_exp_date" required/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">Login Low</label> <input type="text"  id="loginlow" class="  col-sm-3" name="login_low" onkeypress="fnnumber();"/>
-								 	<label class="  col-sm-3 ">Login High</label> <input type="text" id="loginhigh"class="  col-sm-3" name="login_high" onkeypress="fnnumber();"/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">User Disable Date</label> <input type="text" class="  col-sm-3"id="userdisabledate" name="user_disable_date" required/>
-									<label class="  col-sm-3 ">User Disable Till Date</label> <input type="text" class="  col-sm-3" id="userdisabletilldate"name="user_disable_till" required/>
-								</div> -->
-
-														<div class="form-row">
-															<label class="col-sm-3 ">Password</label> <input
-																type="password" class="col-sm-2 form-control"
-																name="password" id="password" readonly
-																value="bornfire123" title="Default password" />
-															<!-- onblur="fnpassword()" -->
-
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Mobile No</label> <input
-																type="text" th:value="${UserProfilelist.mobileNo}"
-																id="mobileno" class="  col-sm-2 form-control"
-																name="mobileNo"
-																oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);"
-																readonly /> <small id="mobileHelp"
-																class="form-text text-muted"
-																style="color: red !important; display: none; float: right; padding-left: 1050px;">Please
-																enter a valid 10-digit mobile number.</small>
-
-
-
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-
-														<div class="form-row">
-
-															<label class="col-sm-3 ">Role Id</label> <input
-																type="text" class="col-sm-2 form-control" name="roleId"
-																id="roleId" th:value="${UserProfilelist.role}" readonly />
-															<!-- <select 
-																class="col-sm-2 form-control" name="roleId" id="roleId">
-																<option value=""  >SELECT</option>
-																<option value="ADM">ADM-Administration</option>
-																<option value="OPR">OPR-Operation</option>
-																<option value="INQ">INQ-Inquiries</option>
-																<option value="RPT">RPT-Reports</option>
-																<option value="SER">SER-Service</option>
-																<option value="GEN">GEN-General</option>
-																<option value="RES">RES-Resources</option>
-																<option value="MGR">MGR-Manager</option>
-																<option value="SWE">SWE-SoftwareEngineer</option>
-																<option value="MNT">MNT-Maintenance</option>
-															</select> -->
-															<div class="col-md-1 "></div>
-															<label class="col-sm-3">Pwd Exp Date</label> <input
-																type="text"
-																th:value="${#dates.format(UserProfilelist.passExpDate, 'dd-MM-yyyy')}"
-																class="col-sm-2 form-control" name="passExpDate"
-																id="passExpDate" readonly />
-															<!-- onblur="fnpassword()" -->
-
-
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-													</div>
-
-
-													<div class="form-row">
-
-
-														<!--  	<label class="col-sm-3">Role Description</label> 
-												<input type="text"class="  col-sm-3" id="roledescription" value="" readonly /> -->
-													</div>
-													<!--  	<div class="form-row">
-											<label class="col-sm-3">Permissions</label> 
-											<select	class=" col-sm-3 " name="permission" id="permission">
-												<option	class="" value="O">SELECT</option>
-												<option value="R">R-Read</option>
-												<option value="W">W-Write</option></select>
-
-										</div>  -->
-
-
-
-
-												</div>
-											</form>
-										</div>
-
-
-
-
-										<div
-											class="col-sm-12 d-flex justify-content-center card-footer"
-											style="padding-top: 10px;">
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="Dashboard" onclick="contentLoad(this)">Home</button>
-											<!-- Uncomment the Register button if needed -->
-
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="register" onclick="verifysubmit(event)">Verify</button>
-
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" id="btnback"
-												onclick="list()">Back</button>
-										</div>
-
-
-
-
-										<div>
-
-
-											<!-- <button th:if="${userProfile.entity_flg}=='N'" type="button"
-												class="btn btn-xs btn-primary"
-												th:attr="data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},data-modify_user=${userProfile.modify_user}"
-												onclick="verify(this);" id="btnModify">Verify</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="passwordReset();">PasswordReset</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												form="userProfile" id="btnSubmit" onclick="submitform();">Submit</button>
-
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnHome" onclick="home();">Home</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnBack" onclick="back();">Back</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="Delete();">Delete</button -->
-
-
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-
-
-							<!-- -----modify------- -->
-
-							<div th:if="${formmode}=='modify'" class="container-manager"
-								style="margin-top: auto; margin-left: auto;">
-								<div class="transparent-shadow">
-									<div class="row">
-										<div class="col-sm-12 ">
-											<form action="#" th:object="${UserProfilelist}" method="post"
-												autocomplete="off" id="hrmsuserProfilemodify"
-												th:fragment="finuserapply">
-
-
-												<div
-													style="background-color: #f5f5f5; padding: 10px; height: 50px;">
-													<div class="float-left">
-														<div STYLE="font-size: 1.3rem; font-weight: bold;">USER
-															PROFILE - MODIFY</div>
-													</div>
-
-													<div class="btn-group nav-buttons float-right">
-
-														<button type="button"
-															class="btn btn-xs btn-primary btns active btn-dark"
-															id="btnInq" onclick="list()"
-															style="border-color: #66dbe0; font-size: 16px; width: 70px; size: 100px;">List</button>
-													</div>
-												</div>
-												<div class="card-body">
-
-													<input autocomplete="false" name="hidden" type="text"
-														style="display: none;"> <input type="hidden"
-														th:value="${formmode}" id="formmode1"
-														style="display: none;">
-													<div class="form-group" style="line-height: 1.9;">
-
-														<div class="form-row">
-
-															<label class="col-sm-3">Organization Id</label>
-															<!-- Organization Selection -->
-															<select class="col-sm-2 form-control"
-																onchange="select_org();" id="org_id" name="org_id">
-																<option th:text="${UserProfilelist.org_id}"
-																	th:value="${UserProfilelist.org_id}" selected>Select
-																	Organization</option>
-																<!-- Populate options dynamically using Thymeleaf -->
-
-																<option th:each="OrgId : ${OrgIds}"
-																	th:if="${OrgId !=UserProfilelist.org_id}"
-																	th:value="${OrgId}" th:text="${OrgId}"></option>
-															</select>
-															<div class="col-sm-1"></div>
-
-
-															<label class="col-sm-3">Branch Id</label>
-
-
-															<!-- Branch Selection -->
-															<select class="col-sm-2 form-control"
-																onchange="select_branch();" id="branchId"
-																name="branchId">
-
-																<option th:value="${UserProfilelist.branchId}"
-																	th:text="${UserProfilelist.branchId}" selected></option>
-
-																<!-- List all branch IDs excluding the selected one -->
-																<option th:each="branchId : ${branchIds}"
-																	th:if="${branchId != UserProfilelist.branchId}"
-																	th:value="${branchId}" th:text="${branchId}">
-																</option>
-															</select>
-
-														</div>
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">User Id</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userId" id="userid"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">User Name</label> <input
-																type="text" class="  col-sm-2 form-control"
-																name="userNames" id="userNames"
-																th:value="${UserProfilelist.userNames}" readonly />
-
-														</div>
-
-
-
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Employee Id</label> <input
-																type="text" id="employeeid"
-																class="  col-sm-2 form-control" name="employeeId"
-																th:value="${UserProfilelist.userId}" readonly />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Employee Name</label> <input
-																type="text" id="employeename"
-																class="  col-sm-2 form-control" name="employeeName"
-																th:value="${UserProfilelist.userNames}" readonly />
-														</div>
-
-														<div class="form-row">
-															<label class="  col-sm-3 ">Designation</label> <input
-																type="text" id="designation"
-																class="  col-sm-2 form-control" name="designation"
-																th:value="${UserProfilelist.designation}" />
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Email Id</label> <input
-																type="email" id="emailid"
-																class="  col-sm-2 form-control" name="emailId"
-																onblur="validateEmail(this);"
-																th:value="${UserProfilelist.emailId}" /> <span
-																id="emailError"
-																style="color: red; font-size: 14px; display: none; padding-left: 1050px;">Invalid
-																email address</span>
-															<!--  			<label class="col-sm-3">Nature Of Employment</label>
-												<select class=" col-sm-3  "name="nature_of_employment" id="natureofemployment">
-													
-													<option	class="" value="">SELECT</option>
-													<option class="" value="Permanent">Permanent</option>
-													<option class="" value="Contract">Contract</option>
-													<option class="" value="Part Time">Part Time</option></select>  -->
-
-														</div>
-														<!-- 
-								<div class="form-row">
-									<label class="  col-sm-3 ">Max Inactive Time</label> <input type="text" id="maxinactivetime"class="  col-sm-3" name="max_inactive_time" onkeypress="fnnumber();"/>
-									<span style="color: red;font-size: 10px;display:none" id="inactiveTimeError" class="error"></span>
-									 <label class="  col-sm-3 ">Account Expiry date</label> <input type="text" id="accexpdate" class="  col-sm-3" name="acc_exp_date" required/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">Login Low</label> <input type="text"  id="loginlow" class="  col-sm-3" name="login_low" onkeypress="fnnumber();"/>
-								 	<label class="  col-sm-3 ">Login High</label> <input type="text" id="loginhigh"class="  col-sm-3" name="login_high" onkeypress="fnnumber();"/>
-								</div>
-
-								<div class="form-row">
-									<label class="  col-sm-3 ">User Disable Date</label> <input type="text" class="  col-sm-3"id="userdisabledate" name="user_disable_date" required/>
-									<label class="  col-sm-3 ">User Disable Till Date</label> <input type="text" class="  col-sm-3" id="userdisabletilldate"name="user_disable_till" required/>
-								</div> -->
-
-														<div class="form-row">
-															<label class="col-sm-3 ">Password</label> <input
-																type="password" class="col-sm-2 form-control"
-																name="password" id="password" readonly
-																value="bornfire123" title="Default password" />
-															<!-- onblur="fnpassword()" -->
-
-															<div class="col-md-1 "></div>
-															<label class="  col-sm-3 ">Mobile No</label> <input
-																type="text" th:value="${UserProfilelist.mobileNo}"
-																id="mobileno" class="  col-sm-2 form-control"
-																name="mobileNo"
-																oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);validateMobileNumber(this);" />
-															<small id="mobileHelp" class="form-text text-muted"
-																style="color: red !important; display: none; float: right; padding-left: 1050px;">Please
-																enter a valid 10-digit mobile number.</small>
-
-
-
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-
-														<div class="form-row">
-
-															<label class="col-sm-3 ">Role Id</label>
-															<!-- <input
-																type="text" class="col-sm-2 form-control" name="roleId"
-																id="roleId" th:value="${UserProfilelist.role}"
-																readonly /> -->
-															<select class="col-sm-2 form-control" name="role"
-																id="role">
-																<option value=""
-																	th:selected="${UserProfilelist.role == ''}">SELECT</option>
-																<option value="ADM"
-																	th:selected="${UserProfilelist.role == 'ADM'}">ADM
-																	- Administration</option>
-																<option value="OPR"
-																	th:selected="${UserProfilelist.role == 'OPR'}">OPR
-																	- Operation</option>
-																<option value="INQ"
-																	th:selected="${UserProfilelist.role == 'INQ'}">INQ
-																	- Inquiries</option>
-																<option value="RPT"
-																	th:selected="${UserProfilelist.role == 'RPT'}">RPT
-																	- Reports</option>
-																<option value="SER"
-																	th:selected="${UserProfilelist.role == 'SER'}">SER
-																	- Service</option>
-																<option value="GEN"
-																	th:selected="${UserProfilelist.role == 'GEN'}">GEN
-																	- General</option>
-																<option value="RES"
-																	th:selected="${UserProfilelist.role == 'RES'}">RES
-																	- Resources</option>
-																<option value="MGR"
-																	th:selected="${UserProfilelist.role == 'MGR'}">MGR
-																	- Manager</option>
-																<option value="SWE"
-																	th:selected="${UserProfilelist.role == 'SWE'}">SWE
-																	- Software Engineer</option>
-																<option value="MNT"
-																	th:selected="${UserProfilelist.role == 'MNT'}">MNT
-																	- Maintenance</option>
-															</select>
-															<div class="col-md-1 "></div>
-															<label class="col-sm-3">Pwd Exp Date</label> <input
-																type="text"
-																th:value="${#dates.format(UserProfilelist.passExpDate, 'yyyy-MM-dd')}"
-																class="col-sm-2 form-control" name="passExpDate"
-																id="passExpDate" autocomplete="off" />
-															<!-- onblur="fnpassword()" -->
-															<script>
-//below is date picker for pwd expir date in modify
-$(document).ready(function () {
-    $("#passExpDate").datepicker({
-        dateFormat: "dd-mm-yy",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "1900:2100",
-        showButtonPanel: true,
-        // Add the beforeShow option to customize the datepicker's position
-        beforeShow: function (input, inst) {
-            setTimeout(function () {
-                inst.dpDiv.css({
-                    top: input.offsetTop + input.offsetHeight + 5, // Position below the input field
-                    left: input.offsetLeft,  // Align left with input field
-                    zIndex: 1051 // Ensure it's above other elements (adjust if needed)
-                });
-            }, 0); // Use setTimeout to ensure correct positioning after the datepicker is shown
-        }
-    });
-
-    $("#passExpDate").on("focus", function () {
-        $(this).datepicker("show");
-    });
-
-    // Custom CSS for the datepicker (optional, but recommended)
-    $(".ui-datepicker").css({
-        "font-family": "Arial, sans-serif", // Example font
-        "font-size": "14px",
-        "border": "1px solid #ccc",
-        "background-color": "#fff"
-    });
-
-    $(".ui-datepicker td, .ui-datepicker th").css({ // Style the table cells
-        "padding": "5px",
-        "text-align": "center"
-    });
-
-    $(".ui-datepicker .ui-datepicker-title").css({ // Style the title bar
-        "background-color": "#eee",
-        "padding": "5px",
-        "font-weight": "bold"
-    });
-
-    $(".ui-datepicker button").css({ // Style the buttons
-        "padding": "5px 10px",
-        "margin": "5px",
-        "background-color": "#f0f0f0",
-        "border": "1px solid #ccc"
-    });
-
-    // Style the "Today" and "Done" buttons specifically
-    $(".ui-datepicker-buttonpane button").css({
-      "background": "#007bff", // Example: Blue background
-      "color": "white",
-      "border": "none",
-      "padding": "8px 16px",
-      "cursor": "pointer"
-    });
-
-
-});
-
-</script>
-
-															<!--  <input type="text" class="  col-sm-3" id="passexpdate"name="pass_exp_date" required/> -->
-														</div>
-
-
-
-
-													</div>
-
-
-													<div class="form-row">
-
-
-														<!--  	<label class="col-sm-3">Role Description</label> 
-												<input type="text"class="  col-sm-3" id="roledescription" value="" readonly /> -->
-													</div>
-													<!--  	<div class="form-row">
-											<label class="col-sm-3">Permissions</label> 
-											<select	class=" col-sm-3 " name="permission" id="permission">
-												<option	class="" value="O">SELECT</option>
-												<option value="R">R-Read</option>
-												<option value="W">W-Write</option></select>
-
-										</div>  -->
-
-
-
-
-												</div>
-											</form>
-										</div>
-
-
-
-
-										<div class="card-footer text-center"
-											style="font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 600; display: flex; justify-content: center; gap: 20px; width: 100%;">
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="Dashboard" onclick="contentLoad(this)">Home</button>
-											<!-- Uncomment the Register button if needed -->
-
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" type="button"
-												id="register" onclick="Modifyusersubmit(event)">Modify</button>
-
-											<button class="btn btn-primary mx-2 btn-dark"
-												style="width: 150px; color: white;" id="btnback"
-												onclick="list()">Back</button>
-										</div>
-
-
-
-
-										<div>
-
-
-											<!-- <button th:if="${userProfile.entity_flg}=='N'" type="button"
-												class="btn btn-xs btn-primary"
-												th:attr="data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},data-modify_user=${userProfile.modify_user}"
-												onclick="verify(this);" id="btnModify">Verify</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="passwordReset();">PasswordReset</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												form="userProfile" id="btnSubmit" onclick="submitform();">Submit</button>
-
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnHome" onclick="home();">Home</button>
-											<button type="button" class="btn btn-xs btn-primary"
-												id="btnBack" onclick="back();">Back</button>
-											<button
-												th:if="${formmode}=='edit' AND ${userProfile.entity_flg}=='Y'"
-												type="button" class="btn btn-xs btn-primary" id="btnpassrst"
-												onclick="Delete();">Delete</button -->
-
-
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-
-
-
-
-
-
-
-
 
 						</div>
 					</div>
@@ -2253,78 +1653,78 @@ $(document).ready(function () {
 							<div class="form-group ">
 								<div class="container-fluid">
 									<div class="row row-cols-2 row-cols-lg-3">
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Entry User:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:value="${session.USERID}"
 												th:if="${formmode}=='add'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Modify User:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:value="${session.USERID}"
 												th:if="${formmode}=='add'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Verify User:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:value="${session.USERID}"
 												th:if="${formmode}=='add'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
 									</div>
 									<div class="row row-cols-2 row-cols-lg-3">
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Entry Date:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:if="${formmode}=='add'"
 												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Modify Date:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:if="${formmode}=='add'"
 												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<label>Verify Date:</label>
 										</div>
-										<div class="col-4 col-lg-2">
+										<div class="col-4 col-sm-2">
 											<input type="text" th:if="${formmode}=='list'"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  /> <input
 												type="text" th:if="${formmode}=='add'"
 												th:value="${#calendars.format(#calendars.createNow(), 'dd-MM-yyyy HH:mm')}"
-												class="form-control form-control-sm" autocomplete="off"
+												class="form-control form-control-sm  " autocomplete="off"
 												readonly  />
 										</div>
 									</div>
@@ -2336,8 +1736,12 @@ $(document).ready(function () {
 						Status : <font style="color: #00cc00; font-size: 18px">ACTIVE</font>
 					</div>
 				</div>-->
+			
+			
 			</div>
 		</div>
+
+    </div>
 		<div class="modal fade" id="formmsg" data-backdrop="static"
 			data-keyboard="false">
 			<div
@@ -2385,7 +1789,7 @@ $(document).ready(function () {
 				<img th:src=@{/images/infins.gif} alt="Loading...">
 			</div>
 		</div>
-		
+
 		<script> // BELOW IS FOR PASSWORD EXPIRE AFTER CURRENT DATE 
   const passExpDateInput = document.getElementById('passExpDate');
   const today = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format

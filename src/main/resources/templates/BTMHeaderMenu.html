@@ -448,7 +448,7 @@ a {
 	function contentLoad(a) {
         document.getElementById('loadingModal').style.display = 'flex'; // Show the loading modal
 
-        location.href = "/BDOC/" + a.id + "?activeMenu=" + a.id;
+        location.href = "/BDOC/" + encodeURIComponent(a.id) + "?activeMenu=" + encodeURIComponent(a.id);
 	}
 
 	/* LogOut Functionality */
@@ -652,7 +652,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		<!-- Second Layer (Menu) -->
 		<div class="second-layer">
 			<ul class="nav-links">
-				<li class="nav-item"><a href="#" id="Dashboard"  th:classappend="${activeMenu == 'Dashboard'} ? ' active' : ''"
+				<li class="nav-item"><a href="#" id="Dashboard"  th:classappend="${(activeMenu == null or activeMenu == '') or activeMenu == 'Dashboard'} ? ' active' : ''"
 					onclick="contentLoad(this)">Home</a></li>
 
 				<!-- Admin Section -->
@@ -660,7 +660,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					class="dropdown-toggle">Admin</a>
 					<ul class="dropdown-menu">
 						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'TSK_organizationMaster'} ? ' active' : ''"
-							id="TSK_organizationMaster">Organization Master</a></li>
+							id="OrganizationMaster">Organization Master</a></li>
 						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'BDOCUserProfile'} ? ' active' : ''"
 							id="BDOCUserProfile">User Profile</a></li>
 						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'BTMAdminAccessandRole'} ? ' active' : ''"

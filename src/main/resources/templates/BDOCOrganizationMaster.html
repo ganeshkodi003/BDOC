@@ -252,23 +252,23 @@ $(document).ready(function () {
 		function addorg() {
 			document.getElementById('loadingModal').style.display = 'flex';
 			
-			location.href = 'TSK_organizationMaster?formmode=add';
+			location.href = 'OrganizationMaster?formmode=add';
 		}
 		function addbranch() {
 			document.getElementById('loadingModal').style.display = 'flex';
 			
-			location.href = 'TSK_organizationMaster?formmode=addbranch';
+			location.href = 'OrganizationMaster?formmode=addbranch';
 		}
 
 		function BranchList() {
 			document.getElementById('loadingModal').style.display = 'flex';
 			
-			location.href = 'TSK_organizationMaster?formmode=branchList';
+			location.href = 'OrganizationMaster?formmode=branchList';
 		}
 		function OrgList() {
 			document.getElementById('loadingModal').style.display = 'flex';
 			
-			location.href = 'TSK_organizationMaster';
+			location.href = 'OrganizationMaster';
 		}
 		function modifyuser() {
 			document.getElementById('loadingModal').style.display = 'flex';
@@ -280,7 +280,7 @@ $(document).ready(function () {
 
 		if ($("#organizationDetails").valid()) {
 
-				var url = "./TSK_organizationMasterAdd?formmode=edit";
+				var url = "./OrganizationMasterAdd?formmode=edit";
 				$("#organizationDetails").attr('action', url);
 
 				var options = {
@@ -443,7 +443,7 @@ $(document).ready(function () {
 
 			if ($("#organizationDetails").valid()) {
 
-					var url = "./TSK_organizationMasterAdd?formmode=add";
+					var url = "./OrganizationMasterAdd?formmode=add";
 					$("#organizationDetails").attr('action', url);
 
 					var options = {
@@ -772,40 +772,40 @@ $(document).ready(function () {
     function Modifyuserscreen(a) {
  		var id = a.getAttribute('data-userId');
  		//alert("USER ID :" + id);
- 		location.href = './TSK_organizationMaster?formmode=edit&id=' + id;
+ 		location.href = './OrganizationMaster?formmode=edit&id=' + id;
  	}
     
     function Modifybranchscreen(a) {
  		var id = a.getAttribute('data-userId');
  		//alert("USER ID :" + id);
- 		location.href = './TSK_organizationMaster?formmode=branchEdit&id=' + id;
+ 		location.href = './OrganizationMaster?formmode=branchEdit&id=' + id;
  	}
     function viewbranchuser(a) {
  		var id = a.getAttribute('data-userId');
  		//alert("USER ID :" + id);
- 		location.href = './TSK_organizationMaster?formmode=branchView&id=' + id;
+ 		location.href = './OrganizationMaster?formmode=branchView&id=' + id;
  	}
     
     function deletebranchuser(a) {
  		var id = a.getAttribute('data-userId');
  		//alert("USER ID :" + id);
- 		location.href = './TSK_organizationMaster?formmode=branchDelete&id=' + id;
+ 		location.href = './OrganizationMaster?formmode=branchDelete&id=' + id;
  	}
     function viewuser(a) {
  		var id = a.getAttribute('data-userId');
  		//alert("USER ID :" + id);
- 		location.href = './TSK_organizationMaster?formmode=view&id=' + id;
+ 		location.href = './OrganizationMaster?formmode=view&id=' + id;
  	}
     function Org_List() {
     	document.getElementById('loadingModal').style.display = 'flex';
 		
-		location.href = 'TSK_organizationMaster';
+		location.href = 'OrganizationMaster';
  	}
     
 	function deleteuser(a) {
 			var id = a.getAttribute('data-userId');
 			//alert("USER ID :" + userid);
-			location.href = './TSK_organizationMaster?formmode=delete&id=' + id;
+			location.href = './OrganizationMaster?formmode=delete&id=' + id;
 		}
 	
 	$(document).ready(function () {
