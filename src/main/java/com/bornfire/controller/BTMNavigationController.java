@@ -85,6 +85,7 @@ import com.bornfire.config.AES;
 import com.bornfire.entities.*;
 import com.bornfire.services.AdminOperServices;
 import com.bornfire.services.AttendanceRegisterService;
+import com.bornfire.services.BDOCAccessRoleService;
 import com.bornfire.services.BHMS_Services;
 import com.bornfire.services.BankDetailService;
 import com.bornfire.services.ExcelUploadService;
@@ -432,9 +433,11 @@ public class BTMNavigationController {
 
 	@Autowired
 	BTMAdminAssociateModRep btmAdminAssociateModRep;
-
+ 
+	
 	@Autowired
-	AccessRolesRep accessRolesRep;
+	BDOCAccessRoleService accessroleservice;
+	
 	@Autowired
 	bexpiRepo bexpiRepoa;
 
@@ -5005,59 +5008,57 @@ public class BTMNavigationController {
 		return "BTMAttendanceRegisterInquires";
 	}
 
-	@RequestMapping(value = "BTMAdminAccessandRole", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "AdminAccessandRole", method = { RequestMethod.GET, RequestMethod.POST })
 
 	public String BTMAdminAccessandRole(@RequestParam(required = false) String formmode,
 			@RequestParam(required = false) String role_id, Model md, HttpServletRequest req,
-			@RequestParam(value = "activeMenu", required = false) String activeMenu)
+			@RequestParam(value = "activeMenu", required = false) String activeMenu,
+			@RequestParam(required = false) String userid)
 			throws NoSuchAlgorithmException, InvalidKeySpecException, ParseException {
 
 		String userId = (String) req.getSession().getAttribute("USERID");
 		// md.addAttribute("RoleMenu", resourceMasterRepo.getrole(userId));
 		md.addAttribute("RoleMenu", hrmsrepoo.getrole(userId));
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
 		md.addAttribute("menu", "BTMHeaderMenu");
+		md.addAttribute("IPSRoleMenu", accessroleservice.getRoleMenu(roleId));
 		md.addAttribute("activeMenu", activeMenu);
 
 		if (formmode == null || formmode.equals("list")) {
 
 			md.addAttribute("formmode", "list");
-			md.addAttribute("accessRolesList", accessRolesRep.getRolelist());
-
+			md.addAttribute("AccessandRoles", accessroleservice.rulelist());
 		} else if (formmode.equals("add")) {
 
 			md.addAttribute("formmode", formmode);
-			md.addAttribute("BTMAccessRole", new AccessRoles());
 
 		} else if (formmode.equals("view")) {
 			System.out.println("role id is " + role_id);
 			md.addAttribute("formmode", formmode);
-
-			AccessRoles accessRolesview = accessRolesRep.getUser(role_id);
-
-			md.addAttribute("accessRolesview", accessRolesview);
-
 			md.addAttribute("formmode", "view");
+			md.addAttribute("accessRolesview", accessroleservice.getViewNewData(userid));
 
-		} else if (formmode.equals("delete")) {
+		} else if (formmode.equals("verify")) {
+			System.out.println("role id is " + role_id);
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("formmode", "verify");
+			md.addAttribute("accessRolesview", accessroleservice.getModifyData(userid));
+
+		}  else if (formmode.equals("delete")) {
 
 			md.addAttribute("formmode", formmode);
 
-			AccessRoles accessRolesview = accessRolesRep.getUser(role_id);
+			//AccessRoles accessRolesview = accessRolesRep.getUser(role_id);
 
-			md.addAttribute("accessRolesview", accessRolesview);
+			//md.addAttribute("accessRolesview", accessRolesview);
 
 			md.addAttribute("formmode", "delete");
 
-		} else if (formmode.equals("modify")) {
+		} else if (formmode.equals("edit")) {
 
 			md.addAttribute("formmode", formmode);
-
-			AccessRoles accessRolesview = accessRolesRep.getUser(role_id);
-
-			md.addAttribute("accessRolesview", accessRolesview);
-
-			md.addAttribute("BTMAccessRole", new AccessRoles());
-			md.addAttribute("formmode", "modify");
+			md.addAttribute("formmode", "edit");
+			md.addAttribute("accessRolesview", accessroleservice.getRoleId(userid));
 
 		} else {
 
@@ -5067,67 +5068,29 @@ public class BTMNavigationController {
 
 		return "AccessRole";
 	}
-
-	@RequestMapping(value = "addAccessRole", method = RequestMethod.POST)
+	@RequestMapping(value = "createAccessRole", method = RequestMethod.POST)
 	@ResponseBody
-
-	public String addAccessRole(@RequestParam(required = false) String formmode, Model md, HttpServletRequest rq,
+	public String createAccessRoleEn(@RequestParam("formmode") String formmode,
 			@RequestParam(value = "adminValue", required = false) String adminValue,
-			@RequestParam(value = "masterValue", required = false) String masterValue,
-			@RequestParam(value = "ordersValue", required = false) String ordersValue,
-			@RequestParam(value = "productioncycleValue", required = false) String productioncycleValue,
-			@RequestParam(value = "inventoryValue", required = false) String inventoryValue,
-			@RequestParam(value = "hrmsValue", required = false) String hrmsValue,
-			@RequestParam(value = "reportsValue", required = false) String reportsValue,
-			@RequestParam(value = "tranValue", required = false) String tranValue,
-			@RequestParam(value = "finalString", required = false) String finalString, @ModelAttribute AccessRoles ar) {
-		System.out.println("came to nav controller access and role add");
-		AccessRoles up = new AccessRoles();
-		up.setRole_id(ar.getRole_id());
-		up.setRole_desc(ar.getRole_desc());
-		up.setPermissions(ar.getPermissions());
-		up.setRemarks(ar.getRemarks());
-		up.setWork_class(ar.getWork_class());
-		up.setMenulist(finalString);
-		up.setAdmin(adminValue);
-		up.setMaster(masterValue);
-		up.setOrders(ordersValue);
-		up.setProduction_cycle(productioncycleValue);
-		up.setInventory(inventoryValue);
-		up.setHrms(hrmsValue);
-		up.setReports(reportsValue);
-		up.setTransaction_master(tranValue);
-		;
-		up.setDel_flg("N");
-		accessRolesRep.save(up);
-		String msg = "Role Added Successfully";
-		return msg;
+			@RequestParam(value = "finalString", required = false) String finalString,
+			@RequestParam(value = "userprofilevalue", required = false) String userprofilevalue,
+			@RequestParam(value = "accessValue", required = false) String accessValue,
+			@RequestParam(value = "organizationmastvalue", required = false) String organizationmastvalue,
+			@ModelAttribute BDOCAccessRole accessRole, Model md, HttpServletRequest rq) {
 
+		String userid = (String) rq.getSession().getAttribute("USERID");
+		String roleId = (String) rq.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", accessroleservice.getRoleMenu(roleId));
+		String msg = accessroleservice.addPARAMETER(accessRole, userid, formmode, adminValue, userprofilevalue,
+				accessValue,   organizationmastvalue  , finalString );
+		// System.out.println(msg);
+		return msg;
 	}
+	
 
 	/*---deleteuser---*/
 
-	@RequestMapping(value = "deleteAccessRole", method = RequestMethod.POST)
-	@ResponseBody
-	public String deleteAccessRole(@RequestParam(required = false) String role_id, HttpServletRequest rq) {
-
-		String msg = "";
-		System.out.println("deleting Role and Access...");
-
-		// Fetch session attributes
-		String sessionUserId = (String) rq.getSession().getAttribute("USERID");
-		String sessionUserName = (String) rq.getSession().getAttribute("USERNAME");
-
-		// Validate userId parameter
-
-		// Fetch user entity from repository
-		AccessRoles entity = accessRolesRep.getUser(role_id);
-		entity.setDel_flg("Y");
-		accessRolesRep.save(entity);
-		msg = "Role Deleted successfully.";
-
-		return msg;
-	}
+ 
 
 	@RequestMapping(value = "fsubmit", method = RequestMethod.POST)
 	@ResponseBody

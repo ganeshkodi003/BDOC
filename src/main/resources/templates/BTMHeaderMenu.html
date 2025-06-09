@@ -656,15 +656,15 @@ document.addEventListener("DOMContentLoaded", function () {
 					onclick="contentLoad(this)">Home</a></li>
 
 				<!-- Admin Section -->
-				<li class="nav-item dropdown"><a href="#" th:classappend="${activeMenu == 'TSK_organizationMaster' or activeMenu == 'BDOCUserProfile' or activeMenu == 'BTMAdminAccessandRole'} ? ' active' : ''"
+				<li class="nav-item dropdown"><a href="#" th:classappend="${activeMenu == 'OrganizationMaster' or activeMenu == 'BDOCUserProfile' or activeMenu == 'AdminAccessandRole'} ? ' active' : ''"
 					class="dropdown-toggle">Admin</a>
 					<ul class="dropdown-menu">
-						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'TSK_organizationMaster'} ? ' active' : ''"
+						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'OrganizationMaster'} ? ' active' : ''"
 							id="OrganizationMaster">Organization Master</a></li>
 						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'BDOCUserProfile'} ? ' active' : ''"
 							id="BDOCUserProfile">User Profile</a></li>
-						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'BTMAdminAccessandRole'} ? ' active' : ''"
-							id="BTMAdminAccessandRole">Access and Role</a></li>
+						<li><a href="#" onclick="contentLoad(this)" th:classappend="${activeMenu == 'AdminAccessandRole'} ? ' active' : ''"
+							id="AdminAccessandRole">Access and Role</a></li>
 
 					</ul></li>
 				<!-- Document Section -->
